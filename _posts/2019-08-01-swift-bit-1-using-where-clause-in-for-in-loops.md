@@ -34,7 +34,7 @@ Result: 2 4
 Neat isn’t it?
 Playground sample,
 
-![Playground sample](/assets/swiftbit1-1.png)
+![Playground sample](/blog/assets/swiftbit1-1.png)
 
 
 Do you know any other interesting methods like these? Feel free to share it with us in the comments below.
