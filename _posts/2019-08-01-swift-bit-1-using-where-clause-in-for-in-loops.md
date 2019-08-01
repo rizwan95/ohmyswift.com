@@ -19,3 +19,24 @@ for item in items {
 Result: 2 4 
 {% endhighlight %}
 
+
+As a Swift developer we always want to write better code. In Swift, we can use the “where” clause along with the for loop.
+The Swift way,
+
+
+{% highlight swift %}
+for item in items where item % 2 == 0{
+    print(item)
+}
+Result: 2 4
+{% endhighlight %}
+
+Neat isn’t it?
+Playground sample,
+
+![Playground sample](/assets/swiftbit1-1.png)
+
+
+Do you know any other interesting methods like these? Feel free to share it with us in the comments below.
+Edit — Thanks to Md. Ibrahim Hassan for giving a better sample code.
+Follow me on [Twitter](https://twitter.com/rizwanasifahmed).
