@@ -29,6 +29,8 @@ GEM
       safe_yaml (~> 1.0)
     jekyll-archives (2.2.1)
       jekyll (>= 3.6, < 5.0)
+    jekyll-compose (0.11.0)
+      jekyll (>= 3.7, < 5.0)
     jekyll-feed (0.12.1)
       jekyll (>= 3.7, < 5.0)
     jekyll-paginate (1.1.0)
@@ -71,6 +73,7 @@ PLATFORMS
 DEPENDENCIES
   jekyll (~> 3.8.6)
   jekyll-archives
+  jekyll-compose
   jekyll-feed (~> 0.6)
   jekyll-paginate
   jekyll-sitemap
