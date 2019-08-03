@@ -38,4 +38,5 @@ Playground sample,
 
 
 Edit — Thanks to Md. Ibrahim Hassan for giving a better sample code.
-Follow me on [Twitter](https://twitter.com/rizwanasifahmed)
+Follow me on [Twitter](https://twitter.com/rizwanasifahmed). 
+Have any queries? Feel free to DM me.

@@ -42,5 +42,5 @@ Neat isn’t it? The number of lines of code is reduced, and the code looks more
 
 
 Note — There are also other techniques like using compactMap to unwrap optionals, I will be covering about them in upcoming articles.
-Follow me on [Twitter](https://twitter.com/rizwanasifahmed) 
+Follow me on [Twitter](https://twitter.com/rizwanasifahmed).
 Have any queries? Feel free to DM me.
