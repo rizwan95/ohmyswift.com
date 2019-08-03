@@ -5,7 +5,7 @@
   
   <link href="https://ohmyswift.com//blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://ohmyswift.com//blog/" rel="alternate" type="text/html" />
-  <updated>2019-08-03T09:24:56+05:30</updated>
+  <updated>2019-08-03T09:41:14+05:30</updated>
   <id>https://ohmyswift.com//blog//</id>
 
   
@@ -18,6 +18,71 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Swift bit #3 — Unwrap optional values using for in loop</title>
+      
+      
+      <link href="https://ohmyswift.com//blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/" rel="alternate" type="text/html" title="Swift bit #3 — Unwrap optional values using for in loop" />
+      
+      <published>2019-08-03T09:29:00+05:30</published>
+      <updated>2019-08-03T09:29:00+05:30</updated>
+      <id>https://ohmyswift.com//blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop</id>
+      <content type="html" xml:base="https://ohmyswift.com//blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/">&lt;p&gt;One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.&lt;/p&gt;
+
+&lt;p&gt;Consider that there is an array of optional values. Usually, we use if let or guard statement to unwrap the optionals.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//An array of optionals.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ford&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Lamborghini&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;McLaren&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Aston Martin&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;carObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;   
+             &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;carObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
+         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The above code is okay, nothing wrong with it, but we should try to use the power of Swift whenever we can.&lt;/p&gt;
+
+&lt;p&gt;We can unwrap the array of optionals using case let directly in the for in loop.&lt;/p&gt;
+
+&lt;p&gt;Here is how you do it,&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//An array of optionals.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ford&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Lamborghini&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;McLaren&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Aston Martin&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Neat isn’t it? The number of lines of code is reduced, and the code looks more readable.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit03.png&quot; alt=&quot;Unwrapping optionals using for in loops&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note — There are also other techniques like using compactMap to unwrap optionals, I will be covering about them in upcoming articles.
+Follow me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt; 
+Have any queries? Feel free to DM me.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+        <summary type="html">One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
@@ -53,9 +118,10 @@
 
 &lt;p&gt;Playground sample,&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit02.png&quot; alt=&quot;Playground sample&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit02.png&quot; alt=&quot;Toggle() method in Swift boolean&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Follow me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt;&lt;/p&gt;</content>
+&lt;p&gt;Follow me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt; 
+Have any queries? Feel free to DM me.&lt;/p&gt;</content>
 
       
       

@@ -40,8 +40,8 @@ floatingView.panel.shouldScroll.toggle()
 
 Playground sample,
 
-![Playground sample](/blog/assets/images/swiftbit02.png)
+![Toggle() method in Swift boolean](/blog/assets/images/swiftbit02.png)
 
-Follow me on [Twitter](https://twitter.com/rizwanasifahmed)
-
+Follow me on [Twitter](https://twitter.com/rizwanasifahmed) 
+Have any queries? Feel free to DM me.
 
