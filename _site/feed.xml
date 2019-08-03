@@ -3,10 +3,10 @@
   <generator uri="http://jekyllrb.com" version="3.8.6">Jekyll</generator>
   
   
-  <link href="https://ohmyswift.com//blog/feed.xml" rel="self" type="application/atom+xml" />
-  <link href="https://ohmyswift.com//blog/" rel="alternate" type="text/html" />
-  <updated>2019-08-02T00:11:22+05:30</updated>
-  <id>https://ohmyswift.com//blog//</id>
+  <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
+  <updated>2019-08-03T09:09:17+05:30</updated>
+  <id>http://localhost:4000/blog//</id>
 
   
     <title type="html">Oh my Swift</title>
@@ -25,12 +25,12 @@
       <title type="html">Swift bit #1 — Using “where” clause in “for in” loops</title>
       
       
-      <link href="https://ohmyswift.com//blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/" rel="alternate" type="text/html" title="Swift bit #1 — Using “where” clause in “for in” loops" />
+      <link href="http://localhost:4000/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/" rel="alternate" type="text/html" title="Swift bit #1 — Using “where” clause in “for in” loops" />
       
       <published>2019-08-01T23:27:00+05:30</published>
       <updated>2019-08-01T23:27:00+05:30</updated>
-      <id>https://ohmyswift.com//blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops</id>
-      <content type="html" xml:base="https://ohmyswift.com//blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/">&lt;p&gt;We all would have written a piece of code similar to this,
+      <id>http://localhost:4000/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/">&lt;p&gt;We all would have written a piece of code similar to this,
 The usual way,&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
@@ -52,7 +52,7 @@ The Swift way,&lt;/p&gt;
 &lt;p&gt;Neat isn’t it?
 Playground sample,&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/swiftbit1-1.png&quot; alt=&quot;Playground sample&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit01.png&quot; alt=&quot;Playground sample&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Do you know any other interesting methods like these? Feel free to share it with us in the comments below.
 Edit — Thanks to Md. Ibrahim Hassan for giving a better sample code.
@@ -87,12 +87,12 @@ Follow me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitt
       <title type="html">Humble beginnings</title>
       
       
-      <link href="https://ohmyswift.com//blog/2019/07/31/humble-beginnings/" rel="alternate" type="text/html" title="Humble beginnings" />
+      <link href="http://localhost:4000/blog/2019/07/31/humble-beginnings/" rel="alternate" type="text/html" title="Humble beginnings" />
       
       <published>2019-07-31T11:48:49+05:30</published>
       <updated>2019-07-31T11:48:49+05:30</updated>
-      <id>https://ohmyswift.com//blog/2019/07/31/humble-beginnings</id>
-      <content type="html" xml:base="https://ohmyswift.com//blog/2019/07/31/humble-beginnings/">&lt;p&gt;Blogging has always been my favorite exercise. I started creating websites using Wordpress, PHP, and PHPBB nearly ten years back. After a point, I took the path of iOS development. I became an iOS developer. Learning things in iOS was challenging as well as it was fun at the same time. As I discovered new things, I thought, why shouldn’t I share my knowledge with other fellow developers? And this is the reason why I have started the blog. 
+      <id>http://localhost:4000/blog/2019/07/31/humble-beginnings</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/07/31/humble-beginnings/">&lt;p&gt;Blogging has always been my favorite exercise. I started creating websites using Wordpress, PHP, and PHPBB nearly ten years back. After a point, I took the path of iOS development. I became an iOS developer. Learning things in iOS was challenging as well as it was fun at the same time. As I discovered new things, I thought, why shouldn’t I share my knowledge with other fellow developers? And this is the reason why I have started the blog. 
 So much has evolved since then. With the introduction of new technologies and frameworks, there are so many ways to set up a website. The challenge is to select the right technology for the intended purpose. After doing in-depth research,  I made up my mind to set up a blog using Jekyll. Yes, Jekyll powers ohmyswift.com. Thanks to the developer community, which helped me in choosing the right framework to set up my blog.&lt;/p&gt;
 
 &lt;p&gt;Now, coming to Ohmyswift.com, there will be frequent blog posts about the latest topics in Swift language and iOS development. So buckle up, there are going to be plenty of articles coming up!&lt;/p&gt;</content>
