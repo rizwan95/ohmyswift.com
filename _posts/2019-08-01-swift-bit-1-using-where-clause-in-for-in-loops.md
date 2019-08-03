@@ -37,6 +37,5 @@ Playground sample,
 ![Playground sample](/blog/assets/images/swiftbit01.png)
 
 
-Do you know any other interesting methods like these? Feel free to share it with us in the comments below.
 Edit — Thanks to Md. Ibrahim Hassan for giving a better sample code.
-Follow me on [Twitter](https://twitter.com/rizwanasifahmed).
+Follow me on [Twitter](https://twitter.com/rizwanasifahmed)
