@@ -5,7 +5,7 @@
   
   <link href="https://ohmyswift.com//blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://ohmyswift.com//blog/" rel="alternate" type="text/html" />
-  <updated>2019-08-03T09:46:40+05:30</updated>
+  <updated>2019-08-05T23:50:21+05:30</updated>
   <id>https://ohmyswift.com//blog//</id>
 
   
@@ -72,6 +72,8 @@ Have any queries? Feel free to DM me.&lt;/p&gt;</content>
       
 
       
+        <category term="Swift" />
+      
 
       
 
@@ -131,6 +133,8 @@ Have any queries? Feel free to DM me.&lt;/p&gt;</content>
 
       
 
+      
+        <category term="Swift" />
       
 
       
