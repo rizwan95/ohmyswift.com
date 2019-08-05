@@ -3,10 +3,10 @@
   <generator uri="http://jekyllrb.com" version="3.8.6">Jekyll</generator>
   
   
-  <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
-  <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2019-08-06T00:06:01+05:30</updated>
-  <id>http://localhost:4000/blog//</id>
+  <link href="https://ohmyswift.com//blog/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://ohmyswift.com//blog/" rel="alternate" type="text/html" />
+  <updated>2019-08-06T00:08:26+05:30</updated>
+  <id>https://ohmyswift.com//blog//</id>
 
   
     <title type="html">Oh my Swift</title>
@@ -25,12 +25,12 @@
       <title type="html">Swift bit #3 — Unwrap optional values using for in loop</title>
       
       
-      <link href="http://localhost:4000/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/" rel="alternate" type="text/html" title="Swift bit #3 — Unwrap optional values using for in loop" />
+      <link href="https://ohmyswift.com//blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/" rel="alternate" type="text/html" title="Swift bit #3 — Unwrap optional values using for in loop" />
       
       <published>2019-08-03T09:29:00+05:30</published>
       <updated>2019-08-03T09:29:00+05:30</updated>
-      <id>http://localhost:4000/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop</id>
-      <content type="html" xml:base="http://localhost:4000/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/">&lt;p&gt;One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.&lt;/p&gt;
+      <id>https://ohmyswift.com//blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop</id>
+      <content type="html" xml:base="https://ohmyswift.com//blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/">&lt;p&gt;One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.&lt;/p&gt;
 
 &lt;p&gt;Consider that there is an array of optional values. Usually, we use if let or guard statement to unwrap the optionals.&lt;/p&gt;
 
@@ -90,12 +90,12 @@ Have any queries? Feel free to DM me.&lt;/p&gt;</content>
       <title type="html">Swift bit #2 - Using Booleans the right way, in Swift</title>
       
       
-      <link href="http://localhost:4000/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift/" rel="alternate" type="text/html" title="Swift bit #2 - Using Booleans the right way, in Swift" />
+      <link href="https://ohmyswift.com//blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift/" rel="alternate" type="text/html" title="Swift bit #2 - Using Booleans the right way, in Swift" />
       
       <published>2019-08-03T09:19:00+05:30</published>
       <updated>2019-08-03T09:19:00+05:30</updated>
-      <id>http://localhost:4000/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift</id>
-      <content type="html" xml:base="http://localhost:4000/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift/">&lt;p&gt;Boolean is one of the most frequently used and simplest data type in any programming language.&lt;/p&gt;
+      <id>https://ohmyswift.com//blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift</id>
+      <content type="html" xml:base="https://ohmyswift.com//blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift/">&lt;p&gt;Boolean is one of the most frequently used and simplest data type in any programming language.&lt;/p&gt;
 
 &lt;p&gt;It is common to want to toggle the state of the boolean variable. So, we normally do it like this,&lt;/p&gt;
 
@@ -150,12 +150,12 @@ Have any queries? Feel free to DM me.&lt;/p&gt;</content>
       <title type="html">Swift bit #1 — Using “where” clause in “for in” loops</title>
       
       
-      <link href="http://localhost:4000/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/" rel="alternate" type="text/html" title="Swift bit #1 — Using “where” clause in “for in” loops" />
+      <link href="https://ohmyswift.com//blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/" rel="alternate" type="text/html" title="Swift bit #1 — Using “where” clause in “for in” loops" />
       
       <published>2019-08-01T23:27:00+05:30</published>
       <updated>2019-08-01T23:27:00+05:30</updated>
-      <id>http://localhost:4000/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops</id>
-      <content type="html" xml:base="http://localhost:4000/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/">&lt;p&gt;We all would have written a piece of code similar to this,
+      <id>https://ohmyswift.com//blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops</id>
+      <content type="html" xml:base="https://ohmyswift.com//blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/">&lt;p&gt;We all would have written a piece of code similar to this,
 The usual way,&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
@@ -212,12 +212,12 @@ Have any queries? Feel free to DM me.&lt;/p&gt;</content>
       <title type="html">Humble beginnings</title>
       
       
-      <link href="http://localhost:4000/blog/2019/07/31/humble-beginnings/" rel="alternate" type="text/html" title="Humble beginnings" />
+      <link href="https://ohmyswift.com//blog/2019/07/31/humble-beginnings/" rel="alternate" type="text/html" title="Humble beginnings" />
       
       <published>2019-07-31T11:48:49+05:30</published>
       <updated>2019-07-31T11:48:49+05:30</updated>
-      <id>http://localhost:4000/blog/2019/07/31/humble-beginnings</id>
-      <content type="html" xml:base="http://localhost:4000/blog/2019/07/31/humble-beginnings/">&lt;p&gt;Blogging has always been my favorite exercise. I started creating websites using Wordpress, PHP, and PHPBB nearly ten years back. After a point, I took the path of iOS development. I became an iOS developer. Learning things in iOS was challenging as well as it was fun at the same time. As I discovered new things, I thought, why shouldn’t I share my knowledge with other fellow developers? And this is the reason why I have started the blog. 
+      <id>https://ohmyswift.com//blog/2019/07/31/humble-beginnings</id>
+      <content type="html" xml:base="https://ohmyswift.com//blog/2019/07/31/humble-beginnings/">&lt;p&gt;Blogging has always been my favorite exercise. I started creating websites using Wordpress, PHP, and PHPBB nearly ten years back. After a point, I took the path of iOS development. I became an iOS developer. Learning things in iOS was challenging as well as it was fun at the same time. As I discovered new things, I thought, why shouldn’t I share my knowledge with other fellow developers? And this is the reason why I have started the blog. 
 So much has evolved since then. With the introduction of new technologies and frameworks, there are so many ways to set up a website. The challenge is to select the right technology for the intended purpose. After doing in-depth research,  I made up my mind to set up a blog using Jekyll. Yes, Jekyll powers ohmyswift.com. Thanks to the developer community, which helped me in choosing the right framework to set up my blog.&lt;/p&gt;
 
 &lt;p&gt;Now, coming to Ohmyswift.com, there will be frequent blog posts about the latest topics in Swift language and iOS development. So buckle up, there are going to be plenty of articles coming up!&lt;/p&gt;</content>
