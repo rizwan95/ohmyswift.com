@@ -1,1 +1,1 @@
-Sitemap: https://ohmyswift.com//blog/sitemap.xml
+Sitemap: https://ohmyswift.com/blog/sitemap.xml
