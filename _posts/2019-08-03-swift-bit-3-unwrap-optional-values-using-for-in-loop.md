@@ -2,7 +2,6 @@
 layout: post
 title: 'Swift bit #3 — Unwrap optional values using for in loop'
 date: 2019-08-03 09:29 +0530
-categories: Swift
 
 ---
 

@@ -2,7 +2,6 @@
 layout: post
 title: 'Swift bit #2 - Using Booleans the right way, in Swift'
 date: 2019-08-03 09:19 +0530
-categories: Swift
 
 ---
 
