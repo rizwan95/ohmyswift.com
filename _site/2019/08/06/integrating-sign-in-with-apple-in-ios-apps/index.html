@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Integrating &#39;Sign in with Apple&#39; in iOS apps</title>
+  <meta name="description" content="The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the ‘Sign In with Apple’ feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of ‘Sign In with Apple’ on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.">
+  
+
+  <link rel="stylesheet" href="/blog/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Oh my Swift" href="http://localhost:4000/blog/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="Integrating &#39;Sign in with Apple&#39; in iOS apps">
+  <meta property="og:site_name" content="Oh my Swift">
+  <meta property="og:url" content="http://localhost:4000/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/">
+  <meta property="og:description" content="The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the ‘Sign In with Apple’ feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of ‘Sign In with Apple’ on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="rizwanasifahmed">
+  <meta name="twitter:title" content="Integrating &#39;Sign in with Apple&#39; in iOS apps">
+  <meta name="twitter:description" content="The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the ‘Sign In with Apple’ feature in iOS 13. The users can sign in securely, and their priva...">
+  
+    <meta name="twitter:creator" content="rizwanasifahmed">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700&display=swap" rel="stylesheet">
+
+  
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-144905716-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">Oh my Swift</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/about/">About</a>
+      
+        
+        <a class="page-link" href="/blog/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/rizwan95">GitHub</a>
+      
+        
+        <a class="page-link" href="https://twitter.com/rizwanasifahmed">Twitter</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Integrating &#39;Sign in with Apple&#39; in iOS apps</h1>
+    
+    <p class="post-meta"><time datetime="2019-08-06T07:41:00+05:30" itemprop="datePublished">Aug 6, 2019</time> •
+  
+    
+    
+      
+    
+      
+        <a href="/blog/categories/swift-ios-sign-in-with-apple/">Swift, iOS, Sign in with Apple</a>
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the ‘Sign In with Apple’ feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of ‘Sign In with Apple’ on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.</p>
+
+<h3 id="requirements">Requirements</h3>
+
+<ul>
+  <li>Xcode 11 (in beta at the time of writing the article)</li>
+  <li>Apple developer account.</li>
+</ul>
+
+<h3 id="steps-to-integrate-sign-in-with-apple">Steps to integrate ‘Sign In with Apple’</h3>
+<p>Before getting started, you have to setup keys for ‘Sign in with Apple’ feature. If you haven’t checked it out, you can do it here.</p>
+
+<p>Alright, let’s get started!</p>
+<h4 id="step-1"><em>Step 1</em></h4>
+<p>Create a new project in Xcode.</p>
+
+<h4 id="step-2"><em>Step 2</em></h4>
+<p>Head to Signing and capabilities tab.
+Hit the ‘+ Capability’ option and select ‘Sign In with Apple.’</p>
+
+<h4 id="step-3"><em>Step 3</em></h4>
+<p>Navigate to the class where you want to set up the ‘Sign in with Apple’ button. I have built a SignInHandler class which encapsulates all the sign-in code and logic.</p>
+
+<h4 id="step-4"><em>Step 4</em></h4>
+<p>Import the framework ‘AuthenticationServices’ in your class.</p>
+
+<h4 id="step-5"><em>Step 5</em></h4>
+<p>Create an instance of ASAuthorizationAppleIDButton class and add it as a subview to the view along with the necessary constraints.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">//Code to create an instance of the 'Sign In with Apple' button</span>
+<span class="kd">@available(iOS 13.0, *)</span>
+<span class="kd">func</span> <span class="nf">createAppleSigninButton</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ASAuthorizationAppleIDButton</span><span class="p">{</span>
+    <span class="k">let</span> <span class="nv">signInButton</span> <span class="o">=</span> <span class="kt">ASAuthorizationAppleIDButton</span><span class="p">()</span>
+    <span class="n">signInButton</span><span class="o">.</span><span class="nf">addTarget</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">#selector(</span><span class="nf">handleSigninAction</span><span class="kd">)</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">touchUpInside</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">signInButton</span>
+<span class="p">}</span></code></pre></figure>
+
+<h4 id="step-6"><em>Step 6</em></h4>
+<p>Now, we have to write the implementation for handleSigninAction.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">@available(iOS 13.0, *)</span>
+<span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">handleSigninAction</span><span class="p">()</span> <span class="p">{</span>
+<span class="c1">// 1</span>
+    <span class="k">let</span> <span class="nv">appleIDProvider</span> <span class="o">=</span> <span class="kt">ASAuthorizationAppleIDProvider</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="n">appleIDProvider</span><span class="o">.</span><span class="nf">createRequest</span><span class="p">()</span>
+
+<span class="c1">//2</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">requestedScopes</span> <span class="o">=</span> <span class="p">[</span><span class="o">.</span><span class="n">fullName</span><span class="p">,</span> <span class="o">.</span><span class="n">email</span><span class="p">]</span>
+
+<span class="c1">//3</span>
+    <span class="k">let</span> <span class="nv">authorizationController</span> <span class="o">=</span> <span class="kt">ASAuthorizationController</span><span class="p">(</span><span class="nv">authorizationRequests</span><span class="p">:</span> <span class="p">[</span><span class="n">request</span><span class="p">])</span>
+    <span class="n">authorizationController</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="k">self</span>
+    <span class="n">authorizationController</span><span class="o">.</span><span class="n">presentationContextProvider</span> <span class="o">=</span> <span class="k">self</span>
+    <span class="n">authorizationController</span><span class="o">.</span><span class="nf">performRequests</span><span class="p">()</span>
+<span class="p">}</span></code></pre></figure>
+
+<h4 id="here-is-the-breakdown-of-the-above-given-code-snippet">Here is the breakdown of the above given code snippet,</h4>
+
+<ol>
+  <li>
+    <p>We are using an instance of ASAuthorizationAppleIDProvider inorder to create a request.</p>
+  </li>
+  <li>
+    <p>We need only the full name and email of the user. Hence, we have mentioned them in the ‘requestedScopes.’</p>
+  </li>
+  <li>
+    <p>Finally, we pass the request to the ASAuthorizationController.</p>
+  </li>
+</ol>
+
+<p>On tapping the ‘Sign in’ button, ‘handleSigninAction’ method is triggered, and the ASAuthorizationController is presented, which prompts the user to use Apple sign-in.</p>
+
+<h4 id="step-7">Step 7</h4>
+<p>There are two scenarios after presenting the ASAuthorizationController. Either the user successfully signs in, or an error occurs. 
+The delegates, ‘didCompleteWithAuthorization’ or ‘didCompleteWithError’ get callbacks for the success or failure scenarios, respectively.</p>
+
+<p>We will write an extension to SignInHandler class and conform it to ‘ASAuthorizationControllerDelegate.’ If the user successfully logs in, the user’s details such as  full name, email id. etc can be extracted from ‘ASAuthorizationAppleIDCredential’.</p>
+
+<p>If any error occurs during the login process, it should be handled in ‘didCompleteWithError’ method.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">@available(iOS 13.0, *)</span>
+<span class="kd">extension</span> <span class="kt">SignInHandler</span> <span class="p">:</span> <span class="kt">ASAuthorizationControllerDelegate</span><span class="p">{</span>
+    
+    <span class="kd">func</span> <span class="nf">authorizationController</span><span class="p">(</span><span class="nv">controller</span><span class="p">:</span> <span class="kt">ASAuthorizationController</span><span class="p">,</span> <span class="n">didCompleteWithAuthorization</span> <span class="nv">authorization</span><span class="p">:</span> <span class="kt">ASAuthorization</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">appleIDCredential</span> <span class="o">=</span> <span class="n">authorization</span><span class="o">.</span><span class="n">credential</span> <span class="k">as?</span> <span class="kt">ASAuthorizationAppleIDCredential</span> <span class="p">{</span>
+            
+            <span class="k">let</span> <span class="nv">userIdentifier</span> <span class="o">=</span> <span class="n">appleIDCredential</span><span class="o">.</span><span class="n">user</span>
+            <span class="k">let</span> <span class="nv">fullName</span> <span class="o">=</span> <span class="n">appleIDCredential</span><span class="o">.</span><span class="n">fullName</span>
+            <span class="k">let</span> <span class="nv">email</span> <span class="o">=</span> <span class="n">appleIDCredential</span><span class="o">.</span><span class="n">email</span>
+            
+            <span class="nf">print</span><span class="p">(</span><span class="n">userIdentifier</span><span class="p">,</span><span class="n">fullName</span> <span class="p">??</span> <span class="s">"Not found"</span><span class="p">,</span><span class="n">email</span> <span class="p">??</span> <span class="s">"Not found"</span><span class="p">)</span>
+        <span class="p">}</span> 
+    <span class="p">}</span>
+    
+    
+    
+    <span class="kd">func</span> <span class="nf">authorizationController</span><span class="p">(</span><span class="nv">controller</span><span class="p">:</span> <span class="kt">ASAuthorizationController</span><span class="p">,</span> <span class="n">didCompleteWithError</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Handle error here.</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>There is an another delegate called as ‘ASAuthorizationControllerPresentationContextProviding’. It is not required to implement this delegate, but it is highly recommended to implement it.</p>
+
+<p>All we have to do is provide the current window.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">presentationAnchor</span><span class="p">(</span><span class="k">for</span> <span class="nv">controller</span><span class="p">:</span> <span class="kt">ASAuthorizationController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ASPresentationAnchor</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">view</span><span class="o">.</span><span class="n">window</span> <span class="p">??</span> <span class="kt">UIWindow</span><span class="p">()</span>
+<span class="p">}</span></code></pre></figure>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/blog/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

@@ -3,10 +3,10 @@
   <generator uri="http://jekyllrb.com" version="3.8.6">Jekyll</generator>
   
   
-  <link href="https://ohmyswift.com/blog/feed.xml" rel="self" type="application/atom+xml" />
-  <link href="https://ohmyswift.com/blog/" rel="alternate" type="text/html" />
-  <updated>2019-08-06T00:57:04+05:30</updated>
-  <id>https://ohmyswift.com/blog//</id>
+  <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
+  <updated>2019-08-10T00:11:31+05:30</updated>
+  <id>http://localhost:4000/blog//</id>
 
   
     <title type="html">Oh my Swift</title>
@@ -22,15 +22,159 @@
   
     <entry>
       
+      <title type="html">Integrating ‘Sign in with Apple’ in iOS apps</title>
+      
+      
+      <link href="http://localhost:4000/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/" rel="alternate" type="text/html" title="Integrating 'Sign in with Apple' in iOS apps" />
+      
+      <published>2019-08-06T07:41:00+05:30</published>
+      <updated>2019-08-06T07:41:00+05:30</updated>
+      <id>http://localhost:4000/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/">&lt;p&gt;The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the ‘Sign In with Apple’ feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of ‘Sign In with Apple’ on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Xcode 11 (in beta at the time of writing the article)&lt;/li&gt;
+  &lt;li&gt;Apple developer account.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;steps-to-integrate-sign-in-with-apple&quot;&gt;Steps to integrate ‘Sign In with Apple’&lt;/h3&gt;
+&lt;p&gt;Before getting started, you have to setup keys for ‘Sign in with Apple’ feature. If you haven’t checked it out, you can do it here.&lt;/p&gt;
+
+&lt;p&gt;Alright, let’s get started!&lt;/p&gt;
+&lt;h4 id=&quot;step-1&quot;&gt;&lt;em&gt;Step 1&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;Create a new project in Xcode.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-2&quot;&gt;&lt;em&gt;Step 2&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;Head to Signing and capabilities tab.
+Hit the ‘+ Capability’ option and select ‘Sign In with Apple.’&lt;/p&gt;
+
+&lt;h4 id=&quot;step-3&quot;&gt;&lt;em&gt;Step 3&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;Navigate to the class where you want to set up the ‘Sign in with Apple’ button. I have built a SignInHandler class which encapsulates all the sign-in code and logic.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-4&quot;&gt;&lt;em&gt;Step 4&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;Import the framework ‘AuthenticationServices’ in your class.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-5&quot;&gt;&lt;em&gt;Step 5&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;Create an instance of ASAuthorizationAppleIDButton class and add it as a subview to the view along with the necessary constraints.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//Code to create an instance of the 'Sign In with Apple' button&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;@available(iOS 13.0, *)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createAppleSigninButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signInButton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;signInButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addTarget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#selector(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;handleSigninAction&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchUpInside&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signInButton&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;step-6&quot;&gt;&lt;em&gt;Step 6&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;Now, we have to write the implementation for handleSigninAction.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;@available(iOS 13.0, *)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;@objc&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handleSigninAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;appleIDProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appleIDProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//2&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;requestedScopes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fullName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//3&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;authorizationController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;authorizationRequests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;authorizationController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delegate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;authorizationController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;presentationContextProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;authorizationController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;performRequests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;here-is-the-breakdown-of-the-above-given-code-snippet&quot;&gt;Here is the breakdown of the above given code snippet,&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;We are using an instance of ASAuthorizationAppleIDProvider inorder to create a request.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We need only the full name and email of the user. Hence, we have mentioned them in the ‘requestedScopes.’&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Finally, we pass the request to the ASAuthorizationController.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;On tapping the ‘Sign in’ button, ‘handleSigninAction’ method is triggered, and the ASAuthorizationController is presented, which prompts the user to use Apple sign-in.&lt;/p&gt;
+
+&lt;h4 id=&quot;step-7&quot;&gt;Step 7&lt;/h4&gt;
+&lt;p&gt;There are two scenarios after presenting the ASAuthorizationController. Either the user successfully signs in, or an error occurs. 
+The delegates, ‘didCompleteWithAuthorization’ or ‘didCompleteWithError’ get callbacks for the success or failure scenarios, respectively.&lt;/p&gt;
+
+&lt;p&gt;We will write an extension to SignInHandler class and conform it to ‘ASAuthorizationControllerDelegate.’ If the user successfully logs in, the user’s details such as  full name, email id. etc can be extracted from ‘ASAuthorizationAppleIDCredential’.&lt;/p&gt;
+
+&lt;p&gt;If any error occurs during the login process, it should be handled in ‘didCompleteWithError’ method.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;@available(iOS 13.0, *)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SignInHandler&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationControllerDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;authorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;didCompleteWithAuthorization&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;authorization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;appleIDCredential&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;authorization&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;credential&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDCredential&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            
+            &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;userIdentifier&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appleIDCredential&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;fullName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appleIDCredential&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fullName&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appleIDCredential&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;
+            
+            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userIdentifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fullName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Not found&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Not found&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    
+    
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;authorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;didCompleteWithError&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//Handle error here.&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;There is an another delegate called as ‘ASAuthorizationControllerPresentationContextProviding’. It is not required to implement this delegate, but it is highly recommended to implement it.&lt;/p&gt;
+
+&lt;p&gt;All we have to do is provide the current window.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;presentationAnchor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASPresentationAnchor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;window&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+        <category term="Swift, iOS, Sign in with Apple" />
+      
+
+      
+
+      
+        <summary type="html">The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the ‘Sign In with Apple’ feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of ‘Sign In with Apple’ on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
       <title type="html">Swift bit #3 — Unwrap optional values using for in loop</title>
       
       
-      <link href="https://ohmyswift.com/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/" rel="alternate" type="text/html" title="Swift bit #3 — Unwrap optional values using for in loop" />
+      <link href="http://localhost:4000/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/" rel="alternate" type="text/html" title="Swift bit #3 — Unwrap optional values using for in loop" />
       
       <published>2019-08-03T09:29:00+05:30</published>
       <updated>2019-08-03T09:29:00+05:30</updated>
-      <id>https://ohmyswift.com/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/">&lt;p&gt;One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.&lt;/p&gt;
+      <id>http://localhost:4000/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/">&lt;p&gt;One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.&lt;/p&gt;
 
 &lt;p&gt;Consider that there is an array of optional values. Usually, we use if let or guard statement to unwrap the optionals.&lt;/p&gt;
 
@@ -90,12 +234,12 @@ Have any queries? Feel free to DM me.&lt;/p&gt;</content>
       <title type="html">Swift bit #2 - Using Booleans the right way, in Swift</title>
       
       
-      <link href="https://ohmyswift.com/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift/" rel="alternate" type="text/html" title="Swift bit #2 - Using Booleans the right way, in Swift" />
+      <link href="http://localhost:4000/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift/" rel="alternate" type="text/html" title="Swift bit #2 - Using Booleans the right way, in Swift" />
       
       <published>2019-08-03T09:19:00+05:30</published>
       <updated>2019-08-03T09:19:00+05:30</updated>
-      <id>https://ohmyswift.com/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift/">&lt;p&gt;Boolean is one of the most frequently used and simplest data type in any programming language.&lt;/p&gt;
+      <id>http://localhost:4000/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift/">&lt;p&gt;Boolean is one of the most frequently used and simplest data type in any programming language.&lt;/p&gt;
 
 &lt;p&gt;It is common to want to toggle the state of the boolean variable. So, we normally do it like this,&lt;/p&gt;
 
@@ -152,12 +296,12 @@ Have any queries? Feel free to DM me.&lt;/p&gt;</content>
       <title type="html">Swift bit #1 — Using “where” clause in “for in” loops</title>
       
       
-      <link href="https://ohmyswift.com/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/" rel="alternate" type="text/html" title="Swift bit #1 — Using “where” clause in “for in” loops" />
+      <link href="http://localhost:4000/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/" rel="alternate" type="text/html" title="Swift bit #1 — Using “where” clause in “for in” loops" />
       
       <published>2019-08-01T23:27:00+05:30</published>
       <updated>2019-08-01T23:27:00+05:30</updated>
-      <id>https://ohmyswift.com/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/">&lt;p&gt;We all would have written a piece of code similar to this,
+      <id>http://localhost:4000/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/">&lt;p&gt;We all would have written a piece of code similar to this,
 The usual way,&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
@@ -214,12 +358,12 @@ Have any queries? Feel free to DM me.&lt;/p&gt;</content>
       <title type="html">Humble beginnings</title>
       
       
-      <link href="https://ohmyswift.com/blog/2019/07/31/humble-beginnings/" rel="alternate" type="text/html" title="Humble beginnings" />
+      <link href="http://localhost:4000/blog/2019/07/31/humble-beginnings/" rel="alternate" type="text/html" title="Humble beginnings" />
       
       <published>2019-07-31T11:48:49+05:30</published>
       <updated>2019-07-31T11:48:49+05:30</updated>
-      <id>https://ohmyswift.com/blog/2019/07/31/humble-beginnings</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2019/07/31/humble-beginnings/">&lt;p&gt;Blogging has always been my favorite exercise. I started creating websites using Wordpress, PHP, and PHPBB nearly ten years back. After a point, I took the path of iOS development. I became an iOS developer. Learning things in iOS was challenging as well as it was fun at the same time. As I discovered new things, I thought, why shouldn’t I share my knowledge with other fellow developers? And this is the reason why I have started the blog. 
+      <id>http://localhost:4000/blog/2019/07/31/humble-beginnings</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/07/31/humble-beginnings/">&lt;p&gt;Blogging has always been my favorite exercise. I started creating websites using Wordpress, PHP, and PHPBB nearly ten years back. After a point, I took the path of iOS development. I became an iOS developer. Learning things in iOS was challenging as well as it was fun at the same time. As I discovered new things, I thought, why shouldn’t I share my knowledge with other fellow developers? And this is the reason why I have started the blog. 
 So much has evolved since then. With the introduction of new technologies and frameworks, there are so many ways to set up a website. The challenge is to select the right technology for the intended purpose. After doing in-depth research,  I made up my mind to set up a blog using Jekyll. Yes, Jekyll powers ohmyswift.com. Thanks to the developer community, which helped me in choosing the right framework to set up my blog.&lt;/p&gt;
 
 &lt;p&gt;Now, coming to Ohmyswift.com, there will be frequent blog posts about the latest topics in Swift language and iOS development. So buckle up, there are going to be plenty of articles coming up!&lt;/p&gt;</content>
