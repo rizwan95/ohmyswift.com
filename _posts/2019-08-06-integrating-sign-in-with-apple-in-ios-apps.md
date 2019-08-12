@@ -14,7 +14,7 @@ The WWDC 2019 gave us many features to look forward. One of the most exciting fe
 * Apple developer account.
 
 ### Steps to integrate 'Sign In with Apple'
-Before getting started, you have to configure 'Sign in with Apple' in the developer portal. If you don't know how to configure 'Sign in with Apple', don't worry, we have got you covered. Head to this article to know about it. 
+Before getting started, you have to configure 'Sign in with Apple' in the developer portal. If you don't know how to configure 'Sign in with Apple', don't worry, we have got you covered. [Head to this article](/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/) to know about it. 
 
 
 
@@ -151,4 +151,7 @@ Add the button to a view and setup the constraints. Embed the sign-in button in 
 
 That's it you have successfully implemented 'Sign in with Apple' in your iOS app.
 
+You can download the completed project from [here](http://bit.ly/signinwithapple)
+
+You can always reach out to me on [Twitter](https://twitter.com/rizwanasifahmed) and feel free to share your thoughts in the comments below. 
 

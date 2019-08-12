@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2019-08-12T11:02:01+05:30</updated>
+  <updated>2019-08-12T11:23:02+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -110,7 +110,7 @@
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;steps-to-integrate-sign-in-with-apple&quot;&gt;Steps to integrate ‘Sign In with Apple’&lt;/h3&gt;
-&lt;p&gt;Before getting started, you have to configure ‘Sign in with Apple’ in the developer portal. If you don’t know how to configure ‘Sign in with Apple’, don’t worry, we have got you covered. Head to this article to know about it.&lt;/p&gt;
+&lt;p&gt;Before getting started, you have to configure ‘Sign in with Apple’ in the developer portal. If you don’t know how to configure ‘Sign in with Apple’, don’t worry, we have got you covered. &lt;a href=&quot;/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/&quot;&gt;Head to this article&lt;/a&gt; to know about it.&lt;/p&gt;
 
 &lt;p&gt;Alright, let’s get started!&lt;/p&gt;
 
@@ -247,7 +247,11 @@ Add the button to a view and setup the constraints. Embed the sign-in button in 
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;That’s it you have successfully implemented ‘Sign in with Apple’ in your iOS app.&lt;/p&gt;</content>
+&lt;p&gt;That’s it you have successfully implemented ‘Sign in with Apple’ in your iOS app.&lt;/p&gt;
+
+&lt;p&gt;You can download the completed project from &lt;a href=&quot;http://bit.ly/signinwithapple&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can always reach out to me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt; and feel free to share your thoughts in the comments below.&lt;/p&gt;</content>
 
       
       
