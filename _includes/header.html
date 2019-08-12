@@ -1,6 +1,14 @@
 <header class="site-header">
 
   <div class="wrapper">
+    
+      <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+      <meta property="og:title" content="{{ page.og_title }}" />
+      <meta property="og:description" content="{{ page.og_description }}" />
+      <meta property="og:image" content="{{ site.url }}{{ page.og_image }}" />
+      <meta property="og:type"  content="{{ page.og_type }}" />
+      <meta property="og:locale"  content="en_US" />
+      
 
     <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
 
@@ -16,14 +24,5 @@
     </nav>
 
   </div>
-
-
-<meta property="og:url" content="{{ site.url }}{{ page.url }}" />
-<meta property="og:title" content="{{ page.og_title }}" />
-<meta property="og:description" content="{{ page.og_description }}" />
-<meta property="og:image" content="{{ site.url }}{{ page.og_image }}" />
-<meta property="og:type"  content="{{ page.og_type }}" />
-<meta property="og:locale"  content="en_US" />
-
 
 </header>
