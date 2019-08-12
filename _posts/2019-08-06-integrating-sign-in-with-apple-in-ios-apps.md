@@ -4,6 +4,10 @@ title: Integrating 'Sign in with Apple' in iOS apps
 date: 2019-08-06 07:41 +0530
 category: Swift, iOS, Sign in with Apple
 comments: true
+og_title: Integrating 'Sign in with Apple' in iOS apps
+og_description: Article about integrating 'Sign in with Apple' in iOS apps
+og_image: /blog/assets/images/signinwithapple01.png
+og_type: website
 ---
 
 The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the 'Sign In with Apple' feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of 'Sign In with Apple' on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.
@@ -148,6 +152,9 @@ Now that we have our Sign in button, we can implement it in a ViewController and
 Add the button to a view and setup the constraints. Embed the sign-in button in a UIStackView for easy setup.
 
 - Run the project, and you can see the sign-in button in action. Tap the button, and it will present you an authentication view.
+
+
+
 
 That's it you have successfully implemented 'Sign in with Apple' in your iOS app.
 
