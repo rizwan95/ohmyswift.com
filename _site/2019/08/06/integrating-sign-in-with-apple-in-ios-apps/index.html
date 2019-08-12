@@ -123,34 +123,45 @@
 </ul>
 
 <h3 id="steps-to-integrate-sign-in-with-apple">Steps to integrate ‘Sign In with Apple’</h3>
-<p>Before getting started, you have to setup keys for ‘Sign in with Apple’ feature. If you haven’t checked it out, you can do it here.</p>
+<p>Before getting started, you have to configure ‘Sign in with Apple’ in the developer portal. If you don’t know how to configure ‘Sign in with Apple’, don’t worry, we have got you covered. Head to this article to know about it.</p>
 
 <p>Alright, let’s get started!</p>
-<h4 id="step-1"><em>Step 1</em></h4>
-<p>Create a new project in Xcode.</p>
 
-<h4 id="step-2"><em>Step 2</em></h4>
-<p>Head to Signing and capabilities tab.
-Hit the ‘+ Capability’ option and select ‘Sign In with Apple.’</p>
+<h3 id="adding-sign-in-with-apple-in-capabilities">Adding ‘Sign In with Apple’ in capabilities</h3>
 
-<h4 id="step-3"><em>Step 3</em></h4>
-<p>Navigate to the class where you want to set up the ‘Sign in with Apple’ button. I have built a SignInHandler class which encapsulates all the sign-in code and logic.</p>
+<ul>
+  <li>
+    <p>Create a new project in Xcode.</p>
+  </li>
+  <li>
+    <p>Head to Signing and capabilities tab and hit the ‘+ Capability’ option and select ‘Sign In with Apple.’ It will look like this,</p>
+  </li>
+</ul>
 
-<h4 id="step-4"><em>Step 4</em></h4>
-<p>Import the framework ‘AuthenticationServices’ in your class.</p>
+<p><img src="/blog/assets/images/signinwithapple01.png" alt="Sign in with Apple" /></p>
 
-<h4 id="step-5"><em>Step 5</em></h4>
-<p>Create an instance of ASAuthorizationAppleIDButton class and add it as a subview to the view along with the necessary constraints.</p>
+<h3 id="setting-up-the-sign-in-with-apple-button">Setting up the ‘Sign In with Apple’ button</h3>
+
+<ul>
+  <li>
+    <p>Navigate to the class where you want to set up the ‘Sign in with Apple’ button. I have built a SignInHandler class which encapsulates all the sign-in code and logic.</p>
+  </li>
+  <li>
+    <p>Import the framework ‘AuthenticationServices’ in your class.</p>
+  </li>
+  <li>
+    <p>Create an instance of ASAuthorizationAppleIDButton class and define its targets and selectors.</p>
+  </li>
+</ul>
 
 <figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">//Code to create an instance of the 'Sign In with Apple' button</span>
 <span class="kd">@available(iOS 13.0, *)</span>
-<span class="kd">func</span> <span class="nf">createAppleSigninButton</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ASAuthorizationAppleIDButton</span><span class="p">{</span>
+<span class="kd">func</span> <span class="nf">getAppleSigninButton</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ASAuthorizationAppleIDButton</span><span class="p">{</span>
     <span class="k">let</span> <span class="nv">signInButton</span> <span class="o">=</span> <span class="kt">ASAuthorizationAppleIDButton</span><span class="p">()</span>
     <span class="n">signInButton</span><span class="o">.</span><span class="nf">addTarget</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">#selector(</span><span class="nf">handleSigninAction</span><span class="kd">)</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">touchUpInside</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">signInButton</span>
 <span class="p">}</span></code></pre></figure>
 
-<h4 id="step-6"><em>Step 6</em></h4>
 <p>Now, we have to write the implementation for handleSigninAction.</p>
 
 <figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">@available(iOS 13.0, *)</span>
@@ -183,15 +194,25 @@ Hit the ‘+ Capability’ option and select ‘Sign In with Apple.’</p>
   </li>
 </ol>
 
+<p><img src="/blog/assets/images/signinwithapple02.png" alt="Sign in with Apple sample" /></p>
+
+<h3 id="handling-the-successfailure-scenarios-after-sign-in">Handling the success/failure scenarios after sign in</h3>
+
 <p>On tapping the ‘Sign in’ button, ‘handleSigninAction’ method is triggered, and the ASAuthorizationController is presented, which prompts the user to use Apple sign-in.</p>
 
-<h4 id="step-7">Step 7</h4>
 <p>There are two scenarios after presenting the ASAuthorizationController. Either the user successfully signs in, or an error occurs. 
 The delegates, ‘didCompleteWithAuthorization’ or ‘didCompleteWithError’ get callbacks for the success or failure scenarios, respectively.</p>
 
-<p>We will write an extension to SignInHandler class and conform it to ‘ASAuthorizationControllerDelegate.’ If the user successfully logs in, the user’s details such as  full name, email id. etc can be extracted from ‘ASAuthorizationAppleIDCredential’.</p>
+<p>We will write an extension to SignInHandler class and conform it to ‘ASAuthorizationControllerDelegate.’</p>
 
-<p>If any error occurs during the login process, it should be handled in ‘didCompleteWithError’ method.</p>
+<ul>
+  <li>
+    <p>If the user successfully logs in, the user’s details such as  full name, email id. etc can be extracted from ‘ASAuthorizationAppleIDCredential’ in the ‘didCompleteWithAuthorization’ method.</p>
+  </li>
+  <li>
+    <p>If any error occurs during the login process, it should be handled in ‘didCompleteWithError’ method.</p>
+  </li>
+</ul>
 
 <figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">@available(iOS 13.0, *)</span>
 <span class="kd">extension</span> <span class="kt">SignInHandler</span> <span class="p">:</span> <span class="kt">ASAuthorizationControllerDelegate</span><span class="p">{</span>
@@ -223,12 +244,57 @@ The delegates, ‘didCompleteWithAuthorization’ or ‘didCompleteWithError’ 
     <span class="k">return</span> <span class="n">view</span><span class="o">.</span><span class="n">window</span> <span class="p">??</span> <span class="kt">UIWindow</span><span class="p">()</span>
 <span class="p">}</span></code></pre></figure>
 
+<p><img src="/blog/assets/images/signinwithapple03.png" alt="Sign in with Apple sample" /></p>
+
+<h3 id="integrating-the-sign-in-with-apple-button-in-a-viewcontroller">Integrating the ‘Sign in with Apple’ button in a ViewController</h3>
+
+<p>Now that we have our Sign in button, we can implement it in a ViewController and see it in action.</p>
+
+<ul>
+  <li>
+    <p>Create an instance of the ‘SignInHandler’ class and use the ‘getAppleSigninButton()’ to generate the button.
+Add the button to a view and setup the constraints. Embed the sign-in button in a UIStackView for easy setup.</p>
+  </li>
+  <li>
+    <p>Run the project, and you can see the sign-in button in action. Tap the button, and it will present you an authentication view.</p>
+  </li>
+</ul>
+
+<p>That’s it you have successfully implemented ‘Sign in with Apple’ in your iOS app.</p>
+
 
   </div>
 
   
 
 </article>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://ohmyswift.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+
+
+
+
 
       </div>
     </main>

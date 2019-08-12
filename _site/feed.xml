@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2019-08-10T00:11:31+05:30</updated>
+  <updated>2019-08-12T11:02:01+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -18,6 +18,76 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Enabling ‘Sign in with Apple’in developer account</title>
+      
+      
+      <link href="http://localhost:4000/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/" rel="alternate" type="text/html" title="Enabling 'Sign in with Apple'in developer account" />
+      
+      <published>2019-08-12T10:26:00+05:30</published>
+      <updated>2019-08-12T10:26:00+05:30</updated>
+      <id>http://localhost:4000/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/">&lt;p&gt;‘&lt;strong&gt;Sign in with Apple&lt;/strong&gt;’ is an exciting feature announced in WWDC 2019. You must be wondering how to get started. Well, this article is about completed the configuration, &lt;a href=&quot;/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/&quot;&gt;Click here&lt;/a&gt; to know how to integrate ‘Sign in with Apple’ feature in your iOS apps.&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Paid Apple developer account.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Xcode 11 (It is still in beta, at the time of writing.)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;lets-get-started&quot;&gt;Let’s get started&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Login in to your Apple developer account and head to ‘&lt;strong&gt;Certificates, identifiers, and profiles&lt;/strong&gt;’ tab.&lt;/li&gt;
+  &lt;li&gt;Click the ‘&lt;strong&gt;More&lt;/strong&gt;’ tab from the left menu and select the ‘configure’ button.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinconfig01.png&quot; alt=&quot;Sign in with Apple configuration&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;registering-domains-and-emails&quot;&gt;Registering Domains and Emails,&lt;/h3&gt;
+&lt;p&gt;In the Configuration screen, you will be asked to provide a registered domain name, associated email address, and an individual email address. After specifying the domain and email address, you will be given an option to download a verification file.  Place the verification file at the path ‘&lt;strong&gt;https://yourdomainname.com/.well-known/apple-developer-domain-association.txt&lt;/strong&gt;’&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinconfig02.png&quot; alt=&quot;Sign in with Apple configuration&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;enabling-sign-in-with-apple-in-identifiers&quot;&gt;Enabling ‘Sign in with Apple’ in Identifiers&lt;/h3&gt;
+
+&lt;p&gt;It will take some time for the verfication process to be completed. Once it is done, head back to the ‘&lt;strong&gt;Identifiers&lt;/strong&gt;’ tab and enable the ‘&lt;strong&gt;Sign in with Apple&lt;/strong&gt;’ option.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinconfig03.png&quot; alt=&quot;Sign in with Apple configuration&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You have now successfully enabled ‘&lt;strong&gt;Sign in with Apple&lt;/strong&gt;’ in your developer account. You can now regenerate the profiles, download,and use them.&lt;/p&gt;
+
+&lt;h3 id=&quot;where-now&quot;&gt;Where now?&lt;/h3&gt;
+
+&lt;p&gt;As you have succesfully enabled ‘Sign in with Apple’ in your developer account, you would want to integrate it in your iOS apps. Head &lt;a href=&quot;/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/&quot;&gt;here&lt;/a&gt; to know how to do it.&lt;/p&gt;
+
+&lt;p&gt;Have any queries? Reach out to me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt; and feel free to share your thoughts in the comments below.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+        <category term="Swift, iOS, Sign in with Apple" />
+      
+
+      
+
+      
+        <summary type="html">‘Sign in with Apple’ is an exciting feature announced in WWDC 2019. You must be wondering how to get started. Well, this article is about completed the configuration, Click here to know how to integrate ‘Sign in with Apple’ feature in your iOS apps.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
@@ -40,34 +110,45 @@
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;steps-to-integrate-sign-in-with-apple&quot;&gt;Steps to integrate ‘Sign In with Apple’&lt;/h3&gt;
-&lt;p&gt;Before getting started, you have to setup keys for ‘Sign in with Apple’ feature. If you haven’t checked it out, you can do it here.&lt;/p&gt;
+&lt;p&gt;Before getting started, you have to configure ‘Sign in with Apple’ in the developer portal. If you don’t know how to configure ‘Sign in with Apple’, don’t worry, we have got you covered. Head to this article to know about it.&lt;/p&gt;
 
 &lt;p&gt;Alright, let’s get started!&lt;/p&gt;
-&lt;h4 id=&quot;step-1&quot;&gt;&lt;em&gt;Step 1&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;Create a new project in Xcode.&lt;/p&gt;
 
-&lt;h4 id=&quot;step-2&quot;&gt;&lt;em&gt;Step 2&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;Head to Signing and capabilities tab.
-Hit the ‘+ Capability’ option and select ‘Sign In with Apple.’&lt;/p&gt;
+&lt;h3 id=&quot;adding-sign-in-with-apple-in-capabilities&quot;&gt;Adding ‘Sign In with Apple’ in capabilities&lt;/h3&gt;
 
-&lt;h4 id=&quot;step-3&quot;&gt;&lt;em&gt;Step 3&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;Navigate to the class where you want to set up the ‘Sign in with Apple’ button. I have built a SignInHandler class which encapsulates all the sign-in code and logic.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a new project in Xcode.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Head to Signing and capabilities tab and hit the ‘+ Capability’ option and select ‘Sign In with Apple.’ It will look like this,&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h4 id=&quot;step-4&quot;&gt;&lt;em&gt;Step 4&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;Import the framework ‘AuthenticationServices’ in your class.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinwithapple01.png&quot; alt=&quot;Sign in with Apple&quot; /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;step-5&quot;&gt;&lt;em&gt;Step 5&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;Create an instance of ASAuthorizationAppleIDButton class and add it as a subview to the view along with the necessary constraints.&lt;/p&gt;
+&lt;h3 id=&quot;setting-up-the-sign-in-with-apple-button&quot;&gt;Setting up the ‘Sign In with Apple’ button&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Navigate to the class where you want to set up the ‘Sign in with Apple’ button. I have built a SignInHandler class which encapsulates all the sign-in code and logic.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Import the framework ‘AuthenticationServices’ in your class.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create an instance of ASAuthorizationAppleIDButton class and define its targets and selectors.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//Code to create an instance of the 'Sign In with Apple' button&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;@available(iOS 13.0, *)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createAppleSigninButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getAppleSigninButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signInButton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;signInButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addTarget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#selector(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;handleSigninAction&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchUpInside&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signInButton&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h4 id=&quot;step-6&quot;&gt;&lt;em&gt;Step 6&lt;/em&gt;&lt;/h4&gt;
 &lt;p&gt;Now, we have to write the implementation for handleSigninAction.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;@available(iOS 13.0, *)&lt;/span&gt;
@@ -100,15 +181,25 @@ Hit the ‘+ Capability’ option and select ‘Sign In with Apple.’&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinwithapple02.png&quot; alt=&quot;Sign in with Apple sample&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;handling-the-successfailure-scenarios-after-sign-in&quot;&gt;Handling the success/failure scenarios after sign in&lt;/h3&gt;
+
 &lt;p&gt;On tapping the ‘Sign in’ button, ‘handleSigninAction’ method is triggered, and the ASAuthorizationController is presented, which prompts the user to use Apple sign-in.&lt;/p&gt;
 
-&lt;h4 id=&quot;step-7&quot;&gt;Step 7&lt;/h4&gt;
 &lt;p&gt;There are two scenarios after presenting the ASAuthorizationController. Either the user successfully signs in, or an error occurs. 
 The delegates, ‘didCompleteWithAuthorization’ or ‘didCompleteWithError’ get callbacks for the success or failure scenarios, respectively.&lt;/p&gt;
 
-&lt;p&gt;We will write an extension to SignInHandler class and conform it to ‘ASAuthorizationControllerDelegate.’ If the user successfully logs in, the user’s details such as  full name, email id. etc can be extracted from ‘ASAuthorizationAppleIDCredential’.&lt;/p&gt;
+&lt;p&gt;We will write an extension to SignInHandler class and conform it to ‘ASAuthorizationControllerDelegate.’&lt;/p&gt;
 
-&lt;p&gt;If any error occurs during the login process, it should be handled in ‘didCompleteWithError’ method.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;If the user successfully logs in, the user’s details such as  full name, email id. etc can be extracted from ‘ASAuthorizationAppleIDCredential’ in the ‘didCompleteWithAuthorization’ method.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If any error occurs during the login process, it should be handled in ‘didCompleteWithError’ method.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;@available(iOS 13.0, *)&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SignInHandler&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationControllerDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -138,7 +229,25 @@ The delegates, ‘didCompleteWithAuthorization’ or ‘didCompleteWithError’ 
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;presentationAnchor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASPresentationAnchor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;window&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content>
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinwithapple03.png&quot; alt=&quot;Sign in with Apple sample&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;integrating-the-sign-in-with-apple-button-in-a-viewcontroller&quot;&gt;Integrating the ‘Sign in with Apple’ button in a ViewController&lt;/h3&gt;
+
+&lt;p&gt;Now that we have our Sign in button, we can implement it in a ViewController and see it in action.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create an instance of the ‘SignInHandler’ class and use the ‘getAppleSigninButton()’ to generate the button.
+Add the button to a view and setup the constraints. Embed the sign-in button in a UIStackView for easy setup.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the project, and you can see the sign-in button in action. Tap the button, and it will present you an authentication view.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s it you have successfully implemented ‘Sign in with Apple’ in your iOS app.&lt;/p&gt;</content>
 
       
       

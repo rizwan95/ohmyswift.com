@@ -21,6 +21,10 @@
 <lastmod>2019-08-06T07:41:00+05:30</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/</loc>
+<lastmod>2019-08-12T10:26:00+05:30</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/blog/404/</loc>
 </url>
 <url>
@@ -37,5 +41,8 @@
 </url>
 <url>
 <loc>http://localhost:4000/blog/categories/swift-ios-sign-in-with-apple/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/posts/2/</loc>
 </url>
 </urlset>

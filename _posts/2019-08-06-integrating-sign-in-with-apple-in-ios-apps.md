@@ -3,6 +3,7 @@ layout: post
 title: Integrating 'Sign in with Apple' in iOS apps
 date: 2019-08-06 07:41 +0530
 category: Swift, iOS, Sign in with Apple
+comments: true
 ---
 
 The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the 'Sign In with Apple' feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of 'Sign In with Apple' on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.
@@ -13,30 +14,34 @@ The WWDC 2019 gave us many features to look forward. One of the most exciting fe
 * Apple developer account.
 
 ### Steps to integrate 'Sign In with Apple'
-Before getting started, you have to setup keys for 'Sign in with Apple' feature. If you haven't checked it out, you can do it here.
+Before getting started, you have to configure 'Sign in with Apple' in the developer portal. If you don't know how to configure 'Sign in with Apple', don't worry, we have got you covered. Head to this article to know about it. 
+
+
 
 Alright, let's get started!
-#### _Step 1_
-Create a new project in Xcode.
 
-#### _Step 2_ 
-Head to Signing and capabilities tab.
-Hit the '+ Capability' option and select 'Sign In with Apple.'
+### Adding 'Sign In with Apple' in capabilities
 
-#### _Step 3_
-Navigate to the class where you want to set up the 'Sign in with Apple' button. I have built a SignInHandler class which encapsulates all the sign-in code and logic.
+- Create a new project in Xcode.
 
-#### _Step 4_
-Import the framework 'AuthenticationServices' in your class.
+- Head to Signing and capabilities tab and hit the '+ Capability' option and select 'Sign In with Apple.' It will look like this, 
 
-#### _Step 5_
-Create an instance of ASAuthorizationAppleIDButton class and add it as a subview to the view along with the necessary constraints. 
+![Sign in with Apple](/blog/assets/images/signinwithapple01.png)
+
+
+### Setting up the 'Sign In with Apple' button
+
+- Navigate to the class where you want to set up the 'Sign in with Apple' button. I have built a SignInHandler class which encapsulates all the sign-in code and logic.
+
+- Import the framework 'AuthenticationServices' in your class.
+
+- Create an instance of ASAuthorizationAppleIDButton class and define its targets and selectors. 
 
 {% highlight swift %}
 
 //Code to create an instance of the 'Sign In with Apple' button
 @available(iOS 13.0, *)
-func createAppleSigninButton() -> ASAuthorizationAppleIDButton{
+func getAppleSigninButton() -> ASAuthorizationAppleIDButton{
     let signInButton = ASAuthorizationAppleIDButton()
     signInButton.addTarget(self, action: #selector(handleSigninAction), for: .touchUpInside)
     return signInButton
@@ -44,8 +49,6 @@ func createAppleSigninButton() -> ASAuthorizationAppleIDButton{
 
 {% endhighlight %}
 
-
-#### _Step 6_
 Now, we have to write the implementation for handleSigninAction.
 
 {% highlight swift %}
@@ -79,15 +82,20 @@ Now, we have to write the implementation for handleSigninAction.
 
 3. Finally, we pass the request to the ASAuthorizationController. 
 
+![Sign in with Apple sample](/blog/assets/images/signinwithapple02.png)
+
+### Handling the success/failure scenarios after sign in 
+
 On tapping the 'Sign in' button, 'handleSigninAction' method is triggered, and the ASAuthorizationController is presented, which prompts the user to use Apple sign-in. 
 
-#### Step 7
 There are two scenarios after presenting the ASAuthorizationController. Either the user successfully signs in, or an error occurs. 
 The delegates, 'didCompleteWithAuthorization' or 'didCompleteWithError' get callbacks for the success or failure scenarios, respectively.
 
-We will write an extension to SignInHandler class and conform it to 'ASAuthorizationControllerDelegate.' If the user successfully logs in, the user's details such as  full name, email id. etc can be extracted from 'ASAuthorizationAppleIDCredential'. 
+We will write an extension to SignInHandler class and conform it to 'ASAuthorizationControllerDelegate.' 
 
-If any error occurs during the login process, it should be handled in 'didCompleteWithError' method. 
+- If the user successfully logs in, the user's details such as  full name, email id. etc can be extracted from 'ASAuthorizationAppleIDCredential' in the 'didCompleteWithAuthorization' method.
+
+- If any error occurs during the login process, it should be handled in 'didCompleteWithError' method. 
 
 
 {% highlight swift %}
@@ -128,3 +136,19 @@ func presentationAnchor(for controller: ASAuthorizationController) -> ASPresenta
 }
 
 {% endhighlight %}
+
+
+![Sign in with Apple sample](/blog/assets/images/signinwithapple03.png)
+
+### Integrating the 'Sign in with Apple' button in a ViewController 
+
+Now that we have our Sign in button, we can implement it in a ViewController and see it in action.
+
+- Create an instance of the 'SignInHandler' class and use the 'getAppleSigninButton()' to generate the button.
+Add the button to a view and setup the constraints. Embed the sign-in button in a UIStackView for easy setup.
+
+- Run the project, and you can see the sign-in button in action. Tap the button, and it will present you an authentication view.
+
+That's it you have successfully implemented 'Sign in with Apple' in your iOS app.
+
+
