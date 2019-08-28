@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2019-08-28T14:58:42+05:30</updated>
+  <updated>2019-08-28T17:37:05+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -22,18 +22,18 @@
   
     <entry>
       
-      <title type="html">Swifty ways of typecasting objects</title>
+      <title type="html">Swift bit #4 - Swifty ways of typecasting objects</title>
       
       
-      <link href="http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/" rel="alternate" type="text/html" title="Swifty ways of typecasting objects" />
+      <link href="http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/" rel="alternate" type="text/html" title="Swift bit #4 - Swifty ways of typecasting objects" />
       
       <published>2019-08-27T08:33:00+05:30</published>
       <updated>2019-08-27T08:33:00+05:30</updated>
       <id>http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects</id>
-      <content type="html" xml:base="http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/">&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit04.png&quot; alt=&quot;Typecasting objects&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? 
+      <content type="html" xml:base="http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/">&lt;p&gt;Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? 
 Well, there are multiple ways of doing it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit04.png&quot; alt=&quot;Typecasting objects&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Method 1 - Using ‘for’ loop.
 This method is a kind of brute force method. Usually, we all do this way.&lt;/p&gt;
@@ -82,7 +82,7 @@ Here, we are using the power of the ‘for in’ loops to find the UILabel from 
       
 
       
-        <summary type="html"></summary>
+        <summary type="html">Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? Well, there are multiple ways of doing it.</summary>
       
 
       
