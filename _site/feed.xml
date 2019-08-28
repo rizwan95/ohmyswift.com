@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2019-08-12T12:29:13+05:30</updated>
+  <updated>2019-08-28T11:22:35+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -18,6 +18,77 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Swifty ways of typecasting objects</title>
+      
+      
+      <link href="http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/" rel="alternate" type="text/html" title="Swifty ways of typecasting objects" />
+      
+      <published>2019-08-27T08:33:00+05:30</published>
+      <updated>2019-08-27T08:33:00+05:30</updated>
+      <id>http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/">&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit04.png&quot; alt=&quot;Typecasting objects&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? 
+Well, there are multiple ways of doing it.&lt;/p&gt;
+
+&lt;p&gt;Method 1 - Using ‘for’ loop.
+This method is a kind of brute force method. Usually, we all do this way.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subview&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subviews&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subview&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UILabel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;c1&quot;&gt;// Change your text here&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We run the code, and everything works as expected. However, as a developer, we should find out more efficient methods of doing it. Let’s see another way of doing it.&lt;/p&gt;
+
+&lt;p&gt;Method 2 - Using ‘case let’ in ‘for in’ loop.
+Here, we are using the power of the ‘for in’ loops to find the UILabel from the subviews.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UILabel&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subviews&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;//Change your text here&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Neat, isn’t it? There is a significant reduction in the number of lines of code.&lt;/p&gt;
+
+&lt;p&gt;So, do we settle here? No. There should be more Swifty way to solve this problem. Let’s see how.&lt;/p&gt;
+
+&lt;p&gt;Method 3 - Using ‘compactMap’&lt;/p&gt;
+
+&lt;p&gt;In this method, we use ‘compactMap’  to typecast a view to UILabel. I consider this method to be more swifty and descriptive.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subviews&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compactMap&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UILabel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forEach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+	&lt;span class=&quot;c1&quot;&gt;// Change your text here&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;These are the methods I prefer to typecast objects from an array. There are many more methods too. So, what is your preferred way of typecasting objects? Tell us in the comments below. Still have any queries reach out to me directly on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+        <summary type="html"></summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
