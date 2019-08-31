@@ -29,6 +29,10 @@
 <lastmod>2019-08-27T08:33:00+05:30</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/</loc>
+<lastmod>2019-08-31T19:10:00+05:30</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/blog/404/</loc>
 </url>
 <url>
@@ -45,6 +49,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/blog/categories/swift-ios-sign-in-with-apple/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/categories/swift-ios-websockets-urlsessionwebsockettask/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/blog/posts/2/</loc>
