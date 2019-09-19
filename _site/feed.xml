@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2019-09-19T09:35:52+05:30</updated>
+  <updated>2019-09-19T13:08:30+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -34,6 +34,8 @@
 I was testing a multipart data request API using the [Postman app.]https://www.getpostman.com/ The API worked, the file got uploaded, and the results came in. 
 However, I needed to write the Swift code to make a multipart request from the iOS app. 
 Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/postman-swift.png&quot; alt=&quot;Generate Swift code using Postman&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After you had entered the API endpoint details like URL, query params, request body, and request headers hit the “code” button.&lt;/p&gt;
 
