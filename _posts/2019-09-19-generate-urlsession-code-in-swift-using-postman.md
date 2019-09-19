@@ -2,9 +2,9 @@
 layout: post
 title: Generate URLSession code in Swift using Postman
 date: 2019-09-19 00:31 +0530
+category: Swift, Postman
 ---
 Almost every iOS developer would have had to make a network call from their app. Swift uses URLSession to make network calls. URLSessionTask includes DataTask, UploadTask, DownloadTask, and WebsocketTask (WebsocketTask is lately introduced in iOS13.0 check [this article](/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/) to know more about it.)
-
 I was testing a multipart data request API using the [Postman app.]https://www.getpostman.com/ The API worked, the file got uploaded, and the results came in. 
 However, I needed to write the Swift code to make a multipart request from the iOS app. 
 Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could! 
