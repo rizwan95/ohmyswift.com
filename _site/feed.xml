@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2019-10-20T12:38:37+05:30</updated>
+  <updated>2020-01-12T00:53:57+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -18,6 +18,156 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Why we should avoid using closures in swift structs?</title>
+      
+      
+      <link href="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/" rel="alternate" type="text/html" title="Why we should avoid using closures in swift structs?" />
+      
+      <published>2020-01-11T10:06:00+05:30</published>
+      <updated>2020-01-11T10:06:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/">&lt;p&gt;We all love closures, don’t we? Closures make iOS developers’ lives easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.”
+Wait. What? Memory leak in Structs? How could that be possible? 
+Structs are value types, and there is no way a memory leak can occur.
+Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift.&lt;/p&gt;
+
+&lt;h2 id=&quot;back-to-the-basics&quot;&gt;&lt;strong&gt;Back to the basics&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The reason I am taking you back to the basics is that before diving into the main problem, we need to have a stronghold of the basics.&lt;/p&gt;
+
+&lt;p&gt;The basic types in Swift fall into two categories. One is the “Reference type,” and the other is the “Value type.” Generally, Classes are reference types. On the other hand, Structs and Enums are value types.&lt;/p&gt;
+
+&lt;h2 id=&quot;value-types&quot;&gt;&lt;strong&gt;Value types&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The value types store the data directly in memory. Every instance has a unique copy of the data. When a variable is assigned to an existing variable, the data is copied. The allocation of the value types is done in the stack. When the value type variable goes out of scope, the deallocation of the memory occurs.&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;oldPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Rizwan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;newPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Oh my Swift&quot;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-------&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Rizwan&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Oh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can see that changing the value of the newPerson doesn’t change the value of oldPerson. This is how value types work.&lt;/p&gt;
+
+&lt;h2 id=&quot;reference-types&quot;&gt;&lt;strong&gt;Reference types&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The reference types keep a reference (aka a pointer) to the data when initialized. Whenever a variable is assigned to an existing reference type, the reference is shared among the variables. The allocation of reference types is done in the heap. The ARC (Automatic Reference Counting) handles the deallocation of the reference type variables.&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
+ &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;withName&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;oldPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;withName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Rizwan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;newPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Oh my Swift&quot;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Output&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Oh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Oh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can see that changing the oldPerson variable reflects the changes in the newPerson variable. This is how reference types work.&lt;/p&gt;
+
+&lt;p&gt;Usually, memory leaks occur in reference types. It occurs in the form of retain cycles in most of the cases. To know more about retain cycles, read this post.&lt;/p&gt;
+
+&lt;p&gt;So, if reference types are the reason for memory leaks, we can use value types for all purposes. That should solve the problem.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, this is not the case. Sometimes structs and enums can be treated as reference types, and this means that retain cycles can occur in structs and enums too.&lt;/p&gt;
+
+&lt;h2 id=&quot;closures---the-villain-in-structs&quot;&gt;&lt;strong&gt;Closures - The villain in Structs.&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;When you use closures in Structs, the closure behaves as a reference type, and the problem starts there. The closures need to have a reference to the environment outside so that the environment can be modified when the closure body is executed.&lt;/p&gt;
+
+&lt;p&gt;In the case of the classes, we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;weak self&lt;/code&gt; to break the retain cycle. When we try to do it for a struct, we get the following compiler error, ‘weak’ may only be applied to class and class-bound protocol types, not ‘{Struct name}’&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;speed&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Float&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;())?&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;myCar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;increaseSpeed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+ &lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// The retain cycle occurs here. We cannot use [weak myCar] as myCar is a value type.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My car's speed :&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prints 30&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;myNewCar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My new car's speed :&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prints 30 still!&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You would have expected the result of myNewCar to be 90.0, but it prints My new car’s speed: 30.0&lt;/p&gt;
+
+&lt;h2 id=&quot;but-why&quot;&gt;&lt;strong&gt;But why?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Well, the reason is, “myNewCar” is a partial copy of “newCar.” Since closures and their environments cannot be copied completely. The value of “speed” is copied, but the property “increaseSpeed” of “myNewCar” (myNewCar.increaseSpeed?()) holds a reference to the “increaseSpeed” of “myCar” with the “speed” of “myCar” in the captured environment. So, the “increaseSpeed” of “myCar” is invoked.&lt;/p&gt;
+
+&lt;p&gt;These are the various reasons why closures in Swift Structs are dangerous.&lt;/p&gt;
+
+&lt;h2 id=&quot;so-what-do-we-do-now&quot;&gt;&lt;strong&gt;So what do we do now?&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The straight forward solution is, avoid using closures in value types. If you want to use them, you should be very careful with it, or else it might lead to unexpected results. 
+Regarding the retain cycle, the only way to break them is to set the variables “myCar” and “myNewCar” to nil manually. It doesn’t sound ideal, but there is no other way.&lt;/p&gt;
+
+&lt;p&gt;It was really thought provoking for me when I learnt about the behaviour of closures in value types. I hope you also felt the same.&lt;/p&gt;
+
+&lt;p&gt;Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
+ You can also follow me on twitter right here: &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;[1] &lt;a href=&quot;https://forums.swift.org/t/avoiding-unbreakable-reference-cycle-with-value-types-and-closures/18757/6&quot;&gt;https://forums.swift.org/t/avoiding-unbreakable-reference-cycle-with-value-types-and-closures/18757/6&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2] &lt;a href=&quot;https://github.com/Wolox/ios-style-guide/blob/master/rules/avoid-struct-closure-self.md&quot;&gt;https://github.com/Wolox/ios-style-guide/blob/master/rules/avoid-struct-closure-self.md&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3] &lt;a href=&quot;https://www.objc.io/issues/16-swift/swift-classes-vs-structs/&quot;&gt;https://www.objc.io/issues/16-swift/swift-classes-vs-structs/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[4] &lt;a href=&quot;https://marcosantadev.com/capturing-values-swift-closures/&quot;&gt;https://marcosantadev.com/capturing-values-swift-closures/&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+        <category term="Swift, Struct, Closures, sort, struct vs classes" />
+      
+
+      
+
+      
+        <summary type="html">We all love closures, don’t we? Closures make iOS developers’ lives easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in Structs? How could that be possible? Structs are value types, and there is no way a memory leak can occur. Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
