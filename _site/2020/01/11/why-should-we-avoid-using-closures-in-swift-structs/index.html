@@ -9,12 +9,12 @@
     
     
     
-    <title>Why we should avoid using closures in Swift structs?</title>
-    <meta name="description" content="We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?">
+    <title>Why should we avoid using closures in Swift structs?</title>
+    <meta name="description" content="We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?">
     
   
     <link rel="stylesheet" href="/blog/assets/main.css">
-    <link rel="canonical" href="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/">
+    <link rel="canonical" href="http://localhost:4000/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">
     
     
     <link rel="alternate" type="application/rss+xml" title="Oh my Swift" href="http://localhost:4000/blog/feed.xml">
@@ -22,16 +22,16 @@
     
   
     
-    <meta property="og:title" content="Why we should avoid using closures in Swift structs?">
+    <meta property="og:title" content="Why should we avoid using closures in Swift structs?">
     <meta property="og:site_name" content="Oh my Swift">
-    <meta property="og:url" content="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/">
-    <meta property="og:description" content="We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?">
+    <meta property="og:url" content="http://localhost:4000/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">
+    <meta property="og:description" content="We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?">
     
     
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="rizwanasifahmed">
-    <meta name="twitter:title" content="Why we should avoid using closures in Swift structs?">
-    <meta name="twitter:description" content="We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and...">
+    <meta name="twitter:title" content="Why should we avoid using closures in Swift structs?">
+    <meta name="twitter:description" content="We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks an...">
     
       <meta name="twitter:creator" content="rizwanasifahmed">
     
@@ -56,19 +56,19 @@
 
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Why we should avoid using closures in Swift structs? | Oh my Swift</title>
+<title>Why should we avoid using closures in Swift structs? | Oh my Swift</title>
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Why we should avoid using closures in Swift structs?" />
+<meta property="og:title" content="Why should we avoid using closures in Swift structs?" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?" />
-<meta property="og:description" content="We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?" />
-<link rel="canonical" href="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/" />
-<meta property="og:url" content="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/" />
+<meta name="description" content="We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?" />
+<meta property="og:description" content="We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?" />
+<link rel="canonical" href="http://localhost:4000/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/" />
+<meta property="og:url" content="http://localhost:4000/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/" />
 <meta property="og:site_name" content="Oh my Swift" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-01-11T10:06:00+05:30" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/","headline":"Why we should avoid using closures in Swift structs?","dateModified":"2020-01-11T10:06:00+05:30","datePublished":"2020-01-11T10:06:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/"},"description":"We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/","headline":"Why should we avoid using closures in Swift structs?","dateModified":"2020-01-11T10:06:00+05:30","datePublished":"2020-01-11T10:06:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/"},"description":"We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -109,7 +109,7 @@
 
   <header class="post-header">
     
-      <h1 class="post-title" itemprop="name headline">Why we should avoid using closures in Swift structs?</h1>
+      <h1 class="post-title" itemprop="name headline">Why should we avoid using closures in Swift structs?</h1>
     
     <p class="post-meta"><time datetime="2020-01-11T10:06:00+05:30" itemprop="datePublished">Jan 11, 2020</time> •
   
@@ -137,10 +137,10 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.”
+    <p>We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.”
 Wait. What? Memory leak in structs? How could that be possible?</p>
 
-<p><img src="/blog/assets/images/closuresinstructs.png" alt="Why we should avoid using closures in Swift structs?" /></p>
+<p><img src="/blog/assets/images/closuresinstructs.png" alt="Why should we avoid using closures in Swift structs?" /></p>
 
 <p>Structs are value types, and there is no way a memory leak can occur.
 Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift.</p>

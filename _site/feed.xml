@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2020-01-12T11:39:06+05:30</updated>
+  <updated>2020-01-12T12:09:06+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -22,18 +22,18 @@
   
     <entry>
       
-      <title type="html">Why we should avoid using closures in Swift structs?</title>
+      <title type="html">Why should we avoid using closures in Swift structs?</title>
       
       
-      <link href="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/" rel="alternate" type="text/html" title="Why we should avoid using closures in Swift structs?" />
+      <link href="http://localhost:4000/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/" rel="alternate" type="text/html" title="Why should we avoid using closures in Swift structs?" />
       
       <published>2020-01-11T10:06:00+05:30</published>
       <updated>2020-01-11T10:06:00+05:30</updated>
-      <id>http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs</id>
-      <content type="html" xml:base="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/">&lt;p&gt;We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.”
+      <id>http://localhost:4000/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">&lt;p&gt;We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.”
 Wait. What? Memory leak in structs? How could that be possible?&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/assets/images/closuresinstructs.png&quot; alt=&quot;Why we should avoid using closures in Swift structs?&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/closuresinstructs.png&quot; alt=&quot;Why should we avoid using closures in Swift structs?&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Structs are value types, and there is no way a memory leak can occur.
 Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift.&lt;/p&gt;
@@ -166,7 +166,7 @@ Regarding the retain cycle, the only way to break them is to set the variables �
       
 
       
-        <summary type="html">We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?</summary>
+        <summary type="html">We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?</summary>
       
 
       

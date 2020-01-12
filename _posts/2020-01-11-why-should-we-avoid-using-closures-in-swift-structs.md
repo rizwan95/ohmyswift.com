@@ -1,15 +1,15 @@
 ---
 layout: post
-title: Why we should avoid using closures in Swift structs?
+title: Why should we avoid using closures in Swift structs?
 date: 2020-01-11 10:06 +0530
 category: Swift, Struct, Closures, struct vs classes
 comments: true
 ---
 
-We all love closures, don't we? Closures make an iOS developers' life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, "Memory leak and unexpected behaviors."
+We all love closures, don't we? Closures make an iOS developer's life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, "Memory leaks and unexpected behaviors."
 Wait. What? Memory leak in structs? How could that be possible?
 
-![Why we should avoid using closures in Swift structs?](/blog/assets/images/closuresinstructs.png)
+![Why should we avoid using closures in Swift structs?](/blog/assets/images/closuresinstructs.png)
 
 Structs are value types, and there is no way a memory leak can occur.
 Is that statement even true? We have so many questions already. So let's get back to the basics of memory management in Swift.
