@@ -9,8 +9,8 @@
     
     
     
-    <title>Why we should avoid using closures in swift structs?</title>
-    <meta name="description" content="We all love closures, don’t we? Closures make iOS developers’ lives easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in Structs? How could that be possible? Structs are value types, and there is no way a memory leak can occur. Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift.">
+    <title>Why we should avoid using closures in Swift structs?</title>
+    <meta name="description" content="We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?">
     
   
     <link rel="stylesheet" href="/blog/assets/main.css">
@@ -22,16 +22,16 @@
     
   
     
-    <meta property="og:title" content="Why we should avoid using closures in swift structs?">
+    <meta property="og:title" content="Why we should avoid using closures in Swift structs?">
     <meta property="og:site_name" content="Oh my Swift">
     <meta property="og:url" content="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/">
-    <meta property="og:description" content="We all love closures, don’t we? Closures make iOS developers’ lives easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in Structs? How could that be possible? Structs are value types, and there is no way a memory leak can occur. Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift.">
+    <meta property="og:description" content="We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?">
     
     
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="rizwanasifahmed">
-    <meta name="twitter:title" content="Why we should avoid using closures in swift structs?">
-    <meta name="twitter:description" content="We all love closures, don’t we? Closures make iOS developers’ lives easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and u...">
+    <meta name="twitter:title" content="Why we should avoid using closures in Swift structs?">
+    <meta name="twitter:description" content="We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and...">
     
       <meta name="twitter:creator" content="rizwanasifahmed">
     
@@ -56,19 +56,19 @@
 
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Why we should avoid using closures in swift structs? | Oh my Swift</title>
+<title>Why we should avoid using closures in Swift structs? | Oh my Swift</title>
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Why we should avoid using closures in swift structs?" />
+<meta property="og:title" content="Why we should avoid using closures in Swift structs?" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="We all love closures, don’t we? Closures make iOS developers’ lives easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in Structs? How could that be possible? Structs are value types, and there is no way a memory leak can occur. Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift." />
-<meta property="og:description" content="We all love closures, don’t we? Closures make iOS developers’ lives easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in Structs? How could that be possible? Structs are value types, and there is no way a memory leak can occur. Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift." />
+<meta name="description" content="We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?" />
+<meta property="og:description" content="We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?" />
 <link rel="canonical" href="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/" />
 <meta property="og:url" content="http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/" />
 <meta property="og:site_name" content="Oh my Swift" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-01-11T10:06:00+05:30" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/","headline":"Why we should avoid using closures in swift structs?","dateModified":"2020-01-11T10:06:00+05:30","datePublished":"2020-01-11T10:06:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/"},"description":"We all love closures, don’t we? Closures make iOS developers’ lives easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in Structs? How could that be possible? Structs are value types, and there is no way a memory leak can occur. Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/","headline":"Why we should avoid using closures in Swift structs?","dateModified":"2020-01-11T10:06:00+05:30","datePublished":"2020-01-11T10:06:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2020/01/11/why-we-should-avoid-using-closures-in-swift-structs/"},"description":"We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -109,7 +109,7 @@
 
   <header class="post-header">
     
-      <h1 class="post-title" itemprop="name headline">Why we should avoid using closures in swift structs?</h1>
+      <h1 class="post-title" itemprop="name headline">Why we should avoid using closures in Swift structs?</h1>
     
     <p class="post-meta"><time datetime="2020-01-11T10:06:00+05:30" itemprop="datePublished">Jan 11, 2020</time> •
   
@@ -126,7 +126,7 @@
       
     
       
-        <a href="/blog/categories/swift-struct-closures-sort-struct-vs-classes/">Swift, Struct, Closures, sort, struct vs classes</a>
+        <a href="/blog/categories/swift-struct-closures-struct-vs-classes/">Swift, Struct, Closures, struct vs classes</a>
       
     
   
@@ -137,16 +137,19 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>We all love closures, don’t we? Closures make iOS developers’ lives easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.”
-Wait. What? Memory leak in Structs? How could that be possible? 
-Structs are value types, and there is no way a memory leak can occur.
+    <p>We all love closures, don’t we? Closures make an iOS developers’ life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leak and unexpected behaviors.”
+Wait. What? Memory leak in structs? How could that be possible?</p>
+
+<p><img src="/blog/assets/images/closuresinstructs.png" alt="Why we should avoid using closures in Swift structs?" /></p>
+
+<p>Structs are value types, and there is no way a memory leak can occur.
 Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift.</p>
 
-<h2 id="back-to-the-basics"><strong>Back to the basics</strong></h2>
+<h2 id="back-to-basics"><strong>Back to basics</strong></h2>
 
 <p>The reason I am taking you back to the basics is that before diving into the main problem, we need to have a stronghold of the basics.</p>
 
-<p>The basic types in Swift fall into two categories. One is the “Reference type,” and the other is the “Value type.” Generally, Classes are reference types. On the other hand, Structs and Enums are value types.</p>
+<p>The basic types in Swift fall into two categories. One is the “Reference type,” and the other is the “Value type.” Generally, Classes are reference types. On the other hand, structs and enums are value types.</p>
 
 <h2 id="value-types"><strong>Value types</strong></h2>
 
@@ -175,16 +178,17 @@ Is that statement even true? We have so many questions already. So let’s get b
 <p>The reference types keep a reference (aka a pointer) to the data when initialized. Whenever a variable is assigned to an existing reference type, the reference is shared among the variables. The allocation of reference types is done in the heap. The ARC (Automatic Reference Counting) handles the deallocation of the reference type variables.</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">Person</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">name</span> <span class="p">:</span> <span class="kt">String</span>
- <span class="nf">init</span><span class="p">(</span><span class="n">withName</span> <span class="nv">name</span> <span class="p">:</span> <span class="kt">String</span><span class="p">){</span>
- <span class="k">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
- <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="nf">init</span><span class="p">(</span><span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">){</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 <span class="k">var</span> <span class="nv">oldPerson</span> <span class="o">=</span> <span class="kt">Person</span><span class="p">(</span><span class="nv">withName</span><span class="p">:</span> <span class="s">"Rizwan"</span><span class="p">)</span>
 <span class="k">var</span> <span class="nv">newPerson</span> <span class="o">=</span> <span class="n">oldPerson</span>
 <span class="n">newPerson</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">"Oh my Swift"</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">oldPerson</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">newPerson</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
 
 <span class="o">------</span>
 <span class="kt">Output</span>
@@ -195,24 +199,25 @@ Is that statement even true? We have so many questions already. So let’s get b
 
 <p>We can see that changing the oldPerson variable reflects the changes in the newPerson variable. This is how reference types work.</p>
 
-<p>Usually, memory leaks occur in reference types. It occurs in the form of retain cycles in most of the cases. To know more about retain cycles, read this post.</p>
+<p>Usually, memory leaks occur in reference types. It occurs in the form of retain cycles in most of the cases. To know more about retain cycles, read this <a href="https://medium.com/flawless-app-stories/memory-leaks-in-swift-bfd5f95f3a74">blog</a> from Flawless app stories.</p>
 
 <p>So, if reference types are the reason for memory leaks, we can use value types for all purposes. That should solve the problem.</p>
 
 <p>Unfortunately, this is not the case. Sometimes structs and enums can be treated as reference types, and this means that retain cycles can occur in structs and enums too.</p>
 
-<h2 id="closures---the-villain-in-structs"><strong>Closures - The villain in Structs.</strong></h2>
-<p>When you use closures in Structs, the closure behaves as a reference type, and the problem starts there. The closures need to have a reference to the environment outside so that the environment can be modified when the closure body is executed.</p>
+<h2 id="closures---the-villain-in-structs"><strong>Closures - The Villain in structs</strong></h2>
 
-<p>In the case of the classes, we can use <code class="highlighter-rouge">weak self</code> to break the retain cycle. When we try to do it for a struct, we get the following compiler error, ‘weak’ may only be applied to class and class-bound protocol types, not ‘{Struct name}’</p>
+<p>When you use closures in structs, the closure behaves as a reference type, and the problem starts there. The closures need to have a reference to the environment outside so that the environment can be modified when the closure body is executed.</p>
+
+<p>In the case of classes, we can use <code class="highlighter-rouge">weak self</code> to break the retain cycle. When we try to do it for a struct, we get the following compiler error, ‘weak’ may only be applied to class and class-bound protocol types, not ‘{struct name}’</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Car</span> <span class="p">{</span>
- <span class="k">var</span> <span class="nv">speed</span> <span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mf">0.0</span>
- <span class="k">var</span> <span class="nv">increaseSpeed</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="p">())?</span>
+    <span class="k">var</span> <span class="nv">speed</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">var</span> <span class="nv">increaseSpeed</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="p">())?</span>
 <span class="p">}</span>
 <span class="k">var</span> <span class="nv">myCar</span> <span class="o">=</span> <span class="kt">Car</span><span class="p">()</span>
- <span class="n">myCar</span><span class="o">.</span><span class="n">increaseSpeed</span> <span class="o">=</span> <span class="p">{</span> 
- <span class="n">myCar</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="mi">30</span> <span class="c1">// The retain cycle occurs here. We cannot use [weak myCar] as myCar is a value type.</span>
+<span class="n">myCar</span><span class="o">.</span><span class="n">increaseSpeed</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">myCar</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="mi">30</span> <span class="c1">// The retain cycle occurs here. We cannot use [weak myCar] as myCar is a value type.</span>
 <span class="p">}</span>
 <span class="n">myCar</span><span class="o">.</span><span class="nf">increaseSpeed</span><span class="p">?()</span>
 <span class="nf">print</span><span class="p">(</span><span class="s">"My car's speed :"</span><span class="p">)</span>
@@ -223,19 +228,19 @@ Is that statement even true? We have so many questions already. So let’s get b
 <span class="n">myNewCar</span><span class="o">.</span><span class="nf">increaseSpeed</span><span class="p">?()</span>
 <span class="nf">print</span><span class="p">(</span><span class="s">"My new car's speed :"</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">myNewCar</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span> <span class="c1">// Prints 30 still!</span>
-
 </code></pre></div></div>
 
 <p>You would have expected the result of myNewCar to be 90.0, but it prints My new car’s speed: 30.0</p>
 
 <h2 id="but-why"><strong>But why?</strong></h2>
+
 <p>Well, the reason is, “myNewCar” is a partial copy of “newCar.” Since closures and their environments cannot be copied completely. The value of “speed” is copied, but the property “increaseSpeed” of “myNewCar” (myNewCar.increaseSpeed?()) holds a reference to the “increaseSpeed” of “myCar” with the “speed” of “myCar” in the captured environment. So, the “increaseSpeed” of “myCar” is invoked.</p>
 
-<p>These are the various reasons why closures in Swift Structs are dangerous.</p>
+<p>These are the various reasons why closures in Swift structs are dangerous.</p>
 
 <h2 id="so-what-do-we-do-now"><strong>So what do we do now?</strong></h2>
 
-<p>The straight forward solution is, avoid using closures in value types. If you want to use them, you should be very careful with it, or else it might lead to unexpected results. 
+<p>The straight forward solution is, avoid using closures in value types. If you want to use them, you should be very careful with it, or else it might lead to unexpected results.
 Regarding the retain cycle, the only way to break them is to set the variables “myCar” and “myNewCar” to nil manually. It doesn’t sound ideal, but there is no other way.</p>
 
 <p>It was really thought provoking for me when I learnt about the behaviour of closures in value types. I hope you also felt the same.</p>
