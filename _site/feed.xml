@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2020-01-12T12:13:38+05:30</updated>
+  <updated>2020-02-13T22:53:03+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -18,6 +18,88 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Simulating remote push notifications in a simulator</title>
+      
+      
+      <link href="http://localhost:4000/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/" rel="alternate" type="text/html" title="Simulating remote push notifications in a simulator" />
+      
+      <published>2020-02-13T22:22:00+05:30</published>
+      <updated>2020-02-13T22:22:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">&lt;p&gt;Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.&lt;/p&gt;
+
+&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
+
+&lt;p&gt;Well, the requirements are quite simple. We will be needing the following,&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Xcode 11.4 beta or above.&lt;/li&gt;
+  &lt;li&gt;Bundle identifier of your app.&lt;/li&gt;
+  &lt;li&gt;The device identifier of your currently active simulator.&lt;/li&gt;
+  &lt;li&gt;Push notification payload.&lt;/li&gt;
+  &lt;li&gt;Terminal.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;how-to-find-the-device-identifier-of-the-simulator&quot;&gt;How to find the device identifier of the simulator?&lt;/h2&gt;
+
+&lt;p&gt;You can find the simulator’s device identifier from &lt;strong&gt;Window&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Devices and Simulator&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Select the active simulator&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Copy the displayed identifier&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-generate-push-notification-payload&quot;&gt;How to generate push notification payload?&lt;/h2&gt;
+
+&lt;p&gt;The push notification payload is of the standard Apple format.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{&quot;aps&quot;:{&quot;alert&quot;:&quot;I am a remote push notification&quot;,&quot;badge&quot;:1,&quot;sound&quot;:&quot;default&quot;}}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Save the following JSON in the .apns format.
+    (We will be saving the json in a file as notficationpayload.apns for the tutorial purpose. )&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-trigger-remote-push-notifications-in-the-simulator&quot;&gt;How to trigger remote push notifications in the simulator?&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run the app in simulator using Xcode.&lt;/li&gt;
+  &lt;li&gt;Open terminal.&lt;/li&gt;
+  &lt;li&gt;Navigate to the folder where the payload file is present .&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Execute the command with the format,
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;xcrun simctl push &amp;lt;device-identifier&amp;gt; &amp;lt;your-bundle-id&amp;gt; notificationpayload.apns&lt;/code&gt;
+ (Sample command -
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;xcrun simctl push 3A3CE233-307D-463D-A1C6-F66B9C2C1445 com.sample.pushnotification notificationpayload.apns&lt;/code&gt;)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Hit enter.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s it! Notifications will start to appear on your simulator!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/simulatornotifications/simulatornotification.png&quot; alt=&quot;Simulating remote push notifications in a simulator&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
+ You can also follow me on twitter right here: &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+        <summary type="html">Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
