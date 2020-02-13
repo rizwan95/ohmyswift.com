@@ -57,7 +57,7 @@
         <meta name="twitter:image2" content="{{ page.twitter_card.image2 }}">
         <meta name="twitter:image3" content="{{ page.twitter_card.image3 }}">
       {% else %}
-        <meta name="twitter:image:src" content="{{ page.twitter_card.image }}">
+        <meta name="twitter:image:src" content="{{ site.url }}{{ page.twitter_card.image }}">
         {% if page.twitter_card.type == 'photo' %}
           {% if page.twitter_card.width %}<meta name="twitter:image:width" content="{{ page.twitter_card.width }}">{% endif %}
           {% if page.twitter_card.height %}<meta name="twitter:image:height" content="{{ page.twitter_card.height }}">{% endif %}
