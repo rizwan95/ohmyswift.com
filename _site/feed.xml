@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2020-02-14T00:05:13+05:30</updated>
+  <updated>2020-03-18T20:21:38+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -18,6 +18,74 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Using UICollectionViewCompositionalLayout in iOS 12 and earlier</title>
+      
+      
+      <link href="http://localhost:4000/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/" rel="alternate" type="text/html" title="Using UICollectionViewCompositionalLayout in iOS 12 and earlier" />
+      
+      <published>2020-03-18T19:42:00+05:30</published>
+      <updated>2020-03-18T19:42:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">&lt;p&gt;At WWDC 2019, Apple added a brand new API “&lt;strong&gt;UICollectionViewCompositionalLayout&lt;/strong&gt;” to the UIKit. Using this powerful API, we can create complex compositional layouts without writing complicated code. At times, It feels tough to create complex collection view UIs using the UICollectionViewFlowLayout. The UICollectionViewCompositionalLayout API eases the process and guess what you can even support orthogonal scrolling UIs with much ease. Well, it sounds great, but practically we cannot use the UICollectionViewCompositionalLayout API until we drop the support for iOS 12.0 and earlier in our apps. (It is not going to happen for the next few years is what I predict.) So how do we use this API in iOS 12.0 and earlier?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/compositionallayout/compositionallayout.png&quot; alt=&quot;IBPCollectionViewCompositionalLayout&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Well, a friend of mine, &lt;a href=&quot;https://twitter.com/k_katsumi&quot;&gt;Kishikawa Katsumi&lt;/a&gt;, had a solution for it! He claimed that his library &lt;strong&gt;IBPCollectionViewCompositionalLayout&lt;/strong&gt; could use the same UICollectionViewCompositionalLayout APIs in iOS 12.0 and earlier. I was skeptical at first, but decided to give it a try.
+I installed it using Cocoapods, followed the instructions given, and boom! CompositionalLayouts started working on iOS 12.0 and earlier!  Everything worked like magic.&lt;/p&gt;
+
+&lt;p&gt;I was amazed by the work he had done and decided to share this with the developer community. So here it is!&lt;/p&gt;
+
+&lt;p&gt;Do check out this excellent &lt;a href=&quot;https://github.com/kishikawakatsumi/IBPCollectionViewCompositionalLayout&quot;&gt;github library&lt;/a&gt;  and share your thoughts in comments.&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Kishikawa Katsumi&lt;/strong&gt; - &lt;a href=&quot;https://twitter.com/k_katsumi&quot;&gt;https://twitter.com/k_katsumi&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - iOS Engineer. Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/&quot;&gt;Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+        <category term="Swift, uicollectionview, UICollectionViewCompositionalLayout, collection view, compositional layouts" />
+      
+
+      
+
+      
+        <summary type="html">At WWDC 2019, Apple added a brand new API “UICollectionViewCompositionalLayout” to the UIKit. Using this powerful API, we can create complex compositional layouts without writing complicated code. At times, It feels tough to create complex collection view UIs using the UICollectionViewFlowLayout. The UICollectionViewCompositionalLayout API eases the process and guess what you can even support orthogonal scrolling UIs with much ease. Well, it sounds great, but practically we cannot use the UICollectionViewCompositionalLayout API until we drop the support for iOS 12.0 and earlier in our apps. (It is not going to happen for the next few years is what I predict.) So how do we use this API in iOS 12.0 and earlier?</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/blog/blog/assets/images/compositionallayout/compositionallayout.png" />
+      
+    </entry>
+  
   
   
     <entry>

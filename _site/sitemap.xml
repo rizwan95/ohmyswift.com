@@ -49,6 +49,10 @@
 <lastmod>2020-02-13T22:22:00+05:30</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/</loc>
+<lastmod>2020-03-18T19:42:00+05:30</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/blog/404/</loc>
 </url>
 <url>
@@ -80,6 +84,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/blog/categories/swift-ios-simulator-simulator-notifications/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/categories/swift-uicollectionview-uicollectionviewcompositionallayout-collection-view-compositional-layouts/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/blog/posts/2/</loc>
