@@ -3,10 +3,8 @@
 main:
   - title: "Archives"
     url: /archives/
-  - title: "GitHub"
-    url: https://github.com/rizwan95
-  - title: "Twitter"
-    url: https://twitter.com/rizwanasifahmed
-  - title: "Reddit"
-    url: https://www.reddit.com/r/ohmyswift/
+  - title: "Social media"
+    url: /social/
+  - title: "Showcase"
+    url: /showcase/
     
