@@ -52,3 +52,9 @@ That's it! Notifications will start to appear on your simulator!
 
  Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
  You can also follow me on twitter right here: <https://twitter.com/rizwanasifahmed>
+
+### More articles
+
+- [Using UICollectionViewCompositionalLayout in iOS 12 and earlier](/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/)
+- [Why should we avoid using closures in Swift structs?](/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/)
+- [Swift 5 replaces IntroSort with TimSort in the 'sort()' method](/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/)

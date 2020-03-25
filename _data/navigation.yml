@@ -5,6 +5,6 @@ main:
     url: /archives/
   - title: "Social media"
     url: /social/
-  - title: "Showcase"
-    url: /showcase/
+  # - title: "Showcase"
+  #   url: /showcase/
     

@@ -67,3 +67,10 @@ Pull request Link: <https://github.com/apple/swift/pull/19717>
 SwiftCI Benchmark results: <https://github.com/apple/swift/pull/19717#issuecomment-427511589>
 
 Timsort: <https://svn.python.org/projects/python/trunk/Objects/listsort.txt>
+
+
+### More articles
+
+- [Using UICollectionViewCompositionalLayout in iOS 12 and earlier](/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/)
+- [Simulating remote push notifications in a simulator](/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/)
+- [Why should we avoid using closures in Swift structs?](/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/)
