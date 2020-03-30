@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2020-03-18T21:27:23+05:30</updated>
+  <updated>2020-03-30T20:56:40+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -146,7 +146,15 @@ I installed it using Cocoapods, followed the instructions given, and boom! Compo
 &lt;p&gt;&lt;img src=&quot;/blog/assets/images/simulatornotifications/simulatornotification.png&quot; alt=&quot;Simulating remote push notifications in a simulator&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
- You can also follow me on twitter right here: &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/p&gt;</content>
+ You can also follow me on twitter right here: &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/&quot;&gt;Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
 
       
       
@@ -304,7 +312,15 @@ Regarding the retain cycle, the only way to break them is to set the variables �
 
 &lt;p&gt;[3] &lt;a href=&quot;https://www.objc.io/issues/16-swift/swift-classes-vs-structs/&quot;&gt;https://www.objc.io/issues/16-swift/swift-classes-vs-structs/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;[4] &lt;a href=&quot;https://marcosantadev.com/capturing-values-swift-closures/&quot;&gt;https://marcosantadev.com/capturing-values-swift-closures/&lt;/a&gt;&lt;/p&gt;</content>
+&lt;p&gt;[4] &lt;a href=&quot;https://marcosantadev.com/capturing-values-swift-closures/&quot;&gt;https://marcosantadev.com/capturing-values-swift-closures/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/&quot;&gt;Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
 
       
       
@@ -395,7 +411,15 @@ In addition to maintaining the relative order of equal/non-comparable elements, 
 
 &lt;p&gt;SwiftCI Benchmark results: &lt;a href=&quot;https://github.com/apple/swift/pull/19717#issuecomment-427511589&quot;&gt;https://github.com/apple/swift/pull/19717#issuecomment-427511589&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Timsort: &lt;a href=&quot;https://svn.python.org/projects/python/trunk/Objects/listsort.txt&quot;&gt;https://svn.python.org/projects/python/trunk/Objects/listsort.txt&lt;/a&gt;&lt;/p&gt;</content>
+&lt;p&gt;Timsort: &lt;a href=&quot;https://svn.python.org/projects/python/trunk/Objects/listsort.txt&quot;&gt;https://svn.python.org/projects/python/trunk/Objects/listsort.txt&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
 
       
       

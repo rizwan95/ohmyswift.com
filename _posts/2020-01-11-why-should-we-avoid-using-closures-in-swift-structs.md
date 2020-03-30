@@ -129,3 +129,9 @@ It was really thought provoking for me when I learnt about the behaviour of clos
  [3] <https://www.objc.io/issues/16-swift/swift-classes-vs-structs/>
 
  [4] <https://marcosantadev.com/capturing-values-swift-closures/>
+
+### More articles
+
+- [Using UICollectionViewCompositionalLayout in iOS 12 and earlier](/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/)
+- [Simulating remote push notifications in a simulator](/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/)
+- [Swift 5 replaces IntroSort with TimSort in the 'sort()' method](/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/)
