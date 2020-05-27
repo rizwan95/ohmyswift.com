@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Why should we avoid using closures in Swift structs?
-date: 2020-01-11 10:06 +0530
+date: 2020-01-10 10:06 +0530
 category: Swift, Struct, Closures, struct vs classes
 comments: true
 ---
