@@ -2,12 +2,12 @@
 layout: post
 title: 'Swift bit #2 - Using Booleans the right way, in Swift'
 date: 2019-08-03 09:19 +0530
-categories: Swift
+categories: Swift fundamentals
+tags: [swift, booleans]
+author: Rizwan
 ---
 
-Boolean is one of the most frequently used and simplest data type in any programming language.
-
-It is common to want to toggle the state of the boolean variable. So, we normally do it like this,
+Boolean is one of the most frequently used and simplest data type in any programming language.It is common to want to toggle the state of the boolean variable. So, we normally do it like this,
 
 
 {% highlight swift %}

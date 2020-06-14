@@ -4,7 +4,9 @@ title: Introducing URLSessionWebSocketTask - Native WebSocket implementation usi
   Swift 5
 date: 2019-08-31 19:10 +0530
 comments: true
-category: Swift, iOS, websockets, URLSessionWebSocketTask
+category: URLSession
+tags: [swift, iOS, websockets, URLSessionWebSocketTask]
+author: Rizwan
 ---
 
 We all love WebSockets, don't we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon 

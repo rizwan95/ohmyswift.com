@@ -2,8 +2,10 @@
 layout: post
 title: 'Swift bit #4 - Swifty ways of typecasting objects'
 date: 2019-08-27 08:33 +0530
-category: Swift, iOS, Sign in with Apple
+category: Swift fundamentals
+tags: [swift, iOS, type casting]
 comments: true
+author: Rizwan
 ---
 
 Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? 

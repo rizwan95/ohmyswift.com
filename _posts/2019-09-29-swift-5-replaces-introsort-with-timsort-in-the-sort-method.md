@@ -2,8 +2,10 @@
 layout: post
 title: Swift 5 replaces IntroSort with TimSort in the 'sort()' method
 date: 2019-09-29 11:04 +0530
-category: Swift, Timsort, Algorithms, sort
+category: Algorithms
+tags: [swift, timsort, algorithms, sort]
 comments: true
+author: Rizwan
 ---
 
 When we hear the term 'Sorting,' the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method `sort()` to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was 'Introsort,' but after Swift 5, it is 'Timsort.' Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about 'Timsort' in this article. 

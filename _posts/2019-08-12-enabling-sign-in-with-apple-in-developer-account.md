@@ -2,12 +2,14 @@
 layout: post
 title: Enabling 'Sign in with Apple'in developer account
 date: 2019-08-12 10:26 +0530
-category: Swift, iOS, Sign in with Apple
+category: Sign in with Apple
+tags: [swift, iOS, Sign in with Apple]
 comments: true
 og_title: Enabling 'Sign in with Apple'in developer account
 og_description: Article about enabling 'Sign in with Apple' in iOS apps
 og_image: /blog/assets/images/signinconfig01.png
 og_type: blog
+author: Rizwan
 
 ---
 

@@ -2,8 +2,10 @@
 layout: post
 title: An effective way to clear entire Userdefaults in Swift
 date: 2020-05-19 19:49 +0530
-category: Swift, userdefaults
+category: Userdefaults
 comments: true
+tags: [swift, userdefaults]
+author: Rizwan
 
 summary: How will you clear all the values from UserDefaults effectively? Well, read the article to find out.
 twitter_card:
@@ -40,3 +42,14 @@ extension UserDefaults {
 
 Using the API clears our UserDefaults completely, and leaves it in a fresh state.
 So yes, it might look insignificant, but it is a helpful API. Do you have other ways to clear the UserDefaults? Let me know in the comments below.  
+
+### About the author
+
+- **Rizwan Ahmed** - iOS Engineer. Twitter - <https://twitter.com/rizwanasifahmed>
+
+### More articles
+
+- [Embracing Localization in Image Assets](/blog/2020/06/14/embracing-localization-in-image-assets/)
+- [Simulating remote push notifications in a simulator](/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/)
+- [Why should we avoid using closures in Swift structs?](/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/)
+- [Using UICollectionViewCompositionalLayout in iOS 12 and earlier](/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/)
