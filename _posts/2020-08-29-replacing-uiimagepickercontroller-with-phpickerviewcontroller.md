@@ -8,9 +8,9 @@ tags: [swift, imageassets, phphotopickerviewcontroller, uiimagepikcercontroller,
 author: Rizwan
 summary: From iOS 14.0, Apple is providing its developers a brand new way to select images/videos from their apps using ```PHPickerViewController``` Let's find out how to implement it.
 twitter_card:
-   image: /blog/assets/images/phpickerviewcontroller/phpickerviewcontroller.png
+   image: /blog/assets/images/phpickerviewcontroller/phpickerviewcontroller-twitter.png
 facebook:
-    image: /blog/assets/images/phpickerviewcontroller/phpickerviewcontroller.png
+    image: /blog/assets/images/phpickerviewcontroller/phpickerviewcontroller-facebook.png
 
 ---
 Almost every app requires photos and video access these days. Before iOS 14.0, the iOS developers used ```UIImagePickerController``` to access the items from the user's media library. From iOS 14.0, Apple is providing its developers a brand new way to select images or videos from their apps using ```PHPickerViewController```
