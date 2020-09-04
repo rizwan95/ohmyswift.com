@@ -6,11 +6,9 @@ category: Userdefaults
 comments: true
 tags: [swift, userdefaults]
 author: Rizwan
-
 summary: How will you clear all the values from UserDefaults effectively? Well, read the article to find out.
 twitter_card:
    image: /blog/assets/images/clear-userdefaults.png
-
 facebook:
     image: /blog/assets/images/clear-userdefaults.png
 

@@ -9,27 +9,16 @@ Indie Support Weeks is an open effort aimed at helping indie developers within t
 
 ### App Showcase
 
-### 1. Snoopcover (iOS, iPadOS and macOS)
+### 1. Winya (iOS, and iPadOS)
 
-**Summary** - Mask and share confidential images at a tap.
+**Summary** - Stream games from iPhone/iPad like a PRO
 
-**Key highlights** - uses AI to mask sensitive content, quick share, uses advanced masking algorithms, secure and private.
+**Key highlights** - Unlimited streaming, pause streaming, control video quality with precision, control audio quality with precision 
 
-[Homepage](https://codeflakesstudio.com)
+[Homepage](https://winya.app)
 
-[iOS, and iPadOS download link](https://apps.apple.com/app/apple-store/id1487317524?pt=120273080&ct=oms&mt=8)
+[iOS, and iPadOS download link](https://apps.apple.com/app/id1504093464)
 
-[macOS download link](https://apps.apple.com/app/apple-store/id1487360091?pt=120273080&ct=oms&mt=8)
-
-### 2. Captionize (iOS and iPadOS)
-
-**Summary** - Write beautiful captions for your Instagram posts.
-
-**Key highlights** -  increases content focus, add line breaks, secure and private.
-
-[Homepage](https://codeflakesstudio.com)
-
-[Download link](https://apps.apple.com/app/apple-store/id1493116013?pt=120273080&ct=oms&mt=8)
 
 ### 3. Timemator 2 (macOS)
 
