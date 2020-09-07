@@ -13,14 +13,13 @@ Indie Support Weeks is an open effort aimed at helping indie developers within t
 
 **Summary** - Stream games from iPhone/iPad like a PRO
 
-**Key highlights** - Unlimited streaming, pause streaming, control video quality with precision, control audio quality with precision 
+**Key highlights** - Stream games, Unlimited streaming, pause streaming, control video quality with precision, control audio quality with precision
 
 [Homepage](https://winya.app)
 
 [iOS, and iPadOS download link](https://apps.apple.com/app/id1504093464)
 
-
-### 3. Timemator 2 (macOS)
+### 2. Timemator 2 (macOS)
 
 **Summary** - "Time waits for none." Timemator 2 is a macOS application which let's you to track your time effectively.
 
@@ -32,7 +31,7 @@ Indie Support Weeks is an open effort aimed at helping indie developers within t
 
 [Download link](https://s3-eu-west-1.amazonaws.com/catforce-timemator/releases/Timemator.dmg)
 
-### 4. NativeConnect (macOS)
+### 3. NativeConnect (macOS)
 
 **Summary** - Built using AppKit, NativeConnect is a mac app which lets you manage your appstoreconnect account on the go.
 
