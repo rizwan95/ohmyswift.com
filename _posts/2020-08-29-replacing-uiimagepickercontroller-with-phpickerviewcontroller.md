@@ -95,6 +95,12 @@ PHPickerViewController is supported only from iOS 14.0. If your app has a deploy
 - [Amazing Photo picker sample code](https://github.com/rizwan95/AmazingPhotoPicker)
 - [Meet the new Photos picker](https://developer.apple.com/videos/play/wwdc2020/10652/)
 
+### Special mention
+
+Recently, [FeedSpot](https://blog.feedspot.com) added [Ohmyswift](https://ohmyswift.com) to its "Top 30 Swift Programming Blogs & News Websites To Follow in 2020." It is an honor to us, and it means a lot to us. Do check out their listings at
+
+- [https://blog.feedspot.com/swift_programming_blogs/](https://blog.feedspot.com/swift_programming_blogs/)
+
 ### About the author
 
 - **Rizwan Ahmed** - iOS Engineer. Twitter - <https://twitter.com/rizwanasifahmed>
