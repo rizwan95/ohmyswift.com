@@ -33,7 +33,7 @@ Implementing ```PHPickerViewController``` is a breeze. The APIs are pretty strai
 {% highlight swift %}
 import PhotosUI
 
-private func showPicker() { 
+private func showPicker() {
    let configuration = PHPickerConfiguration()
    let picker = PHPickerViewController(configuration: configuration)
    self.present(picker, animated: true, completion: nil)
@@ -61,7 +61,6 @@ configuration.filter = .any(of: [.livePhotos, .images])
 {% highlight swift %}
 configuration.preferredAssetRepresentationMode = .automatic
 {% endhighlight %}
-
 
 ## Accessing items from PHPickerViewController using the PHPickerViewControllerDelegate
 
