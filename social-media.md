@@ -6,6 +6,8 @@ permalink: /social/
 
 #### Join our social media channels to get the latest updates from us
 
+**Email** - <hey@ohmyswift.com>
+
 **Twitter** - <https://twitter.com/ohmyswiftblog/>
 
 **Github** - <https://github.com/rizwan95>
