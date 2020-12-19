@@ -17,7 +17,7 @@ We do not charge for showcasing any of the apps. We will showcase the apps only 
 
 [Homepage](https://winya.app)
 
-[iOS, and iPadOS download link](https://apps.apple.com/app/id1504093464)
+[iOS, and iPadOS download link](https://winya.link/getwinya)
 
 ### 2. Core Data Lab (macOS)
 

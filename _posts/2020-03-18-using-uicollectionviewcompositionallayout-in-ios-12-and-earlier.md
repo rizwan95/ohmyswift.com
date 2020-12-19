@@ -6,11 +6,11 @@ category: UICollectionView
 tags: [Swift, uicollectionview, uicollectionviewcompositionallayout, collection view, compositional layouts] 
 comments: true
 author: Rizwan
-
 summary: Apple added a brand new API "**UICollectionViewCompositionalLayout**" to the UIKit. Well how do we use it in iOS 12.0 and earlier? Well, lets find out. 
-
-twitter_card:
-   image: /blog/assets/images/compositionallayout/compositionallayout.png
+image:
+   path: assets/images/compositionallayout/compositionallayout.png
+   twitter: assets/images/compositionallayout/compositionallayout.png
+   facebook: assets/images/compositionallayout/compositionallayout.png
 ---
 
 At WWDC 2019, Apple added a brand new API "**UICollectionViewCompositionalLayout**" to the UIKit. Using this powerful API, we can create complex compositional layouts without writing complicated code. At times, It feels tough to create complex collection view UIs using the UICollectionViewFlowLayout. The UICollectionViewCompositionalLayout API eases the process and guess what you can even support orthogonal scrolling UIs with much ease. Well, it sounds great, but practically we cannot use the UICollectionViewCompositionalLayout API until we drop the support for iOS 12.0 and earlier in our apps. (It is not going to happen for the next few years is what I predict.) So how do we use this API in iOS 12.0 and earlier?

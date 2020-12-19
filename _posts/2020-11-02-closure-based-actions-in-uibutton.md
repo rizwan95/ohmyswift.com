@@ -7,10 +7,10 @@ comments: true
 tags: [swift, uibutton closure, closure, closure uibutton, callbacks closure, closure callbacks]
 author: Rizwan
 summary: iOS 14.0 brings us many improvements and new APIs. One such API is the closure based action API for UIControls. Let's see how to use it. 
-twitter_card:
-   image: /blog/assets/images/closurebasedactions/Closure-based-actions-twitter.png
-facebook:
-    image: /blog/assets/images/closurebasedactions/Closure-based-actions-facebook.png
+image:
+    path: assets/images/closurebasedactions/Closure-based-actions-facebook.png
+    twitter: assets/images/closurebasedactions/Closure-based-actions-twitter.png
+    facebook: assets/images/closurebasedactions/Closure-based-actions-facebook.png
 
 ---
 
@@ -74,7 +74,7 @@ It is up to the developer to choose whichever method they want. My personal pref
 
 As I had mentioned earlier, the closure based actions are available for iOS 14.0 and above. If you want to support iOS 13.0 and earlier, you will still have to use the legacy ```addTarget``` method.
 
-### My thoughts
+### Closing thoughts
 
 It is good to see that Apple is working so hard to improve its SDKs. Let us try to adopt the new APIs as much as we can to make the development process easier and effective. It will be challenging to adapt to the change, but it is worth it. You will see more about these new APIs in the upcoming articles, and I will show you how to make the most out of them.
 
@@ -85,9 +85,14 @@ We always want to give back to the community. So we decided that we will review 
 #### App name - Winya (iOS and iPad OS app)
 
 A ***free screen-sharing app*** that casts your screen to Twitch in HD. It will be useful for gamers to streaming their gameplay to Twitch.
-Ohmyswifters, ***[download the app](https://apps.apple.com/app/id1504093464)*** and show your support to them.
+Ohmyswifters, ***[download the app](https://winya.link/getwinya)*** and show your support to them.
 
-***[iOS, and iPadOS download link](https://apps.apple.com/app/id1504093464)***
+***[iOS, and iPadOS download link](https://winya.link/getwinya)***
+
+### About the author
+
+- **Rizwan Ahmed** - iOS Engineer. Twitter - <https://twitter.com/rizwanasifahmed>
+
 
 #### More articles
 

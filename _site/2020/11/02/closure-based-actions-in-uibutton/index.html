@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    
+    
+    
+    <title>Closure based actions in UIButton</title>
+    <meta name="description" content="iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the addTarget method in UIControls. Yes, you heard me right—no more usage of addTarget methods, #selector(), and @objc annotation in front of methods. More importantly, we can write a closure based code using the action handler. Okay, enough talk, let’s dive into the code.">
+    
+  
+    <link rel="stylesheet" href="/blog/assets/main.css">
+    <link rel="canonical" href="http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton/">
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="Oh my Swift" href="http://localhost:4000/blog/feed.xml">
+  
+    
+  
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+    
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-144905716-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Closure based actions in UIButton | Oh my Swift</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Closure based actions in UIButton" />
+<meta name="author" content="Rizwan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the addTarget method in UIControls. Yes, you heard me right—no more usage of addTarget methods, #selector(), and @objc annotation in front of methods. More importantly, we can write a closure based code using the action handler. Okay, enough talk, let’s dive into the code." />
+<meta property="og:description" content="iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the addTarget method in UIControls. Yes, you heard me right—no more usage of addTarget methods, #selector(), and @objc annotation in front of methods. More importantly, we can write a closure based code using the action handler. Okay, enough talk, let’s dive into the code." />
+<link rel="canonical" href="http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton/" />
+<meta property="og:url" content="http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton/" />
+<meta property="og:site_name" content="Oh my Swift" />
+<meta property="og:image" content="http://localhost:4000/blog/assets/images/closurebasedactions/Closure-based-actions-facebook.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-02T00:54:00+05:30" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/blog/assets/images/closurebasedactions/Closure-based-actions-twitter.png" />
+<meta property="twitter:title" content="Closure based actions in UIButton" />
+<script type="application/ld+json">
+{"headline":"Closure based actions in UIButton","dateModified":"2020-11-02T00:54:00+05:30","datePublished":"2020-11-02T00:54:00+05:30","url":"http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton/","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton/"},"author":{"@type":"Person","name":"Rizwan"},"description":"iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the addTarget method in UIControls. Yes, you heard me right—no more usage of addTarget methods, #selector(), and @objc annotation in front of methods. More importantly, we can write a closure based code using the action handler. Okay, enough talk, let’s dive into the code.","@type":"BlogPosting","image":{"twitter":"assets/images/closurebasedactions/Closure-based-actions-twitter.png","facebook":"assets/images/closurebasedactions/Closure-based-actions-facebook.png","url":"http://localhost:4000/blog/assets/images/closurebasedactions/Closure-based-actions-facebook.png","@type":"imageObject"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+
+</head>
+  
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">Oh my Swift</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="/blog/social/">Social media</a>
+      
+        
+        <a class="page-link" href="/blog/showcase/">Showcase</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Closure based actions in UIButton</h1>
+    
+    <p class="post-meta"><time datetime="2020-11-02T00:54:00+05:30" itemprop="datePublished">Nov 2, 2020</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan</span></span> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/uibutton/">UIButton</a>
+      
+    
+      
+    
+  
+
+
+ •
+  
+    
+    
+      
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/uibutton-closure/">uibutton closure</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/closure/">closure</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/closure-uibutton/">closure uibutton</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/callbacks-closure/">callbacks closure</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/closure-callbacks/">closure callbacks</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the <code class="highlighter-rouge">addTarget</code> method in UIControls. Yes, you heard me right—no more usage of <code class="highlighter-rouge">addTarget</code> methods, <code class="highlighter-rouge">#selector()</code>, and <code class="highlighter-rouge">@objc</code> annotation in front of methods.
+More importantly, we can write a closure based code using the action handler. Okay, enough talk, let’s dive into the code.</p>
+
+<h3 id="target-based-uibutton-ios-130-and-earlier">Target-based UIButton. (iOS 13.0 and earlier)</h3>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">fileprivate</span> <span class="kd">func</span> <span class="nf">configureButton</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">fileprivate</span> <span class="kd">func</span> <span class="nf">configureButton</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">button</span> <span class="o">=</span> <span class="kt">UIButton</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">custom</span><span class="p">)</span>
+    <span class="n">button</span><span class="o">.</span><span class="nf">addTarget</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">#selector(</span><span class="nf">openFile(_:)</span><span class="kd">)</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">touchUpInside</span><span class="p">)</span>
+    <span class="n">button</span><span class="o">.</span><span class="nf">setTitleColor</span><span class="p">(</span><span class="o">.</span><span class="n">systemBlue</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">normal</span><span class="p">)</span>
+    <span class="n">button</span><span class="o">.</span><span class="nf">setTitle</span><span class="p">(</span><span class="s">"Tap me"</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">normal</span><span class="p">)</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="nf">addSubview</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+<span class="p">}</span>
+
+ <span class="kd">@objc</span> <span class="kd">fileprivate</span> <span class="kd">func</span> <span class="nf">openFile</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"File opened"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="closure-based-uibutton-ios-140-and-later">Closure based UIButton (iOS 14.0 and later)</h3>
+
+<h4 id="variant-1">Variant 1</h4>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">fileprivate</span> <span class="kd">func</span> <span class="nf">configureButton</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">button</span> <span class="o">=</span> <span class="kt">UIButton</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">custom</span><span class="p">,</span> <span class="nv">primaryAction</span><span class="p">:</span> <span class="kt">UIAction</span><span class="p">(</span><span class="nv">handler</span><span class="p">:</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"File opened"</span><span class="p">)</span>
+    <span class="p">}))</span>
+    <span class="n">button</span><span class="o">.</span><span class="nf">setTitleColor</span><span class="p">(</span><span class="o">.</span><span class="n">systemBlue</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">normal</span><span class="p">)</span>
+    <span class="n">button</span><span class="o">.</span><span class="nf">setTitle</span><span class="p">(</span><span class="s">"Tap me"</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">normal</span><span class="p">)</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="nf">addSubview</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<h4 id="variant-2">Variant 2</h4>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">fileprivate</span> <span class="kd">func</span> <span class="nf">configureButton</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">button</span> <span class="o">=</span> <span class="kt">UIButton</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">custom</span><span class="p">)</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="nf">addSubview</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+    <span class="n">button</span><span class="o">.</span><span class="nf">setTitleColor</span><span class="p">(</span><span class="o">.</span><span class="n">systemBlue</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">normal</span><span class="p">)</span>
+    <span class="n">button</span><span class="o">.</span><span class="nf">setTitle</span><span class="p">(</span><span class="s">"Tap me"</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">normal</span><span class="p">)</span>
+    <span class="n">button</span><span class="o">.</span><span class="nf">addAction</span><span class="p">(</span><span class="kt">UIAction</span><span class="p">(</span><span class="nv">handler</span><span class="p">:</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"File opened"</span><span class="p">)</span>
+    <span class="p">}),</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">touchUpInside</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>As you can see, I have mentioned two variants of closure based UIButton.</p>
+
+<p>In the first variant, the action handler is specified during the initialization of the button.
+In the second variant, the action handler is specified after the initialization of the button.
+It is up to the developer to choose whichever method they want. My personal preference is the second variant.</p>
+
+<h3 id="limitations">Limitations</h3>
+
+<p>As I had mentioned earlier, the closure based actions are available for iOS 14.0 and above. If you want to support iOS 13.0 and earlier, you will still have to use the legacy <code class="highlighter-rouge">addTarget</code> method.</p>
+
+<h3 id="closing-thoughts">Closing thoughts</h3>
+
+<p>It is good to see that Apple is working so hard to improve its SDKs. Let us try to adopt the new APIs as much as we can to make the development process easier and effective. It will be challenging to adapt to the change, but it is worth it. You will see more about these new APIs in the upcoming articles, and I will show you how to make the most out of them.</p>
+
+<h3 id="app-showcase-special-mentions">App Showcase (Special mentions)</h3>
+
+<p>We always want to give back to the community. So we decided that we will review some of the most amazing apps which we had used.</p>
+
+<h4 id="app-name---winya-ios-and-ipad-os-app">App name - Winya (iOS and iPad OS app)</h4>
+
+<p>A <strong><em>free screen-sharing app</em></strong> that casts your screen to Twitch in HD. It will be useful for gamers to streaming their gameplay to Twitch.
+Ohmyswifters, <strong><em><a href="https://winya.link/getwinya">download the app</a></em></strong> and show your support to them.</p>
+
+<p><strong><em><a href="https://winya.link/getwinya">iOS, and iPadOS download link</a></em></strong></p>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer. Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h4 id="more-articles">More articles</h4>
+
+<ul>
+  <li><a href="/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">Replacing UIImagePickerController with PHPickerViewController</a></li>
+  <li><a href="/blog/2020/06/14/embracing-localization-in-image-assets/">Embracing Localization in Image Assets</a></li>
+  <li><a href="/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">An effective way to clear entire Userdefaults in Swift</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+  <li><a href="/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">Why should we avoid using closures in Swift structs?</a></li>
+</ul>
+
+  </div>
+
+  
+
+</article>
+<script defer src="https://comments.winya.app/js/commento.js"></script>
+<div id="commento"></div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/blog/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

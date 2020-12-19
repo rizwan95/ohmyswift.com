@@ -7,10 +7,10 @@ comments: true
 tags: [swift, userdefaults]
 author: Rizwan
 summary: How will you clear all the values from UserDefaults effectively? Well, read the article to find out.
-twitter_card:
-   image: /blog/assets/images/clear-userdefaults.png
-facebook:
-    image: /blog/assets/images/clear-userdefaults.png
+image: 
+    path: assets/images/clear-userdefaults.png
+    twitter: assets/images/clear-userdefaults.png
+    facebook: assets/images/clear-userdefaults.png
 
 ---
 As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the ```removeObject``` method to remove the value for a particular key.

@@ -7,10 +7,10 @@ comments: true
 tags: [swift, imageassets, localization, image localization]
 author: Rizwan
 summary: If your app uses text in images, you should localize it. Localizing image assests which contain text in them is not that hard. Let's find out how to do it.
-twitter_card:
-   image: /blog/assets/images/Image_localization/appdemo.png
-facebook:
-    image: /blog/assets/images/Image_localization/appdemo.png
+image: 
+    path: assets/images/Image_localization/appdemo.png
+    twitter: assets/images/Image_localization/appdemo.png
+    facebook: assets/images/Image_localization/appdemo.png
 
 ---
 

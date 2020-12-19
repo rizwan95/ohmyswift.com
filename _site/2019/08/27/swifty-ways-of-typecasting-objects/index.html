@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    
+    
+    
+    <title>Swift bit #4 - Swifty ways of typecasting objects</title>
+    <meta name="description" content="Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? Well, there are multiple ways of doing it.">
+    
+  
+    <link rel="stylesheet" href="/blog/assets/main.css">
+    <link rel="canonical" href="http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/">
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="Oh my Swift" href="http://localhost:4000/blog/feed.xml">
+  
+    
+  
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+    
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-144905716-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Swift bit #4 - Swifty ways of typecasting objects | Oh my Swift</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Swift bit #4 - Swifty ways of typecasting objects" />
+<meta name="author" content="Rizwan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? Well, there are multiple ways of doing it." />
+<meta property="og:description" content="Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? Well, there are multiple ways of doing it." />
+<link rel="canonical" href="http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/" />
+<meta property="og:url" content="http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/" />
+<meta property="og:site_name" content="Oh my Swift" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-08-27T08:33:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Swift bit #4 - Swifty ways of typecasting objects" />
+<script type="application/ld+json">
+{"headline":"Swift bit #4 - Swifty ways of typecasting objects","dateModified":"2019-08-27T08:33:00+05:30","datePublished":"2019-08-27T08:33:00+05:30","url":"http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2019/08/27/swifty-ways-of-typecasting-objects/"},"author":{"@type":"Person","name":"Rizwan"},"description":"Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? Well, there are multiple ways of doing it.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+
+</head>
+  
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">Oh my Swift</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="/blog/social/">Social media</a>
+      
+        
+        <a class="page-link" href="/blog/showcase/">Showcase</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Swift bit #4 - Swifty ways of typecasting objects</h1>
+    
+    <p class="post-meta"><time datetime="2019-08-27T08:33:00+05:30" itemprop="datePublished">Aug 27, 2019</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan</span></span> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/swift-fundamentals/">Swift fundamentals</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+ •
+  
+    
+    
+      
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/ios/">iOS</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/type-casting/">type casting</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? 
+Well, there are multiple ways of doing it.</p>
+
+<p><img src="/blog/assets/images/swiftbit04.png" alt="Typecasting objects" /></p>
+
+<p>Method 1 - Using ‘for’ loop.
+This method is a kind of brute force method. Usually, we all do this way.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">for</span> <span class="n">subview</span> <span class="k">in</span> <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">subviews</span><span class="p">{</span>
+    <span class="k">if</span> <span class="n">subview</span> <span class="k">is</span> <span class="kt">UILabel</span> <span class="p">{</span>
+       <span class="c1">// Change your text here</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>We run the code, and everything works as expected. However, as a developer, we should find out more efficient methods of doing it. Let’s see another way of doing it.</p>
+
+<p>Method 2 - Using ‘case let’ in ‘for in’ loop.
+Here, we are using the power of the ‘for in’ loops to find the UILabel from the subviews.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">for</span> <span class="k">case</span> <span class="k">let</span> <span class="nv">label</span> <span class="k">as</span> <span class="kt">UILabel</span> <span class="k">in</span> <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">subviews</span> <span class="p">{</span>
+	<span class="c1">//Change your text here</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Neat, isn’t it? There is a significant reduction in the number of lines of code.</p>
+
+<p>So, do we settle here? No. There should be more Swifty way to solve this problem. Let’s see how.</p>
+
+<p>Method 3 - Using ‘compactMap’</p>
+
+<p>In this method, we use ‘compactMap’  to typecast a view to UILabel. I consider this method to be more swifty and descriptive.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">subviews</span>
+  <span class="o">.</span><span class="n">compactMap</span> <span class="p">{</span> <span class="nv">$0</span> <span class="k">as</span> <span class="kt">UILabel</span> <span class="p">}</span>
+  <span class="o">.</span><span class="n">forEach</span> <span class="p">{</span> 
+	<span class="c1">// Change your text here</span>
+ <span class="p">}</span></code></pre></figure>
+
+<p>These are the methods I prefer to typecast objects from an array. There are many more methods too. So, what is your preferred way of typecasting objects? Tell us in the comments below. Still have any queries reach out to me directly on <a href="https://twitter.com/rizwanasifahmed">Twitter</a></p>
+
+
+  </div>
+
+  
+
+</article>
+<script defer src="https://comments.winya.app/js/commento.js"></script>
+<div id="commento"></div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/blog/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

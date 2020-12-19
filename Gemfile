@@ -21,12 +21,12 @@ gem "jekyll-whiteglass"
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.6"
+  gem "jekyll-feed"
   gem "jekyll-archives"
   gem "jekyll-paginate"
   gem "jekyll-sitemap"
   gem "jekyll-compose"
-  gem 'jekyll-seo-tag'
+  gem 'jekyll-seo-tag', :git => "https://github.com/rizwan95/jekyll-seo-tag.git"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

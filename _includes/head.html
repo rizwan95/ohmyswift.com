@@ -27,46 +27,6 @@
   
     {% include head_custom.html %}
   
-    {% if site.facebook_app_id %}<meta property="fb:admins" content="{{ site.facebook_app_id }}">{% endif %}
-    <meta property="og:title" content="{{ title }}">
-    <meta property="og:site_name" content="{{ site.title | escape }}">
-    <meta property="og:url" content="{{ canonical }}">
-    <meta property="og:description" content="{{ description }}">
-    {% if site.facebook_page %}<meta property="article:author" content="{{ site.facebook_page }}">{% endif %}
-    {% if page.facebook.image %}
-      <meta property="og:image" content="{{ page.facebook.image }}">
-    {% elsif site.facebook_image %}
-      <meta property="og:image" content="{{ site.facebook_image }}">
-    {% endif %}
-    
-    
-    <meta name="twitter:card" content="{{ page.twitter_card.type | default: "summary" }}">
-    {% if site.twitter_username %}<meta name="twitter:site" content="{{ site.twitter_username }}">{% endif %}
-    <meta name="twitter:title" content="{{ title | truncate: 70 }}">
-    <meta name="twitter:description" content="{{ description | truncate: 200 }}">
-    {% if page.twitter_card.creator %}
-      <meta name="twitter:creator" content="{{ page.twitter_card.creator }}">
-    {% elsif site.twitter_username %}
-      <meta name="twitter:creator" content="{{ site.twitter_username }}">
-    {% endif %}
-
-     {% if page.twitter_card.image %}
-      {% if page.twitter_card.type == 'gallery' %}
-        <meta name="twitter:image0" content="{{ page.twitter_card.image }}">
-        <meta name="twitter:image1" content="{{ page.twitter_card.image1 }}">
-        <meta name="twitter:image2" content="{{ page.twitter_card.image2 }}">
-        <meta name="twitter:image3" content="{{ page.twitter_card.image3 }}">
-      {% else %}
-        <meta name="twitter:image:src" content="{{ site.url }}{{ page.twitter_card.image }}">
-        {% if page.twitter_card.type == 'photo' %}
-          {% if page.twitter_card.width %}<meta name="twitter:image:width" content="{{ page.twitter_card.width }}">{% endif %}
-          {% if page.twitter_card.height %}<meta name="twitter:image:height" content="{{ page.twitter_card.height }}">{% endif %}
-        {% endif %}
-      {% endif %}
-    {% elsif site.twitter_image %}
-      <meta name="twitter:image:src" content="{{ site.twitter_image }}">
-    {% endif %} 
-  
     {% include fonts.html %}
     {% include google_analytics.html %}
     {% seo %}
