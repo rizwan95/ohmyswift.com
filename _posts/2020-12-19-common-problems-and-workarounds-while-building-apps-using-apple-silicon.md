@@ -103,9 +103,9 @@ We always want to give back to the community. So we decided that we will review 
 #### App name - Winya (iOS and iPad OS app)
 
 A ***free screen-sharing app*** that casts your screen to Twitch in HD. It will be useful for gamers to streaming their gameplay to Twitch.
-Ohmyswifters, ***[download the app](https://winya.link/getapp)*** and show your support to them.
+Ohmyswifters, ***[download the app](https://winya.link/getwinya)*** and show your support to them.
 
-***[iOS, and iPadOS download link](https://winya.link/getapp)***
+***[iOS, and iPadOS download link](https://winya.link/getwinya)***
 
 ### About the author
 
