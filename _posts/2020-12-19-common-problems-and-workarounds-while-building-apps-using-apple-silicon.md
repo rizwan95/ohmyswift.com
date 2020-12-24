@@ -13,7 +13,9 @@ image:
     facebook: assets/images/apple-silicon-problems/Apple-Silicon-Facebook.jpeg
 
 ---
-Apple's new Apple Silicon (M1 processor) is a beast. The apps open pretty quickly, and the slow Xcode build times are a thing of the past. But what does it have in store for the iOS/macOS developers? When you try to run your existing projects on Apple Silicon devices, there are a few problems you have to resolve before your projects could build. I will list three significant issues and their solution, which most developers are likely to face when running the projects in Apple Silicon devices.
+Apple's new Apple Silicon (M1 processor) is a beast. The apps open pretty quickly, and the slow Xcode build times are a thing of the past. But what does it have in store for the iOS/macOS developers? 
+
+When you try to run your existing projects on Apple Silicon devices, there are a few problems you have to resolve before your projects could build. I will list three significant issues and their solution, which most developers are likely to face when running the projects in Apple Silicon devices.
 
 ### Running Cocoapods on Apple Silicon (M1 processor)
 

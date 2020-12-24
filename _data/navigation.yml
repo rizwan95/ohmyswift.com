@@ -7,4 +7,6 @@ main:
     url: /social/
   - title: "Showcase"
     url: /showcase/
+  - title: "Support us"
+    url: "https://www.buymeacoffee.com/ohmyswift"
     
