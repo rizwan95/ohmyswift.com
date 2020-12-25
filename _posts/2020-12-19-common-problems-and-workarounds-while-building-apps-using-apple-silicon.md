@@ -98,7 +98,7 @@ Good times are ahead. There is a lot to learn and to teach. I enjoyed writing an
 - [Firebase and Apple Silicon](https://github.com/firebase/firebase-ios-sdk/issues/6520)
 
 
-### App Showcase (Special mentions)
+### App Showcase
 
 We always want to give back to the community. So we decided that we will review some of the most amazing apps which we had used. Please download their apps and show them your support. 
 

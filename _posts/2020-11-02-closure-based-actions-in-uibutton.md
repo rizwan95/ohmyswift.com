@@ -78,7 +78,7 @@ As I had mentioned earlier, the closure based actions are available for iOS 14.0
 
 It is good to see that Apple is working so hard to improve its SDKs. Let us try to adopt the new APIs as much as we can to make the development process easier and effective. It will be challenging to adapt to the change, but it is worth it. You will see more about these new APIs in the upcoming articles, and I will show you how to make the most out of them.
 
-### App Showcase (Special mentions)
+### App Showcase 
 
 We always want to give back to the community. So we decided that we will review some of the most amazing apps which we had used.
 
