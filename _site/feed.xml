@@ -1,0 +1,2134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <generator uri="http://jekyllrb.com" version="4.2.0">Jekyll</generator>
+  
+  
+  <link href="https://ohmyswift.com/blog/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://ohmyswift.com/blog/" rel="alternate" type="text/html" />
+  <updated>2021-01-14T22:28:30+05:30</updated>
+  <id>https://ohmyswift.com/blog//</id>
+
+  
+    <title type="html">Oh my Swift</title>
+  
+
+  
+    <subtitle>Ohmyswift.com focuses on delivering latest articles about Swift and iOS development.</subtitle>
+  
+
+  
+
+  
+  
+    <entry>
+      
+      <title type="html">Experimenting with Swift async and await pattern using Xcode</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode/" rel="alternate" type="text/html" title="Experimenting with Swift async and await pattern using Xcode" />
+      
+      <published>2020-12-25T21:02:00+05:30</published>
+      <updated>2020-12-25T21:02:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode/">&lt;p&gt;You all might know that async/await is accepted and is available in the main snapshots! Let’s get our hands dirty by trying out some basic example of async/await in Swift.&lt;/p&gt;
+
+&lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Xcode 12.3&lt;/li&gt;
+  &lt;li&gt;Latest Swift Toolchain (You can download it from &lt;a href=&quot;https://link.ohmyswift.com/J3EvM&quot;&gt;here&lt;/a&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;installing-the-swift-toolchain&quot;&gt;Installing the Swift Toolchain&lt;/h3&gt;
+&lt;p&gt;Download the Swift Toolchain, and install the .pkg file. After installing the Swift toolchain, open Xcode and go to Preferences -&amp;gt; Components and select &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Swift Development Snapshot&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/expermiment-async-await/swift-toolchain.png&quot; alt=&quot;Swift Development Toolchain&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, go to your Project’s build settings and add the following Swift flags &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Xfrontend -enable-experimental-concurrency&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/expermiment-async-await/other-flags.png&quot; alt=&quot;Swift Compiler Flags&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;That’s it! You have installed the latest Swift Development Toolchain in your Xcode.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-completion-handlers-to-handle-asynchronous-tasks&quot;&gt;Using completion handlers to handle asynchronous tasks&lt;/h3&gt;
+&lt;p&gt;We usually use completion handlers for handling asynchronous tasks. For example,&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getPlayerNames&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;DispatchQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;global&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;playerNames&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gamePlayers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;internal&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;performCompletionHandlerCall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+	&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getPlayerNames&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Printing names from a completion handler &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;playerNames&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The above code is OK, but there are too many things going on. It is error-prone, and the code starts falling apart when nesting of multiple completion handlers is required, which eventually leads to the pyramid of doom. Let’s find out how to re-write the above code using the new async await approach.&lt;/p&gt;
+
+&lt;h3 id=&quot;replacing-completion-handlers-with-asyncawait&quot;&gt;Replacing completion handlers with async/await&lt;/h3&gt;
+
+&lt;p&gt;When you write async/await code, the boilerplate code is reduced, and it allows us to focus on improving the performance of the concurrent code.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;refreshPlayers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;playerNames&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getNames&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNames&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gamePlayers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;@asyncHandler&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;internal&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;performAsyncAwaitOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;refreshPlayers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Printing names from a async await function &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;playerNames&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The above code is clean, precise, self explanatory, and less confusing. 
+The usage of async and await keywords in the methods improve the readability of the code.&lt;/p&gt;
+
+&lt;h3 id=&quot;closing-thoughts&quot;&gt;Closing Thoughts&lt;/h3&gt;
+&lt;p&gt;The async/await pattern is a vast improvement. The real power of async/await will be revealed when multiple asynchronous operations are chained.  It is still in development, and many more improvements are made as we speak. I will be keeping an eye on how things shape, and I will be writing more articles about the async/await pattern.
+If you are interested in learning more about the async/await pattern, I have given reference links at the end of the article. You can give it a read for a better understanding. 
+Also, I have uploaded the demo project to github. You can download it from &lt;a href=&quot;https://link.ohmyswift.com/43KZu&quot;&gt;here.&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;p&gt;[1] &lt;a href=&quot;https://forums.swift.org/t/swift-concurrency-roadmap/41611&quot;&gt;https://forums.swift.org/t/swift-concurrency-roadmap/41611&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2] &lt;a href=&quot;https://forums.swift.org/t/question-about-async-await/6659/15&quot;&gt;https://forums.swift.org/t/question-about-async-await/6659/15&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3] &lt;a href=&quot;https://forums.swift.org/t/concurrency-fixing-race-conditions-in-async-await-example/6514/45&quot;&gt;https://forums.swift.org/t/concurrency-fixing-race-conditions-in-async-await-example/6514/45&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;special-mentions&quot;&gt;Special mentions&lt;/h3&gt;
+
+&lt;p&gt;Shoutout to &lt;a href=&quot;https://twitter.com/karthikgs7&quot;&gt;Karthikeyan&lt;/a&gt; for his help in setting up the toolchain and stuff.&lt;/p&gt;
+
+&lt;h3 id=&quot;app-showcase&quot;&gt;App Showcase&lt;/h3&gt;
+
+&lt;p&gt;Winya - A &lt;strong&gt;&lt;em&gt;free screen-sharing app&lt;/em&gt;&lt;/strong&gt; that casts your screen to Twitch in HD. It will be useful for gamers to streaming their gameplay to Twitch.
+Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwinya&quot;&gt;download the app&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt; and show your support to them.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwinya&quot;&gt;iOS, and iPadOS download link&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;more-articles&quot;&gt;More articles&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;&quot;&gt;Common problems and workarounds while building apps using Apple Silicon&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/11/01/closure-based-actions-in-uibutton/&quot;&gt;Closure based actions in UIButton&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;Replacing UIImagePickerController with PHPickerViewController&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/06/14/embracing-localization-in-image-assets/&quot;&gt;Embracing Localization in Image Assets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/&quot;&gt;An effective way to clear entire Userdefaults in Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Concurrency" />
+      
+
+      
+        <category term="swift async await" />
+      
+        <category term="async/await swift" />
+      
+        <category term="concurrency in swift" />
+      
+        <category term="swift concurrency" />
+      
+        <category term="async await" />
+      
+        <category term="async await swift5" />
+      
+
+      
+        <summary type="html">You all might know that async/await is accepted and is available in the main snapshots! Let’s get our hands dirty by trying out some basic example of async/await in Swift.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Common problems and workarounds while building apps using Apple Silicon</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon/" rel="alternate" type="text/html" title="Common problems and workarounds while building apps using Apple Silicon" />
+      
+      <published>2020-12-19T09:57:00+05:30</published>
+      <updated>2020-12-19T09:57:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon/">&lt;p&gt;Apple’s new Apple Silicon (M1 processor) is a beast. The apps open pretty quickly, and the slow Xcode build times are a thing of the past. But what does it have in store for the iOS/macOS developers?&lt;/p&gt;
+
+&lt;p&gt;When you try to run your existing projects on Apple Silicon devices, there are a few problems you have to resolve before your projects could build. I will list three significant issues and their solution, which most developers are likely to face when running the projects in Apple Silicon devices.&lt;/p&gt;
+
+&lt;h3 id=&quot;running-cocoapods-on-apple-silicon-m1-processor&quot;&gt;Running Cocoapods on Apple Silicon (M1 processor)&lt;/h3&gt;
+
+&lt;p&gt;Cocoapods is not entirely compatible with ARM architecture at the time of writing this article. The reason is, Cocoapods has an internal dependency on the &lt;a href=&quot;https://github.com/ffi/ffi&quot;&gt;Ruby-FFI&lt;/a&gt; gem, which is not yet compatible with the ARM architecture. When you do a  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo pod install&lt;/code&gt; , you are likely to bump into the following error.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-zsh&quot; data-lang=&quot;zsh&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;LoadError - dlsym&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0x7f8926035eb0, Init_ffi_c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: symbol not found - /Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi_c.bundle
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:6:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;rescue &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:3:in `&amp;lt;top (required)&amp;gt;'&lt;/span&gt;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/ethon-0.12.0/lib/ethon.rb:2:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'&lt;/span&gt;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/typhoeus-1.4.0/lib/typhoeus.rb:2:in `&amp;lt;top (required)&amp;gt;'&lt;/span&gt;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:74:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;cdn_url?&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:36:in `create_source_with_url'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:21:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;find_or_create_source_with_url&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:178:in `block in sources'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:177:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;map&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:177:in `sources'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:1073:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;block &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;resolve_dependencies&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/user_interface.rb:64:in `section'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:1072:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;resolve_dependencies&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:124:in `analyze'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:414:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;analyze&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:239:in `block in resolve_dependencies'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/user_interface.rb:64:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;section&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:238:in `resolve_dependencies'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:160:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/command/install.rb:52:in `run'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/claide-1.0.3/lib/claide/command.rb:334:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;run&lt;span class=&quot;s1&quot;&gt;'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/command.rb:52:in `run'&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/bin/pod:55:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+/usr/local/bin/pod:23:in `load'&lt;/span&gt;
+/usr/local/bin/pod:23:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;main&amp;gt;&lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;solution&quot;&gt;Solution&lt;/h3&gt;
+&lt;p&gt;The solution is pretty straight forward. You have to run the following commands,&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-zsh&quot; data-lang=&quot;zsh&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo arch&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-x86_64&lt;/span&gt; gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ffi
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;cocoapods&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;What we are doing is, we are running the Ruby-FFI gem with backward compatibility. 
+Some developers run the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Terminal.app&lt;/code&gt; with Rosetta and perform the usual &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo gem install ffi&lt;/code&gt; installation. The developer can choose whatever method they prefer.&lt;/p&gt;
+
+&lt;h3 id=&quot;apple-silicon-simulator-support-for-firebase&quot;&gt;Apple Silicon simulator support for Firebase&lt;/h3&gt;
+
+&lt;p&gt;Firebase is one of the most extensively used frameworks out there. When you try to run your existing project in an Apple Silicon simulator using Xcode, you will probably bump into the following error.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-llvm&quot; data-lang=&quot;llvm&quot;&gt;&lt;span class=&quot;nl&quot;&gt;ld:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/Users/myusername/Downloads/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;202009&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/temp/My_Project/Pods/FirebaseAnalytics/Frameworks/FIRAnalyticsConnector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;framework/FIRAnalyticsConnector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;FIRAnalyticsConnector_e321ed8e3db06efc9803f6c008e67a34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;building&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;iOS&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Simulator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;but&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;linking&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;built&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;iOS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'/Users/myusername/Downloads/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;202009&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/temp/My_Project/Pods/FirebaseAnalytics/Frameworks/FIRAnalyticsConnector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;framework/FIRAnalyticsConnector'&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;architecture&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;arm64&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;solution-1&quot;&gt;Solution&lt;/h3&gt;
+&lt;p&gt;Luckily the Firebase developers have come up with a pretty neat workaround. The developers have to specify the  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-M1&lt;/code&gt; tag along with the Firebase pod version.  For example,
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pod 'Firebase/Analytics', '7.2-M1'&lt;/code&gt; 
+You can use the same workaround for other Firebase related pods as well. The workaround is documented in &lt;a href=&quot;https://github.com/firebase/firebase-ios-sdk/blob/master/AppleSilicon.md&quot;&gt;here.&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;broken-redirections-from-default-web-browsers-to-apps-in-apple-silicon&quot;&gt;Broken redirections from default web browsers to apps in Apple Silicon&lt;/h3&gt;
+
+&lt;p&gt;Most of the Sign-in/Sign-up module in apps open up the user’s default browser. After the user successfully signs in, the browser redirects back to the app. The handoff can break if the user uses a browser that is not yet built for the Apple Silicon processors. The sign-in will not happen, and it could make the app unusable. This issue occurred with Firefox Developer Edition, which was not yet built for Apple Silicon at the time of writing this blog.&lt;/p&gt;
+
+&lt;h3 id=&quot;solution-2&quot;&gt;Solution&lt;/h3&gt;
+&lt;p&gt;The developer can show an alert or a message before the user attempts to sign-in about the problem. They can request the user to change their default browser to Safari or any other compatible browser. After the sign-in is done, the user can revert to their favorite browser as the default browser.&lt;/p&gt;
+
+&lt;h3 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h3&gt;
+
+&lt;p&gt;Good times are ahead. There is a lot to learn and to teach. I enjoyed writing and sharing this article. In the future, I will be writing more about such issues as they are discovered. Do you feel that I am missing out on something important? Do let me know in the comments below. Also, if you find this article useful, feel free to share it.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/64901180/running-cocoapods-on-apple-silicon-m1&quot;&gt;Cocoapods and Apple Silicon&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/firebase/firebase-ios-sdk/issues/6520&quot;&gt;Firebase and Apple Silicon&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;app-showcase&quot;&gt;App Showcase&lt;/h3&gt;
+
+&lt;p&gt;We always want to give back to the community. So we decided that we will review some of the most amazing apps which we had used. Please download their apps and show them your support.&lt;/p&gt;
+
+&lt;h4 id=&quot;app-name---winya-ios-and-ipad-os-app&quot;&gt;App name - Winya (iOS and iPad OS app)&lt;/h4&gt;
+
+&lt;p&gt;A &lt;strong&gt;&lt;em&gt;free screen-sharing app&lt;/em&gt;&lt;/strong&gt; that casts your screen to Twitch in HD. It will be useful for gamers to streaming their gameplay to Twitch.
+Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwinya&quot;&gt;download the app&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt; and show your support to them.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwinya&quot;&gt;iOS, and iPadOS download link&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - iOS Engineer.  Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;more-articles&quot;&gt;More articles&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/11/01/closure-based-actions-in-uibutton/&quot;&gt;Closure based actions in UIButton&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;Replacing UIImagePickerController with PHPickerViewController&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/06/14/embracing-localization-in-image-assets/&quot;&gt;Embracing Localization in Image Assets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/&quot;&gt;An effective way to clear entire Userdefaults in Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Apple Silicon" />
+      
+
+      
+        <category term="apple silicon" />
+      
+        <category term="cocoapods" />
+      
+        <category term="cocoapods apple silicon" />
+      
+        <category term="cocoapods not installing in apple silicon" />
+      
+        <category term="firebase" />
+      
+        <category term="firebase not building in apple silicon" />
+      
+        <category term="firebase in apple silicon" />
+      
+        <category term="firebase apple silicon" />
+      
+        <category term="m1 processor" />
+      
+        <category term="apple silicon project not building" />
+      
+
+      
+        <summary type="html">Apple’s new Apple Silicon (M1 processor) is a beast. The apps open pretty quickly, and the slow Xcode build times are a thing of the past. But what does it have in store for the iOS/macOS developers?</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Closure based actions in UIButton</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2020/11/02/closure-based-actions-in-uibutton/" rel="alternate" type="text/html" title="Closure based actions in UIButton" />
+      
+      <published>2020-11-02T00:54:00+05:30</published>
+      <updated>2020-11-02T00:54:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2020/11/02/closure-based-actions-in-uibutton</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2020/11/02/closure-based-actions-in-uibutton/">&lt;p&gt;iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; method in UIControls. Yes, you heard me right—no more usage of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; methods, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#selector()&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@objc&lt;/code&gt; annotation in front of methods.
+More importantly, we can write a closure based code using the action handler. Okay, enough talk, let’s dive into the code.&lt;/p&gt;
+
+&lt;h3 id=&quot;target-based-uibutton-ios-130-and-earlier&quot;&gt;Target-based UIButton. (iOS 13.0 and earlier)&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;fileprivate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configureButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;fileprivate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configureButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addTarget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#selector(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;openFile(_:)&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchUpInside&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setTitleColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemBlue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Tap me&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addSubview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ &lt;span class=&quot;kd&quot;&gt;@objc&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;fileprivate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;openFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;File opened&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;closure-based-uibutton-ios-140-and-later&quot;&gt;Closure based UIButton (iOS 14.0 and later)&lt;/h3&gt;
+
+&lt;h4 id=&quot;variant-1&quot;&gt;Variant 1&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;fileprivate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configureButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;primaryAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;File opened&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setTitleColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemBlue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Tap me&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addSubview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;variant-2&quot;&gt;Variant 2&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;fileprivate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configureButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addSubview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setTitleColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemBlue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Tap me&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;UIAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;File opened&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchUpInside&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As you can see, I have mentioned two variants of closure based UIButton.&lt;/p&gt;
+
+&lt;p&gt;In the first variant, the action handler is specified during the initialization of the button.
+In the second variant, the action handler is specified after the initialization of the button.
+It is up to the developer to choose whichever method they want. My personal preference is the second variant.&lt;/p&gt;
+
+&lt;h3 id=&quot;limitations&quot;&gt;Limitations&lt;/h3&gt;
+
+&lt;p&gt;As I had mentioned earlier, the closure based actions are available for iOS 14.0 and above. If you want to support iOS 13.0 and earlier, you will still have to use the legacy &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;h3 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h3&gt;
+
+&lt;p&gt;It is good to see that Apple is working so hard to improve its SDKs. Let us try to adopt the new APIs as much as we can to make the development process easier and effective. It will be challenging to adapt to the change, but it is worth it. You will see more about these new APIs in the upcoming articles, and I will show you how to make the most out of them.&lt;/p&gt;
+
+&lt;h3 id=&quot;app-showcase&quot;&gt;App Showcase&lt;/h3&gt;
+
+&lt;p&gt;We always want to give back to the community. So we decided that we will review some of the most amazing apps which we had used.&lt;/p&gt;
+
+&lt;h4 id=&quot;app-name---winya-ios-and-ipad-os-app&quot;&gt;App name - Winya (iOS and iPad OS app)&lt;/h4&gt;
+
+&lt;p&gt;A &lt;strong&gt;&lt;em&gt;free screen-sharing app&lt;/em&gt;&lt;/strong&gt; that casts your screen to Twitch in HD. It will be useful for gamers to streaming their gameplay to Twitch.
+Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwinya&quot;&gt;download the app&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt; and show your support to them.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwinya&quot;&gt;iOS, and iPadOS download link&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - iOS Engineer. Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;more-articles&quot;&gt;More articles&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;Replacing UIImagePickerController with PHPickerViewController&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/06/14/embracing-localization-in-image-assets/&quot;&gt;Embracing Localization in Image Assets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/&quot;&gt;An effective way to clear entire Userdefaults in Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="UIButton" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="uibutton closure" />
+      
+        <category term="closure" />
+      
+        <category term="closure uibutton" />
+      
+        <category term="callbacks closure" />
+      
+        <category term="closure callbacks" />
+      
+
+      
+        <summary type="html">iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the addTarget method in UIControls. Yes, you heard me right—no more usage of addTarget methods, #selector(), and @objc annotation in front of methods. More importantly, we can write a closure based code using the action handler. Okay, enough talk, let’s dive into the code.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Replacing UIImagePickerController with PHPickerViewController</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/" rel="alternate" type="text/html" title="Replacing UIImagePickerController with PHPickerViewController" />
+      
+      <published>2020-08-29T11:09:00+05:30</published>
+      <updated>2020-08-29T11:09:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">&lt;p&gt;Almost every app requires photos and video access these days. Before iOS 14.0, the iOS developers used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIImagePickerController&lt;/code&gt; to access the items from the user’s media library. From iOS 14.0, Apple is providing its developers a brand new way to select images or videos from their apps using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPickerViewController&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;features-of-phpickerviewcontroller&quot;&gt;Features of PHPickerViewController&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;No more permission alerts.&lt;/strong&gt; The developer doesn’t have to specify the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Privacy - Photo Library Usage Description&lt;/code&gt; key in the .plist, and there won’t be any alert views asking for permission.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Runs in a separate process.&lt;/strong&gt; Although the PHPickerViewController might appear to be present inside the application, it runs in a separate process.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Built-in privacy.&lt;/strong&gt; Since PHPickerViewController runs in a separate process, the application can only access the items selected by the user via PHPickerViewControllerDelegate.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Built-in search.&lt;/strong&gt; Searching photos is a built-in feature in PHPickerViewController, and the UI is similar to that of the Photos app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Selection limit.&lt;/strong&gt; PHPickerViewController also allows the developer to limit the number of photos a user can select by setting the &lt;strong&gt;selectionLimit&lt;/strong&gt; property in PHPickerConfiguration.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;implementing-phpickerviewcontroller-in-an-application&quot;&gt;Implementing PHPickerViewController in an application&lt;/h2&gt;
+
+&lt;p&gt;Implementing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPickerViewController&lt;/code&gt; is a breeze. The APIs are pretty straightforward.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create an instance of PHPickerConfiguration and pass it to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPickerViewController&lt;/code&gt; instance while creating it.&lt;/li&gt;
+  &lt;li&gt;It is the developer’s responsibility to present or dismiss the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPickerViewController&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;PhotosUI&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;showPicker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;PHPickerConfiguration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;picker&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;PHPickerViewController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;present&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;picker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;animated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;customizing-the-phpickerviewcontroller-using-the-phpickerconfiguration&quot;&gt;Customizing the PHPickerViewController using the PHPickerConfiguration&lt;/h2&gt;
+
+&lt;p&gt;The PHPickerConfiguration provides us three properties using which we can customize the PHPickerViewController.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;selectionLimit&lt;/code&gt; - The selectionLimit property specifies the number of items a user can select. The value &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt; specifies unlimited selection. The below configuration limits the selection to 4 items.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;selectionLimit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;filter&lt;/code&gt; - The filter property restricts the type of items that can be displayed. Setting the value to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nil&lt;/code&gt; will display all the supported items. The below configuration displays only the live photos and images.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;livePhotos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;preferredAssetRepresentationMode&lt;/code&gt; - The preferredAssetRepresentationMode determines how an item provider should represent an asset. The default value is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;automatic&lt;/code&gt;.     The below configuration sets the asset’s representation mode to automatic.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;preferredAssetRepresentationMode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;automatic&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;accessing-items-from-phpickerviewcontroller-using-the-phpickerviewcontrollerdelegate&quot;&gt;Accessing items from PHPickerViewController using the PHPickerViewControllerDelegate&lt;/h2&gt;
+
+&lt;p&gt;The PHPickerViewControllerDelegate acts differently when compared to UIImagePickerControllerDelegate. PHPickerViewControllerDelegate provides us an NSItemProvider using which objects can be loaded.&lt;/p&gt;
+
+&lt;p&gt;If you look closely, the API will be similar to UITableView’s or UICollectionView’s drag and drop APIs.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;picker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;picker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;PHPickerViewController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;didFinishPicking&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;results&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;PHPickerResult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;dismiss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;animated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;itemProviders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;results&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itemProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itemProviders&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;canLoadObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ofClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIImage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;loadObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ofClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIImage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;DispatchQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIImage&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imageView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imageView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;PHPickerViewController is supported only from iOS 14.0. If your app has a deployment target of iOS 13.0 and less, you still have to use  UIImagePickerController.&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rizwan95/AmazingPhotoPicker&quot;&gt;Amazing Photo picker sample code&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2020/10652/&quot;&gt;Meet the new Photos picker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;special-mention&quot;&gt;Special mention&lt;/h3&gt;
+
+&lt;p&gt;Recently, &lt;a href=&quot;https://blog.feedspot.com&quot;&gt;FeedSpot&lt;/a&gt; added &lt;a href=&quot;https://ohmyswift.com&quot;&gt;Ohmyswift&lt;/a&gt; to its “Top 30 Swift Programming Blogs &amp;amp; News Websites To Follow in 2020.” It is an honor to us, and it means a lot to us. Do check out their listings at&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.feedspot.com/swift_programming_blogs/&quot;&gt;https://blog.feedspot.com/swift_programming_blogs/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - iOS Engineer. Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/06/14/embracing-localization-in-image-assets/&quot;&gt;Embracing Localization in Image Assets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/&quot;&gt;An effective way to clear entire Userdefaults in Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="PHPickerViewController" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="imageassets" />
+      
+        <category term="phphotopickerviewcontroller" />
+      
+        <category term="uiimagepikcercontroller" />
+      
+        <category term="images" />
+      
+
+      
+        <summary type="html">Almost every app requires photos and video access these days. Before iOS 14.0, the iOS developers used UIImagePickerController to access the items from the user’s media library. From iOS 14.0, Apple is providing its developers a brand new way to select images or videos from their apps using PHPickerViewController</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Embracing Localization in Image Assets</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/" rel="alternate" type="text/html" title="Embracing Localization in Image Assets" />
+      
+      <published>2020-06-14T18:41:00+05:30</published>
+      <updated>2020-06-14T18:41:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/">&lt;p&gt;One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/Image_localization/appdemo.png&quot; alt=&quot;Localized image asset&quot; height=&quot;80%&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-localize-image-assets&quot;&gt;How to localize image assets&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Generate the localized images in the languages which your app supports.&lt;/li&gt;
+  &lt;li&gt;Go to the asset catalog and create an image asset.&lt;/li&gt;
+  &lt;li&gt;Select the image and click on the attributes inspector.&lt;/li&gt;
+  &lt;li&gt;From the attributes inspector, click the “Localize” button and select the languages.&lt;/li&gt;
+  &lt;li&gt;Now, all you have to do is to drop the localized images in the asset catalog.&lt;/li&gt;
+  &lt;li&gt;You can now see that your images are localized, and your app looks great!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/Image_localization/imageassetpreview.png&quot; alt=&quot;Localized image asset&quot; height=&quot;80%&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you want to know more about localization, refer to the following WWDC session.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/403/&quot;&gt;WWDC 2019 Session 403 Creating Great Localized Experiences with Xcode 11&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - iOS Engineer. Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/&quot;&gt;An effective way to clear entire Userdefaults in Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="XCAssets" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="imageassets" />
+      
+        <category term="localization" />
+      
+        <category term="image localization" />
+      
+
+      
+        <summary type="html">One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">An effective way to clear entire Userdefaults in Swift</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/" rel="alternate" type="text/html" title="An effective way to clear entire Userdefaults in Swift" />
+      
+      <published>2020-05-19T19:49:00+05:30</published>
+      <updated>2020-05-19T19:49:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">&lt;p&gt;As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;removeObject&lt;/code&gt; method to remove the value for a particular key.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;standard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removeObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;forKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;is_app_launched&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;What if we have a vast number of keys, and we want to clear them all? Like 10 or 20 keys?  If we try to clear all the keys using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;removeObject&lt;/code&gt; method, we might miss clearing some values, and the code becomes complex. We don’t want to do that. So is there a better way? Yes, there is.&lt;/p&gt;
+
+&lt;p&gt;Apple provides us with a nice and clean API to deal with this. We can make use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;removePersistantDomainForName&lt;/code&gt; method to reset the UserDefaults.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bundleID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bundleIdentifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;standard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removePersistentDomain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;forName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bundleID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We can wrap the API in the UserDefaults extension to use it conveniently.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/clear-userdefaults.png&quot; alt=&quot;Clear UserDefaults&quot; /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;resetDefaults&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bundleID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bundleIdentifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;standard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removePersistentDomain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;forName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bundleID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Using the API clears our UserDefaults completely, and leaves it in a fresh state.
+So yes, it might look insignificant, but it is a helpful API. Do you have other ways to clear the UserDefaults? Let me know in the comments below.&lt;/p&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - iOS Engineer. Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/06/14/embracing-localization-in-image-assets/&quot;&gt;Embracing Localization in Image Assets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Userdefaults" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="userdefaults" />
+      
+
+      
+        <summary type="html">As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the removeObject method to remove the value for a particular key.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Using UICollectionViewCompositionalLayout in iOS 12 and earlier</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/" rel="alternate" type="text/html" title="Using UICollectionViewCompositionalLayout in iOS 12 and earlier" />
+      
+      <published>2020-03-18T19:42:00+05:30</published>
+      <updated>2020-03-18T19:42:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">&lt;p&gt;At WWDC 2019, Apple added a brand new API “&lt;strong&gt;UICollectionViewCompositionalLayout&lt;/strong&gt;” to the UIKit. Using this powerful API, we can create complex compositional layouts without writing complicated code. At times, It feels tough to create complex collection view UIs using the UICollectionViewFlowLayout. The UICollectionViewCompositionalLayout API eases the process and guess what you can even support orthogonal scrolling UIs with much ease. Well, it sounds great, but practically we cannot use the UICollectionViewCompositionalLayout API until we drop the support for iOS 12.0 and earlier in our apps. (It is not going to happen for the next few years is what I predict.) So how do we use this API in iOS 12.0 and earlier?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/compositionallayout/compositionallayout.png&quot; alt=&quot;IBPCollectionViewCompositionalLayout&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Well, a friend of mine, &lt;a href=&quot;https://twitter.com/k_katsumi&quot;&gt;Kishikawa Katsumi&lt;/a&gt;, had a solution for it! He claimed that his library &lt;strong&gt;IBPCollectionViewCompositionalLayout&lt;/strong&gt; could use the same UICollectionViewCompositionalLayout APIs in iOS 12.0 and earlier. I was skeptical at first, but decided to give it a try.
+I installed it using Cocoapods, followed the instructions given, and boom! CompositionalLayouts started working on iOS 12.0 and earlier!  Everything worked like magic.&lt;/p&gt;
+
+&lt;p&gt;I was amazed by the work he had done and decided to share this with the developer community. So here it is!&lt;/p&gt;
+
+&lt;p&gt;Do check out this excellent &lt;a href=&quot;https://github.com/kishikawakatsumi/IBPCollectionViewCompositionalLayout&quot;&gt;github library&lt;/a&gt;  and share your thoughts in comments.&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Kishikawa Katsumi&lt;/strong&gt; - &lt;a href=&quot;https://twitter.com/k_katsumi&quot;&gt;https://twitter.com/k_katsumi&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - iOS Engineer. Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/&quot;&gt;Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="UICollectionView" />
+      
+
+      
+        <category term="Swift" />
+      
+        <category term="uicollectionview" />
+      
+        <category term="uicollectionviewcompositionallayout" />
+      
+        <category term="collection view" />
+      
+        <category term="compositional layouts" />
+      
+
+      
+        <summary type="html">At WWDC 2019, Apple added a brand new API “UICollectionViewCompositionalLayout” to the UIKit. Using this powerful API, we can create complex compositional layouts without writing complicated code. At times, It feels tough to create complex collection view UIs using the UICollectionViewFlowLayout. The UICollectionViewCompositionalLayout API eases the process and guess what you can even support orthogonal scrolling UIs with much ease. Well, it sounds great, but practically we cannot use the UICollectionViewCompositionalLayout API until we drop the support for iOS 12.0 and earlier in our apps. (It is not going to happen for the next few years is what I predict.) So how do we use this API in iOS 12.0 and earlier?</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Simulating remote push notifications in a simulator</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/" rel="alternate" type="text/html" title="Simulating remote push notifications in a simulator" />
+      
+      <published>2020-02-13T22:22:00+05:30</published>
+      <updated>2020-02-13T22:22:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">&lt;p&gt;Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.&lt;/p&gt;
+
+&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
+
+&lt;p&gt;Well, the requirements are quite simple. We will be needing the following,&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Xcode 11.4 beta or above.&lt;/li&gt;
+  &lt;li&gt;Bundle identifier of your app.&lt;/li&gt;
+  &lt;li&gt;The device identifier of your currently active simulator.&lt;/li&gt;
+  &lt;li&gt;Push notification payload.&lt;/li&gt;
+  &lt;li&gt;Terminal.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;how-to-find-the-device-identifier-of-the-simulator&quot;&gt;How to find the device identifier of the simulator&lt;/h2&gt;
+
+&lt;p&gt;You can find the simulator’s device identifier from &lt;strong&gt;Window&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Devices and Simulator&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Select the active simulator&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Copy the displayed identifier&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-generate-push-notification-payload&quot;&gt;How to generate push notification payload&lt;/h2&gt;
+
+&lt;p&gt;The push notification payload is of the standard Apple format.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{&quot;aps&quot;:{&quot;alert&quot;:&quot;I am a remote push notification&quot;,&quot;badge&quot;:1,&quot;sound&quot;:&quot;default&quot;}}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Save the following JSON in the .apns format.
+    (We will be saving the json in a file as notficationpayload.apns for the tutorial purpose. )&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-trigger-remote-push-notifications-in-the-simulator&quot;&gt;How to trigger remote push notifications in the simulator&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run the app in simulator using Xcode.&lt;/li&gt;
+  &lt;li&gt;Open terminal.&lt;/li&gt;
+  &lt;li&gt;Navigate to the folder where the payload file is present .&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Execute the command with the format,
+ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xcrun simctl push &amp;lt;device-identifier&amp;gt; &amp;lt;your-bundle-id&amp;gt; notificationpayload.apns&lt;/code&gt;
+ (Sample command -
+ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xcrun simctl push 3A3CE233-307D-463D-A1C6-F66B9C2C1445 com.sample.pushnotification notificationpayload.apns&lt;/code&gt;)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Hit enter.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s it! Notifications will start to appear on your simulator!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/simulatornotifications/simulatornotification.png&quot; alt=&quot;Simulating remote push notifications in a simulator&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
+ You can also follow me on twitter right here: &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/&quot;&gt;Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Push Notifications" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="ios simulator" />
+      
+        <category term="simulator notifications" />
+      
+
+      
+        <summary type="html">Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ohmyswift.com/blog/blog/assets/images/simulatornotifications/simulatornotification.png" />
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Why should we avoid using closures in Swift structs?</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs/" rel="alternate" type="text/html" title="Why should we avoid using closures in Swift structs?" />
+      
+      <published>2020-01-10T10:06:00+05:30</published>
+      <updated>2020-01-10T10:06:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs/">&lt;p&gt;We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.”
+Wait. What? Memory leak in structs? How could that be possible?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/closuresinstructs.png&quot; alt=&quot;Why should we avoid using closures in Swift structs?&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Structs are value types, and there is no way a memory leak can occur.
+Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift.&lt;/p&gt;
+
+&lt;h2 id=&quot;back-to-basics&quot;&gt;&lt;strong&gt;Back to basics&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The reason I am taking you back to the basics is that before diving into the main problem, we need to have a stronghold of the basics.&lt;/p&gt;
+
+&lt;p&gt;The basic types in Swift fall into two categories. One is the “Reference type,” and the other is the “Value type.” Generally, Classes are reference types. On the other hand, structs and enums are value types.&lt;/p&gt;
+
+&lt;h2 id=&quot;value-types&quot;&gt;&lt;strong&gt;Value types&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The value types store the data directly in memory. Every instance has a unique copy of the data. When a variable is assigned to an existing variable, the data is copied. The allocation of the value types is done in the stack. When the value type variable goes out of scope, the deallocation of the memory occurs.&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;oldPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Rizwan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;newPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Oh my Swift&quot;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-------&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Rizwan&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Oh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can see that changing the value of the newPerson doesn’t change the value of oldPerson. This is how value types work.&lt;/p&gt;
+
+&lt;h2 id=&quot;reference-types&quot;&gt;&lt;strong&gt;Reference types&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The reference types keep a reference (aka a pointer) to the data when initialized. Whenever a variable is assigned to an existing reference type, the reference is shared among the variables. The allocation of reference types is done in the heap. The ARC (Automatic Reference Counting) handles the deallocation of the reference type variables.&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;withName&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;oldPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;withName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Rizwan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;newPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Oh my Swift&quot;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Output&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Oh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Oh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can see that changing the oldPerson variable reflects the changes in the newPerson variable. This is how reference types work.&lt;/p&gt;
+
+&lt;p&gt;Usually, memory leaks occur in reference types. It occurs in the form of retain cycles in most of the cases. To know more about retain cycles, read this &lt;a href=&quot;https://medium.com/flawless-app-stories/memory-leaks-in-swift-bfd5f95f3a74&quot;&gt;blog&lt;/a&gt; from Flawless app stories.&lt;/p&gt;
+
+&lt;p&gt;So, if reference types are the reason for memory leaks, we can use value types for all purposes. That should solve the problem.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, this is not the case. Sometimes structs and enums can be treated as reference types, and this means that retain cycles can occur in structs and enums too.&lt;/p&gt;
+
+&lt;h2 id=&quot;closures---the-villain-in-structs&quot;&gt;&lt;strong&gt;Closures - The Villain in structs&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;When you use closures in structs, the closure behaves as a reference type, and the problem starts there. The closures need to have a reference to the environment outside so that the environment can be modified when the closure body is executed.&lt;/p&gt;
+
+&lt;p&gt;In the case of classes, we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;weak self&lt;/code&gt; to break the retain cycle. When we try to do it for a struct, we get the following compiler error, ‘weak’ may only be applied to class and class-bound protocol types, not ‘{struct name}’&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;speed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Float&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;())?&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;myCar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;increaseSpeed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// The retain cycle occurs here. We cannot use [weak myCar] as myCar is a value type.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My car's speed :&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prints 30&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;myNewCar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My new car's speed :&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prints 30 still!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You would have expected the result of myNewCar to be 90.0, but it prints My new car’s speed: 30.0&lt;/p&gt;
+
+&lt;h2 id=&quot;but-why&quot;&gt;&lt;strong&gt;But why?&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Well, the reason is, “myNewCar” is a partial copy of “newCar.” Since closures and their environments cannot be copied completely. The value of “speed” is copied, but the property “increaseSpeed” of “myNewCar” (myNewCar.increaseSpeed?()) holds a reference to the “increaseSpeed” of “myCar” with the “speed” of “myCar” in the captured environment. So, the “increaseSpeed” of “myCar” is invoked.&lt;/p&gt;
+
+&lt;p&gt;These are the various reasons why closures in Swift structs are dangerous.&lt;/p&gt;
+
+&lt;h2 id=&quot;so-what-do-we-do-now&quot;&gt;&lt;strong&gt;So what do we do now?&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The straight forward solution is, avoid using closures in value types. If you want to use them, you should be very careful with it, or else it might lead to unexpected results.
+Regarding the retain cycle, the only way to break them is to set the variables “myCar” and “myNewCar” to nil manually. It doesn’t sound ideal, but there is no other way.&lt;/p&gt;
+
+&lt;p&gt;It was really thought provoking for me when I learnt about the behaviour of closures in value types. I hope you also felt the same.&lt;/p&gt;
+
+&lt;p&gt;Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
+ You can also follow me on twitter right here: &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;[1] &lt;a href=&quot;https://forums.swift.org/t/avoiding-unbreakable-reference-cycle-with-value-types-and-closures/18757/6&quot;&gt;https://forums.swift.org/t/avoiding-unbreakable-reference-cycle-with-value-types-and-closures/18757/6&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2] &lt;a href=&quot;https://github.com/Wolox/ios-style-guide/blob/master/rules/avoid-struct-closure-self.md&quot;&gt;https://github.com/Wolox/ios-style-guide/blob/master/rules/avoid-struct-closure-self.md&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3] &lt;a href=&quot;https://www.objc.io/issues/16-swift/swift-classes-vs-structs/&quot;&gt;https://www.objc.io/issues/16-swift/swift-classes-vs-structs/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[4] &lt;a href=&quot;https://marcosantadev.com/capturing-values-swift-closures/&quot;&gt;https://marcosantadev.com/capturing-values-swift-closures/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/&quot;&gt;Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Closures" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="struct" />
+      
+        <category term="closures" />
+      
+        <category term="struct vs classes" />
+      
+
+      
+        <summary type="html">We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/" rel="alternate" type="text/html" title="Swift 5 replaces IntroSort with TimSort in the 'sort()' method" />
+      
+      <published>2019-09-29T11:04:00+05:30</published>
+      <updated>2019-09-29T11:04:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/">&lt;p&gt;When we hear the term ‘Sorting,’ the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sort()&lt;/code&gt; to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was ‘Introsort,’ but after Swift 5, it is ‘Timsort.’ Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about ‘Timsort’ in this article.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-timsort&quot;&gt;What is ‘Timsort?’&lt;/h2&gt;
+&lt;p&gt;Timsort is a hybrid sorting algorithm similar to introsort. Hybrid sorting algorithms are the ones which combine two or more sorting techniques to achieve the required results. For example, introsort is a combination of insertion sort, quick sort, and heap sort whereas, Timsort is a beautiful combination of binary insertion sort and merge sort.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/timsortcomparisionchart.png&quot; alt=&quot;Timsort in Swift&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-so-special-about-timsort&quot;&gt;What is so special about Timsort?&lt;/h2&gt;
+&lt;p&gt;Timsort is a stable sorting algorithm, whereas Introsort is an unstable sorting algorithm. Stable sorting algorithms are those in which the repeated elements are maintained in the same order as given during the input.&lt;/p&gt;
+
+&lt;p&gt;Unstable sorting algorithms are those in which the order of the repeated elements are not maintained in the same order as given during the input.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sorting_stability_playing_cards.svg/440px-Sorting_stability_playing_cards.svg.png&quot; alt=&quot;Stable and unstable sorting algorithms&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Source - Wikipedia&lt;/p&gt;
+
+&lt;h2 id=&quot;how-does-timsort-work&quot;&gt;How does Timsort work?&lt;/h2&gt;
+&lt;p&gt;I had already mentioned that Timsort uses a combination of binary insertion sort and merge sort. Timsort divides the array of elements into smaller sections and sorts them using binary insertion sort and merges the sorted arrays using merge sort. Isn’t it cool? This technique is efficient when compared to introsort. Timsort has a worst case of O(n log n), and non-constant space complexity.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-does-timsort-use-insertion-sort&quot;&gt;How does Timsort use insertion sort?&lt;/h2&gt;
+&lt;p&gt;Timsort scans the array at first and performs a progressive sorting and merging of sub-arrays(sub-partitions), instead of dividing the entire array at first and merging them at the end. These partitions are known as “runs.” Whenever a run is found, it is added to a stack containing all other previous runs.&lt;/p&gt;
+
+&lt;p&gt;My friend, Bruno Rocha tells that, Timsort takes advantage of the fact that in every array of elements, there are contiguous subsequences of already sorted elements. In such cases, Timsort keeps on advancing its pointer until the current sequence stops being an ascending or descending pattern to find its next run.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 1&lt;/strong&gt; - If the given sequence of elements is descending, we can quickly sort it in linear time by reversing the sequence.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 2&lt;/strong&gt; - Timsort defines that every run should have a power of two, ranging from 16 to 256 or anything close to that. If the current run size is found to be smaller than the minimum field size, the elements are sorted immediately using insertion sort.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-does-merge-work-in-timsort&quot;&gt;How does merge work in Timsort?&lt;/h2&gt;
+&lt;p&gt;In general, Timsort’s merging procedure is similar to mergesort. The algorithm tries to collapse the top three runs into a single one by merging them.&lt;br /&gt;
+Timsort makes use of the fact that if a specific array keeps on winning the comparison, then it is likely that it will win every time. In such cases, instead of comparing, we can apply binary search to reduce the comparisons. This technique is called as galloping. Swift doesn’t use galloping, but it attempts to collapse runs based on the last four runs, instead of three.&lt;/p&gt;
+
+&lt;h2 id=&quot;timsort-algorithm-benchmarks&quot;&gt;Timsort algorithm benchmarks.&lt;/h2&gt;
+
+&lt;p&gt;During October 2018, Nate Cook submitted a PR for implementing Timsort in Swift. He stated,&lt;/p&gt;
+
+&lt;p&gt;“This switches the standard library’s sort algorithm from an in-place introsort to use a modified Timsort, a stable, adaptive sort that merges runs using a temporary buffer. This implementation performs straight merges instead of adopting Timsort’s galloping strategy.
+In addition to maintaining the relative order of equal/non-comparable elements, this algorithm outperforms the introsort on data with any intrinsic structure, such as runs of ascending or descending elements or a significant number of equality collisions. Benchmarking script and results can be seen in this gist: &lt;a href=&quot;https://gist.github.com/natecook1000/5161e10aeba09408c130284ea6ec4e11&quot;&gt;https://gist.github.com/natecook1000/5161e10aeba09408c130284ea6ec4e11&lt;/a&gt;”&lt;/p&gt;
+
+&lt;p&gt;The pull request went through many iterations, and finally, the Timsort pull request was merged in November 2018.&lt;/p&gt;
+
+&lt;h2 id=&quot;my-thoughts-about-swift&quot;&gt;My thoughts about Swift&lt;/h2&gt;
+&lt;p&gt;It is fantastic to see how Swift is evolving every moment. A lot has changed since Swift’s initial release, and it is still changing. This kind of rapid evolution wouldn’t have been possible without the contribution of our Swift community. 
+ I realized that the more I learned, the more I understand that I know a very little. (Here is my &lt;a href=&quot;https://twitter.com/rizwanasifahmed/status/1176908418256211969?s=20&quot;&gt;tweet&lt;/a&gt; about it.)&lt;/p&gt;
+
+&lt;p&gt;Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
+ You can also follow me on twitter right here: &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References:&lt;/h2&gt;
+&lt;p&gt;If you want to learn more about Introsort , read this fantastic &lt;a href=&quot;https://medium.com/swift2go/timsort-and-introsort-swifts-sorting-algorithms-f4b85b8fcbe2&quot;&gt;blog&lt;/a&gt; written by my friend Bruno Rocha&lt;/p&gt;
+
+&lt;p&gt;Pull request Link: &lt;a href=&quot;https://github.com/apple/swift/pull/19717&quot;&gt;https://github.com/apple/swift/pull/19717&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;SwiftCI Benchmark results: &lt;a href=&quot;https://github.com/apple/swift/pull/19717#issuecomment-427511589&quot;&gt;https://github.com/apple/swift/pull/19717#issuecomment-427511589&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Timsort: &lt;a href=&quot;https://svn.python.org/projects/python/trunk/Objects/listsort.txt&quot;&gt;https://svn.python.org/projects/python/trunk/Objects/listsort.txt&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Algorithms" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="timsort" />
+      
+        <category term="algorithms" />
+      
+        <category term="sort" />
+      
+
+      
+        <summary type="html">When we hear the term ‘Sorting,’ the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method sort() to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was ‘Introsort,’ but after Swift 5, it is ‘Timsort.’ Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about ‘Timsort’ in this article.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Generate URLSession code in Swift using Postman</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2019/09/19/generate-urlsession-code-in-swift-using-postman/" rel="alternate" type="text/html" title="Generate URLSession code in Swift using Postman" />
+      
+      <published>2019-09-19T00:31:00+05:30</published>
+      <updated>2019-09-19T00:31:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2019/09/19/generate-urlsession-code-in-swift-using-postman</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2019/09/19/generate-urlsession-code-in-swift-using-postman/">&lt;p&gt;Almost every iOS developer would have had to make a network call from their app. Swift uses URLSession to make network calls. URLSessionTask includes DataTask, UploadTask, DownloadTask, and WebsocketTask (WebsocketTask is lately introduced in iOS13.0 check &lt;a href=&quot;/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/&quot;&gt;this article&lt;/a&gt; to know more about it.)
+I was testing a multipart data request API using the [Postman app.]&lt;a href=&quot;https://www.getpostman.com/&quot;&gt;https://www.getpostman.com/&lt;/a&gt; The API worked, the file got uploaded, and the results came in.
+However, I needed to write the Swift code to make a multipart request from the iOS app.
+Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/postman-swift.png&quot; alt=&quot;Generate Swift code using Postman&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After you had entered the API endpoint details like URL, query params, request body, and request headers hit the “code” button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/postman-main-screen.png&quot; alt=&quot;Postman main screeen&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Select Swift as the programming language, and you will be able to see the Swift code for the request.
+Neat, isn’t it? The generated code comes in very handy for developers and saves much time. Of course, we have to modify the code here and there to suit our needs, but it saves much time!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/postman-swift-snippet-1.png&quot; alt=&quot;Postman Swift snippet 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/postman-swift-snippet-2.png&quot; alt=&quot;Postman Swift snippet 2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Got any remarks? Feel free to comment them below. You can also reach out to me at &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Postman" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="postman" />
+      
+
+      
+        <summary type="html">Almost every iOS developer would have had to make a network call from their app. Swift uses URLSession to make network calls. URLSessionTask includes DataTask, UploadTask, DownloadTask, and WebsocketTask (WebsocketTask is lately introduced in iOS13.0 check this article to know more about it.) I was testing a multipart data request API using the [Postman app.]https://www.getpostman.com/ The API worked, the file got uploaded, and the results came in. However, I needed to write the Swift code to make a multipart request from the iOS app. Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could!</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/" rel="alternate" type="text/html" title="Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5" />
+      
+      <published>2019-08-31T19:10:00+05:30</published>
+      <updated>2019-08-31T19:10:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/">&lt;p&gt;We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon 
+“URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/websockettask.jpg&quot; alt=&quot;Socket connection in Swift&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s see how we can implement it in our project(s). 
+I have created a separate class named “WebSocketConnector,” which acts as a socket connection manager/handler where all the socket related code is present.&lt;/p&gt;
+
+&lt;p&gt;URLSessionWebSocketTask is an extension of URLSessionTask.&lt;/p&gt;
+
+&lt;p&gt;We first have to create a urlsession object. The urlsession object has a method called as “websocketTask(with: URL)” using which we can create a websocket task. 
+The websocketTask method takes a socket URL as a parameter. For the demo, we are going to use “wss://echo.websocket.org” to test our socket connection.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;withSocketURL&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;urlSession&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;URLSession&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;delegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;delegateQueue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;operationQueue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urlSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;webSocketTask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;I have created a WebSocketProtocol and our  WebSocketConnector confroms to it. We implement the “establishConnection()” method, disconnect method, and send methods.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;establishConnection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;resume&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;addListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In the “establishConnection” method, we call the “resume()” method on the socket and add a listener to the socket. The “addListener()” method gets invoked whenever the app receives a message or an error from the server.&lt;/p&gt;
+
+&lt;p&gt;After establishing a connection,  we can send a message or data to the server. As the server which we use is an echo server, it gives you back the message which you send.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;receive&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;success&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    
+                &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;didReceiveData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+                &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;didReceiveMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;failure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;didReceiveError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;URLSessionWebSocketTask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;didReceiveError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;So whenever a successful message is received, the “didReceiveMessage?(message)” is triggered. When an error is received, the “didReceiveError?(error)” is invoked.&lt;/p&gt;
+
+&lt;p&gt;When we need to close the connection, we call the “disconnect()” method. Simple, isn’t it?&lt;/p&gt;
+
+&lt;p&gt;I enjoyed implementing it, and it is a great relief that Apple provided us native WebSocket support. However, we still have to rely on third-party libraries if we are supporting iOS 12 and below. If your deployment target is 13.0 and above, you can go with “URLSessionWebSocketTask” without any hesitations.&lt;/p&gt;
+
+&lt;p&gt;You can find the completed project &lt;a href=&quot;https://github.com/rizwan95/SwiftWebSockets&quot;&gt;here&lt;/a&gt;.
+I am excited to see you people implement URLSessionWebSocketTask in your projects. Do share your experience and of course, if you have any questions, ask them in the comments. You can also reach out to me directly on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="URLSession" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="iOS" />
+      
+        <category term="websockets" />
+      
+        <category term="URLSessionWebSocketTask" />
+      
+
+      
+        <summary type="html">We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Swift bit #4 - Swifty ways of typecasting objects</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2019/08/27/swifty-ways-of-typecasting-objects/" rel="alternate" type="text/html" title="Swift bit #4 - Swifty ways of typecasting objects" />
+      
+      <published>2019-08-27T08:33:00+05:30</published>
+      <updated>2019-08-27T08:33:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2019/08/27/swifty-ways-of-typecasting-objects</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/27/swifty-ways-of-typecasting-objects/">&lt;p&gt;Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? 
+Well, there are multiple ways of doing it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit04.png&quot; alt=&quot;Typecasting objects&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Method 1 - Using ‘for’ loop.
+This method is a kind of brute force method. Usually, we all do this way.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subview&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subviews&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subview&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UILabel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;c1&quot;&gt;// Change your text here&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We run the code, and everything works as expected. However, as a developer, we should find out more efficient methods of doing it. Let’s see another way of doing it.&lt;/p&gt;
+
+&lt;p&gt;Method 2 - Using ‘case let’ in ‘for in’ loop.
+Here, we are using the power of the ‘for in’ loops to find the UILabel from the subviews.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UILabel&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subviews&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;//Change your text here&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Neat, isn’t it? There is a significant reduction in the number of lines of code.&lt;/p&gt;
+
+&lt;p&gt;So, do we settle here? No. There should be more Swifty way to solve this problem. Let’s see how.&lt;/p&gt;
+
+&lt;p&gt;Method 3 - Using ‘compactMap’&lt;/p&gt;
+
+&lt;p&gt;In this method, we use ‘compactMap’  to typecast a view to UILabel. I consider this method to be more swifty and descriptive.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subviews&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compactMap&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UILabel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forEach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+	&lt;span class=&quot;c1&quot;&gt;// Change your text here&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;These are the methods I prefer to typecast objects from an array. There are many more methods too. So, what is your preferred way of typecasting objects? Tell us in the comments below. Still have any queries reach out to me directly on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Swift fundamentals" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="iOS" />
+      
+        <category term="type casting" />
+      
+
+      
+        <summary type="html">Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? Well, there are multiple ways of doing it.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Enabling ‘Sign in with Apple’in developer account</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/" rel="alternate" type="text/html" title="Enabling 'Sign in with Apple'in developer account" />
+      
+      <published>2019-08-12T10:26:00+05:30</published>
+      <updated>2019-08-12T10:26:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/">&lt;p&gt;‘&lt;strong&gt;Sign in with Apple&lt;/strong&gt;’ is an exciting feature announced in WWDC 2019. You must be wondering how to get started. Well, this article is about completed the configuration, &lt;a href=&quot;/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/&quot;&gt;Click here&lt;/a&gt; to know how to integrate ‘Sign in with Apple’ feature in your iOS apps.&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Paid Apple developer account.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Xcode 11 (It is still in beta, at the time of writing.)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;lets-get-started&quot;&gt;Let’s get started&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Login in to your Apple developer account and head to ‘&lt;strong&gt;Certificates, identifiers, and profiles&lt;/strong&gt;’ tab.&lt;/li&gt;
+  &lt;li&gt;Click the ‘&lt;strong&gt;More&lt;/strong&gt;’ tab from the left menu and select the ‘configure’ button.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinconfig01.png&quot; alt=&quot;Sign in with Apple configuration&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;registering-domains-and-emails&quot;&gt;Registering Domains and Emails,&lt;/h3&gt;
+&lt;p&gt;In the Configuration screen, you will be asked to provide a registered domain name, associated email address, and an individual email address. After specifying the domain and email address, you will be given an option to download a verification file.  Place the verification file at the path ‘&lt;strong&gt;https://yourdomainname.com/.well-known/apple-developer-domain-association.txt&lt;/strong&gt;’&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinconfig02.png&quot; alt=&quot;Sign in with Apple configuration&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;enabling-sign-in-with-apple-in-identifiers&quot;&gt;Enabling ‘Sign in with Apple’ in Identifiers&lt;/h3&gt;
+
+&lt;p&gt;It will take some time for the verfication process to be completed. Once it is done, head back to the ‘&lt;strong&gt;Identifiers&lt;/strong&gt;’ tab and enable the ‘&lt;strong&gt;Sign in with Apple&lt;/strong&gt;’ option.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinconfig03.png&quot; alt=&quot;Sign in with Apple configuration&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You have now successfully enabled ‘&lt;strong&gt;Sign in with Apple&lt;/strong&gt;’ in your developer account. You can now regenerate the profiles, download,and use them.&lt;/p&gt;
+
+&lt;h3 id=&quot;where-now&quot;&gt;Where now?&lt;/h3&gt;
+
+&lt;p&gt;As you have succesfully enabled ‘Sign in with Apple’ in your developer account, you would want to integrate it in your iOS apps. Head &lt;a href=&quot;/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/&quot;&gt;here&lt;/a&gt; to know how to do it.&lt;/p&gt;
+
+&lt;p&gt;Have any queries? Reach out to me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt; and feel free to share your thoughts in the comments below.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Sign in with Apple" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="iOS" />
+      
+        <category term="Sign in with Apple" />
+      
+
+      
+        <summary type="html">‘Sign in with Apple’ is an exciting feature announced in WWDC 2019. You must be wondering how to get started. Well, this article is about completed the configuration, Click here to know how to integrate ‘Sign in with Apple’ feature in your iOS apps.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Integrating ‘Sign in with Apple’ in iOS apps</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2019/08/05/integrating-sign-in-with-apple-in-ios-apps/" rel="alternate" type="text/html" title="Integrating 'Sign in with Apple' in iOS apps" />
+      
+      <published>2019-08-05T07:41:00+05:30</published>
+      <updated>2019-08-05T07:41:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2019/08/05/integrating-sign-in-with-apple-in-ios-apps</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/05/integrating-sign-in-with-apple-in-ios-apps/">&lt;p&gt;The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the ‘Sign In with Apple’ feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of ‘Sign In with Apple’ on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Xcode 11 (in beta at the time of writing the article)&lt;/li&gt;
+  &lt;li&gt;Apple developer account.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;steps-to-integrate-sign-in-with-apple&quot;&gt;Steps to integrate ‘Sign In with Apple’&lt;/h3&gt;
+&lt;p&gt;Before getting started, you have to configure ‘Sign in with Apple’ in the developer portal. If you don’t know how to configure ‘Sign in with Apple’, don’t worry, we have got you covered. &lt;a href=&quot;/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/&quot;&gt;Head to this article&lt;/a&gt; to know about it.&lt;/p&gt;
+
+&lt;p&gt;Alright, let’s get started!&lt;/p&gt;
+
+&lt;h3 id=&quot;adding-sign-in-with-apple-in-capabilities&quot;&gt;Adding ‘Sign In with Apple’ in capabilities&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a new project in Xcode.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Head to Signing and capabilities tab and hit the ‘+ Capability’ option and select ‘Sign In with Apple.’ It will look like this,&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinwithapple01.png&quot; alt=&quot;Sign in with Apple&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;setting-up-the-sign-in-with-apple-button&quot;&gt;Setting up the ‘Sign In with Apple’ button&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Navigate to the class where you want to set up the ‘Sign in with Apple’ button. I have built a SignInHandler class which encapsulates all the sign-in code and logic.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Import the framework ‘AuthenticationServices’ in your class.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create an instance of ASAuthorizationAppleIDButton class and define its targets and selectors.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//Code to create an instance of the 'Sign In with Apple' button&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;@available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iOS&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;13.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getAppleSigninButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signInButton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;signInButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addTarget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#selector(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;handleSigninAction&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchUpInside&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signInButton&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now, we have to write the implementation for handleSigninAction.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;@available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iOS&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;13.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;@objc&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handleSigninAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;appleIDProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appleIDProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;createRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//2&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;requestedScopes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fullName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//3&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;authorizationController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;authorizationRequests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;authorizationController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delegate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;authorizationController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;presentationContextProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;authorizationController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;performRequests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;here-is-the-breakdown-of-the-above-given-code-snippet&quot;&gt;Here is the breakdown of the above given code snippet,&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;We are using an instance of ASAuthorizationAppleIDProvider inorder to create a request.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We need only the full name and email of the user. Hence, we have mentioned them in the ‘requestedScopes.’&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Finally, we pass the request to the ASAuthorizationController.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinwithapple02.png&quot; alt=&quot;Sign in with Apple sample&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;handling-the-successfailure-scenarios-after-sign-in&quot;&gt;Handling the success/failure scenarios after sign in&lt;/h3&gt;
+
+&lt;p&gt;On tapping the ‘Sign in’ button, ‘handleSigninAction’ method is triggered, and the ASAuthorizationController is presented, which prompts the user to use Apple sign-in.&lt;/p&gt;
+
+&lt;p&gt;There are two scenarios after presenting the ASAuthorizationController. Either the user successfully signs in, or an error occurs. 
+The delegates, ‘didCompleteWithAuthorization’ or ‘didCompleteWithError’ get callbacks for the success or failure scenarios, respectively.&lt;/p&gt;
+
+&lt;p&gt;We will write an extension to SignInHandler class and conform it to ‘ASAuthorizationControllerDelegate.’&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;If the user successfully logs in, the user’s details such as  full name, email id. etc can be extracted from ‘ASAuthorizationAppleIDCredential’ in the ‘didCompleteWithAuthorization’ method.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If any error occurs during the login process, it should be handled in ‘didCompleteWithError’ method.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;@available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iOS&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;13.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SignInHandler&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationControllerDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;authorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;didCompleteWithAuthorization&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;authorization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;appleIDCredential&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;authorization&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;credential&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationAppleIDCredential&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            
+            &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;userIdentifier&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appleIDCredential&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;fullName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appleIDCredential&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fullName&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appleIDCredential&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;
+            
+            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userIdentifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fullName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Not found&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Not found&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    
+    
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;authorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;didCompleteWithError&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//Handle error here.&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;There is an another delegate called as ‘ASAuthorizationControllerPresentationContextProviding’. It is not required to implement this delegate, but it is highly recommended to implement it.&lt;/p&gt;
+
+&lt;p&gt;All we have to do is provide the current window.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;presentationAnchor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASAuthorizationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ASPresentationAnchor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;window&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinwithapple03.png&quot; alt=&quot;Sign in with Apple sample&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;integrating-the-sign-in-with-apple-button-in-a-viewcontroller&quot;&gt;Integrating the ‘Sign in with Apple’ button in a ViewController&lt;/h3&gt;
+
+&lt;p&gt;Now that we have our Sign in button, we can implement it in a ViewController and see it in action.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create an instance of the ‘SignInHandler’ class and use the ‘getAppleSigninButton()’ to generate the button.
+Add the button to a view and setup the constraints. Embed the sign-in button in a UIStackView for easy setup.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the project, and you can see the sign-in button in action. Tap the button, and it will present you an authentication view.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s it you have successfully implemented ‘Sign in with Apple’ in your iOS app.&lt;/p&gt;
+
+&lt;p&gt;You can download the completed project from &lt;a href=&quot;http://bit.ly/signinwithapple&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can always reach out to me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt; and feel free to share your thoughts in the comments below.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Sign in with Apple" />
+      
+
+      
+        <category term="Swift" />
+      
+        <category term="iOS" />
+      
+        <category term="Sign in with Apple" />
+      
+
+      
+        <summary type="html">The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the ‘Sign In with Apple’ feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of ‘Sign In with Apple’ on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Swift bit #3 — Unwrap optional values using for in loop</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/" rel="alternate" type="text/html" title="Swift bit #3 — Unwrap optional values using for in loop" />
+      
+      <published>2019-08-03T09:29:00+05:30</published>
+      <updated>2019-08-03T09:29:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/">&lt;p&gt;One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.&lt;/p&gt;
+
+&lt;p&gt;Consider that there is an array of optional values. Usually, we use if let or guard statement to unwrap the optionals.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//An array of optionals.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ford&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Lamborghini&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;McLaren&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Aston Martin&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;carObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;   
+             &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;carObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
+         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The above code is okay, nothing wrong with it, but we should try to use the power of Swift whenever we can.&lt;/p&gt;
+
+&lt;p&gt;We can unwrap the array of optionals using case let directly in the for in loop.&lt;/p&gt;
+
+&lt;p&gt;Here is how you do it,&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//An array of optionals.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ford&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Lamborghini&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;McLaren&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Aston Martin&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Neat isn’t it? The number of lines of code is reduced, and the code looks more readable.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit03.png&quot; alt=&quot;Unwrapping optionals using for in loops&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note — There are also other techniques like using compactMap to unwrap optionals, I will be covering about them in upcoming articles.
+Follow me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt;.
+Have any queries? Feel free to DM me.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Swift fundamentals" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="for loops" />
+      
+        <category term="for in loops" />
+      
+        <category term="unwrap" />
+      
+        <category term="optionals" />
+      
+
+      
+        <summary type="html">One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Swift bit #2 - Using Booleans the right way, in Swift</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift/" rel="alternate" type="text/html" title="Swift bit #2 - Using Booleans the right way, in Swift" />
+      
+      <published>2019-08-03T09:19:00+05:30</published>
+      <updated>2019-08-03T09:19:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/03/swift-bit-2-using-booleans-the-right-way-in-swift/">&lt;p&gt;Boolean is one of the most frequently used and simplest data type in any programming language.It is common to want to toggle the state of the boolean variable. So, we normally do it like this,&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;isEnabled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trueif&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isEnabled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;isEnabled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEnabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prints false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The above approach is common but there will be cases where the boolean value should be toggled frequently. Explicitly assigning the boolean to true or false can be error prone. In Swift, we can use the toggle() method to toggle the value of a boolean.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;isEnabled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isEnabled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;isEnabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEnabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prints false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Though it is simple, it will be very beneficial in cases which involves complex data structures like,&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;n&quot;&gt;floatingView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;panel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shouldScroll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Playground sample,&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit02.png&quot; alt=&quot;Toggle() method in Swift boolean&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Follow me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt;. 
+Have any queries? Feel free to DM me.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Swift" />
+      
+        <category term="fundamentals" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="booleans" />
+      
+
+      
+        <summary type="html">Boolean is one of the most frequently used and simplest data type in any programming language.It is common to want to toggle the state of the boolean variable. So, we normally do it like this,</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Swift bit #1 — Using “where” clause in “for in” loops</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/" rel="alternate" type="text/html" title="Swift bit #1 — Using “where” clause in “for in” loops" />
+      
+      <published>2019-08-01T23:27:00+05:30</published>
+      <updated>2019-08-01T23:27:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/01/swift-bit-1-using-where-clause-in-for-in-loops/">&lt;p&gt;We all would have written a piece of code similar to this,
+The usual way,&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As a Swift developer we always want to write better code. In Swift, we can use the “where” clause along with the for loop.
+The Swift way,&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Neat isn’t it?
+Playground sample,&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit01.png&quot; alt=&quot;Playground sample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Edit — Thanks to Md. Ibrahim Hassan for giving a better sample code.
+Follow me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt;. 
+Have any queries? Feel free to DM me.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Swift fundamentals" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="for loops" />
+      
+        <category term="for in loops" />
+      
+        <category term="unwrap" />
+      
+        <category term="optionals" />
+      
+
+      
+        <summary type="html">We all would have written a piece of code similar to this, The usual way,</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Humble beginnings</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2019/07/31/humble-beginnings/" rel="alternate" type="text/html" title="Humble beginnings" />
+      
+      <published>2019-07-31T11:48:49+05:30</published>
+      <updated>2019-07-31T11:48:49+05:30</updated>
+      <id>https://ohmyswift.com/blog/2019/07/31/humble-beginnings</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2019/07/31/humble-beginnings/">&lt;p&gt;Blogging has always been my favorite exercise. I started creating websites using Wordpress, PHP, and PHPBB nearly ten years back. After a point, I took the path of iOS development. I became an iOS developer. Learning things in iOS was challenging as well as it was fun at the same time. As I discovered new things, I thought, why shouldn’t I share my knowledge with other fellow developers? And this is the reason why I have started the blog. 
+So much has evolved since then. With the introduction of new technologies and frameworks, there are so many ways to set up a website. The challenge is to select the right technology for the intended purpose. After doing in-depth research,  I made up my mind to set up a blog using Jekyll. Yes, Jekyll powers ohmyswift.com. Thanks to the developer community, which helped me in choosing the right framework to set up my blog.&lt;/p&gt;
+
+&lt;p&gt;Now, coming to Ohmyswift.com, there will be frequent blog posts about the latest topics in Swift language and iOS development. So buckle up, there are going to be plenty of articles coming up!&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Personal" />
+      
+
+      
+
+      
+        <summary type="html">Blogging has always been my favorite exercise. I started creating websites using Wordpress, PHP, and PHPBB nearly ten years back. After a point, I took the path of iOS development. I became an iOS developer. Learning things in iOS was challenging as well as it was fun at the same time. As I discovered new things, I thought, why shouldn’t I share my knowledge with other fellow developers? And this is the reason why I have started the blog. So much has evolved since then. With the introduction of new technologies and frameworks, there are so many ways to set up a website. The challenge is to select the right technology for the intended purpose. After doing in-depth research, I made up my mind to set up a blog using Jekyll. Yes, Jekyll powers ohmyswift.com. Thanks to the developer community, which helped me in choosing the right framework to set up my blog.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+</feed>

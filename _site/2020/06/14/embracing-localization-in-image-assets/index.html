@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    
+    
+    
+    <title>Embracing Localization in Image Assets</title>
+    <meta name="description" content="One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.">
+    
+  
+    <link rel="stylesheet" href="/blog/assets/main.css">
+    <link rel="stylesheet" href="/blog/assets/customstyles.css">
+
+ 
+    <link rel="canonical" href="https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/">
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="Oh my Swift" href="https://ohmyswift.com/blog/feed.xml">
+  
+    
+  
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+    
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-144905716-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Embracing Localization in Image Assets | Oh my Swift</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Embracing Localization in Image Assets" />
+<meta name="author" content="Rizwan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard." />
+<meta property="og:description" content="One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard." />
+<link rel="canonical" href="https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/" />
+<meta property="og:url" content="https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/" />
+<meta property="og:site_name" content="Oh my Swift" />
+<meta property="og:image" content="https://ohmyswift.com/blog/assets/images/Image_localization/appdemo.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-14T18:41:00+05:30" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://ohmyswift.com/blog/assets/images/Image_localization/appdemo.png" />
+<meta property="twitter:title" content="Embracing Localization in Image Assets" />
+<script type="application/ld+json">
+{"dateModified":"2020-06-14T18:41:00+05:30","datePublished":"2020-06-14T18:41:00+05:30","url":"https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/"},"author":{"@type":"Person","name":"Rizwan"},"description":"One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.","image":{"twitter":"assets/images/Image_localization/appdemo.png","facebook":"assets/images/Image_localization/appdemo.png","url":"https://ohmyswift.com/blog/assets/images/Image_localization/appdemo.png","@type":"imageObject"},"@type":"BlogPosting","headline":"Embracing Localization in Image Assets","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+
+</head>
+  
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">Oh my Swift</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="/blog/social/">Social media</a>
+      
+        
+        <a class="page-link" href="/blog/showcase/">Showcase</a>
+      
+        
+        <a class="page-link" href="https://www.buymeacoffee.com/ohmyswift">Support us</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Embracing Localization in Image Assets</h1>
+    
+    <p class="post-meta"><time datetime="2020-06-14T18:41:00+05:30" itemprop="datePublished">Jun 14, 2020</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan</span></span> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/xcassets/">XCAssets</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+ •
+  
+    
+    
+      
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/imageassets/">imageassets</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/localization/">localization</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/image-localization/">image localization</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.</p>
+
+<p><img src="/blog/assets/images/Image_localization/appdemo.png" alt="Localized image asset" height="80%" width="80%" /></p>
+
+<h2 id="how-to-localize-image-assets">How to localize image assets</h2>
+
+<ul>
+  <li>Generate the localized images in the languages which your app supports.</li>
+  <li>Go to the asset catalog and create an image asset.</li>
+  <li>Select the image and click on the attributes inspector.</li>
+  <li>From the attributes inspector, click the “Localize” button and select the languages.</li>
+  <li>Now, all you have to do is to drop the localized images in the asset catalog.</li>
+  <li>You can now see that your images are localized, and your app looks great!</li>
+</ul>
+
+<p><img src="/blog/assets/images/Image_localization/imageassetpreview.png" alt="Localized image asset" height="80%" width="80%" /></p>
+
+<p>If you want to know more about localization, refer to the following WWDC session.</p>
+
+<ul>
+  <li><a href="https://developer.apple.com/videos/play/wwdc2019/403/">WWDC 2019 Session 403 Creating Great Localized Experiences with Xcode 11</a></li>
+</ul>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer. Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h3 id="more-articles">More articles</h3>
+
+<ul>
+  <li><a href="/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">An effective way to clear entire Userdefaults in Swift</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+  <li><a href="/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">Why should we avoid using closures in Swift structs?</a></li>
+  <li><a href="/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">Using UICollectionViewCompositionalLayout in iOS 12 and earlier</a></li>
+</ul>
+
+  </div>
+
+  <div class = "centerstyle">
+    <p>Like our articles? Support us!</p>
+    <a href="https://www.buymeacoffee.com/ohmyswift"><img src="https://link.ohmyswift.com/GQGjN"></a>
+</div>
+
+  
+
+</article>
+<script defer src="https://comments.winya.app/js/commento.js"></script>
+<div id="commento"></div>
+
+  
+      </div>
+    </main>
+
+    <footer class="site-footer">
+    <div class="wrapper">
+      <p>
+        
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://ohmyswift.com/blog/feed.xml">RSS</a>
+
+      </p>
+    </div>  
+    <div>
+<script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ohmyswift" data-description="Support me on Buy me a coffee!" data-message="Do you like our articles? Support us! Buy us a pizza" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18">
+</script>
+</div>
+</footer>
+
+  </body>
+
+</html>
