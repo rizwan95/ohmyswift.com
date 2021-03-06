@@ -14,9 +14,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Oh my Swift
-email: rizwan.ahmed95@gmail.com
+email: rizwan@ohmyswift.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Ohmyswift.com focuses on delivering latest articles about Swift and iOS development.
+  Swift is easy to learn, but difficult to master. I will be writing interesting articles about Swift and iOS development here.
 baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "https://ohmyswift.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: rizwanasifahmed
