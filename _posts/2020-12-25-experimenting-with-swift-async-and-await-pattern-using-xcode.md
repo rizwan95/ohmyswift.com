@@ -100,10 +100,13 @@ Ohmyswifters, ***[download the app](https://winya.link/getwinya)*** and show you
 
 ***[iOS, and iPadOS download link](https://winya.link/getwinya)***
 
+### About the author
+
+- **Rizwan Ahmed** - iOS Engineer.  Twitter - <https://twitter.com/rizwanasifahmed>
+
 #### More articles
 
-- [Common problems and workarounds while building apps using Apple Silicon]()
-- [Closure based actions in UIButton](/blog/2020/11/01/closure-based-actions-in-uibutton/)
+- [Closure based actions in UIButton](/blog/2020/11/02/closure-based-actions-in-uibutton/)
 - [Replacing UIImagePickerController with PHPickerViewController](/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/)
 - [Embracing Localization in Image Assets](/blog/2020/06/14/embracing-localization-in-image-assets/)
 - [An effective way to clear entire Userdefaults in Swift](/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/)
