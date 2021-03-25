@@ -5,7 +5,7 @@ permalink: /showcase/
 ---
 
 Indie Support Weeks is an open effort aimed at helping indie developers within the Apple Developer Community who have been impacted by the current global COVID-19 pandemic. We will be showcasing the apps created by the indie developers inorder to support them during these times of global pandemic. Download their apps and support them.
-We do not charge for showcasing any of the apps. We will showcase the apps only if they meet certain quality checks. Do you want your app to be reviewed by us and showcased in here? Send an email to <hey@ohmyswift.com> 
+We do not charge for showcasing any of the apps. We will showcase the apps only if they meet certain quality checks. Do you want your app to be reviewed by us and showcased in here? Send an email to <rizwan@ohmyswift.com> 
 
 ### App Showcase
 
@@ -15,11 +15,21 @@ We do not charge for showcasing any of the apps. We will showcase the apps only 
 
 **Key highlights** - Stream games, Unlimited streaming, pause streaming, control video quality with precision, control audio quality with precision
 
-[Homepage](https://winya.app)
+[Homepage](https://winya.app?utm_source=ohmyswift&amp;utm_medium=appshowcase&amp;utm_campaign=mar)
 
-[iOS, and iPadOS download link](https://winya.link/getwinya)
+[iOS, and iPadOS download link](https://apps.apple.com/us/app/winya-live-stream-games/id1504093464)
 
-### 2. Core Data Lab (macOS)
+### 2. Proxyman (iOS, iPadOS, and macOS)
+
+**Summary** - Developers, rejoice. We have an excellent debug assistant to add to your toolkit. Its name is Proxyman – from Proxy + middleMan. Natively built for macOS, the app is an easy way to intercept HTTP/HTTPS requests and debug from your Mac, iOS simulator, or remote devices without disrupting your network connection.
+
+**Key highlights** - Intercept network requests, network debugger
+
+[Homepage](https://proxyman.io/?utm_source=ohmyswift&amp;utm_medium=appshowcase&amp;utm_campaign=mar)
+
+[iOS, and iPadOS download link](https://proxyman.io/release/osx/Proxyman_latest.dmg/?utm_source=ohmyswift&amp;utm_medium=appshowcase&amp;utm_campaign=mar)
+
+### 3. Core Data Lab (macOS)
 
 **Summary** - Core Data Lab lets you easily view, edit, track and analyze data of SQLite based Core Data apps. Trust me, it is the best CoreData debugger tool out there.
 
@@ -29,24 +39,3 @@ We do not charge for showcasing any of the apps. We will showcase the apps only 
 
 [Download link](https://apps.apple.com/in/app/core-data-lab/id1460684638?mt=12)
 
-### 3. Timemator 2 (macOS)
-
-**Summary** - "Time waits for none." Timemator 2 is a macOS application which let's you to track your time effectively.
-
-**Key highlights** - auto-tracking, activity Timeline, manual time-tracking, and 100% secure and private.
-
-**Discounts** - Timemator is providing a discount of 30% for ohmyswift's readers. Do you want to grab one? [contact us here](/blog/social)
-
-[Homepage](https://timemator.com/)
-
-[Download link](https://s3-eu-west-1.amazonaws.com/catforce-timemator/releases/Timemator.dmg)
-
-### 4. NativeConnect (macOS)
-
-**Summary** - Built using AppKit, NativeConnect is a mac app which lets you manage your appstoreconnect account on the go.
-
-**Key highlights** - Supports multiple Apple IDs, 100% secure and private, share libraries via iCloud, and open format for automation.
-
-[Homepage](https://nativeconnect.app/)
-
-[Download link](https://install.appcenter.ms/users/vadim.shpakovski/apps/nativeconnect/distribution_groups/public)
