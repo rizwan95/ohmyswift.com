@@ -19,7 +19,17 @@ We do not charge for showcasing any of the apps. We will showcase the apps only 
 
 [iOS, and iPadOS download link](https://apps.apple.com/us/app/winya-live-stream-games/id1504093464)
 
-### 2. Proxyman (iOS, iPadOS, and macOS)
+### 2. Sourcery Pro (macOS)
+
+**Summary** - Sourcery Pro is the most advanced Xcode Source extension ever made. Do you hate writing protocol mocks, adding Codable conformance,or just writing same patterns over and over again Now you no longer need to, it's just a shortcut away, and you can automate any other repetitions in your Swift codebase too!
+
+**Key highlights** - Generate Swift code, Xcode extension, Automate repetitive code, powerful editor with intelisense
+
+[Homepage](https://merowing.info/sourcery-pro/)
+
+[macOS download link](https://apps.apple.com/in/app/sourcery-pro/id1561780836?utm_source=ohmyswift&utm_medium=appshowcase&utm_campaign=apr)
+
+### 3. Proxyman (iOS, iPadOS, and macOS)
 
 **Summary** - Developers, rejoice. We have an excellent debug assistant to add to your toolkit. Its name is Proxyman – from Proxy + middleMan. Natively built for macOS, the app is an easy way to intercept HTTP/HTTPS requests and debug from your Mac, iOS simulator, or remote devices without disrupting your network connection.
 
