@@ -17,7 +17,7 @@
 }
 
 .sponsor:after {
-content: "APP SHOWCASE";
+content: "SUPPORT CREATORS";
 display: block;
 float: right;
 font-size: 0.8rem;
@@ -32,7 +32,7 @@ color: white;
 
 .sponsor img {
 object-fit: cover;
-width: 180px;
+width: 120px;
 height: 100%;
 margin-right: 1em;
 border-radius: 4px;

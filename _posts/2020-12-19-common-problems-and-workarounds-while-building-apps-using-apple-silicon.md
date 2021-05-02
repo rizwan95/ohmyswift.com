@@ -17,6 +17,8 @@ Apple's new Apple Silicon (M1 processor) is a beast. The apps open pretty quickl
 
 When you try to run your existing projects on Apple Silicon devices, there are a few problems you have to resolve before your projects could build. I will list three significant issues and their solution, which most developers are likely to face when running the projects in Apple Silicon devices.
 
+{% include appshowcase-mini.html %}
+
 ### Running Cocoapods on Apple Silicon (M1 processor)
 
 Cocoapods is not entirely compatible with ARM architecture at the time of writing this article. The reason is, Cocoapods has an internal dependency on the [Ruby-FFI](https://github.com/ffi/ffi) gem, which is not yet compatible with the ARM architecture. When you do a  ```sudo pod install``` , you are likely to bump into the following error.

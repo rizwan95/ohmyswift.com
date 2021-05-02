@@ -24,7 +24,7 @@ print(colors) // [Yellow, Orange]
 {% endhighlight %}
 
 The above code implements a deque of colors with the strings yellow and orange. 
-
+{% include appshowcase-mini.html %}
 ## Deque operations
 Now let's see some operations or methods unique to deques. 
 

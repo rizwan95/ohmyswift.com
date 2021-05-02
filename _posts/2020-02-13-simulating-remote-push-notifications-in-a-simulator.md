@@ -22,7 +22,7 @@ Well, the requirements are quite simple. We will be needing the following,
 - The device identifier of your currently active simulator.
 - Push notification payload.
 - Terminal.
-
+{% include appshowcase-mini.html %}
 ## How to find the device identifier of the simulator
 
  You can find the simulator's device identifier from **Window** -> **Devices and Simulator** -> **Select the active simulator** -> **Copy the displayed identifier**

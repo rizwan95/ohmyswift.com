@@ -16,8 +16,9 @@ image:
 
 Dictionaries are one of the most commonly used data structures. Dictionaries come with keys and values where the keys are unique. Sometimes, there might be a situation where we would want to swap the keys and values of a dictionary. Let's see how to swap keys and values of a dictionary in swift.
 
-While doing so, we need to make sure that the values which are converted to keys are hashable and unique, else the conversion will fail.
+{% include appshowcase-mini.html %}
 
+While doing so, we need to make sure that the values which are converted to keys are hashable and unique, else the conversion will fail.
 {% highlight swift %}
 extension Dictionary where Value: Hashable {
     struct DuplicateValuesError: Error { }
