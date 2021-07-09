@@ -32,6 +32,7 @@ print(isEnabled) // Prints false
 
 {% endhighlight %}
 
+{% include appshowcase-mini.html %}
 
 Though it is simple, it will be very beneficial in cases which involves complex data structures like,
 

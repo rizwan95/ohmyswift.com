@@ -33,6 +33,8 @@ for item in items where item % 2 == 0{
 Result: 2 4
 {% endhighlight %}
 
+{% include appshowcase-mini.html %}
+
 Neat isn’t it?
 Playground sample,
 

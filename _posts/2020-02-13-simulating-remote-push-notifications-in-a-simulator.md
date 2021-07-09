@@ -13,6 +13,8 @@ twitter_card:
 ---
 Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.
 
+{% include appshowcase-mini.html %}
+
 ## Requirements
 
 Well, the requirements are quite simple. We will be needing the following,

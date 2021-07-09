@@ -15,6 +15,8 @@ image:
 ---
 As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the ```removeObject``` method to remove the value for a particular key.
 
+{% include appshowcase-mini.html %}
+
 {% highlight swift %}UserDefaults.standard.removeObject(forKey: "is_app_launched"){% endhighlight %}
 
 What if we have a vast number of keys, and we want to clear them all? Like 10 or 20 keys?  If we try to clear all the keys using the ```removeObject``` method, we might miss clearing some values, and the code becomes complex. We don't want to do that. So is there a better way? Yes, there is.

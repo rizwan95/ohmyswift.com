@@ -11,6 +11,8 @@ I was testing a multipart data request API using the [Postman app.]<https://www.
 However, I needed to write the Swift code to make a multipart request from the iOS app.
 Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could!
 
+{% include appshowcase-mini.html %}
+
 ![Generate Swift code using Postman](/blog/assets/images/postman-swift.png)
 
 After you had entered the API endpoint details like URL, query params, request body, and request headers hit the "code" button.

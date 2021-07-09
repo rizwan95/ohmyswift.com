@@ -16,6 +16,8 @@ image:
 
 One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.
 
+{% include appshowcase-mini.html %}
+
 ![Localized image asset](/blog/assets/images/Image_localization/appdemo.png){:height="80%" width="80%"}
 
 ## How to localize image assets

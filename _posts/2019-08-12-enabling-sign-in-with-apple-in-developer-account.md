@@ -15,6 +15,8 @@ author: Rizwan
 
 '**Sign in with Apple**' is an exciting feature announced in WWDC 2019. You must be wondering how to get started. Well, this article is about completed the configuration, [Click here](/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/) to know how to integrate 'Sign in with Apple' feature in your iOS apps.
 
+{% include appshowcase-mini.html %}
+
 ### Requirements
 - **Paid Apple developer account.**
 - **Xcode 11 (It is still in beta, at the time of writing.)**

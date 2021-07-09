@@ -14,6 +14,8 @@ image:
 ---
 Almost every app requires photos and video access these days. Before iOS 14.0, the iOS developers used ```UIImagePickerController``` to access the items from the user's media library. From iOS 14.0, Apple is providing its developers a brand new way to select images or videos from their apps using ```PHPickerViewController```
 
+{% include appshowcase-mini.html %}
+
 ## Features of PHPickerViewController
 
 - **No more permission alerts.** The developer doesn't have to specify the ```Privacy - Photo Library Usage Description``` key in the .plist, and there won't be any alert views asking for permission.

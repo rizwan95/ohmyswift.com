@@ -10,6 +10,8 @@ author: Rizwan
 
 When we hear the term 'Sorting,' the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method `sort()` to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was 'Introsort,' but after Swift 5, it is 'Timsort.' Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about 'Timsort' in this article. 
 
+{% include appshowcase-mini.html %}
+
 
 ## What is 'Timsort?'
 Timsort is a hybrid sorting algorithm similar to introsort. Hybrid sorting algorithms are the ones which combine two or more sorting techniques to achieve the required results. For example, introsort is a combination of insertion sort, quick sort, and heap sort whereas, Timsort is a beautiful combination of binary insertion sort and merge sort.
