@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/blog/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/blog/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/blog/assets/images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/blog/assets/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#9f00a7">
+    <meta name="theme-color" content="#ffffff">
+
+  
+    
+    
+    
+    <title>Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5</title>
+    <meta name="description" content="We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore.">
+    
+  
+    <link rel="stylesheet" href="/blog/assets/main.css">
+    <link rel="stylesheet" href="/blog/assets/customstyles.css">
+
+ 
+    <link rel="canonical" href="https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/">
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="Oh my Swift" href="https://ohmyswift.com/blog/feed.xml">
+  
+    
+  
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+    
+  
+  
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-144905716-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5 | Oh my Swift</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5" />
+<meta name="author" content="Rizwan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore." />
+<meta property="og:description" content="We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore." />
+<link rel="canonical" href="https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/" />
+<meta property="og:url" content="https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/" />
+<meta property="og:site_name" content="Oh my Swift" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-08-31T19:10:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/"},"url":"https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/","author":{"@type":"Person","name":"Rizwan"},"@type":"BlogPosting","headline":"Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5","dateModified":"2019-08-31T19:10:00+05:30","datePublished":"2019-08-31T19:10:00+05:30","description":"We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+
+</head>
+  
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">Oh my Swift</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="/blog/social/">Social media</a>
+      
+        
+        <a class="page-link" href="/blog/showcase/">App Showcase</a>
+      
+        
+        <a class="page-link" href="https://www.buymeacoffee.com/ohmyswift">Support us</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5</h1>
+    
+    <p class="post-meta"><time datetime="2019-08-31T19:10:00+05:30" itemprop="datePublished">Aug 31, 2019</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan</span></span> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/urlsession/">URLSession</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+ •
+  
+    
+    
+      
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/ios/">iOS</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/websockets/">websockets</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/urlsessionwebsockettask/">URLSessionWebSocketTask</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon 
+“URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore.</p>
+
+<div>
+    <a class="notification sponsor" href="https://apps.apple.com/app/id1504093464?utm_source=ohmyswift&amp;utm_medium=appshowcase-mini&amp;utm_campaign=may" target="_blank">
+    <img src="https://winya.app/assets/img/winya-squircle.png" />
+    <div>
+    <p class="sponsor-title">
+        Winya: Live Stream Games
+    </p>
+    <p>
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
+    </div>
+</a>
+</div>
+
+<p><img src="/blog/assets/images/websockettask.jpg" alt="Socket connection in Swift" /></p>
+
+<p>Let’s see how we can implement it in our project(s). 
+I have created a separate class named “WebSocketConnector,” which acts as a socket connection manager/handler where all the socket related code is present.</p>
+
+<p>URLSessionWebSocketTask is an extension of URLSessionTask.</p>
+
+<p>We first have to create a urlsession object. The urlsession object has a method called as “websocketTask(with: URL)” using which we can create a websocket task. 
+The websocketTask method takes a socket URL as a parameter. For the demo, we are going to use “wss://echo.websocket.org” to test our socket connection.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="nf">init</span><span class="p">(</span><span class="n">withSocketURL</span> <span class="nv">url</span> <span class="p">:</span> <span class="kt">URL</span><span class="p">){</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">()</span>
+        <span class="n">urlSession</span>  <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="o">.</span><span class="k">default</span><span class="p">,</span> <span class="nv">delegate</span><span class="p">:</span> <span class="k">self</span><span class="p">,</span> <span class="nv">delegateQueue</span><span class="p">:</span> <span class="n">operationQueue</span><span class="p">)</span>
+        <span class="n">socket</span> <span class="o">=</span> <span class="n">urlSession</span><span class="o">.</span><span class="nf">webSocketTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>I have created a WebSocketProtocol and our  WebSocketConnector confroms to it. We implement the “establishConnection()” method, disconnect method, and send methods.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">establishConnection</span><span class="p">(){</span>
+        <span class="n">socket</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+        <span class="nf">addListener</span><span class="p">()</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>In the “establishConnection” method, we call the “resume()” method on the socket and add a listener to the socket. The “addListener()” method gets invoked whenever the app receives a message or an error from the server.</p>
+
+<p>After establishing a connection,  we can send a message or data to the server. As the server which we use is an echo server, it gives you back the message which you send.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift">    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">addListener</span><span class="p">(){</span>
+        <span class="n">socket</span><span class="o">.</span><span class="n">receive</span> <span class="p">{[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">in</span>
+            <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">response</span><span class="p">):</span>
+                <span class="k">switch</span> <span class="n">response</span> <span class="p">{</span>
+                    
+                <span class="k">case</span> <span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="k">let</span> <span class="nv">data</span><span class="p">):</span>
+                    <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="nf">didReceiveData</span><span class="p">?(</span><span class="n">data</span><span class="p">)</span>
+
+                <span class="k">case</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="k">let</span> <span class="nv">message</span><span class="p">):</span>
+                    <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="nf">didReceiveMessage</span><span class="p">?(</span><span class="n">message</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+                <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="nf">didReceiveError</span><span class="p">?(</span><span class="n">error</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">send</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">socket</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="kt">URLSessionWebSocketTask</span><span class="o">.</span><span class="kt">Message</span><span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="n">message</span><span class="p">))</span> <span class="p">{[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+                <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="nf">didReceiveError</span><span class="p">?(</span><span class="n">error</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>So whenever a successful message is received, the “didReceiveMessage?(message)” is triggered. When an error is received, the “didReceiveError?(error)” is invoked.</p>
+
+<p>When we need to close the connection, we call the “disconnect()” method. Simple, isn’t it?</p>
+
+<p>I enjoyed implementing it, and it is a great relief that Apple provided us native WebSocket support. However, we still have to rely on third-party libraries if we are supporting iOS 12 and below. If your deployment target is 13.0 and above, you can go with “URLSessionWebSocketTask” without any hesitations.</p>
+
+<p>You can find the completed project <a href="https://github.com/rizwan95/SwiftWebSockets">here</a>.
+I am excited to see you people implement URLSessionWebSocketTask in your projects. Do share your experience and of course, if you have any questions, ask them in the comments. You can also reach out to me directly on <a href="https://twitter.com/rizwanasifahmed">Twitter</a></p>
+
+
+  </div>
+
+  <div class = "centerstyle">
+    <p>Like our articles? Support us!</p>
+    <a href="https://www.buymeacoffee.com/ohmyswift"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a pizza&emoji=🍕&slug=ohmyswift&button_colour=FFDD00&font_colour=000000&font_family=Inter&outline_colour=000000&coffee_colour=ffffff"></a>
+</div>
+
+  
+
+</article>
+<div>
+    <a class="notification sponsor" href="https://host-palace.com/?affid=13" target="_blank">
+        <img src=" https://is2-ssl.mzstatic.com/image/thumb/Purple114/v4/30/44/e0/3044e006-d5a3-fc74-d0a3-b56c993078ce/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png">
+    <div>
+    <p>
+        HostPalace is a simple, cheap, and easy to use hosting provider. Pricing starts from as low as $1.62 per month. Sign up to get 15% off of all the hosting services. </p>
+    </p>
+    </div>
+</a>
+</div>
+<script defer src="https://comments.winya.app/js/commento.js"></script>
+<div id="commento"></div>
+
+
+  
+      </div>
+    </main>
+
+    <footer class="site-footer">
+    <div class="wrapper">
+      <p>
+        
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://ohmyswift.com/blog/feed.xml">RSS</a>
+
+        
+      </p>
+    <div>
+<script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ohmyswift" data-description="Support me on Buy me a coffee!" data-message="Do you like our articles? Support us! Buy us a pizza" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18">
+</script>
+</div>
+    <div class = "centerstyle">
+    <p>Ohmyswift is hosted at <a href="https://host-palace.com/?affid=13">HostPalace</a> </p>
+</div>
+</footer>
+
+  </body>
+
+</html>
