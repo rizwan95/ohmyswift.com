@@ -1,0 +1,55 @@
+I"=<p>As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the <code class="language-plaintext highlighter-rouge">removeObject</code> method to remove the value for a particular key.</p>
+
+<div>
+    <a class="notification sponsor" href="https://winya.app/get?utm_source=ohmyswift&amp;utm_medium=appshowcase-mini&amp;utm_campaign=may" target="_blank">
+    <img src="https://winya.app/assets/img/winya-squircle.png" />
+    <div>
+    <p class="sponsor-title">
+        Winya: Live Stream Games
+    </p>
+    <p>
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
+    </div>
+</a>
+</div>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">removeObject</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"is_app_launched"</span><span class="p">)</span></code></pre></figure>
+
+<p>What if we have a vast number of keys, and we want to clear them all? Like 10 or 20 keys?  If we try to clear all the keys using the <code class="language-plaintext highlighter-rouge">removeObject</code> method, we might miss clearing some values, and the code becomes complex. We don’t want to do that. So is there a better way? Yes, there is.</p>
+
+<p>Apple provides us with a nice and clean API to deal with this. We can make use of the <code class="language-plaintext highlighter-rouge">removePersistantDomainForName</code> method to reset the UserDefaults.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">if</span> <span class="k">let</span> <span class="nv">bundleID</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bundleIdentifier</span> <span class="p">{</span>
+    <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">removePersistentDomain</span><span class="p">(</span><span class="nv">forName</span><span class="p">:</span> <span class="n">bundleID</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>We can wrap the API in the UserDefaults extension to use it conveniently.</p>
+
+<p><img src="/blog/assets/images/clear-userdefaults.png" alt="Clear UserDefaults" /></p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="kt">UserDefaults</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">resetDefaults</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">bundleID</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bundleIdentifier</span> <span class="p">{</span>
+            <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">removePersistentDomain</span><span class="p">(</span><span class="nv">forName</span><span class="p">:</span> <span class="n">bundleID</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Using the API clears our UserDefaults completely, and leaves it in a fresh state.
+So yes, it might look insignificant, but it is a helpful API. Do you have other ways to clear the UserDefaults? Let me know in the comments below.</p>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer. Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h3 id="more-articles">More articles</h3>
+
+<ul>
+  <li><a href="/blog/2020/06/14/embracing-localization-in-image-assets/">Embracing Localization in Image Assets</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+  <li><a href="/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">Why should we avoid using closures in Swift structs?</a></li>
+  <li><a href="/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">Using UICollectionViewCompositionalLayout in iOS 12 and earlier</a></li>
+</ul>
+:ET
