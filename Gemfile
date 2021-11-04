@@ -14,6 +14,7 @@ gem "jekyll"
 #gem "minima", "~> 2.0"
 gem "jekyll-whiteglass"
 gem "kramdown"
+gem "webrick", "~> 1.7"
 
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
@@ -39,4 +40,5 @@ end
 
 # Performance-booster for watching directories on Windows
 #gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
+
 

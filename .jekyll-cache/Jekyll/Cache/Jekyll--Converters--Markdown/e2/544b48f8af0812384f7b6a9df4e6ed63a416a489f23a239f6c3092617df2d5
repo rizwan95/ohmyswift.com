@@ -1,0 +1,2 @@
+I"¸<p>Almost every app requires photos and video access these days. Before iOS 14.0, the iOS developers used <code class="language-plaintext highlighter-rouge">UIImagePickerController</code> to access the items from the userâ€™s media library. From iOS 14.0, Apple is providing its developers a brand new way to select images or videos from their apps using <code class="language-plaintext highlighter-rouge">PHPickerViewController</code></p>
+:ET

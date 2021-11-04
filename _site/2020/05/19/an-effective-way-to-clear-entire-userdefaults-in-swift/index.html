@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/blog/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/blog/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/blog/assets/images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/blog/assets/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#9f00a7">
+    <meta name="theme-color" content="#ffffff">
+
+  
+    
+    
+    
+    <title>An effective way to clear entire Userdefaults in Swift</title>
+    <meta name="description" content="As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the removeObject method to remove the value for a particular key.">
+    
+  
+    <link rel="stylesheet" href="/blog/assets/main.css">
+    <link rel="stylesheet" href="/blog/assets/customstyles.css">
+
+ 
+    <link rel="canonical" href="https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="Oh my Swift" href="https://ohmyswift.com/blog/feed.xml">
+  
+    
+  
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+    
+  
+  
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-144905716-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>An effective way to clear entire Userdefaults in Swift | Oh my Swift</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="An effective way to clear entire Userdefaults in Swift" />
+<meta name="author" content="Rizwan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the removeObject method to remove the value for a particular key." />
+<meta property="og:description" content="As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the removeObject method to remove the value for a particular key." />
+<link rel="canonical" href="https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/" />
+<meta property="og:url" content="https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/" />
+<meta property="og:site_name" content="Oh my Swift" />
+<meta property="og:image" content="https://ohmyswift.com/blog/assets/images/clear-userdefaults.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-19T19:49:00+05:30" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://ohmyswift.com/blog/assets/images/clear-userdefaults.png" />
+<meta property="twitter:title" content="An effective way to clear entire Userdefaults in Swift" />
+<script type="application/ld+json">
+{"url":"https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/","image":{"twitter":"assets/images/clear-userdefaults.png","facebook":"assets/images/clear-userdefaults.png","url":"https://ohmyswift.com/blog/assets/images/clear-userdefaults.png","@type":"imageObject"},"headline":"An effective way to clear entire Userdefaults in Swift","dateModified":"2020-05-19T19:49:00+05:30","datePublished":"2020-05-19T19:49:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/"},"author":{"@type":"Person","name":"Rizwan"},"@type":"BlogPosting","description":"As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the removeObject method to remove the value for a particular key.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+
+</head>
+  
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">Oh my Swift</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="/blog/social/">Social media</a>
+      
+        
+        <a class="page-link" href="/blog/showcase/">App Showcase</a>
+      
+        
+        <a class="page-link" href="https://www.buymeacoffee.com/ohmyswift">Support us</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">An effective way to clear entire Userdefaults in Swift</h1>
+    
+    <p class="post-meta"><time datetime="2020-05-19T19:49:00+05:30" itemprop="datePublished">May 19, 2020</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan</span></span> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/userdefaults/">Userdefaults</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+ •
+  
+    
+    
+      
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/userdefaults/">userdefaults</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the <code class="language-plaintext highlighter-rouge">removeObject</code> method to remove the value for a particular key.</p>
+
+<div>
+    <a class="notification sponsor" href="https://winya.app/get?utm_source=ohmyswift&amp;utm_medium=appshowcase-mini&amp;utm_campaign=may" target="_blank">
+    <img src="https://winya.app/assets/img/winya-squircle.png" />
+    <div>
+    <p class="sponsor-title">
+        Winya: Live Stream Games
+    </p>
+    <p>
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
+    </div>
+</a>
+</div>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">removeObject</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"is_app_launched"</span><span class="p">)</span></code></pre></figure>
+
+<p>What if we have a vast number of keys, and we want to clear them all? Like 10 or 20 keys?  If we try to clear all the keys using the <code class="language-plaintext highlighter-rouge">removeObject</code> method, we might miss clearing some values, and the code becomes complex. We don’t want to do that. So is there a better way? Yes, there is.</p>
+
+<p>Apple provides us with a nice and clean API to deal with this. We can make use of the <code class="language-plaintext highlighter-rouge">removePersistantDomainForName</code> method to reset the UserDefaults.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">if</span> <span class="k">let</span> <span class="nv">bundleID</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bundleIdentifier</span> <span class="p">{</span>
+    <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">removePersistentDomain</span><span class="p">(</span><span class="nv">forName</span><span class="p">:</span> <span class="n">bundleID</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>We can wrap the API in the UserDefaults extension to use it conveniently.</p>
+
+<p><img src="/blog/assets/images/clear-userdefaults.png" alt="Clear UserDefaults" /></p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="kt">UserDefaults</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">resetDefaults</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">bundleID</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bundleIdentifier</span> <span class="p">{</span>
+            <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">removePersistentDomain</span><span class="p">(</span><span class="nv">forName</span><span class="p">:</span> <span class="n">bundleID</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Using the API clears our UserDefaults completely, and leaves it in a fresh state.
+So yes, it might look insignificant, but it is a helpful API. Do you have other ways to clear the UserDefaults? Let me know in the comments below.</p>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer. Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h3 id="more-articles">More articles</h3>
+
+<ul>
+  <li><a href="/blog/2020/06/14/embracing-localization-in-image-assets/">Embracing Localization in Image Assets</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+  <li><a href="/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">Why should we avoid using closures in Swift structs?</a></li>
+  <li><a href="/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">Using UICollectionViewCompositionalLayout in iOS 12 and earlier</a></li>
+</ul>
+
+  </div>
+
+  <div class = "centerstyle">
+    <p>Like our articles? Support us!</p>
+    <a href="https://www.buymeacoffee.com/ohmyswift"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a pizza&emoji=🍕&slug=ohmyswift&button_colour=FFDD00&font_colour=000000&font_family=Inter&outline_colour=000000&coffee_colour=ffffff"></a>
+</div>
+
+  
+
+</article>
+<div>
+    <a class="notification sponsor" href="https://host-palace.com/?affid=13" target="_blank">
+        <img src=" https://is2-ssl.mzstatic.com/image/thumb/Purple114/v4/30/44/e0/3044e006-d5a3-fc74-d0a3-b56c993078ce/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png">
+    <div>
+    <p>
+        HostPalace is a simple, cheap, and easy to use hosting provider. Pricing starts from as low as $1.62 per month. Sign up to get 15% off of all the hosting services. </p>
+    </p>
+    </div>
+</a>
+</div>
+<script defer src="https://comments.winya.app/js/commento.js"></script>
+<div id="commento"></div>
+
+
+  
+      </div>
+    </main>
+
+    <footer class="site-footer">
+    <div class="wrapper">
+      <p>
+        
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://ohmyswift.com/blog/feed.xml">RSS</a>
+
+        
+      </p>
+    <div>
+<script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ohmyswift" data-description="Support me on Buy me a coffee!" data-message="Do you like our articles? Support us! Buy us a pizza" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18">
+</script>
+</div>
+    <div class = "centerstyle">
+    <p>Ohmyswift is hosted at <a href="https://host-palace.com/?affid=13">HostPalace</a> </p>
+</div>
+</footer>
+
+  </body>
+
+</html>
