@@ -1,3 +1,0 @@
-I"<p>We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon 
-“URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore.</p>
-:ET

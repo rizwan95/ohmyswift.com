@@ -3,10 +3,10 @@
 	"file": "main.css",
 	"sources": [
 		"main.scss",
-		"../../../../../../../../../usr/local/lib/ruby/gems/3.0.0/gems/jekyll-whiteglass-1.11.0/_sass/whiteglass.scss",
-		"../../../../../../../../../usr/local/lib/ruby/gems/3.0.0/gems/jekyll-whiteglass-1.11.0/_sass/whiteglass/_base.scss",
-		"../../../../../../../../../usr/local/lib/ruby/gems/3.0.0/gems/jekyll-whiteglass-1.11.0/_sass/whiteglass/_layout.scss",
-		"../../../../../../../../../usr/local/lib/ruby/gems/3.0.0/gems/jekyll-whiteglass-1.11.0/_sass/whiteglass/_syntax-highlighting.scss"
+		"../../../.gem/ruby/3.1.2/gems/jekyll-whiteglass-1.11.0/_sass/whiteglass.scss",
+		"../../../.gem/ruby/3.1.2/gems/jekyll-whiteglass-1.11.0/_sass/whiteglass/_base.scss",
+		"../../../.gem/ruby/3.1.2/gems/jekyll-whiteglass-1.11.0/_sass/whiteglass/_layout.scss",
+		"../../../.gem/ruby/3.1.2/gems/jekyll-whiteglass-1.11.0/_sass/whiteglass/_syntax-highlighting.scss"
 	],
 	"sourcesContent": [
 		"@charset \"utf-8\";\n\n// Our variables\n$base-font-family: Bitter, \"Apple SD Gothic Neo\", AppleGothic, NanumBarunGothic, \"Malgun Gothic\", Dotum, sans-serif;\n$monospace-font-family: Monaco, Menlo, Consolas, \"Courier New\", DotumChe, monospace;\n$base-font-size:   16px;\n$base-font-weight: 400;\n$small-font-size:  $base-font-size * 0.875;\n$base-line-height: 1.5;\n\n$spacing-unit:     30px;\n\n$text-color:       #111;\n$background-color: #fdfdfd;\n$brand-color:      #2568ba;\n\n$grey-color:       #757575;\n$grey-color-light: lighten($grey-color, 45%);\n$grey-color-dark:  darken($grey-color, 20%);\n\n// Width of the content area\n$content-width:    800px;\n\n$on-palm:          600px;\n$on-laptop:        800px;\n\n\n\n// whiteglass also includes a mixin for defining media queries.\n// Use media queries like this:\n// @include media-query($on-palm) {\n//     .wrapper {\n//         padding-right: $spacing-unit / 2;\n//         padding-left: $spacing-unit / 2;\n//     }\n// }\n@mixin media-query($device) {\n  @media screen and (max-width: $device) {\n    @content;\n  }\n}\n\n\n\n// Import partials from the `whiteglass` theme.\n@import \"whiteglass\";\n",
