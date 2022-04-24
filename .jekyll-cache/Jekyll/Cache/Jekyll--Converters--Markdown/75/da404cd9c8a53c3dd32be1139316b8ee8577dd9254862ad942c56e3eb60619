@@ -1,0 +1,112 @@
+I"�#<p>You all might know that async/await is accepted and is available in the main snapshots! Let’s get our hands dirty by trying out some basic example of async/await in Swift.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+<ol>
+  <li>Xcode 12.3</li>
+  <li>Latest Swift Toolchain (You can download it from <a href="https://link.ohmyswift.com/J3EvM">here</a>)</li>
+</ol>
+
+<div>
+    <a class="notification sponsor" href="https://winya.link/get" target="_blank">
+    <img src="https://ik.imagekit.io/cfsimagecdn/Winya/winya_512_qKON5oTjw.png" />
+    <div>
+    <p class="sponsor-title">
+        Winya: Best screen sharing app for iPhone/iPad
+    </p>
+    <p>
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
+    </div>
+</a>
+</div>
+
+<h3 id="installing-the-swift-toolchain">Installing the Swift Toolchain</h3>
+<p>Download the Swift Toolchain, and install the .pkg file. After installing the Swift toolchain, open Xcode and go to Preferences -&gt; Components and select <code class="language-plaintext highlighter-rouge">Swift Development Snapshot</code></p>
+
+<p><img src="/blog/assets/images/expermiment-async-await/swift-toolchain.png" alt="Swift Development Toolchain" /></p>
+
+<p>Next, go to your Project’s build settings and add the following Swift flags <code class="language-plaintext highlighter-rouge">-Xfrontend -enable-experimental-concurrency</code></p>
+
+<p><img src="/blog/assets/images/expermiment-async-await/other-flags.png" alt="Swift Compiler Flags" /></p>
+
+<p>That’s it! You have installed the latest Swift Development Toolchain in your Xcode.</p>
+
+<h3 id="using-completion-handlers-to-handle-asynchronous-tasks">Using completion handlers to handle asynchronous tasks</h3>
+<p>We usually use completion handlers for handling asynchronous tasks. For example,</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="kd">func</span> <span class="nf">getPlayerNames</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">()</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">playerNames</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="n">gamePlayers</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$0</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">}</span>
+        <span class="nf">completion</span><span class="p">?()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">internal</span> <span class="kd">func</span> <span class="nf">performCompletionHandlerCall</span><span class="p">()</span> <span class="p">{</span> 
+	<span class="k">self</span><span class="o">.</span><span class="n">getPlayerNames</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Printing names from a completion handler "</span><span class="p">,</span> <span class="k">self</span><span class="o">.</span><span class="n">playerNames</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>The above code is OK, but there are too many things going on. It is error-prone, and the code starts falling apart when nesting of multiple completion handlers is required, which eventually leads to the pyramid of doom. Let’s find out how to re-write the above code using the new async await approach.</p>
+
+<h3 id="replacing-completion-handlers-with-asyncawait">Replacing completion handlers with async/await</h3>
+
+<p>When you write async/await code, the boilerplate code is reduced, and it allows us to focus on improving the performance of the concurrent code.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="kd">func</span> <span class="nf">refreshPlayers</span><span class="p">()</span> <span class="n">async</span> <span class="p">{</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">playerNames</span> <span class="o">=</span> <span class="n">await</span> <span class="k">self</span><span class="o">.</span><span class="nf">getNames</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kd">func</span> <span class="nf">getNames</span><span class="p">()</span> <span class="n">async</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">self</span><span class="o">.</span><span class="n">gamePlayers</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="nv">$0</span><span class="o">.</span><span class="n">name</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">@asyncHandler</span> <span class="kd">internal</span> <span class="kd">func</span> <span class="nf">performAsyncAwaitOperation</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">await</span> <span class="k">self</span><span class="o">.</span><span class="nf">refreshPlayers</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Printing names from a async await function "</span><span class="p">,</span> <span class="n">playerNames</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>The above code is clean, precise, self explanatory, and less confusing. 
+The usage of async and await keywords in the methods improve the readability of the code.</p>
+
+<h3 id="closing-thoughts">Closing Thoughts</h3>
+<p>The async/await pattern is a vast improvement. The real power of async/await will be revealed when multiple asynchronous operations are chained.  It is still in development, and many more improvements are made as we speak. I will be keeping an eye on how things shape, and I will be writing more articles about the async/await pattern.
+If you are interested in learning more about the async/await pattern, I have given reference links at the end of the article. You can give it a read for a better understanding. 
+Also, I have uploaded the demo project to github. You can download it from <a href="https://link.ohmyswift.com/43KZu">here.</a></p>
+
+<h3 id="references">References</h3>
+
+<p>[1] <a href="https://forums.swift.org/t/swift-concurrency-roadmap/41611">https://forums.swift.org/t/swift-concurrency-roadmap/41611</a></p>
+
+<p>[2] <a href="https://forums.swift.org/t/question-about-async-await/6659/15">https://forums.swift.org/t/question-about-async-await/6659/15</a></p>
+
+<p>[3] <a href="https://forums.swift.org/t/concurrency-fixing-race-conditions-in-async-await-example/6514/45">https://forums.swift.org/t/concurrency-fixing-race-conditions-in-async-await-example/6514/45</a></p>
+
+<h3 id="special-mentions">Special mentions</h3>
+
+<p>Shoutout to <a href="https://twitter.com/karthikgs7">Karthikeyan</a> for his help in setting up the toolchain and stuff.</p>
+
+<h3 id="app-showcase">App Showcase</h3>
+
+<p>Winya - A <strong><em>free screen-sharing app</em></strong> that casts your screen to Twitch in HD. It will be useful for gamers to streaming their gameplay to Twitch.
+Ohmyswifters, <strong><em><a href="https://winya.link/getwinya">download the app</a></em></strong> and show your support to them.</p>
+
+<p><strong><em><a href="https://winya.link/getwinya">iOS, and iPadOS download link</a></em></strong></p>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer.  Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h4 id="more-articles">More articles</h4>
+
+<ul>
+  <li><a href="/blog/2020/11/02/closure-based-actions-in-uibutton/">Closure based actions in UIButton</a></li>
+  <li><a href="/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">Replacing UIImagePickerController with PHPickerViewController</a></li>
+  <li><a href="/blog/2020/06/14/embracing-localization-in-image-assets/">Embracing Localization in Image Assets</a></li>
+  <li><a href="/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">An effective way to clear entire Userdefaults in Swift</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+</ul>
+:ET

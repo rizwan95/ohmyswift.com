@@ -1,0 +1,119 @@
+I"-<p>Almost every app requires photos and video access these days. Before iOS 14.0, the iOS developers used <code class="language-plaintext highlighter-rouge">UIImagePickerController</code> to access the items from the user’s media library. From iOS 14.0, Apple is providing its developers a brand new way to select images or videos from their apps using <code class="language-plaintext highlighter-rouge">PHPickerViewController</code></p>
+
+<div>
+    <a class="notification sponsor" href="https://winya.link/get" target="_blank">
+    <img src="https://ik.imagekit.io/cfsimagecdn/Winya/winya_512_qKON5oTjw.png" />
+    <div>
+    <p class="sponsor-title">
+        Winya: Best screen sharing app for iPhone/iPad
+    </p>
+    <p>
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
+    </div>
+</a>
+</div>
+
+<h2 id="features-of-phpickerviewcontroller">Features of PHPickerViewController</h2>
+
+<ul>
+  <li><strong>No more permission alerts.</strong> The developer doesn’t have to specify the <code class="language-plaintext highlighter-rouge">Privacy - Photo Library Usage Description</code> key in the .plist, and there won’t be any alert views asking for permission.</li>
+  <li><strong>Runs in a separate process.</strong> Although the PHPickerViewController might appear to be present inside the application, it runs in a separate process.</li>
+  <li><strong>Built-in privacy.</strong> Since PHPickerViewController runs in a separate process, the application can only access the items selected by the user via PHPickerViewControllerDelegate.</li>
+  <li><strong>Built-in search.</strong> Searching photos is a built-in feature in PHPickerViewController, and the UI is similar to that of the Photos app.</li>
+  <li><strong>Selection limit.</strong> PHPickerViewController also allows the developer to limit the number of photos a user can select by setting the <strong>selectionLimit</strong> property in PHPickerConfiguration.</li>
+</ul>
+
+<h2 id="implementing-phpickerviewcontroller-in-an-application">Implementing PHPickerViewController in an application</h2>
+
+<p>Implementing <code class="language-plaintext highlighter-rouge">PHPickerViewController</code> is a breeze. The APIs are pretty straightforward.</p>
+
+<ul>
+  <li>Create an instance of PHPickerConfiguration and pass it to the <code class="language-plaintext highlighter-rouge">PHPickerViewController</code> instance while creating it.</li>
+  <li>It is the developer’s responsibility to present or dismiss the <code class="language-plaintext highlighter-rouge">PHPickerViewController</code></li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="kt">PhotosUI</span>
+
+<span class="kd">private</span> <span class="kd">func</span> <span class="nf">showPicker</span><span class="p">()</span> <span class="p">{</span>
+   <span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">PHPickerConfiguration</span><span class="p">()</span>
+   <span class="k">let</span> <span class="nv">picker</span> <span class="o">=</span> <span class="kt">PHPickerViewController</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
+   <span class="k">self</span><span class="o">.</span><span class="nf">present</span><span class="p">(</span><span class="n">picker</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="customizing-the-phpickerviewcontroller-using-the-phpickerconfiguration">Customizing the PHPickerViewController using the PHPickerConfiguration</h2>
+
+<p>The PHPickerConfiguration provides us three properties using which we can customize the PHPickerViewController.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">selectionLimit</code> - The selectionLimit property specifies the number of items a user can select. The value <code class="language-plaintext highlighter-rouge">0</code> specifies unlimited selection. The below configuration limits the selection to 4 items.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">configuration</span><span class="o">.</span><span class="n">selectionLimit</span> <span class="o">=</span> <span class="mi">4</span></code></pre></figure>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">filter</code> - The filter property restricts the type of items that can be displayed. Setting the value to <code class="language-plaintext highlighter-rouge">nil</code> will display all the supported items. The below configuration displays only the live photos and images.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">configuration</span><span class="o">.</span><span class="n">filter</span> <span class="o">=</span> <span class="o">.</span><span class="nf">any</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">livePhotos</span><span class="p">,</span> <span class="o">.</span><span class="n">images</span><span class="p">])</span></code></pre></figure>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">preferredAssetRepresentationMode</code> - The preferredAssetRepresentationMode determines how an item provider should represent an asset. The default value is <code class="language-plaintext highlighter-rouge">automatic</code>.     The below configuration sets the asset’s representation mode to automatic.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">configuration</span><span class="o">.</span><span class="n">preferredAssetRepresentationMode</span> <span class="o">=</span> <span class="o">.</span><span class="n">automatic</span></code></pre></figure>
+
+<h2 id="accessing-items-from-phpickerviewcontroller-using-the-phpickerviewcontrollerdelegate">Accessing items from PHPickerViewController using the PHPickerViewControllerDelegate</h2>
+
+<p>The PHPickerViewControllerDelegate acts differently when compared to UIImagePickerControllerDelegate. PHPickerViewControllerDelegate provides us an NSItemProvider using which objects can be loaded.</p>
+
+<p>If you look closely, the API will be similar to UITableView’s or UICollectionView’s drag and drop APIs.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">picker</span><span class="p">(</span><span class="n">_</span> <span class="nv">picker</span><span class="p">:</span> <span class="kt">PHPickerViewController</span><span class="p">,</span> <span class="n">didFinishPicking</span> <span class="nv">results</span><span class="p">:</span> <span class="p">[</span><span class="kt">PHPickerResult</span><span class="p">])</span> <span class="p">{</span>
+    <span class="nf">dismiss</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">itemProviders</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="nf">map</span><span class="p">(\</span><span class="o">.</span><span class="n">itemProvider</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="k">in</span> <span class="n">itemProviders</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="nf">canLoadObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="kt">UIImage</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">item</span><span class="o">.</span><span class="nf">loadObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="kt">UIImage</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+                <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="k">let</span> <span class="nv">image</span> <span class="o">=</span> <span class="n">image</span> <span class="k">as?</span> <span class="kt">UIImage</span> <span class="p">{</span>
+                        <span class="k">self</span><span class="o">.</span><span class="n">imageView</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="kc">nil</span>
+                        <span class="k">self</span><span class="o">.</span><span class="n">imageView</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>PHPickerViewController is supported only from iOS 14.0. If your app has a deployment target of iOS 13.0 and less, you still have to use  UIImagePickerController.</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://github.com/rizwan95/AmazingPhotoPicker">Amazing Photo picker sample code</a></li>
+  <li><a href="https://developer.apple.com/videos/play/wwdc2020/10652/">Meet the new Photos picker</a></li>
+</ul>
+
+<h3 id="special-mention">Special mention</h3>
+
+<p>Recently, <a href="https://blog.feedspot.com">FeedSpot</a> added <a href="https://ohmyswift.com">Ohmyswift</a> to its “Top 30 Swift Programming Blogs &amp; News Websites To Follow in 2020.” It is an honor to us, and it means a lot to us. Do check out their listings at</p>
+
+<ul>
+  <li><a href="https://blog.feedspot.com/swift_programming_blogs/">https://blog.feedspot.com/swift_programming_blogs/</a></li>
+</ul>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer. Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h3 id="more-articles">More articles</h3>
+
+<ul>
+  <li><a href="/blog/2020/06/14/embracing-localization-in-image-assets/">Embracing Localization in Image Assets</a></li>
+  <li><a href="/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">An effective way to clear entire Userdefaults in Swift</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+  <li><a href="/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">Why should we avoid using closures in Swift structs?</a></li>
+</ul>
+:ET

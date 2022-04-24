@@ -1,0 +1,3 @@
+I"�<p>iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the <code class="language-plaintext highlighter-rouge">addTarget</code> method in UIControls. Yes, you heard me right—no more usage of <code class="language-plaintext highlighter-rouge">addTarget</code> methods, <code class="language-plaintext highlighter-rouge">#selector()</code>, and <code class="language-plaintext highlighter-rouge">@objc</code> annotation in front of methods.
+More importantly, we can write a closure based code using the action handler. Okay, enough talk, let’s dive into the code.</p>
+:ET

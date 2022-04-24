@@ -1,0 +1,50 @@
+.centerstyle {
+    display: grid;
+    justify-content: center;
+}
+
+.sponsor {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #FF572D;
+    border-radius: 6px;
+    margin: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    padding: 1.25rem 2.5rem 1.25rem 1.5rem;
+    color: #000000;
+}
+
+.sponsor:after {
+content: "SUPPORT CREATORS";
+display: block;
+float: right;
+font-size: 0.8rem;
+top: -1em;
+position: absolute;
+background-color: #CE4523;
+border-radius: 8px;
+padding: 0.2rem 0.5rem;
+font-weight: 700;
+color: white;
+}
+
+.sponsor img {
+object-fit: cover;
+width: 120px;
+height: 100%;
+margin-right: 1em;
+border-radius: 4px;
+}
+
+.sponsor .sponsor-title {
+font-weight: 800;
+color:  rgb(207, 125, 48);
+}
+
+
+img[src$="centerme"] {
+    display:block;
+    margin: 0 auto;
+}

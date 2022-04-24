@@ -1,0 +1,69 @@
+I"�<p>Arrays are one of the most widely used data structures in Swift, and we deal with a lot of array manipulations. One such manipulation is the removal of the last element from an array. The three useful methods to remove an element from an array are dropLast(), popLast(), and removeLast()</p>
+
+<p><strong><em>Let us give back to the community. Before getting started, show your support to indie devs by downloading their apps from the banner displayed below. It will help them build great apps.</em></strong></p>
+<div>
+    <a class="notification sponsor" href="https://winya.link/get" target="_blank">
+    <img src="https://ik.imagekit.io/cfsimagecdn/Winya/winya_512_qKON5oTjw.png" />
+    <div>
+    <p class="sponsor-title">
+        Winya: Best screen sharing app for iPhone/iPad
+    </p>
+    <p>
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
+    </div>
+</a>
+</div>
+
+<h2 id="droplast">dropLast()</h2>
+
+<p>We have an array of fruits, namely, [“Apple”,”Orange”,”Banana”]. Using the dropLast() method on the array will remove the last element (‘Banana’ in our case), and it will return the remaining array elements. dropLast() is the preferred method to remove an array because it is safe as it does not mutate the original array.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Apple"</span><span class="p">,</span><span class="s">"Orange"</span><span class="p">,</span><span class="s">"Banana"</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">nonRoundFruits</span> <span class="o">=</span> <span class="n">fruits</span><span class="o">.</span><span class="nf">dropLast</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">nonRoundFruits</span><span class="p">)</span> <span class="c1">// ["Apple", "Orange"]</span></code></pre></figure>
+
+<h2 id="removelast">removeLast()</h2>
+<p>The next method is the removeLast() method. Unlike the dropLast() method, removeLast() method removes the last element from the original array and modifies it.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Apple"</span><span class="p">,</span><span class="s">"Orange"</span><span class="p">,</span><span class="s">"Banana"</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">removedFruit</span> <span class="o">=</span> <span class="n">fruits</span><span class="o">.</span><span class="nf">removeLast</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span> <span class="c1">// ["Apple", "Orange"]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">removedFruit</span><span class="p">)</span> <span class="c1">// Banana</span></code></pre></figure>
+
+<p>There are two essential things to note here. 
+The fruits array is mutable and hence it is declared as a ‘var’
+If there are no elements in the array and if removeLast() method is invoked, the app will crash.</p>
+
+<h2 id="poplast">popLast()</h2>
+
+<p>The popLast() method is similar to the removeLast() method, but it has only one difference. When there are no elements in an array, and if the removeLast() method is invoked, the app will not crash. Instead, it will return a nil value.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Apple"</span><span class="p">,</span><span class="s">"Orange"</span><span class="p">,</span><span class="s">"Banana"</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">removedFruit</span> <span class="o">=</span> <span class="n">fruits</span><span class="o">.</span><span class="nf">popLast</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span> <span class="c1">// ["Apple", "Orange"]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">removedFruit</span><span class="p">)</span> <span class="c1">// Optional("Banana")</span></code></pre></figure>
+
+<h3 id="references">References</h3>
+
+<p>[1] <a href="https://developer.apple.com/documentation/swift/array/1689751-droplast">https://developer.apple.com/documentation/swift/array/1689751-droplast</a></p>
+
+<p>[2] <a href="https://developer.apple.com/documentation/swift/array/2885764-removelast">https://developer.apple.com/documentation/swift/array/2885764-removelast</a></p>
+
+<p>[3] <a href="https://developer.apple.com/documentation/swift/array/1539777-poplast">https://developer.apple.com/documentation/swift/array/1539777-poplast</a></p>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer.  Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h3 id="more-articles">More articles</h3>
+
+<ul>
+  <li><a href="/blog/2021/04/14/exploring-deque-in-swift-collections/">Exploring Deque in Swift Collections</a></li>
+  <li><a href="/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">Replacing UIImagePickerController with PHPickerViewController</a></li>
+  <li><a href="/blog/2020/06/14/embracing-localization-in-image-assets/">Embracing Localization in Image Assets</a></li>
+  <li><a href="/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">An effective way to clear entire Userdefaults in Swift</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+</ul>
+:ET
