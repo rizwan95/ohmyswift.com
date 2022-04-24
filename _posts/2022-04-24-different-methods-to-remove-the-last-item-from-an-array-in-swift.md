@@ -2,6 +2,12 @@
 layout: post
 title: Different methods to remove the last item from an array in Swift
 date: 2022-04-24 23:57 +0530
+category: Array
+tags: [swift, UIButton, iOS15, remove array elements, iOS 16, swift ios 15, droplast in swift, removeLast in swift, how to remove element from an array]
+comments: true
+author: Rizwan
+summary: One of the widely used array manipulation methods is removing the last element from an array. The three valuable methods to remove an element from an array are dropLast(), popLast(), and removeLast(). Let's see what the difference between these methods and which one is effective.
+
 ---
 
 Arrays are one of the most widely used data structures in Swift, and we deal with a lot of array manipulations. One such manipulation is the removal of the last element from an array. The three useful methods to remove an element from an array are dropLast(), popLast(), and removeLast()
