@@ -5,7 +5,7 @@
   
   <link href="https://ohmyswift.com/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://ohmyswift.com/blog/" rel="alternate" type="text/html" />
-  <updated>2022-04-25T00:18:02+05:30</updated>
+  <updated>2022-04-25T00:24:14+05:30</updated>
   <id>https://ohmyswift.com/blog//</id>
 
   
@@ -106,9 +106,35 @@ If there are no elements in the array and if removeLast() method is invoked, the
       
 
       
-
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
       
 
+      
+        <category term="Array" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="UIButton" />
+      
+        <category term="iOS15" />
+      
+        <category term="remove array elements" />
+      
+        <category term="iOS 16" />
+      
+        <category term="swift ios 15" />
+      
+        <category term="droplast in swift" />
+      
+        <category term="removeLast in swift" />
+      
+        <category term="how to remove element from an array" />
       
 
       
