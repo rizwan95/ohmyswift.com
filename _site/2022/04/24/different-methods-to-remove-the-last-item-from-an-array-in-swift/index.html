@@ -63,12 +63,14 @@
 <link rel="canonical" href="https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/" />
 <meta property="og:url" content="https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/" />
 <meta property="og:site_name" content="Oh my Swift" />
+<meta property="og:image" content="https://ohmyswift.com/blog/https://i.imgur.com/tg4CWBf.jpg" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-04-24T23:57:00+05:30" />
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://ohmyswift.com/blog/https://i.imgur.com/saiRZ6p.jpg" />
 <meta property="twitter:title" content="Different methods to remove the last item from an array in Swift" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"Different methods to remove the last item from an array in Swift","dateModified":"2022-04-24T23:57:00+05:30","datePublished":"2022-04-24T23:57:00+05:30","description":"Arrays are one of the most widely used data structures in Swift, and we deal with a lot of array manipulations. One such manipulation is the removal of the last element from an array. The three useful methods to remove an element from an array are dropLast(), popLast(), and removeLast()","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/"},"url":"https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/","author":{"@type":"Person","name":"Rizwan"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"Different methods to remove the last item from an array in Swift","dateModified":"2022-04-24T23:57:00+05:30","datePublished":"2022-04-24T23:57:00+05:30","description":"Arrays are one of the most widely used data structures in Swift, and we deal with a lot of array manipulations. One such manipulation is the removal of the last element from an array. The three useful methods to remove an element from an array are dropLast(), popLast(), and removeLast()","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/"},"url":"https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/","author":{"@type":"Person","name":"Rizwan"},"image":{"twitter":"https://i.imgur.com/saiRZ6p.jpg","facebook":"https://i.imgur.com/tg4CWBf.jpg","url":"https://i.imgur.com/tg4CWBf.jpg","@type":"imageObject"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -2133,7 +2135,7 @@ If there are no elements in the array and if removeLast() method is invoked, the
 
 <h2 id="poplast">popLast()</h2>
 
-<p>The popLast() method is similar to the removeLast() method, but it has only one difference. When there are no elements in an array, and if the removeLast() method is invoked, the app will not crash. Instead, it will return a nil value.</p>
+<p>The popLast() method is similar to the removeLast() method, but it has only one difference. When there are no elements in an array, and if the popLast() method is invoked, the app will not crash. Instead, it will return a nil value.</p>
 
 <figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Apple"</span><span class="p">,</span><span class="s">"Orange"</span><span class="p">,</span><span class="s">"Banana"</span><span class="p">]</span>
 <span class="k">let</span> <span class="nv">removedFruit</span> <span class="o">=</span> <span class="n">fruits</span><span class="o">.</span><span class="nf">popLast</span><span class="p">()</span>
