@@ -9,9 +9,9 @@ author: Rizwan
 summary: One of the widely used array manipulation methods is removing the last element from an array. The three valuable methods to remove an element from an array are dropLast(), popLast(), and removeLast(). Let's see what the difference between these methods and which one is effective.
 
 image:
-    path: https://i.imgur.com/tg4CWBf.jpg
-    twitter: https://i.imgur.com/saiRZ6p.jpg
-    facebook: https://i.imgur.com/tg4CWBf.jpg
+    path: assets/images/remove-last-element/facebook.jpeg
+    twitter: assets/images/remove-last-element/twitter.jpeg
+    facebook: assets/images/remove-last-element/facebook.jpeg
 
 
 ---
