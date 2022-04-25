@@ -41,7 +41,7 @@ If there are no elements in the array and if removeLast() method is invoked, the
 
 ## popLast()
 
-The popLast() method is similar to the removeLast() method, but it has only one difference. When there are no elements in an array, and if the removeLast() method is invoked, the app will not crash. Instead, it will return a nil value.
+The popLast() method is similar to the removeLast() method, but it has only one difference. When there are no elements in an array, and if the popLast() method is invoked, the app will not crash. Instead, it will return a nil value.
 
 {% highlight swift %}
 var fruits = ["Apple","Orange","Banana"]
