@@ -8,6 +8,12 @@ comments: true
 author: Rizwan
 summary: One of the widely used array manipulation methods is removing the last element from an array. The three valuable methods to remove an element from an array are dropLast(), popLast(), and removeLast(). Let's see what the difference between these methods and which one is effective.
 
+image:
+    path: https://i.imgur.com/tg4CWBf.jpg
+    twitter: https://i.imgur.com/saiRZ6p.jpg
+    facebook: https://i.imgur.com/tg4CWBf.jpg
+
+
 ---
 
 Arrays are one of the most widely used data structures in Swift, and we deal with a lot of array manipulations. One such manipulation is the removal of the last element from an array. The three useful methods to remove an element from an array are dropLast(), popLast(), and removeLast()

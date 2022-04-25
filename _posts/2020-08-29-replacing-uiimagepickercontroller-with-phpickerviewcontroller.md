@@ -107,6 +107,7 @@ Recently, [FeedSpot](https://blog.feedspot.com) added [Ohmyswift](https://ohmysw
 
 ### More articles
 
+- [Different methods to remove the last item from an array in Swift](/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/)
 - [Embracing Localization in Image Assets](/blog/2020/06/14/embracing-localization-in-image-assets/)
 - [An effective way to clear entire Userdefaults in Swift](/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/)
 - [Simulating remote push notifications in a simulator](/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/)
