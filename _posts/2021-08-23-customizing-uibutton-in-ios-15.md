@@ -177,6 +177,7 @@ I hope the article was informative and you got to know about the modern ways to 
 
 #### More articles
 
+- [Different methods to remove the last item from an array in Swift](/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/)
 - [Exploring Deque in Swift Collections](/blog/2021/04/14/exploring-deque-in-swift-collections/)
 - [Replacing UIImagePickerController with PHPickerViewController](/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/)
 - [Embracing Localization in Image Assets](/blog/2020/06/14/embracing-localization-in-image-assets/)
