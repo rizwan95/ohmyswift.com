@@ -1,0 +1,27 @@
+I"ˆ	<p>Boolean is one of the most frequently used and simplest data type in any programming language.It is common to want to toggle the state of the boolean variable. So, we normally do it like this,</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="k">var</span> <span class="nv">isEnabled</span> <span class="o">=</span> <span class="n">trueif</span> <span class="n">isEnabled</span> <span class="o">==</span> <span class="kc">true</span> <span class="p">{</span>
+ <span class="n">isEnabled</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">isEnabled</span><span class="p">)</span> <span class="c1">// Prints false</span></code></pre></figure>
+
+<p>The above approach is common but there will be cases where the boolean value should be toggled frequently. Explicitly assigning the boolean to true or false can be error prone. In Swift, we can use the toggle() method to toggle the value of a boolean.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="k">var</span> <span class="nv">isEnabled</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="k">if</span> <span class="n">isEnabled</span> <span class="o">==</span> <span class="kc">true</span><span class="p">{</span>
+ <span class="n">isEnabled</span><span class="o">.</span><span class="nf">toggle</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">isEnabled</span><span class="p">)</span> <span class="c1">// Prints false</span></code></pre></figure>
+
+<p>Though it is simple, it will be very beneficial in cases which involves complex data structures like,</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">floatingView</span><span class="o">.</span><span class="n">panel</span><span class="o">.</span><span class="n">shouldScroll</span><span class="o">.</span><span class="nf">toggle</span><span class="p">()</span></code></pre></figure>
+
+<p>Playground sample,</p>
+
+<p><img src="/blog/assets/images/swiftbit02.png" alt="Toggle() method in Swift boolean" /></p>
+
+<p>Follow me on <a href="https://twitter.com/rizwanasifahmed">Twitter</a>. 
+Have any queries? Feel free to DM me.</p>
+
+:ET

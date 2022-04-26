@@ -720,19 +720,6 @@
   <div class="post-content" itemprop="articleBody">
     <p>As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the <code class="language-plaintext highlighter-rouge">removeObject</code> method to remove the value for a particular key.</p>
 
-<div>
-    <a class="notification sponsor" href="https://winya.link/get" target="_blank">
-    <img src="https://ik.imagekit.io/cfsimagecdn/Winya/winya_512_qKON5oTjw.png" />
-    <div>
-    <p class="sponsor-title">
-        Winya: Best screen sharing app for iPhone/iPad
-    </p>
-    <p>
-        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
-    </div>
-</a>
-</div>
-
 <figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">removeObject</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"is_app_launched"</span><span class="p">)</span></code></pre></figure>
 
 <p>What if we have a vast number of keys, and we want to clear them all? Like 10 or 20 keys?  If we try to clear all the keys using the <code class="language-plaintext highlighter-rouge">removeObject</code> method, we might miss clearing some values, and the code becomes complex. We don’t want to do that. So is there a better way? Yes, there is.</p>
@@ -783,16 +770,7 @@ So yes, it might look insignificant, but it is a helpful API. Do you have other 
   
 
 </article>
-<div>
-    <a class="notification sponsor" href="https://host-palace.com/?affid=13" target="_blank">
-        <img src=" https://is2-ssl.mzstatic.com/image/thumb/Purple114/v4/30/44/e0/3044e006-d5a3-fc74-d0a3-b56c993078ce/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png">
-    <div>
-    <p>
-        HostPalace is a simple, cheap, and easy to use hosting provider. Pricing starts from as low as $1.62 per month. Sign up to get 15% off of all the hosting services. </p>
-    </p>
-    </div>
-</a>
-</div>
+
 <script defer src="https://comments.winya.app/js/commento.js"></script>
 <div id="commento"></div>
 

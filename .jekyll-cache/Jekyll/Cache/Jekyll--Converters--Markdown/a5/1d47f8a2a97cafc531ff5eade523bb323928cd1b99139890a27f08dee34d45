@@ -1,0 +1,32 @@
+I"
+<p>At WWDC 2019, Apple added a brand new API “<strong>UICollectionViewCompositionalLayout</strong>” to the UIKit. Using this powerful API, we can create complex compositional layouts without writing complicated code. At times, It feels tough to create complex collection view UIs using the UICollectionViewFlowLayout. The UICollectionViewCompositionalLayout API eases the process and guess what you can even support orthogonal scrolling UIs with much ease. Well, it sounds great, but practically we cannot use the UICollectionViewCompositionalLayout API until we drop the support for iOS 12.0 and earlier in our apps. (It is not going to happen for the next few years is what I predict.) So how do we use this API in iOS 12.0 and earlier?</p>
+
+<p><img src="/blog/assets/images/compositionallayout/compositionallayout.png" alt="IBPCollectionViewCompositionalLayout" /></p>
+
+<p>Well, a friend of mine, <a href="https://twitter.com/k_katsumi">Kishikawa Katsumi</a>, had a solution for it! He claimed that his library <strong>IBPCollectionViewCompositionalLayout</strong> could use the same UICollectionViewCompositionalLayout APIs in iOS 12.0 and earlier. I was skeptical at first, but decided to give it a try.
+I installed it using Cocoapods, followed the instructions given, and boom! CompositionalLayouts started working on iOS 12.0 and earlier!  Everything worked like magic.</p>
+
+<p>I was amazed by the work he had done and decided to share this with the developer community. So here it is!</p>
+
+<p>Do check out this excellent <a href="https://github.com/kishikawakatsumi/IBPCollectionViewCompositionalLayout">github library</a>  and share your thoughts in comments.</p>
+
+<h3 id="credits">Credits</h3>
+
+<ul>
+  <li><strong>Kishikawa Katsumi</strong> - <a href="https://twitter.com/k_katsumi">https://twitter.com/k_katsumi</a></li>
+</ul>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer. Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h3 id="more-articles">More articles</h3>
+
+<ul>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+  <li><a href="/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">Why should we avoid using closures in Swift structs?</a></li>
+  <li><a href="/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/">Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method</a></li>
+</ul>
+:ET

@@ -1,0 +1,33 @@
+I"�<p>One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.</p>
+
+<p>Consider that there is an array of optional values. Usually, we use if let or guard statement to unwrap the optionals.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">//An array of optionals.</span>
+    <span class="k">let</span> <span class="nv">cars</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Ford"</span><span class="p">,</span><span class="s">"Lamborghini"</span><span class="p">,</span><span class="kc">nil</span><span class="p">,</span><span class="s">"McLaren"</span><span class="p">,</span><span class="s">"Aston Martin"</span><span class="p">,</span><span class="kc">nil</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">car</span> <span class="k">in</span> <span class="n">cars</span> <span class="p">{</span>  
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">carObject</span> <span class="o">=</span> <span class="n">car</span><span class="p">{</span>   
+             <span class="nf">print</span><span class="p">(</span><span class="n">carObject</span><span class="p">)</span>  
+         <span class="p">}</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>The above code is okay, nothing wrong with it, but we should try to use the power of Swift whenever we can.</p>
+
+<p>We can unwrap the array of optionals using case let directly in the for in loop.</p>
+
+<p>Here is how you do it,</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">//An array of optionals.</span>
+    <span class="k">let</span> <span class="nv">cars</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Ford"</span><span class="p">,</span><span class="s">"Lamborghini"</span><span class="p">,</span><span class="kc">nil</span><span class="p">,</span><span class="s">"McLaren"</span><span class="p">,</span><span class="s">"Aston Martin"</span><span class="p">,</span><span class="kc">nil</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="k">case</span> <span class="k">let</span> <span class="nv">car</span><span class="p">?</span> <span class="k">in</span> <span class="n">cars</span> <span class="p">{</span>  
+        <span class="nf">print</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Neat isn’t it? The number of lines of code is reduced, and the code looks more readable.</p>
+
+<p><img src="/blog/assets/images/swiftbit03.png" alt="Unwrapping optionals using for in loops" /></p>
+
+<p>Note — There are also other techniques like using compactMap to unwrap optionals, I will be covering about them in upcoming articles.
+Follow me on <a href="https://twitter.com/rizwanasifahmed">Twitter</a>.
+Have any queries? Feel free to DM me.</p>
+:ET

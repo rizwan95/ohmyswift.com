@@ -1,0 +1,58 @@
+I"k<p>Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.</p>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>Well, the requirements are quite simple. We will be needing the following,</p>
+
+<ul>
+  <li>Xcode 11.4 beta or above.</li>
+  <li>Bundle identifier of your app.</li>
+  <li>The device identifier of your currently active simulator.</li>
+  <li>Push notification payload.</li>
+  <li>Terminal.</li>
+</ul>
+
+<h2 id="how-to-find-the-device-identifier-of-the-simulator">How to find the device identifier of the simulator</h2>
+
+<p>You can find the simulator’s device identifier from <strong>Window</strong> -&gt; <strong>Devices and Simulator</strong> -&gt; <strong>Select the active simulator</strong> -&gt; <strong>Copy the displayed identifier</strong></p>
+
+<h2 id="how-to-generate-push-notification-payload">How to generate push notification payload</h2>
+
+<p>The push notification payload is of the standard Apple format.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"aps":{"alert":"I am a remote push notification","badge":1,"sound":"default"}}
+</code></pre></div></div>
+
+<p>Save the following JSON in the .apns format.
+    (We will be saving the json in a file as notficationpayload.apns for the tutorial purpose. )</p>
+
+<h2 id="how-to-trigger-remote-push-notifications-in-the-simulator">How to trigger remote push notifications in the simulator</h2>
+
+<ul>
+  <li>Run the app in simulator using Xcode.</li>
+  <li>Open terminal.</li>
+  <li>Navigate to the folder where the payload file is present .</li>
+  <li>
+    <p>Execute the command with the format,
+ <code class="language-plaintext highlighter-rouge">xcrun simctl push &lt;device-identifier&gt; &lt;your-bundle-id&gt; notificationpayload.apns</code>
+ (Sample command -
+ <code class="language-plaintext highlighter-rouge">xcrun simctl push 3A3CE233-307D-463D-A1C6-F66B9C2C1445 com.sample.pushnotification notificationpayload.apns</code>)</p>
+  </li>
+  <li>Hit enter.</li>
+</ul>
+
+<p>That’s it! Notifications will start to appear on your simulator!</p>
+
+<p><img src="/blog/assets/images/simulatornotifications/simulatornotification.png" alt="Simulating remote push notifications in a simulator" /></p>
+
+<p>Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
+ You can also follow me on twitter right here: <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></p>
+
+<h3 id="more-articles">More articles</h3>
+
+<ul>
+  <li><a href="/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">Using UICollectionViewCompositionalLayout in iOS 12 and earlier</a></li>
+  <li><a href="/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">Why should we avoid using closures in Swift structs?</a></li>
+  <li><a href="/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/">Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method</a></li>
+</ul>
+:ET
