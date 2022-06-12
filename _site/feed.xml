@@ -5,7 +5,7 @@
   
   <link href="https://ohmyswift.com/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://ohmyswift.com/blog/" rel="alternate" type="text/html" />
-  <updated>2022-04-27T19:45:03+05:30</updated>
+  <updated>2022-06-12T20:17:52+05:30</updated>
   <id>https://ohmyswift.com/blog//</id>
 
   
@@ -18,6 +18,230 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Implementing a custom native calendar using UICalendarView in iOS16 and Swift</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/" rel="alternate" type="text/html" title="Implementing a custom native calendar using UICalendarView in iOS16 and Swift" />
+      
+      <published>2022-06-12T18:08:00+05:30</published>
+      <updated>2022-06-12T18:08:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/">&lt;p&gt;It was WWDC22 week, and I was browsing through my Twitter feed to get some updates about the latest Apple APIs. A person tweeted, “No matter how experienced you are as an iOS developer, you’ll always look it up how to set up a date formatter.” So I humorously replied to the tweet by saying, “Dates are hard 😜 .”&lt;/p&gt;
+
+&lt;p&gt;After a while, something struck my mind, and I was curious to know if Apple had made improvements to the existing date picker. To my surprise, Apple introduced &lt;strong&gt;UICalendarView&lt;/strong&gt; to create custom calendar views from iOS 16.&lt;/p&gt;
+
+&lt;p&gt;At that moment, I could realize how easy it would become for an iOS developer to implement and customize calendar views. Previously, we used third-party calendar components, which came with issues and bugs. Let’s see how to implement a custom native calendar using UICalendarView in iOS 16 and Swift.&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-up-uicalendarview&quot;&gt;Setting up UICalendarView&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/UICalendarView/tr:w-300,h-300,r-15/UICalendarViewInit_FeL27ply-l.png?style=centerme&quot; alt=&quot;Setting up UICalendarView&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;UICalendarView belongs to the UIKit framework and comes with a simple initializer.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;calendarView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;gregorianCalendar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Calendar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;identifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gregorian&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;calendar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gregorianCalendar&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Apple tells us that it is necessary to mention the calendar type explicitly while creating a UICalendarView object. In our example, it will be gregorian calendar.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;API availablility:&lt;/strong&gt; UICalendarView is available from &lt;em&gt;iOS16.0+, iPadOS16.0+, and macCatalyst16.0+&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;customizing-uicalendarview&quot;&gt;Customizing UICalendarView&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/UICalendarView/tr:w-300,h-300,r-15/UICalendarViewCustomization_39npX0m3z.jpg?style=centerme&quot; alt=&quot;Customizing UICalendarView&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;UICalendarView supports various customizations like setting the background color, setting the view’s corner radius, changing the calendar’s tint color, and many more.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;n&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backgroundColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;secondarySystemBackground&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cornerCurve&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;continuous&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cornerRadius&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tintColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemTeal&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;uicalendarview-decorators&quot;&gt;UICalendarView Decorators&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/UICalendarView/tr:w-300,r-15/UICalendarViewDecorators_cNitUyfGJ.jpg?style=centerme&quot; alt=&quot;UICalendarView Decorators&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;UICalendarView comes with a UICalendarViewDelegate, which allows us to add date-specific decorations. It will be beneficial while showing free/busy events in a calendar.&lt;/p&gt;
+
+&lt;p&gt;Make sure you set the delegate object as well.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;n&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delegate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decorationFor&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Decoration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;font&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIFont&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;systemFont&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ofSize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIImage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;SymbolConfiguration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;font&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;font&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;systemName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;star.fill&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;withConfiguration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;withRenderingMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alwaysOriginal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In the above example, I have added a yellow star image to all the dates in the calendar. You can write your logic to customize the decorators.&lt;/p&gt;
+
+&lt;h2 id=&quot;restricting-date-selection&quot;&gt;Restricting date selection&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/UICalendarView/tr:w-300,r-15/UICalendarViewDateRange_0kAXnCWGA.jpg?style=centerme&quot; alt=&quot;Restricting date selection&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also specify the date ranges that the user can choose. In the above example, you can see that the dates before 12 June 2022 are disabled.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;n&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;availableDateRange&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DateInterval&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;distantFuture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;selection-behavior-in-uicalendarview&quot;&gt;Selection behavior in UICalendarView&lt;/h2&gt;
+
+&lt;p&gt;There are two types of selection behavior in UICalendarView: Single date selection and multi-date selection. Whether you need a single or multi-date selection must be specified in the &lt;em&gt;selectionBehaviour&lt;/em&gt; property of the calendar view.&lt;/p&gt;
+
+&lt;h3 id=&quot;for-single-selection&quot;&gt;For single selection&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dateSelection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarSelectionSingleDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;delegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;selectionBehavior&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateSelection&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;for-multi-date-selection&quot;&gt;For multi-date selection&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dateSelection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarSelectionMultiDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;delegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;calendarView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;selectionBehavior&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateSelection&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;single-date-selection-in-uicalendarview&quot;&gt;Single date selection in UICalendarView&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/UICalendarView/tr:w-300,r-15/UICalendarViewSingleSelection_6fZrAC2CY.png?style=centerme&quot; alt=&quot;Single date selection in UICalendarView&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Single date selection in UICalendarView is done using &lt;em&gt;UICalendarSelectionSingleDateDelegate&lt;/em&gt;
+The delegate provides us with two methods.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dateSelection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;selection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarSelectionSingleDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;didSelectDate&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Selected Date:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dateSelection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;selection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarSelectionSingleDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;canSelectDate&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;em&gt;didSelectDate&lt;/em&gt; method gives us a date whenever the user taps on a date in the UICalendarView.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;canSelectDate&lt;/em&gt; method is an optional delegate method using which you can decide whether to allow the user to select a specific date or not.&lt;/p&gt;
+
+&lt;h2 id=&quot;multi-date-selection-in-uicalendarview&quot;&gt;Multi-date selection in UICalendarView&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/UICalendarView/tr:w-300,r-15/UICalendarMultiDateSelection_2NLs5RooT.jpg?style=centerme&quot; alt=&quot;Multi-date selection in UICalendarView&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Multi-date selection in UICalendarView is done using &lt;em&gt;UICalendarSelectionMultiDateDelegate&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The delegate provides us with the following methods.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;multiDateSelection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;selection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarSelectionMultiDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;didSelectDate&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Selected Date:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;em&gt;didSelectDate&lt;/em&gt; method gives us the selected date by the user.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;multiDateSelection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;selection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarSelectionMultiDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;didDeselectDate&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;De-Selected Date:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;em&gt;didDeselectDate&lt;/em&gt; method gives us the deselected date by the user.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;  
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;multiDateSelection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;selection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarSelectionMultiDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;canSelectDate&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;  
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;multiDateSelection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;selection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UICalendarSelectionMultiDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;canDeselectDate&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DateComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;em&gt;canSelectDate&lt;/em&gt; and &lt;em&gt;canDeseectDate&lt;/em&gt; are optional delegate methods using which you can decide whether to allow the user to select/deselect a specific date or not.&lt;/p&gt;
+
+&lt;h3 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h3&gt;
+
+&lt;p&gt;I see UICalendarView as a considerable improvement when compared to UIDatePicker. I enjoyed exploring the UICalendarView API. I hope you will too. Do share your thoughts about UICalendarView API.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;p&gt;[1] &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uicalendarview&quot;&gt;https://developer.apple.com/documentation/uikit/uicalendarview&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2] &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2022/10068/&quot;&gt;https://developer.apple.com/videos/play/wwdc2022/10068/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - Senior iOS Engineer, speaker, and an open source enthusiast.  Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;support-creators&quot;&gt;Support creators&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Show your support to indie devs by downloading their apps from the banner displayed below. It will help them build great apps in these tough times.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://winya.link/get&quot; target=&quot;_blank&quot;&gt;
+    &lt;img src=&quot;https://ik.imagekit.io/cfsimagecdn/Winya/winya_512_qKON5oTjw.png&quot; /&gt;
+    &lt;div&gt;
+    &lt;p class=&quot;sponsor-title&quot;&gt;
+        Winya: Best live streaming app
+    &lt;/p&gt;
+    &lt;p&gt;
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/&quot;&gt;Different methods to remove the last item from an array in Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2021/04/14/exploring-deque-in-swift-collections/&quot;&gt;Exploring Deque in Swift Collections&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;Replacing UIImagePickerController with PHPickerViewController&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/06/14/embracing-localization-in-image-assets/&quot;&gt;Embracing Localization in Image Assets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/&quot;&gt;An effective way to clear entire Userdefaults in Swift&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="UIKit" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="UICalendarView" />
+      
+        <category term="FSCalendar" />
+      
+        <category term="customize calendar in iOS16" />
+      
+        <category term="iOS 16" />
+      
+        <category term="calendar view" />
+      
+        <category term="single select calendar" />
+      
+        <category term="multi select calendar" />
+      
+        <category term="swift calendar implementation" />
+      
+
+      
+        <summary type="html">It was WWDC22 week, and I was browsing through my Twitter feed to get some updates about the latest Apple APIs. A person tweeted, “No matter how experienced you are as an iOS developer, you’ll always look it up how to set up a date formatter.” So I humorously replied to the tweet by saying, “Dates are hard 😜 .”</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
@@ -2646,102 +2870,6 @@ Add the button to a view and setup the constraints. Embed the sign-in button in 
 
       
         <summary type="html">The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the ‘Sign In with Apple’ feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of ‘Sign In with Apple’ on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.</summary>
-      
-
-      
-      
-    </entry>
-  
-  
-  
-    <entry>
-      
-      <title type="html">Swift bit #3 — Unwrap optional values using for in loop</title>
-      
-      
-      <link href="https://ohmyswift.com/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/" rel="alternate" type="text/html" title="Swift bit #3 — Unwrap optional values using for in loop" />
-      
-      <published>2019-08-03T09:29:00+05:30</published>
-      <updated>2019-08-03T09:29:00+05:30</updated>
-      <id>https://ohmyswift.com/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/03/swift-bit-3-unwrap-optional-values-using-for-in-loop/">&lt;p&gt;One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.&lt;/p&gt;
-
-&lt;p&gt;Consider that there is an array of optional values. Usually, we use if let or guard statement to unwrap the optionals.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//An array of optionals.&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ford&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Lamborghini&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;McLaren&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Aston Martin&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;carObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;   
-             &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;carObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
-         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://winya.link/get&quot; target=&quot;_blank&quot;&gt;
-    &lt;img src=&quot;https://ik.imagekit.io/cfsimagecdn/Winya/winya_512_qKON5oTjw.png&quot; /&gt;
-    &lt;div&gt;
-    &lt;p class=&quot;sponsor-title&quot;&gt;
-        Winya: Best live streaming app
-    &lt;/p&gt;
-    &lt;p&gt;
-        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!&lt;/p&gt;
-    &lt;/div&gt;
-&lt;/a&gt;
-&lt;/div&gt;
-
-&lt;p&gt;The above code is okay, nothing wrong with it, but we should try to use the power of Swift whenever we can.&lt;/p&gt;
-
-&lt;p&gt;We can unwrap the array of optionals using case let directly in the for in loop.&lt;/p&gt;
-
-&lt;p&gt;Here is how you do it,&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//An array of optionals.&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ford&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Lamborghini&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;McLaren&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Aston Martin&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cars&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
-        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Neat isn’t it? The number of lines of code is reduced, and the code looks more readable.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/images/swiftbit03.png&quot; alt=&quot;Unwrapping optionals using for in loops&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Note — There are also other techniques like using compactMap to unwrap optionals, I will be covering about them in upcoming articles.
-Follow me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt;.
-Have any queries? Feel free to DM me.&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      
-        <author>
-            <name>Rizwan</name>
-          
-          
-        </author>
-      
-
-      
-        <category term="Swift fundamentals" />
-      
-
-      
-        <category term="swift" />
-      
-        <category term="for loops" />
-      
-        <category term="for in loops" />
-      
-        <category term="unwrap" />
-      
-        <category term="optionals" />
-      
-
-      
-        <summary type="html">One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.</summary>
       
 
       

@@ -1,2 +1,0 @@
-I"¨<p>As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the <code class="language-plaintext highlighter-rouge">removeObject</code> method to remove the value for a particular key.</p>
-:ET
