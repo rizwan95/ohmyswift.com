@@ -24,7 +24,7 @@ print(colors) // [Yellow, Orange]
 {% endhighlight %}
 
 The above code implements a deque of colors with the strings yellow and orange. 
-{% include appshowcase-mini.html %}
+
 
 ## Deque operations
 
@@ -87,6 +87,8 @@ Every data structure has its pros and cons. Likewise, there are some gotchas of 
 Deque is an excellent addition to Swift. Likewise, Ordered Set and Ordered Dictionary are also included in Swift collections. I will be writing more about them in the upcoming articles. 
 I hope you like this article. Do let me know your thoughts about the deque data structure in the comments below. 
 
+{% include appshowcase-mini.html %}
+
 ### References
 
 [1]  <https://swift.org/blog/swift-collections/>
@@ -104,3 +106,4 @@ I hope you like this article. Do let me know your thoughts about the deque data 
 - [Embracing Localization in Image Assets](/blog/2020/06/14/embracing-localization-in-image-assets/)
 - [An effective way to clear entire Userdefaults in Swift](/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/)
 - [Simulating remote push notifications in a simulator](/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/)
+

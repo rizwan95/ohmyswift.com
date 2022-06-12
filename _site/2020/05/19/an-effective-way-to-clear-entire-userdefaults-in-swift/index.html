@@ -70,7 +70,7 @@
 <meta property="twitter:image" content="https://ohmyswift.com/blog/assets/images/clear-userdefaults.png" />
 <meta property="twitter:title" content="An effective way to clear entire Userdefaults in Swift" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"An effective way to clear entire Userdefaults in Swift","dateModified":"2020-05-19T19:49:00+05:30","datePublished":"2020-05-19T19:49:00+05:30","description":"As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the removeObject method to remove the value for a particular key.","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/"},"url":"https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/","author":{"@type":"Person","name":"Rizwan"},"image":{"twitter":"assets/images/clear-userdefaults.png","facebook":"assets/images/clear-userdefaults.png","url":"https://ohmyswift.com/blog/assets/images/clear-userdefaults.png","@type":"imageObject"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","description":"As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the removeObject method to remove the value for a particular key.","image":{"twitter":"assets/images/clear-userdefaults.png","facebook":"assets/images/clear-userdefaults.png","url":"https://ohmyswift.com/blog/assets/images/clear-userdefaults.png","@type":"imageObject"},"headline":"An effective way to clear entire Userdefaults in Swift","datePublished":"2020-05-19T19:49:00+05:30","dateModified":"2020-05-19T19:49:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/"},"url":"https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/","author":{"@type":"Person","name":"Rizwan"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -719,6 +719,19 @@
 
   <div class="post-content" itemprop="articleBody">
     <p>As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the <code class="language-plaintext highlighter-rouge">removeObject</code> method to remove the value for a particular key.</p>
+
+<div>
+    <a class="notification sponsor" href="https://winya.link/get" target="_blank">
+    <img src="https://ik.imagekit.io/cfsimagecdn/Winya/winya_512_qKON5oTjw.png" />
+    <div>
+    <p class="sponsor-title">
+        Winya: Best live streaming app
+    </p>
+    <p>
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
+    </div>
+</a>
+</div>
 
 <figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">removeObject</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"is_app_launched"</span><span class="p">)</span></code></pre></figure>
 

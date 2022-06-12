@@ -18,9 +18,6 @@ image:
 
 Arrays are one of the most widely used data structures in Swift, and we deal with a lot of array manipulations. One such manipulation is the removal of the last element from an array. The three useful methods to remove an element from an array are dropLast(), popLast(), and removeLast()
 
-  **_Let us give back to the community. Before getting started, show your support to indie devs by downloading their apps from the banner displayed below. It will help them build great apps._**
-{% include appshowcase-mini.html %}
-
 ## dropLast()
 
 We have an array of fruits, namely, ["Apple","Orange","Banana"]. Using the dropLast() method on the array will remove the last element ('Banana' in our case), and it will return the remaining array elements. dropLast() is the preferred method to remove an array because it is safe as it does not mutate the original array. 
@@ -64,6 +61,11 @@ print(removedFruit) // Optional("Banana")
 [2] <https://developer.apple.com/documentation/swift/array/2885764-removelast>
 
 [3] <https://developer.apple.com/documentation/swift/array/1539777-poplast>
+
+
+
+  **_Let us give back to the community. Show your support to indie devs by downloading their apps from the banner displayed below. It will help them build great apps._**
+{% include appshowcase-mini.html %}
 
 
 

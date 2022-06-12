@@ -16,7 +16,6 @@ image:
 
 Dictionaries are one of the most commonly used data structures. Dictionaries come with keys and values where the keys are unique. Sometimes, there might be a situation where we would want to swap the keys and values of a dictionary. Let's see how to swap keys and values of a dictionary in swift.
 
-{% include appshowcase-mini.html %}
 
 While doing so, we need to make sure that the values which are converted to keys are hashable and unique, else the conversion will fail.
 {% highlight swift %}
@@ -62,6 +61,7 @@ Do you know a better approach than the one mentioned in this article? Let me kno
 
 - **Rizwan Ahmed** - iOS Engineer.  Twitter - <https://twitter.com/rizwanasifahmed>
 
+
 #### More articles
 
 - [Closure based actions in UIButton](/blog/2020/11/02/closure-based-actions-in-uibutton/)
@@ -69,3 +69,5 @@ Do you know a better approach than the one mentioned in this article? Let me kno
 - [Embracing Localization in Image Assets](/blog/2020/06/14/embracing-localization-in-image-assets/)
 - [An effective way to clear entire Userdefaults in Swift](/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/)
 - [Simulating remote push notifications in a simulator](/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/)
+
+{% include appshowcase-mini.html %}

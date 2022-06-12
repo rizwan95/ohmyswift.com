@@ -1,0 +1,96 @@
+I"9<p>Deque (should be pronounced as “deck”) is a collection implementing double-ended queues. Deques are similar to arrays, but they have efficient insertions and removal of elements at the beginning and at the end.</p>
+
+<p>The indexing semantics are integer indices that are the same as arrays. 
+Now let’s see a sample implementation of deque.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">colors</span><span class="p">:</span> <span class="kt">Deque</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Yellow"</span><span class="p">,</span> <span class="s">"Orange"</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span> <span class="c1">// [Yellow, Orange]</span></code></pre></figure>
+
+<p>The above code implements a deque of colors with the strings yellow and orange.</p>
+
+<div>
+    <a class="notification sponsor" href="https://winya.link/get" target="_blank">
+    <img src="https://ik.imagekit.io/cfsimagecdn/Winya/winya_512_qKON5oTjw.png" />
+    <div>
+    <p class="sponsor-title">
+        Winya: Best screen sharing app for iPhone/iPad
+    </p>
+    <p>
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
+    </div>
+</a>
+</div>
+
+<h2 id="deque-operations">Deque operations</h2>
+
+<p>Now let’s see some operations or methods unique to deques.</p>
+
+<h3 id="1-prepend---adding-an-element-at-the-beginning-of-the-deque">1. prepend - Adding an element at the beginning of the deque.</h3>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">colors</span><span class="o">.</span><span class="nf">prepend</span><span class="p">(</span><span class="s">"Blue"</span><span class="p">)</span> <span class="c1">// Blue is added to the beginning</span></code></pre></figure>
+
+<h3 id="2--append---adding-an-element-to-the-end-of-the-deque">2.  append - Adding an element to the end of the deque.</h3>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">colors</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="s">"White"</span><span class="p">)</span> <span class="c1">// White is added to the end</span></code></pre></figure>
+
+<h3 id="3-popfirst---removal-of-an-element-from-the-beginning-of-the-deque">3. popFirst - Removal of an element from the beginning of the deque.</h3>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">_</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="nf">popFirst</span><span class="p">()</span> <span class="c1">// Blue is removed</span></code></pre></figure>
+
+<h3 id="4-poplast---removal-of-an-element-from-the-beginning-of-the-deque">4. popLast - Removal of an element from the beginning of the deque.</h3>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">_</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="nf">popLast</span><span class="p">()</span> <span class="c1">// White is removed</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span> <span class="c1">// [Yellow, Orange]</span></code></pre></figure>
+
+<h2 id="other-operations">Other operations</h2>
+
+<p>Addition to deque specific methods, there are some common methods like insert, sort, etc.,</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">colors</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="s">"Violet"</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="nf">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span> <span class="c1">// [Yellow, Violet, Orange]</span>
+<span class="n">colors</span><span class="o">.</span><span class="nf">sort</span><span class="p">()</span> 
+<span class="nf">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span> <span class="c1">// [Orange, Violet, Yellow]</span></code></pre></figure>
+
+<h2 id="key-highlights-of-a-deque">Key highlights of a deque</h2>
+
+<ul>
+  <li>Deque implements value semantics.</li>
+  <li>Deque conforms to RangeReplaceableCollection, MutableCollection, and RandomAccessCollection.</li>
+  <li>Deque stores its elements in a circular buffer. So that insertions and deletions at the beginning and end are efficient.</li>
+</ul>
+
+<h2 id="the-gotchas">The Gotchas</h2>
+
+<p>Every data structure has its pros and cons. Likewise, there are some gotchas of deque which we have to know.</p>
+
+<ul>
+  <li>The storage in a deque is discontiguous, whereas, in an array, it is contiguous. Because of this behavior, insertions in the front in a deque are faster, and in arrays, random-access lookups are faster.  So it is not recommended to replace all arrays with deques in the code. We need to know when to use arrays and when to use deques.</li>
+</ul>
+
+<h2 id="closing-thoughts">Closing thoughts</h2>
+
+<p>Deque is an excellent addition to Swift. Likewise, Ordered Set and Ordered Dictionary are also included in Swift collections. I will be writing more about them in the upcoming articles. 
+I hope you like this article. Do let me know your thoughts about the deque data structure in the comments below.</p>
+
+<h3 id="references">References</h3>
+
+<p>[1]  <a href="https://swift.org/blog/swift-collections/">https://swift.org/blog/swift-collections/</a>
+[2]  <a href="https://github.com/apple/swift-collections/blob/main/Documentation/Deque.md">https://github.com/apple/swift-collections/blob/main/Documentation/Deque.md</a></p>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer.  Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h4 id="more-articles">More articles</h4>
+
+<ul>
+  <li><a href="/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/">Different methods to remove the last item from an array in Swift</a></li>
+  <li><a href="/blog/2020/11/02/closure-based-actions-in-uibutton/">Closure based actions in UIButton</a></li>
+  <li><a href="/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">Replacing UIImagePickerController with PHPickerViewController</a></li>
+  <li><a href="/blog/2020/06/14/embracing-localization-in-image-assets/">Embracing Localization in Image Assets</a></li>
+  <li><a href="/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">An effective way to clear entire Userdefaults in Swift</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+</ul>
+:ET

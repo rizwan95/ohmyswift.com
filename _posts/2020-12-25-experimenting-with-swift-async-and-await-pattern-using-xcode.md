@@ -20,7 +20,6 @@ You all might know that async/await is accepted and is available in the main sna
 1. Xcode 12.3
 2. Latest Swift Toolchain (You can download it from [here](https://link.ohmyswift.com/J3EvM)) 
 
-{% include appshowcase-mini.html %}
 
 ### Installing the Swift Toolchain 
 Download the Swift Toolchain, and install the .pkg file. After installing the Swift toolchain, open Xcode and go to Preferences -> Components and select ```Swift Development Snapshot```

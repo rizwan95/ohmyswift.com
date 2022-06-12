@@ -1,0 +1,155 @@
+I"�1<p>Apple’s new Apple Silicon (M1 processor) is a beast. The apps open pretty quickly, and the slow Xcode build times are a thing of the past. But what does it have in store for the iOS/macOS developers?</p>
+
+<p>When you try to run your existing projects on Apple Silicon devices, there are a few problems you have to resolve before your projects could build. I will list three significant issues and their solution, which most developers are likely to face when running the projects in Apple Silicon devices.</p>
+
+<div>
+    <a class="notification sponsor" href="https://winya.link/get" target="_blank">
+    <img src="https://ik.imagekit.io/cfsimagecdn/Winya/winya_512_qKON5oTjw.png" />
+    <div>
+    <p class="sponsor-title">
+        Winya: Best live streaming app
+    </p>
+    <p>
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
+    </div>
+</a>
+</div>
+
+<h3 id="running-cocoapods-on-apple-silicon-m1-processor">Running Cocoapods on Apple Silicon (M1 processor)</h3>
+
+<p>Cocoapods is not entirely compatible with ARM architecture at the time of writing this article. The reason is, Cocoapods has an internal dependency on the <a href="https://github.com/ffi/ffi">Ruby-FFI</a> gem, which is not yet compatible with the ARM architecture. When you do a  <code class="language-plaintext highlighter-rouge">sudo pod install</code> , you are likely to bump into the following error.</p>
+
+<figure class="highlight"><pre><code class="language-zsh" data-lang="zsh"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre></td><td class="code"><pre>LoadError - dlsym<span class="o">(</span>0x7f8926035eb0, Init_ffi_c<span class="o">)</span>: symbol not found - /Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi_c.bundle
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in <span class="sb">`</span>require<span class="s1">'
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'</span>
+/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:6:in <span class="sb">`</span>rescue <span class="k">in</span> &lt;top <span class="o">(</span>required<span class="o">)&gt;</span><span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:3:in `&lt;top (required)&gt;'</span>
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in <span class="sb">`</span>require<span class="s1">'
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'</span>
+/Library/Ruby/Gems/2.6.0/gems/ethon-0.12.0/lib/ethon.rb:2:in <span class="sb">`</span>&lt;top <span class="o">(</span>required<span class="o">)&gt;</span><span class="s1">'
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'</span>
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in <span class="sb">`</span>require<span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/typhoeus-1.4.0/lib/typhoeus.rb:2:in `&lt;top (required)&gt;'</span>
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in <span class="sb">`</span>require<span class="s1">'
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'</span>
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:74:in <span class="sb">`</span>cdn_url?<span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:36:in `create_source_with_url'</span>
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:21:in <span class="sb">`</span>find_or_create_source_with_url<span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:178:in `block in sources'</span>
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:177:in <span class="sb">`</span>map<span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:177:in `sources'</span>
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:1073:in <span class="sb">`</span>block <span class="k">in </span>resolve_dependencies<span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/user_interface.rb:64:in `section'</span>
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:1072:in <span class="sb">`</span>resolve_dependencies<span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:124:in `analyze'</span>
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:414:in <span class="sb">`</span>analyze<span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:239:in `block in resolve_dependencies'</span>
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/user_interface.rb:64:in <span class="sb">`</span>section<span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:238:in `resolve_dependencies'</span>
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:160:in <span class="sb">`</span><span class="nb">install</span><span class="o">!</span><span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/command/install.rb:52:in `run'</span>
+/Library/Ruby/Gems/2.6.0/gems/claide-1.0.3/lib/claide/command.rb:334:in <span class="sb">`</span>run<span class="s1">'
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/command.rb:52:in `run'</span>
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/bin/pod:55:in <span class="sb">`</span>&lt;top <span class="o">(</span>required<span class="o">)&gt;</span><span class="s1">'
+/usr/local/bin/pod:23:in `load'</span>
+/usr/local/bin/pod:23:in <span class="sb">`</span>&lt;main&gt;<span class="s1">'</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="solution">Solution</h3>
+<p>The solution is pretty straight forward. You have to run the following commands,</p>
+
+<figure class="highlight"><pre><code class="language-zsh" data-lang="zsh"><span class="nb">sudo arch</span> <span class="nt">-x86_64</span> gem <span class="nb">install </span>ffi
+<span class="nb">sudo </span>gem <span class="nb">install </span>cocoapods</code></pre></figure>
+
+<p>What we are doing is, we are running the Ruby-FFI gem with backward compatibility. 
+Some developers run the <code class="language-plaintext highlighter-rouge">Terminal.app</code> with Rosetta and perform the usual <code class="language-plaintext highlighter-rouge">sudo gem install ffi</code> installation. The developer can choose whatever method they prefer.</p>
+
+<h3 id="apple-silicon-simulator-support-for-firebase">Apple Silicon simulator support for Firebase</h3>
+
+<p>Firebase is one of the most extensively used frameworks out there. When you try to run your existing project in an Apple Silicon simulator using Xcode, you will probably bump into the following error.</p>
+
+<figure class="highlight"><pre><code class="language-llvm" data-lang="llvm"><span class="nl">ld:</span> <span class="err">in</span> <span class="err">/Users/myusername/Downloads/</span><span class="m">202009</span><span class="err">/temp/My_Project/Pods/FirebaseAnalytics/Frameworks/FIRAnalyticsConnector</span><span class="p">.</span><span class="err">framework/FIRAnalyticsConnector</span><span class="p">(</span><span class="err">FIRAnalyticsConnector_e321ed8e3db06efc9803f6c008e67a34</span><span class="p">.</span><span class="err">o</span><span class="p">),</span> <span class="err">building</span> <span class="err">for</span> <span class="err">iOS</span> <span class="err">Simulator</span><span class="p">,</span> <span class="err">but</span> <span class="err">linking</span> <span class="err">in</span> <span class="err">object</span> <span class="err">file</span> <span class="err">built</span> <span class="err">for</span> <span class="err">iOS</span><span class="p">,</span> <span class="err">file</span> <span class="err">'/Users/myusername/Downloads/</span><span class="m">202009</span><span class="err">/temp/My_Project/Pods/FirebaseAnalytics/Frameworks/FIRAnalyticsConnector</span><span class="p">.</span><span class="err">framework/FIRAnalyticsConnector'</span> <span class="err">for</span> <span class="err">architecture</span> <span class="err">arm64</span></code></pre></figure>
+
+<h3 id="solution-1">Solution</h3>
+<p>Luckily the Firebase developers have come up with a pretty neat workaround. The developers have to specify the  <code class="language-plaintext highlighter-rouge">-M1</code> tag along with the Firebase pod version.  For example,
+<code class="language-plaintext highlighter-rouge">pod 'Firebase/Analytics', '7.2-M1'</code> 
+You can use the same workaround for other Firebase related pods as well. The workaround is documented in <a href="https://github.com/firebase/firebase-ios-sdk/blob/master/AppleSilicon.md">here.</a></p>
+
+<h3 id="broken-redirections-from-default-web-browsers-to-apps-in-apple-silicon">Broken redirections from default web browsers to apps in Apple Silicon</h3>
+
+<p>Most of the Sign-in/Sign-up module in apps open up the user’s default browser. After the user successfully signs in, the browser redirects back to the app. The handoff can break if the user uses a browser that is not yet built for the Apple Silicon processors. The sign-in will not happen, and it could make the app unusable. This issue occurred with Firefox Developer Edition, which was not yet built for Apple Silicon at the time of writing this blog.</p>
+
+<h3 id="solution-2">Solution</h3>
+<p>The developer can show an alert or a message before the user attempts to sign-in about the problem. They can request the user to change their default browser to Safari or any other compatible browser. After the sign-in is done, the user can revert to their favorite browser as the default browser.</p>
+
+<h3 id="closing-thoughts">Closing thoughts</h3>
+
+<p>Good times are ahead. There is a lot to learn and to teach. I enjoyed writing and sharing this article. In the future, I will be writing more about such issues as they are discovered. Do you feel that I am missing out on something important? Do let me know in the comments below. Also, if you find this article useful, feel free to share it.</p>
+
+<h3 id="references">References</h3>
+<ul>
+  <li><a href="https://stackoverflow.com/questions/64901180/running-cocoapods-on-apple-silicon-m1">Cocoapods and Apple Silicon</a></li>
+  <li><a href="https://github.com/firebase/firebase-ios-sdk/issues/6520">Firebase and Apple Silicon</a></li>
+</ul>
+
+<h3 id="app-showcase">App Showcase</h3>
+
+<p>We always want to give back to the community. So we decided that we will review some of the most amazing apps which we had used. Please download their apps and show them your support.</p>
+
+<h4 id="app-name---winya-ios-and-ipad-os-app">App name - Winya (iOS and iPad OS app)</h4>
+
+<p>A <strong><em>free screen-sharing app</em></strong> that casts your screen to Twitch in HD. It will be useful for gamers to streaming their gameplay to Twitch.
+Ohmyswifters, <strong><em><a href="https://winya.link/getwinya">download the app</a></em></strong> and show your support to them.</p>
+
+<p><strong><em><a href="https://winya.link/getwinya">iOS, and iPadOS download link</a></em></strong></p>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer.  Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h4 id="more-articles">More articles</h4>
+
+<ul>
+  <li><a href="/blog/2020/11/02/closure-based-actions-in-uibutton/">Closure based actions in UIButton</a></li>
+  <li><a href="/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">Replacing UIImagePickerController with PHPickerViewController</a></li>
+  <li><a href="/blog/2020/06/14/embracing-localization-in-image-assets/">Embracing Localization in Image Assets</a></li>
+  <li><a href="/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">An effective way to clear entire Userdefaults in Swift</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+</ul>
+:ET

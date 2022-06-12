@@ -17,9 +17,6 @@ Buttons are an essential element in iOS apps. If you are developing an app using
 Creating a button is a straightforward process, but it becomes problematic when it comes to customizations. Soon you will find yourself writing hacks for achieving your desired result. We all have been there, and we have done it. You are not alone. Luckily, iOS 15.0 gives us a new method to customize Buttons much easier using UIButton.Configuration.
 Let's get started!
 
-  **_A gentle request. Before getting started, show your support to indie devs by downloading their apps from the banner displayed below. It will help them in building great apps._**
-{% include appshowcase-mini.html %}
-
 ## Configuration types in UIButton
 
 UIButton.Configuration comes in four different types, namely plain, filled, gray, and tinted. 
@@ -183,3 +180,7 @@ I hope the article was informative and you got to know about the modern ways to 
 - [Embracing Localization in Image Assets](/blog/2020/06/14/embracing-localization-in-image-assets/)
 - [An effective way to clear entire Userdefaults in Swift](/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/)
 - [Simulating remote push notifications in a simulator](/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/)
+
+
+  **_A gentle request. Show your support to indie devs by downloading their apps from the banner displayed below. It will help them in building great apps._**
+{% include appshowcase-mini.html %}

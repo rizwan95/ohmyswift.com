@@ -1,0 +1,51 @@
+I"/<p>One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.</p>
+
+<div>
+    <a class="notification sponsor" href="https://winya.link/get" target="_blank">
+    <img src="https://ik.imagekit.io/cfsimagecdn/Winya/winya_512_qKON5oTjw.png" />
+    <div>
+    <p class="sponsor-title">
+        Winya: Best live streaming app
+    </p>
+    <p>
+        Become a Streamer by starting a live stream from your iPhone/iPad to Twitch/YouTube or any live streaming service of your choice. Download the app and become a creator now!</p>
+    </div>
+</a>
+</div>
+
+<p><img src="/blog/assets/images/Image_localization/appdemo.png" alt="Localized image asset" height="80%" width="80%" /></p>
+
+<h2 id="how-to-localize-image-assets">How to localize image assets</h2>
+
+<ul>
+  <li>Generate the localized images in the languages which your app supports.</li>
+  <li>Go to the asset catalog and create an image asset.</li>
+  <li>Select the image and click on the attributes inspector.</li>
+  <li>From the attributes inspector, click the “Localize” button and select the languages.</li>
+  <li>Now, all you have to do is to drop the localized images in the asset catalog.</li>
+  <li>You can now see that your images are localized, and your app looks great!</li>
+</ul>
+
+<p><img src="/blog/assets/images/Image_localization/imageassetpreview.png" alt="Localized image asset" height="80%" width="80%" /></p>
+
+<p>If you want to know more about localization, refer to the following WWDC session.</p>
+
+<ul>
+  <li><a href="https://developer.apple.com/videos/play/wwdc2019/403/">WWDC 2019 Session 403 Creating Great Localized Experiences with Xcode 11</a></li>
+</ul>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> - iOS Engineer. Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></li>
+</ul>
+
+<h3 id="more-articles">More articles</h3>
+
+<ul>
+  <li><a href="/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">An effective way to clear entire Userdefaults in Swift</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+  <li><a href="/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">Why should we avoid using closures in Swift structs?</a></li>
+  <li><a href="/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">Using UICollectionViewCompositionalLayout in iOS 12 and earlier</a></li>
+</ul>
+:ET
