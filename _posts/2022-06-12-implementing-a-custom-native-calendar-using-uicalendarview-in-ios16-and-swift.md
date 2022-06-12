@@ -240,7 +240,10 @@ The _canSelectDate_ and _canDeseectDate_ are optional delegate methods using whi
 
 ### Closing thoughts
 
-I see UICalendarView as a considerable improvement when compared to UIDatePicker. I enjoyed exploring the UICalendarView API. I hope you will too. Do share your thoughts about UICalendarView API.
+I see UICalendarView as a considerable improvement when compared to UIDatePicker. I enjoyed exploring the UICalendarView API. I hope you will too. Do share your thoughts about UICalendarView API. 
+
+You can find the demo project in here 👉
+ <https://github.com/rizwan95/UICalendarView-Example>
 
 
 ### References 

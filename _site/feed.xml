@@ -5,7 +5,7 @@
   
   <link href="https://ohmyswift.com/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://ohmyswift.com/blog/" rel="alternate" type="text/html" />
-  <updated>2022-06-12T20:17:52+05:30</updated>
+  <updated>2022-06-12T20:32:31+05:30</updated>
   <id>https://ohmyswift.com/blog//</id>
 
   
@@ -157,6 +157,9 @@ The delegate provides us with two methods.&lt;/p&gt;
 &lt;h3 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h3&gt;
 
 &lt;p&gt;I see UICalendarView as a considerable improvement when compared to UIDatePicker. I enjoyed exploring the UICalendarView API. I hope you will too. Do share your thoughts about UICalendarView API.&lt;/p&gt;
+
+&lt;p&gt;You can find the demo project in here 👉
+ &lt;a href=&quot;https://github.com/rizwan95/UICalendarView-Example&quot;&gt;https://github.com/rizwan95/UICalendarView-Example&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
 
