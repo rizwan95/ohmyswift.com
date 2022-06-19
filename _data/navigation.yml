@@ -3,10 +3,9 @@
 main:
   - title: "Archives"
     url: /archives/
+  - title: "Newsletter"
+    url: /newsletter/
   - title: "Social media"
     url: /social/
   - title: "App Showcase"
     url: /showcase/
-  - title: "Support us"
-    url: "https://www.buymeacoffee.com/ohmyswift"
-    

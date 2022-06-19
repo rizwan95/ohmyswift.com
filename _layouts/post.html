@@ -16,6 +16,7 @@ layout: default
     {{ content }}
   </div>
 
+  {% include subscription-form.html %}
   {% include buymeacoffee.html %}
 
   {% if site.comments == true and page.comments != false %}
@@ -26,7 +27,6 @@ layout: default
 
 </article>
 {% include appshowcase.html %}
-{% include commento.html %}
 
 
   

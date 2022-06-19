@@ -263,7 +263,6 @@ You can find the demo project in here 👉
   **_Show your support to indie devs by downloading their apps from the banner displayed below. It will help them build great apps in these tough times._**
 {% include appshowcase-mini.html %}
 
-
 ### More articles
 
 - [Different methods to remove the last item from an array in Swift](/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/)

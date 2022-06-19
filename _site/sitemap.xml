@@ -109,6 +109,9 @@
 <loc>https://ohmyswift.com/blog/</loc>
 </url>
 <url>
+<loc>https://ohmyswift.com/blog/newsletter/</loc>
+</url>
+<url>
 <loc>https://ohmyswift.com/blog/showcase/</loc>
 </url>
 <url>
@@ -428,14 +431,5 @@
 </url>
 <url>
 <loc>https://ohmyswift.com/blog/posts/2/</loc>
-</url>
-<url>
-<loc>https://ohmyswift.com/blog/posts/3/</loc>
-</url>
-<url>
-<loc>https://ohmyswift.com/blog/posts/4/</loc>
-</url>
-<url>
-<loc>https://ohmyswift.com/blog/posts/5/</loc>
 </url>
 </urlset>
