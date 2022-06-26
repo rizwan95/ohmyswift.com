@@ -5,7 +5,7 @@ date: 2020-01-10 10:06 +0530
 category: Closures
 tags: [swift, struct, closures, struct vs classes]
 comments: true
-author: Rizwan
+author: Rizwan Ahmed A
 ---
 
 We all love closures, don't we? Closures make an iOS developer's life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, "Memory leaks and unexpected behaviors."

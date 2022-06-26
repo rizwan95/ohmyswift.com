@@ -5,7 +5,7 @@ date: 2020-08-29 11:09 +0530
 category: PHPickerViewController
 comments: true
 tags: [swift, imageassets, phphotopickerviewcontroller, uiimagepikcercontroller, images]
-author: Rizwan
+author: Rizwan Ahmed A
 summary: From iOS 14.0, Apple is providing its developers a brand new way to select images/videos from their apps using ```PHPickerViewController``` Let's find out how to implement it.
 image: 
     path: assets/images/phpickerviewcontroller/phpickerviewcontroller-facebook.png

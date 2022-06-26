@@ -9,7 +9,7 @@ og_title: Integrating 'Sign in with Apple' in iOS apps
 og_description: Article about integrating 'Sign in with Apple' in iOS apps
 og_image: /blog/assets/images/signinwithapple01.png
 og_type: blog
-author: Rizwan
+author: Rizwan Ahmed A
 ---
 
 The WWDC 2019 gave us many features to look forward. One of the most exciting features and my favorite is the 'Sign In with Apple' feature in iOS 13. The users can sign in securely, and their privacy is guaranteed. Apple is holding up their biggest promise of privacy with this feature. It is available for web and other platforms as well. We will be exploring and learning the integration of 'Sign In with Apple' on different platforms in the upcoming articles. Now, let us get started with how we can integrate it into our iOS app.

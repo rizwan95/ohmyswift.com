@@ -6,7 +6,7 @@ date: 2019-08-31 19:10 +0530
 comments: true
 category: URLSession
 tags: [swift, iOS, websockets, URLSessionWebSocketTask]
-author: Rizwan
+author: Rizwan Ahmed A
 ---
 
 We all love WebSockets, don't we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon 

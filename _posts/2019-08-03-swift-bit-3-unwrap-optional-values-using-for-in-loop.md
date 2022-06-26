@@ -4,7 +4,7 @@ title: 'Swift bit #3 — Unwrap optional values using for in loop'
 date: 2019-08-03 09:29 +0530
 category: Swift fundamentals
 tags: [swift, for loops, for in loops, unwrap, optionals]
-author: Rizwan
+author: Rizwan Ahmed A
 ---
 
 One of the most widely used features in Swift are the optionals. Optionals are types that can hold either a value or a nil value i.e nil.

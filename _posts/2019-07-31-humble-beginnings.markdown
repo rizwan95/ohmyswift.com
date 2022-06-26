@@ -3,7 +3,7 @@ layout: post
 title:  "Humble beginnings"
 date:   2019-07-31 11:48:49 +0530
 categories: Personal
-author: Rizwan
+author: Rizwan Ahmed A
 ---
 
 Blogging has always been my favorite exercise. I started creating websites using Wordpress, PHP, and PHPBB nearly ten years back. After a point, I took the path of iOS development. I became an iOS developer. Learning things in iOS was challenging as well as it was fun at the same time. As I discovered new things, I thought, why shouldn't I share my knowledge with other fellow developers? And this is the reason why I have started the blog. 

@@ -9,7 +9,7 @@ og_title: Enabling 'Sign in with Apple'in developer account
 og_description: Article about enabling 'Sign in with Apple' in iOS apps
 og_image: /blog/assets/images/signinconfig01.png
 og_type: blog
-author: Rizwan
+author: Rizwan Ahmed A
 
 ---
 

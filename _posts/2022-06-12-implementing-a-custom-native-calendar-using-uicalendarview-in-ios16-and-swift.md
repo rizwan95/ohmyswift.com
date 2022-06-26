@@ -5,7 +5,7 @@ date: 2022-06-12 18:08 +0530
 category: UIKit
 tags: [swift, UICalendarView, FSCalendar, customize calendar in iOS16, iOS 16, calendar view, single select calendar, multi select calendar, swift calendar implementation]
 comments: true
-author: Rizwan
+author: Rizwan Ahmed A
 summary: In WWDC22, Apple introduced UICalendarView to create custom calendar views from iOS 16. Let's explore how easy it is now to implement a calendar view in iOS, iPadOS, and macCatalyst.
 
 image:

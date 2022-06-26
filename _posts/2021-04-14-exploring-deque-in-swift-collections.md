@@ -5,7 +5,7 @@ date: 2021-04-14 23:00 +0530
 category: Deque
 tags: [swift, swift ordered dictionary, swift collections, swift deque, swift deque collections, swift ordered set, swift arrays, deque vs arrays, swift deque vs swift arrays]
 comments: true
-author: Rizwan
+author: Rizwan Ahmed A
 summary: Deque (should be pronounced as "deck") is a collection implementing double-ended queues. Deques are similar to arrays, but they have efficient insertions and removal of elements at the beginning and at the end. Let's see a sample implementation of deque. 
 image:
     path: assets/images/deque/Deque-fb.jpg

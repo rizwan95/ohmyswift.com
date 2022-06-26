@@ -5,7 +5,7 @@ date: 2020-05-19 19:49 +0530
 category: Userdefaults
 comments: true
 tags: [swift, userdefaults]
-author: Rizwan
+author: Rizwan Ahmed A
 summary: How will you clear all the values from UserDefaults effectively? Well, read the article to find out.
 image: 
     path: assets/images/clear-userdefaults.png

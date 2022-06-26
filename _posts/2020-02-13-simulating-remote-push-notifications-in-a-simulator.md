@@ -5,7 +5,7 @@ date: 2020-02-13 22:22 +0530
 category: Push Notifications
 tags: [swift, ios simulator, simulator notifications]
 comments: true
-author: Rizwan
+author: Rizwan Ahmed A
 
 summary: Apple just released Xcode 11.4 and one of the notable features is simulating remote push notifications in simulators. Let's see it in action.
 twitter_card:

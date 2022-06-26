@@ -5,7 +5,7 @@ date: 2020-11-02 00:54 +0530
 category: UIButton
 comments: true
 tags: [swift, uibutton closure, closure, closure uibutton, callbacks closure, closure callbacks]
-author: Rizwan
+author: Rizwan Ahmed A
 summary: iOS 14.0 brings us many improvements and new APIs. One such API is the closure based action API for UIControls. Let's see how to use it. 
 image:
     path: assets/images/closurebasedactions/Closure-based-actions-facebook.png

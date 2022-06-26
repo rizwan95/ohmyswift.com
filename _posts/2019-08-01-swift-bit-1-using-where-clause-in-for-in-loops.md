@@ -4,7 +4,7 @@ title: 'Swift bit #1 — Using “where” clause in “for in” loops'
 date: 2019-08-01 23:27 +0530
 category: Swift fundamentals
 tags: [swift, for loops, for in loops, unwrap, optionals]
-author: Rizwan
+author: Rizwan Ahmed A
 ---
 
 We all would have written a piece of code similar to this,

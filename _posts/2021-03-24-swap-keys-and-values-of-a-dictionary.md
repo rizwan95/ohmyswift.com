@@ -5,7 +5,7 @@ date: 2021-03-24 14:36 +0530
 category: Dictionary
 tags: [swift, swift dictionary, dictionary]
 comments: true
-author: Rizwan
+author: Rizwan Ahmed A
 summary: Dictionaries come with keys and values where the keys are unique. Sometimes, there might be a situation where we would want to swap the keys and values of a dictionary. Let's see how to do it.
 image:
     path: assets/images/swap-keys-values/swap-keys-values/swap-keys-values-fb.jpg

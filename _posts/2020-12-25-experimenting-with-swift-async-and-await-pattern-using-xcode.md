@@ -5,7 +5,7 @@ date: 2020-12-25 21:02 +0530
 category: Concurrency
 tags: [swift async await, async/await swift, concurrency in swift, swift concurrency, async await, async await swift5]
 comments: true
-author: Rizwan
+author: Rizwan Ahmed A
 summary: You all might know that async/await is accepted and is available in the main snapshots! Let's get our hands dirty by trying out some basic example of async/await in Swift. 
 image:
     path: assets/images/expermiment-async-await/async-await-facebook.jpeg
