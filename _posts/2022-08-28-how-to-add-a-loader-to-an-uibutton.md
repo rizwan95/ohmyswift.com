@@ -2,6 +2,18 @@
 layout: post
 title: How to add a loader to an UIButton
 date: 2022-08-28 21:28 +0530
+category: UIButton
+tags: [add loader to an uibutton, swift, UIButton, iOS15, UIButtonConfiguration, ios15 button configuration, swift ios 15, customizing uibutton in swift, swift uibutton, implementing button in swift]
+comments: true
+author: Rizwan Ahmed A
+summary: Before iOS 15, we had to write a custom button or do some hacks to show a simple loader or an UIActivityIndicator inside an UIButton. Now, it is not the case anymore. UIButtonConfiguration provides ```showsActivityIndicator```, a simple property using which we can hide/show a loader inside a button.
+
+image:
+    path: assets/images/loader_uibutton/fb.jpeg
+    twitter: assets/images/loader_uibutton/twitter.jpeg
+    facebook: assets/images/loader_uibutton/fb.jpeg
+
+
 ---
 Sometimes, we would require a button to show a loader with appropriate text when a long-duration task is done, such as downloading an image. Before iOS 15, we had to write a custom button or do some hacks to show a simple loader or an UIActivityIndicator inside an UIButton. Now, it is not the case anymore. UIButtonConfiguration provides ```showsActivityIndicator```, a simple property using which we can hide/show a loader inside a button.
 
