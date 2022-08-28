@@ -5,7 +5,7 @@
   
   <link href="https://ohmyswift.com/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://ohmyswift.com/blog/" rel="alternate" type="text/html" />
-  <updated>2022-08-13T21:47:43+05:30</updated>
+  <updated>2022-08-28T22:33:47+05:30</updated>
   <id>https://ohmyswift.com/blog//</id>
 
   
@@ -18,6 +18,139 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">How to add a loader to an UIButton</title>
+      
+      
+      <link href="https://ohmyswift.com/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/" rel="alternate" type="text/html" title="How to add a loader to an UIButton" />
+      
+      <published>2022-08-28T21:28:00+05:30</published>
+      <updated>2022-08-28T21:28:00+05:30</updated>
+      <id>https://ohmyswift.com/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton</id>
+      <content type="html" xml:base="https://ohmyswift.com/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/">&lt;p&gt;Sometimes, we would require a button to show a loader with appropriate text when a long-duration task is done, such as downloading an image. Before iOS 15, we had to write a custom button or do some hacks to show a simple loader or an UIActivityIndicator inside an UIButton. Now, it is not the case anymore. UIButtonConfiguration provides &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;showsActivityIndicator&lt;/code&gt;, a simple property using which we can hide/show a loader inside a button.&lt;/p&gt;
+
+&lt;p&gt;We recommend that you visit &lt;a href=&quot;/blog/2021/08/23/customizing-uibutton-in-ios-15/&quot;&gt;this article&lt;/a&gt; if you are unfamiliar with UIButtonConfiguration.&lt;/p&gt;
+
+&lt;h3 id=&quot;to-hide-the-loader-or-activity-indicator&quot;&gt;To hide the loader or activity indicator&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;filled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showsActivityIndicator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/UIButton/tr:w-300,r-15/tap_to_download?ik-sdk-version=javascript-1.4.3&amp;amp;updatedAt=1661706066724&amp;amp;style=centerme&quot; alt=&quot;To hide the loader or activity indicator in a UIButton&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;to-show-the-loader-or-activity-indicator&quot;&gt;To show the loader or activity indicator&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;filled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showsActivityIndicator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/UIButton/tr:w-300,r-15/downloading_image?ik-sdk-version=javascript-1.4.3&amp;amp;updatedAt=1661705998865&amp;amp;style=centerme&quot; alt=&quot;To show the loader or activity indicator in a UIButton&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;customizing-the-color-of-the-loader-or-activity-indicator&quot;&gt;Customizing the color of the loader or activity indicator&lt;/h2&gt;
+
+&lt;p&gt;We can also customize the color of the loader or activity indicator by using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIConfigurationColorTransformer&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We can use two options: choose the default ones (grayscale, preferredTint, or monochromeTint) or use our custom color.&lt;/p&gt;
+
+&lt;h3 id=&quot;default-color-usage&quot;&gt;Default color usage&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;filled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activityIndicatorColorTransformer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIConfigurationColorTransformer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;preferredTint&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;custom-color-usage&quot;&gt;Custom color usage&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;filled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activityIndicatorColorTransformer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIConfigurationColorTransformer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemYellow&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The UIButton provides us a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;configurationUpdateHandler&lt;/code&gt; where we can change the button’s appearance using the configuration. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;configurationUpdateHandler&lt;/code&gt; is triggered when the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsUpdateConfiguration&lt;/code&gt; method is called on the button.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;shouldToggleActivityIndicator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;didSet&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setNeedsUpdateConfiguration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt;  &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt;  &lt;span class=&quot;nf&quot;&gt;configureButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;filled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Download&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showsActivityIndicator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;primaryAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIAction&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shouldToggleActivityIndicator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configurationUpdateHandler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shouldToggleActivityIndicator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Downloading&quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Download&quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showsActivityIndicator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shouldToggleActivityIndicator&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activityIndicatorColorTransformer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIConfigurationColorTransformer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemYellow&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;p&gt;[1] &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uibutton/configuration&quot;&gt;https://developer.apple.com/documentation/uikit/uibutton/configuration&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - iOS Engineer.  Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;support-creators&quot;&gt;Support creators&lt;/h3&gt;
+&lt;div&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://logto.io?utm_source=ohmyswift_blog&quot; target=&quot;_blank&quot;&gt;
+    &lt;img src=&quot;https://ik.imagekit.io/cfsimagecdn/Winya/logto_f43-tpCQJ.png?ik-sdk-version=javascript-1.4.3&amp;amp;updatedAt=1660407295079&quot; /&gt;
+    &lt;div&gt;
+    &lt;p class=&quot;sponsor-title&quot;&gt;
+        Logto: Open source identity solution
+    &lt;/p&gt;
+    &lt;p&gt;
+        Logto helps you build the sign-in, auth, and user identity within minutes. It supports username, phone number, email, and social sign-in, for web and native apps.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/&quot;&gt;How to filter screenshots, cinematic videos, and depth-effect photos in PHPickerViewController&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/&quot;&gt;Implementing a custom native calendar using UICalendarView in iOS16 and Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2021/04/14/exploring-deque-in-swift-collections/&quot;&gt;Exploring Deque in Swift Collections&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;Replacing UIImagePickerController with PHPickerViewController&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/06/14/embracing-localization-in-image-assets/&quot;&gt;Embracing Localization in Image Assets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/&quot;&gt;An effective way to clear entire Userdefaults in Swift&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+        <summary type="html">Sometimes, we would require a button to show a loader with appropriate text when a long-duration task is done, such as downloading an image. Before iOS 15, we had to write a custom button or do some hacks to show a simple loader or an UIActivityIndicator inside an UIButton. Now, it is not the case anymore. UIButtonConfiguration provides showsActivityIndicator, a simple property using which we can hide/show a loader inside a button.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
@@ -2686,101 +2819,6 @@ Here, we are using the power of the ‘for in’ loops to find the UILabel from 
 
       
         <summary type="html">Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? Well, there are multiple ways of doing it.</summary>
-      
-
-      
-      
-    </entry>
-  
-  
-  
-    <entry>
-      
-      <title type="html">Enabling ‘Sign in with Apple’in developer account</title>
-      
-      
-      <link href="https://ohmyswift.com/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/" rel="alternate" type="text/html" title="Enabling &apos;Sign in with Apple&apos;in developer account" />
-      
-      <published>2019-08-12T10:26:00+05:30</published>
-      <updated>2019-08-12T10:26:00+05:30</updated>
-      <id>https://ohmyswift.com/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/">&lt;p&gt;‘&lt;strong&gt;Sign in with Apple&lt;/strong&gt;’ is an exciting feature announced in WWDC 2019. You must be wondering how to get started. Well, this article is about completed the configuration, &lt;a href=&quot;/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/&quot;&gt;Click here&lt;/a&gt; to know how to integrate ‘Sign in with Apple’ feature in your iOS apps.&lt;/p&gt;
-
-&lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://logto.io?utm_source=ohmyswift_blog&quot; target=&quot;_blank&quot;&gt;
-    &lt;img src=&quot;https://ik.imagekit.io/cfsimagecdn/Winya/logto_f43-tpCQJ.png?ik-sdk-version=javascript-1.4.3&amp;amp;updatedAt=1660407295079&quot; /&gt;
-    &lt;div&gt;
-    &lt;p class=&quot;sponsor-title&quot;&gt;
-        Logto: Open source identity solution
-    &lt;/p&gt;
-    &lt;p&gt;
-        Logto helps you build the sign-in, auth, and user identity within minutes. It supports username, phone number, email, and social sign-in, for web and native apps.&lt;/p&gt;
-    &lt;/div&gt;
-&lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Paid Apple developer account.&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Xcode 11 (It is still in beta, at the time of writing.)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;lets-get-started&quot;&gt;Let’s get started&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Login in to your Apple developer account and head to ‘&lt;strong&gt;Certificates, identifiers, and profiles&lt;/strong&gt;’ tab.&lt;/li&gt;
-  &lt;li&gt;Click the ‘&lt;strong&gt;More&lt;/strong&gt;’ tab from the left menu and select the ‘configure’ button.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinconfig01.png&quot; alt=&quot;Sign in with Apple configuration&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;registering-domains-and-emails&quot;&gt;Registering Domains and Emails,&lt;/h3&gt;
-&lt;p&gt;In the Configuration screen, you will be asked to provide a registered domain name, associated email address, and an individual email address. After specifying the domain and email address, you will be given an option to download a verification file.  Place the verification file at the path ‘&lt;strong&gt;https://yourdomainname.com/.well-known/apple-developer-domain-association.txt&lt;/strong&gt;’&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinconfig02.png&quot; alt=&quot;Sign in with Apple configuration&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;enabling-sign-in-with-apple-in-identifiers&quot;&gt;Enabling ‘Sign in with Apple’ in Identifiers&lt;/h3&gt;
-
-&lt;p&gt;It will take some time for the verfication process to be completed. Once it is done, head back to the ‘&lt;strong&gt;Identifiers&lt;/strong&gt;’ tab and enable the ‘&lt;strong&gt;Sign in with Apple&lt;/strong&gt;’ option.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/images/signinconfig03.png&quot; alt=&quot;Sign in with Apple configuration&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You have now successfully enabled ‘&lt;strong&gt;Sign in with Apple&lt;/strong&gt;’ in your developer account. You can now regenerate the profiles, download,and use them.&lt;/p&gt;
-
-&lt;h3 id=&quot;where-now&quot;&gt;Where now?&lt;/h3&gt;
-
-&lt;p&gt;As you have succesfully enabled ‘Sign in with Apple’ in your developer account, you would want to integrate it in your iOS apps. Head &lt;a href=&quot;/blog/2019/08/06/integrating-sign-in-with-apple-in-ios-apps/&quot;&gt;here&lt;/a&gt; to know how to do it.&lt;/p&gt;
-
-&lt;p&gt;Have any queries? Reach out to me on &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;Twitter&lt;/a&gt; and feel free to share your thoughts in the comments below.&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      
-        <author>
-            <name>Rizwan Ahmed A</name>
-          
-          
-        </author>
-      
-
-      
-        <category term="Sign in with Apple" />
-      
-
-      
-        <category term="swift" />
-      
-        <category term="iOS" />
-      
-        <category term="Sign in with Apple" />
-      
-
-      
-        <summary type="html">‘Sign in with Apple’ is an exciting feature announced in WWDC 2019. You must be wondering how to get started. Well, this article is about completed the configuration, Click here to know how to integrate ‘Sign in with Apple’ feature in your iOS apps.</summary>
       
 
       
