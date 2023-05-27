@@ -8,10 +8,12 @@ keywords: xcode, watchpoints, variable value changes, debugging, swift
 comments: true
 author: Rizwan Ahmed A
 summary: Master Watchpoints in Xcode to instantly track variable value changes. This guide illustrates how to boost debugging efficiency with practical examples and step-by-step instructions.
+
+
 image:
-    path: https://ik.imagekit.io/cfsimagecdn/ohmyswift/Fb661DB626-5290-4732-A9BA-A0C41C15AA8E_kTyNJOFl5.png
-    twitter: https://ik.imagekit.io/cfsimagecdn/ohmyswift/Tw56C90E33-8619-4C22-BF6B-EBEB6963D733_AbTvbnHXIn.png
-    facebook: https://ik.imagekit.io/cfsimagecdn/ohmyswift/Fb661DB626-5290-4732-A9BA-A0C41C15AA8E_kTyNJOFl5.png
+    path: assets/images/watchpoints/facebook-watchpoint.png
+    twitter: assets/images/watchpoints/twitter-watchpoint.png
+    facebook: assets/images/watchpoints/facebook-watchpoint.png 
 
 ---
 

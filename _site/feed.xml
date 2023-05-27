@@ -3,10 +3,10 @@
   <generator uri="http://jekyllrb.com" version="4.3.2">Jekyll</generator>
   
   
-  <link href="https://ohmyswift.com/blog/feed.xml" rel="self" type="application/atom+xml" />
-  <link href="https://ohmyswift.com/blog/" rel="alternate" type="text/html" />
-  <updated>2023-05-27T09:01:34+00:00</updated>
-  <id>https://ohmyswift.com/blog//</id>
+  <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
+  <updated>2023-05-27T15:07:06+05:30</updated>
+  <id>http://localhost:4000/blog//</id>
 
   
     <title type="html">Oh my Swift</title>
@@ -25,12 +25,12 @@
       <title type="html">How to Instantly Track a Variable’s Value Changes with Xcode Watchpoints</title>
       
       
-      <link href="https://ohmyswift.com/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/" rel="alternate" type="text/html" title="How to Instantly Track a Variable's Value Changes with Xcode Watchpoints" />
+      <link href="http://localhost:4000/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/" rel="alternate" type="text/html" title="How to Instantly Track a Variable&apos;s Value Changes with Xcode Watchpoints" />
       
-      <published>2023-05-26T15:04:00+00:00</published>
-      <updated>2023-05-26T15:04:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/">&lt;p&gt;In the world of programming, tracking variable changes can often turn into a debugging nightmare.
+      <published>2023-05-26T20:34:00+05:30</published>
+      <updated>2023-05-26T20:34:00+05:30</updated>
+      <id>http://localhost:4000/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/">&lt;p&gt;In the world of programming, tracking variable changes can often turn into a debugging nightmare.
 In Xcode, you might find yourself frequently relying on breakpoints and manually tracing the changes in your variables’ values. At times, you might also utilize property observers such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;didSet&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;willSet&lt;/code&gt; for this purpose.
 &lt;br /&gt;
 &lt;br /&gt;
@@ -161,12 +161,12 @@ In our case, whenever the value of the property &lt;strong&gt;salary&lt;/strong&
       <title type="html">How to add a loader to an UIButton</title>
       
       
-      <link href="https://ohmyswift.com/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/" rel="alternate" type="text/html" title="How to add a loader to an UIButton" />
+      <link href="http://localhost:4000/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/" rel="alternate" type="text/html" title="How to add a loader to an UIButton" />
       
-      <published>2022-08-28T15:58:00+00:00</published>
-      <updated>2022-08-28T15:58:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/">&lt;p&gt;Sometimes, we would require a button to show a loader with appropriate text when a long-duration task is done, such as downloading an image. Before iOS 15, we had to write a custom button or do some hacks to show a simple loader or an UIActivityIndicator inside an UIButton. Now, it is not the case anymore. UIButtonConfiguration provides &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;showsActivityIndicator&lt;/code&gt;, a simple property using which we can hide/show a loader inside a button.&lt;/p&gt;
+      <published>2022-08-28T21:28:00+05:30</published>
+      <updated>2022-08-28T21:28:00+05:30</updated>
+      <id>http://localhost:4000/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/">&lt;p&gt;Sometimes, we would require a button to show a loader with appropriate text when a long-duration task is done, such as downloading an image. Before iOS 15, we had to write a custom button or do some hacks to show a simple loader or an UIActivityIndicator inside an UIButton. Now, it is not the case anymore. UIButtonConfiguration provides &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;showsActivityIndicator&lt;/code&gt;, a simple property using which we can hide/show a loader inside a button.&lt;/p&gt;
 
 &lt;p&gt;We recommend that you visit &lt;a href=&quot;/blog/2021/08/23/customizing-uibutton-in-ios-15/&quot;&gt;this article&lt;/a&gt; if you are unfamiliar with UIButtonConfiguration.&lt;/p&gt;
 
@@ -313,12 +313,12 @@ In our case, whenever the value of the property &lt;strong&gt;salary&lt;/strong&
       <title type="html">How to filter screenshots, cinematic videos, and depth-effect photos in PHPickerViewController</title>
       
       
-      <link href="https://ohmyswift.com/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/" rel="alternate" type="text/html" title="How to filter screenshots, cinematic videos, and depth-effect photos in PHPickerViewController" />
+      <link href="http://localhost:4000/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/" rel="alternate" type="text/html" title="How to filter screenshots, cinematic videos, and depth-effect photos in PHPickerViewController" />
       
-      <published>2022-06-26T16:00:00+00:00</published>
-      <updated>2022-06-26T16:00:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/">&lt;p&gt;In iOS 14.0, Apple introduced a new way to pick images from the device’s photo library using PHPickerViewController. 
+      <published>2022-06-26T21:30:00+05:30</published>
+      <updated>2022-06-26T21:30:00+05:30</updated>
+      <id>http://localhost:4000/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/">&lt;p&gt;In iOS 14.0, Apple introduced a new way to pick images from the device’s photo library using PHPickerViewController. 
 (If you are not aware of PHPickerViewController, I strongly recommend you to read about &lt;a href=&quot;https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;PHPickerViewController first.&lt;/a&gt;)&lt;/p&gt;
 
 &lt;p&gt;Different apps have different requirements. For example, a hi-res video editing app might be interested in showing cinematic videos and videos. 
@@ -427,12 +427,12 @@ You can also add compound filters and refine your media results using &lt;code c
       <title type="html">Implementing a custom native calendar using UICalendarView in iOS16 and Swift</title>
       
       
-      <link href="https://ohmyswift.com/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/" rel="alternate" type="text/html" title="Implementing a custom native calendar using UICalendarView in iOS16 and Swift" />
+      <link href="http://localhost:4000/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/" rel="alternate" type="text/html" title="Implementing a custom native calendar using UICalendarView in iOS16 and Swift" />
       
-      <published>2022-06-12T12:38:00+00:00</published>
-      <updated>2022-06-12T12:38:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/">&lt;p&gt;It was WWDC22 week, and I was browsing through my Twitter feed to get some updates about the latest Apple APIs. A person tweeted, “No matter how experienced you are as an iOS developer, you’ll always look it up how to set up a date formatter.” So I humorously replied to the tweet by saying, “Dates are hard 😜 .”&lt;/p&gt;
+      <published>2022-06-12T18:08:00+05:30</published>
+      <updated>2022-06-12T18:08:00+05:30</updated>
+      <id>http://localhost:4000/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/">&lt;p&gt;It was WWDC22 week, and I was browsing through my Twitter feed to get some updates about the latest Apple APIs. A person tweeted, “No matter how experienced you are as an iOS developer, you’ll always look it up how to set up a date formatter.” So I humorously replied to the tweet by saying, “Dates are hard 😜 .”&lt;/p&gt;
 
 &lt;p&gt;After a while, something struck my mind, and I was curious to know if Apple had made improvements to the existing date picker. To my surprise, Apple introduced &lt;strong&gt;UICalendarView&lt;/strong&gt; to create custom calendar views from iOS 16.&lt;/p&gt;
 
@@ -644,12 +644,12 @@ The delegate provides us with two methods.&lt;/p&gt;
       <title type="html">Different methods to remove the last item from an array in Swift</title>
       
       
-      <link href="https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/" rel="alternate" type="text/html" title="Different methods to remove the last item from an array in Swift" />
+      <link href="http://localhost:4000/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/" rel="alternate" type="text/html" title="Different methods to remove the last item from an array in Swift" />
       
-      <published>2022-04-24T18:27:00+00:00</published>
-      <updated>2022-04-24T18:27:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/">&lt;p&gt;Arrays are one of the most widely used data structures in Swift, and we deal with a lot of array manipulations. One such manipulation is the removal of the last element from an array. The three useful methods to remove an element from an array are dropLast(), popLast(), and removeLast()&lt;/p&gt;
+      <published>2022-04-24T23:57:00+05:30</published>
+      <updated>2022-04-24T23:57:00+05:30</updated>
+      <id>http://localhost:4000/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/">&lt;p&gt;Arrays are one of the most widely used data structures in Swift, and we deal with a lot of array manipulations. One such manipulation is the removal of the last element from an array. The three useful methods to remove an element from an array are dropLast(), popLast(), and removeLast()&lt;/p&gt;
 
 &lt;h2 id=&quot;droplast&quot;&gt;dropLast()&lt;/h2&gt;
 
@@ -762,12 +762,12 @@ If there are no elements in the array and if removeLast() method is invoked, the
       <title type="html">Customizing UIButton in iOS 15</title>
       
       
-      <link href="https://ohmyswift.com/blog/2021/08/23/customizing-uibutton-in-ios-15/" rel="alternate" type="text/html" title="Customizing UIButton in iOS 15" />
+      <link href="http://localhost:4000/blog/2021/08/23/customizing-uibutton-in-ios-15/" rel="alternate" type="text/html" title="Customizing UIButton in iOS 15" />
       
-      <published>2021-08-23T15:33:00+00:00</published>
-      <updated>2021-08-23T15:33:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2021/08/23/customizing-uibutton-in-ios-15</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2021/08/23/customizing-uibutton-in-ios-15/">&lt;p&gt;Buttons are an essential element in iOS apps. If you are developing an app using UIKit, you will probably use UIButton class to create buttons. 
+      <published>2021-08-23T21:03:00+05:30</published>
+      <updated>2021-08-23T21:03:00+05:30</updated>
+      <id>http://localhost:4000/blog/2021/08/23/customizing-uibutton-in-ios-15</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2021/08/23/customizing-uibutton-in-ios-15/">&lt;p&gt;Buttons are an essential element in iOS apps. If you are developing an app using UIKit, you will probably use UIButton class to create buttons. 
 Creating a button is a straightforward process, but it becomes problematic when it comes to customizations. Soon you will find yourself writing hacks for achieving your desired result. We all have been there, and we have done it. You are not alone. Luckily, iOS 15.0 gives us a new method to customize Buttons much easier using UIButton.Configuration.
 Let’s get started!&lt;/p&gt;
 
@@ -972,12 +972,12 @@ The imagePlacement property supports the following options - leading, trailing, 
       <title type="html">Exploring Deque in Swift Collections</title>
       
       
-      <link href="https://ohmyswift.com/blog/2021/04/14/exploring-deque-in-swift-collections/" rel="alternate" type="text/html" title="Exploring Deque in Swift Collections" />
+      <link href="http://localhost:4000/blog/2021/04/14/exploring-deque-in-swift-collections/" rel="alternate" type="text/html" title="Exploring Deque in Swift Collections" />
       
-      <published>2021-04-14T17:30:00+00:00</published>
-      <updated>2021-04-14T17:30:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2021/04/14/exploring-deque-in-swift-collections</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2021/04/14/exploring-deque-in-swift-collections/">&lt;p&gt;Deque (should be pronounced as “deck”) is a collection implementing double-ended queues. Deques are similar to arrays, but they have efficient insertions and removal of elements at the beginning and at the end.&lt;/p&gt;
+      <published>2021-04-14T23:00:00+05:30</published>
+      <updated>2021-04-14T23:00:00+05:30</updated>
+      <id>http://localhost:4000/blog/2021/04/14/exploring-deque-in-swift-collections</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2021/04/14/exploring-deque-in-swift-collections/">&lt;p&gt;Deque (should be pronounced as “deck”) is a collection implementing double-ended queues. Deques are similar to arrays, but they have efficient insertions and removal of elements at the beginning and at the end.&lt;/p&gt;
 
 &lt;p&gt;The indexing semantics are integer indices that are the same as arrays. 
 Now let’s see a sample implementation of deque.&lt;/p&gt;
@@ -1117,12 +1117,12 @@ I hope you like this article. Do let me know your thoughts about the deque data 
       <title type="html">Swap keys and values of a Dictionary</title>
       
       
-      <link href="https://ohmyswift.com/blog/2021/03/24/swap-keys-and-values-of-a-dictionary/" rel="alternate" type="text/html" title="Swap keys and values of a Dictionary" />
+      <link href="http://localhost:4000/blog/2021/03/24/swap-keys-and-values-of-a-dictionary/" rel="alternate" type="text/html" title="Swap keys and values of a Dictionary" />
       
-      <published>2021-03-24T09:06:00+00:00</published>
-      <updated>2021-03-24T09:06:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2021/03/24/swap-keys-and-values-of-a-dictionary</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2021/03/24/swap-keys-and-values-of-a-dictionary/">&lt;p&gt;Dictionaries are one of the most commonly used data structures. Dictionaries come with keys and values where the keys are unique. Sometimes, there might be a situation where we would want to swap the keys and values of a dictionary. Let’s see how to swap keys and values of a dictionary in swift.&lt;/p&gt;
+      <published>2021-03-24T14:36:00+05:30</published>
+      <updated>2021-03-24T14:36:00+05:30</updated>
+      <id>http://localhost:4000/blog/2021/03/24/swap-keys-and-values-of-a-dictionary</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2021/03/24/swap-keys-and-values-of-a-dictionary/">&lt;p&gt;Dictionaries are one of the most commonly used data structures. Dictionaries come with keys and values where the keys are unique. Sometimes, there might be a situation where we would want to swap the keys and values of a dictionary. Let’s see how to swap keys and values of a dictionary in swift.&lt;/p&gt;
 
 &lt;p&gt;While doing so, we need to make sure that the values which are converted to keys are hashable and unique, else the conversion will fail.&lt;/p&gt;
 
@@ -1219,12 +1219,12 @@ I hope you like this article. Do let me know your thoughts about the deque data 
       <title type="html">Experimenting with Swift async and await pattern using Xcode</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode/" rel="alternate" type="text/html" title="Experimenting with Swift async and await pattern using Xcode" />
+      <link href="http://localhost:4000/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode/" rel="alternate" type="text/html" title="Experimenting with Swift async and await pattern using Xcode" />
       
-      <published>2020-12-25T15:32:00+00:00</published>
-      <updated>2020-12-25T15:32:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode/">&lt;p&gt;You all might know that async/await is accepted and is available in the main snapshots! Let’s get our hands dirty by trying out some basic example of async/await in Swift.&lt;/p&gt;
+      <published>2020-12-25T21:02:00+05:30</published>
+      <updated>2020-12-25T21:02:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode/">&lt;p&gt;You all might know that async/await is accepted and is available in the main snapshots! Let’s get our hands dirty by trying out some basic example of async/await in Swift.&lt;/p&gt;
 
 &lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
 &lt;ol&gt;
@@ -1370,12 +1370,12 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
       <title type="html">Common problems and workarounds while building apps using Apple Silicon</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon/" rel="alternate" type="text/html" title="Common problems and workarounds while building apps using Apple Silicon" />
+      <link href="http://localhost:4000/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon/" rel="alternate" type="text/html" title="Common problems and workarounds while building apps using Apple Silicon" />
       
-      <published>2020-12-19T04:27:00+00:00</published>
-      <updated>2020-12-19T04:27:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon/">&lt;p&gt;Apple’s new Apple Silicon (M1 processor) is a beast. The apps open pretty quickly, and the slow Xcode build times are a thing of the past. But what does it have in store for the iOS/macOS developers?&lt;/p&gt;
+      <published>2020-12-19T09:57:00+05:30</published>
+      <updated>2020-12-19T09:57:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon/">&lt;p&gt;Apple’s new Apple Silicon (M1 processor) is a beast. The apps open pretty quickly, and the slow Xcode build times are a thing of the past. But what does it have in store for the iOS/macOS developers?&lt;/p&gt;
 
 &lt;p&gt;When you try to run your existing projects on Apple Silicon devices, there are a few problems you have to resolve before your projects could build. I will list three significant issues and their solution, which most developers are likely to face when running the projects in Apple Silicon devices.&lt;/p&gt;
 
@@ -1422,39 +1422,39 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
 33
 34
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;LoadError - dlsym&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0x7f8926035eb0, Init_ffi_c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: symbol not found - /Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi_c.bundle
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:6:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;rescue &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:3:in `&amp;lt;top (required)&amp;gt;'&lt;/span&gt;
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/ethon-0.12.0/lib/ethon.rb:2:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'&lt;/span&gt;
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/typhoeus-1.4.0/lib/typhoeus.rb:2:in `&amp;lt;top (required)&amp;gt;'&lt;/span&gt;
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:74:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;cdn_url?&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:36:in `create_source_with_url'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:21:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;find_or_create_source_with_url&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:178:in `block in sources'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:177:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;map&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:177:in `sources'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:1073:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;block &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;resolve_dependencies&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/user_interface.rb:64:in `section'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:1072:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;resolve_dependencies&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:124:in `analyze'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:414:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;analyze&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:239:in `block in resolve_dependencies'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/user_interface.rb:64:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;section&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:238:in `resolve_dependencies'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:160:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/command/install.rb:52:in `run'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/claide-1.0.3/lib/claide/command.rb:334:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;run&lt;span class=&quot;s1&quot;&gt;'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/command.rb:52:in `run'&lt;/span&gt;
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/bin/pod:55:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
-/usr/local/bin/pod:23:in `load'&lt;/span&gt;
-/usr/local/bin/pod:23:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;main&amp;gt;&lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;&apos;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:6:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;rescue &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:3:in `&amp;lt;top (required)&amp;gt;&apos;&lt;/span&gt;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;&apos;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/ethon-0.12.0/lib/ethon.rb:2:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require&apos;&lt;/span&gt;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/typhoeus-1.4.0/lib/typhoeus.rb:2:in `&amp;lt;top (required)&amp;gt;&apos;&lt;/span&gt;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;&apos;
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:74:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;cdn_url?&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:36:in `create_source_with_url&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/sources_manager.rb:21:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;find_or_create_source_with_url&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:178:in `block in sources&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:177:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;map&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:177:in `sources&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:1073:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;block &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;resolve_dependencies&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/user_interface.rb:64:in `section&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:1072:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;resolve_dependencies&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer/analyzer.rb:124:in `analyze&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:414:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;analyze&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:239:in `block in resolve_dependencies&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/user_interface.rb:64:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;section&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:238:in `resolve_dependencies&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/installer.rb:160:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/command/install.rb:52:in `run&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/claide-1.0.3/lib/claide/command.rb:334:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;run&lt;span class=&quot;s1&quot;&gt;&apos;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/lib/cocoapods/command.rb:52:in `run&apos;&lt;/span&gt;
+/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.10.0/bin/pod:55:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;
+/usr/local/bin/pod:23:in `load&apos;&lt;/span&gt;
+/usr/local/bin/pod:23:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;main&amp;gt;&lt;span class=&quot;s1&quot;&gt;&apos;&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;solution&quot;&gt;Solution&lt;/h3&gt;
@@ -1470,11 +1470,11 @@ Some developers run the &lt;code class=&quot;language-plaintext highlighter-roug
 
 &lt;p&gt;Firebase is one of the most extensively used frameworks out there. When you try to run your existing project in an Apple Silicon simulator using Xcode, you will probably bump into the following error.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-llvm&quot; data-lang=&quot;llvm&quot;&gt;&lt;span class=&quot;nl&quot;&gt;ld:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/Users/myusername/Downloads/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;202009&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/temp/My_Project/Pods/FirebaseAnalytics/Frameworks/FIRAnalyticsConnector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;framework/FIRAnalyticsConnector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;FIRAnalyticsConnector_e321ed8e3db06efc9803f6c008e67a34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;building&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;iOS&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Simulator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;but&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;linking&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;built&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;iOS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'/Users/myusername/Downloads/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;202009&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/temp/My_Project/Pods/FirebaseAnalytics/Frameworks/FIRAnalyticsConnector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;framework/FIRAnalyticsConnector'&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;architecture&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;arm64&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-llvm&quot; data-lang=&quot;llvm&quot;&gt;&lt;span class=&quot;nl&quot;&gt;ld:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/Users/myusername/Downloads/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;202009&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/temp/My_Project/Pods/FirebaseAnalytics/Frameworks/FIRAnalyticsConnector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;framework/FIRAnalyticsConnector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;FIRAnalyticsConnector_e321ed8e3db06efc9803f6c008e67a34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;building&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;iOS&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Simulator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;but&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;linking&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;built&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;iOS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&apos;/Users/myusername/Downloads/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;202009&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/temp/My_Project/Pods/FirebaseAnalytics/Frameworks/FIRAnalyticsConnector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;framework/FIRAnalyticsConnector&apos;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;architecture&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;arm64&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;solution-1&quot;&gt;Solution&lt;/h3&gt;
 &lt;p&gt;Luckily the Firebase developers have come up with a pretty neat workaround. The developers have to specify the  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-M1&lt;/code&gt; tag along with the Firebase pod version.  For example,
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pod 'Firebase/Analytics', '7.2-M1'&lt;/code&gt; 
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pod &apos;Firebase/Analytics&apos;, &apos;7.2-M1&apos;&lt;/code&gt; 
 You can use the same workaround for other Firebase related pods as well. The workaround is documented in &lt;a href=&quot;https://github.com/firebase/firebase-ios-sdk/blob/master/AppleSilicon.md&quot;&gt;here.&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;broken-redirections-from-default-web-browsers-to-apps-in-apple-silicon&quot;&gt;Broken redirections from default web browsers to apps in Apple Silicon&lt;/h3&gt;
@@ -1576,12 +1576,12 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
       <title type="html">Closure based actions in UIButton</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/11/01/closure-based-actions-in-uibutton/" rel="alternate" type="text/html" title="Closure based actions in UIButton" />
+      <link href="http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton/" rel="alternate" type="text/html" title="Closure based actions in UIButton" />
       
-      <published>2020-11-01T19:24:00+00:00</published>
-      <updated>2020-11-01T19:24:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2020/11/01/closure-based-actions-in-uibutton</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/11/01/closure-based-actions-in-uibutton/">&lt;p&gt;iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; method in UIControls. Yes, you heard me right—no more usage of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; methods, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#selector()&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@objc&lt;/code&gt; annotation in front of methods.
+      <published>2020-11-02T00:54:00+05:30</published>
+      <updated>2020-11-02T00:54:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton/">&lt;p&gt;iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; method in UIControls. Yes, you heard me right—no more usage of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; methods, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#selector()&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@objc&lt;/code&gt; annotation in front of methods.
 More importantly, we can write a closure based code using the action handler. Okay, enough talk, let’s dive into the code.&lt;/p&gt;
 
 &lt;h3 id=&quot;target-based-uibutton-ios-130-and-earlier&quot;&gt;Target-based UIButton. (iOS 13.0 and earlier)&lt;/h3&gt;
@@ -1713,12 +1713,12 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
       <title type="html">Replacing UIImagePickerController with PHPickerViewController</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/" rel="alternate" type="text/html" title="Replacing UIImagePickerController with PHPickerViewController" />
+      <link href="http://localhost:4000/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/" rel="alternate" type="text/html" title="Replacing UIImagePickerController with PHPickerViewController" />
       
-      <published>2020-08-29T05:39:00+00:00</published>
-      <updated>2020-08-29T05:39:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">&lt;p&gt;Almost every app requires photos and video access these days. Before iOS 14.0, the iOS developers used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIImagePickerController&lt;/code&gt; to access the items from the user’s media library. From iOS 14.0, Apple is providing its developers a brand new way to select images or videos from their apps using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPickerViewController&lt;/code&gt;&lt;/p&gt;
+      <published>2020-08-29T11:09:00+05:30</published>
+      <updated>2020-08-29T11:09:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">&lt;p&gt;Almost every app requires photos and video access these days. Before iOS 14.0, the iOS developers used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIImagePickerController&lt;/code&gt; to access the items from the user’s media library. From iOS 14.0, Apple is providing its developers a brand new way to select images or videos from their apps using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPickerViewController&lt;/code&gt;&lt;/p&gt;
 
 &lt;div&gt;
 
@@ -1874,12 +1874,12 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
       <title type="html">Embracing Localization in Image Assets</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/" rel="alternate" type="text/html" title="Embracing Localization in Image Assets" />
+      <link href="http://localhost:4000/blog/2020/06/14/embracing-localization-in-image-assets/" rel="alternate" type="text/html" title="Embracing Localization in Image Assets" />
       
-      <published>2020-06-14T13:11:00+00:00</published>
-      <updated>2020-06-14T13:11:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/">&lt;p&gt;One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.&lt;/p&gt;
+      <published>2020-06-14T18:41:00+05:30</published>
+      <updated>2020-06-14T18:41:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/06/14/embracing-localization-in-image-assets</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/06/14/embracing-localization-in-image-assets/">&lt;p&gt;One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.&lt;/p&gt;
 
 &lt;div&gt;
 
@@ -1964,12 +1964,12 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
       <title type="html">An effective way to clear entire Userdefaults in Swift</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/" rel="alternate" type="text/html" title="An effective way to clear entire Userdefaults in Swift" />
+      <link href="http://localhost:4000/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/" rel="alternate" type="text/html" title="An effective way to clear entire Userdefaults in Swift" />
       
-      <published>2020-05-19T14:19:00+00:00</published>
-      <updated>2020-05-19T14:19:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">&lt;p&gt;As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;removeObject&lt;/code&gt; method to remove the value for a particular key.&lt;/p&gt;
+      <published>2020-05-19T19:49:00+05:30</published>
+      <updated>2020-05-19T19:49:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">&lt;p&gt;As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;removeObject&lt;/code&gt; method to remove the value for a particular key.&lt;/p&gt;
 
 &lt;div&gt;
 
@@ -2054,12 +2054,12 @@ So yes, it might look insignificant, but it is a helpful API. Do you have other 
       <title type="html">Using UICollectionViewCompositionalLayout in iOS 12 and earlier</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/" rel="alternate" type="text/html" title="Using UICollectionViewCompositionalLayout in iOS 12 and earlier" />
+      <link href="http://localhost:4000/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/" rel="alternate" type="text/html" title="Using UICollectionViewCompositionalLayout in iOS 12 and earlier" />
       
-      <published>2020-03-18T14:12:00+00:00</published>
-      <updated>2020-03-18T14:12:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">&lt;p&gt;At WWDC 2019, Apple added a brand new API “&lt;strong&gt;UICollectionViewCompositionalLayout&lt;/strong&gt;” to the UIKit. Using this powerful API, we can create complex compositional layouts without writing complicated code. At times, It feels tough to create complex collection view UIs using the UICollectionViewFlowLayout. The UICollectionViewCompositionalLayout API eases the process and guess what you can even support orthogonal scrolling UIs with much ease. Well, it sounds great, but practically we cannot use the UICollectionViewCompositionalLayout API until we drop the support for iOS 12.0 and earlier in our apps. (It is not going to happen for the next few years is what I predict.) So how do we use this API in iOS 12.0 and earlier?&lt;/p&gt;
+      <published>2020-03-18T19:42:00+05:30</published>
+      <updated>2020-03-18T19:42:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">&lt;p&gt;At WWDC 2019, Apple added a brand new API “&lt;strong&gt;UICollectionViewCompositionalLayout&lt;/strong&gt;” to the UIKit. Using this powerful API, we can create complex compositional layouts without writing complicated code. At times, It feels tough to create complex collection view UIs using the UICollectionViewFlowLayout. The UICollectionViewCompositionalLayout API eases the process and guess what you can even support orthogonal scrolling UIs with much ease. Well, it sounds great, but practically we cannot use the UICollectionViewCompositionalLayout API until we drop the support for iOS 12.0 and earlier in our apps. (It is not going to happen for the next few years is what I predict.) So how do we use this API in iOS 12.0 and earlier?&lt;/p&gt;
 
 &lt;div&gt;
 
@@ -2139,12 +2139,12 @@ I installed it using Cocoapods, followed the instructions given, and boom! Compo
       <title type="html">Simulating remote push notifications in a simulator</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/" rel="alternate" type="text/html" title="Simulating remote push notifications in a simulator" />
+      <link href="http://localhost:4000/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/" rel="alternate" type="text/html" title="Simulating remote push notifications in a simulator" />
       
-      <published>2020-02-13T16:52:00+00:00</published>
-      <updated>2020-02-13T16:52:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">&lt;p&gt;Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.&lt;/p&gt;
+      <published>2020-02-13T22:22:00+05:30</published>
+      <updated>2020-02-13T22:22:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">&lt;p&gt;Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.&lt;/p&gt;
 
 &lt;div&gt;
 
@@ -2242,7 +2242,7 @@ I installed it using Cocoapods, followed the instructions given, and boom! Compo
       
       
         
-        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ohmyswift.com/blog/blog/assets/images/simulatornotifications/simulatornotification.png" />
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/blog/blog/assets/images/simulatornotifications/simulatornotification.png" />
       
     </entry>
   
@@ -2253,12 +2253,12 @@ I installed it using Cocoapods, followed the instructions given, and boom! Compo
       <title type="html">Why should we avoid using closures in Swift structs?</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs/" rel="alternate" type="text/html" title="Why should we avoid using closures in Swift structs?" />
+      <link href="http://localhost:4000/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs/" rel="alternate" type="text/html" title="Why should we avoid using closures in Swift structs?" />
       
-      <published>2020-01-10T04:36:00+00:00</published>
-      <updated>2020-01-10T04:36:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs/">&lt;p&gt;We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.”
+      <published>2020-01-10T10:06:00+05:30</published>
+      <updated>2020-01-10T10:06:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs/">&lt;p&gt;We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.”
 Wait. What? Memory leak in structs? How could that be possible?&lt;/p&gt;
 
 &lt;div&gt;
@@ -2345,13 +2345,13 @@ Is that statement even true? We have so many questions already. So let’s get b
     &lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// The retain cycle occurs here. We cannot use [weak myCar] as myCar is a value type.&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My car's speed :&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My car&apos;s speed :&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prints 30&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;myNewCar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My new car's speed :&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My new car&apos;s speed :&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prints 30 still!&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -2434,12 +2434,12 @@ Regarding the retain cycle, the only way to break them is to set the variables �
       <title type="html">Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method</title>
       
       
-      <link href="https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/" rel="alternate" type="text/html" title="Swift 5 replaces IntroSort with TimSort in the 'sort()' method" />
+      <link href="http://localhost:4000/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/" rel="alternate" type="text/html" title="Swift 5 replaces IntroSort with TimSort in the &apos;sort()&apos; method" />
       
-      <published>2019-09-29T05:34:00+00:00</published>
-      <updated>2019-09-29T05:34:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/">&lt;p&gt;When we hear the term ‘Sorting,’ the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sort()&lt;/code&gt; to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was ‘Introsort,’ but after Swift 5, it is ‘Timsort.’ Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about ‘Timsort’ in this article.&lt;/p&gt;
+      <published>2019-09-29T11:04:00+05:30</published>
+      <updated>2019-09-29T11:04:00+05:30</updated>
+      <id>http://localhost:4000/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/">&lt;p&gt;When we hear the term ‘Sorting,’ the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sort()&lt;/code&gt; to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was ‘Introsort,’ but after Swift 5, it is ‘Timsort.’ Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about ‘Timsort’ in this article.&lt;/p&gt;
 
 &lt;div&gt;
 
@@ -2551,12 +2551,12 @@ In addition to maintaining the relative order of equal/non-comparable elements, 
       <title type="html">Generate URLSession code in Swift using Postman</title>
       
       
-      <link href="https://ohmyswift.com/blog/2019/09/18/generate-urlsession-code-in-swift-using-postman/" rel="alternate" type="text/html" title="Generate URLSession code in Swift using Postman" />
+      <link href="http://localhost:4000/blog/2019/09/19/generate-urlsession-code-in-swift-using-postman/" rel="alternate" type="text/html" title="Generate URLSession code in Swift using Postman" />
       
-      <published>2019-09-18T19:01:00+00:00</published>
-      <updated>2019-09-18T19:01:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2019/09/18/generate-urlsession-code-in-swift-using-postman</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2019/09/18/generate-urlsession-code-in-swift-using-postman/">&lt;p&gt;Almost every iOS developer would have had to make a network call from their app. Swift uses URLSession to make network calls. URLSessionTask includes DataTask, UploadTask, DownloadTask, and WebsocketTask (WebsocketTask is lately introduced in iOS13.0 check &lt;a href=&quot;/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/&quot;&gt;this article&lt;/a&gt; to know more about it.)
+      <published>2019-09-19T00:31:00+05:30</published>
+      <updated>2019-09-19T00:31:00+05:30</updated>
+      <id>http://localhost:4000/blog/2019/09/19/generate-urlsession-code-in-swift-using-postman</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/09/19/generate-urlsession-code-in-swift-using-postman/">&lt;p&gt;Almost every iOS developer would have had to make a network call from their app. Swift uses URLSession to make network calls. URLSessionTask includes DataTask, UploadTask, DownloadTask, and WebsocketTask (WebsocketTask is lately introduced in iOS13.0 check &lt;a href=&quot;/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/&quot;&gt;this article&lt;/a&gt; to know more about it.)
 I was testing a multipart data request API using the [Postman app.]&lt;a href=&quot;https://www.getpostman.com/&quot;&gt;https://www.getpostman.com/&lt;/a&gt; The API worked, the file got uploaded, and the results came in.
 However, I needed to write the Swift code to make a multipart request from the iOS app.
 Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could!&lt;/p&gt;
@@ -2619,12 +2619,12 @@ Neat, isn’t it? The generated code comes in very handy for developers and save
       <title type="html">Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5</title>
       
       
-      <link href="https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/" rel="alternate" type="text/html" title="Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5" />
+      <link href="http://localhost:4000/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/" rel="alternate" type="text/html" title="Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5" />
       
-      <published>2019-08-31T13:40:00+00:00</published>
-      <updated>2019-08-31T13:40:00+00:00</updated>
-      <id>https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/">&lt;p&gt;We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon 
+      <published>2019-08-31T19:10:00+05:30</published>
+      <updated>2019-08-31T19:10:00+05:30</updated>
+      <id>http://localhost:4000/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/">&lt;p&gt;We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon 
 “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore.&lt;/p&gt;
 
 &lt;div&gt;
