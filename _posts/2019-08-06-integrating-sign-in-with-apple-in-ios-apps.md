@@ -3,7 +3,7 @@ layout: post
 title: Integrating 'Sign in with Apple' in iOS apps
 date: 2019-08-05 07:41 +0530
 category: Sign in with Apple
-tags: [Swift, iOS, Sign in with Apple]
+tags: [swift, iOS, Sign in with Apple]
 comments: true
 og_title: Integrating 'Sign in with Apple' in iOS apps
 og_description: Article about integrating 'Sign in with Apple' in iOS apps

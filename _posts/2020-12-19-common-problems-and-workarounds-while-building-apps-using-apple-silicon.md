@@ -5,6 +5,8 @@ date: 2020-12-19 09:57 +0530
 category: Apple Silicon
 comments: true
 tags: [apple silicon, cocoapods, cocoapods apple silicon, cocoapods not installing in apple silicon, firebase, firebase not building in apple silicon, firebase in apple silicon, firebase apple silicon, m1 processor, apple silicon project not building]
+keywords: apple silicon, cocoapods, cocoapods apple silicon, cocoapods not installing in apple silicon, firebase, firebase not building in apple silicon, firebase in apple silicon, firebase apple silicon, m1 processor, apple silicon project not building
+
 author: Rizwan Ahmed A
 summary: Let's learn how to resolve common errors which occur while building our apps in Apple Silicon
 image:

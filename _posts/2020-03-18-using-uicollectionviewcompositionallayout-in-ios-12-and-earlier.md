@@ -3,7 +3,7 @@ layout: post
 title: "Using UICollectionViewCompositionalLayout in iOS 12 and earlier"
 date: 2020-03-18 19:42 +0530
 category: UICollectionView
-tags: [Swift, uicollectionview, uicollectionviewcompositionallayout, collection view, compositional layouts] 
+tags: [swift, uicollectionview, uicollectionviewcompositionallayout, collection view, compositional layouts] 
 comments: true
 author: Rizwan Ahmed A
 summary: Apple added a brand new API "**UICollectionViewCompositionalLayout**" to the UIKit. Well how do we use it in iOS 12.0 and earlier? Well, lets find out. 

@@ -28,10 +28,10 @@
     <link rel="stylesheet" href="/blog/assets/customstyles.css">
 
  
-    <link rel="canonical" href="https://ohmyswift.com/blog/posts/2/">
+    <link rel="canonical" href="http://localhost:4000/blog/posts/2/">
     
     
-    <link rel="alternate" type="application/rss+xml" title="Oh my Swift" href="https://ohmyswift.com/blog/feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="Oh my Swift" href="http://localhost:4000/blog/feed.xml">
   
     
   
@@ -66,19 +66,19 @@
    
     <!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Page 2 of 2 for Oh my Swift | Swift is easy to learn, but difficult to master. I will be writing interesting articles about Swift and iOS development here.</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Oh my Swift" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Swift is easy to learn, but difficult to master. I will be writing interesting articles about Swift and iOS development here." />
 <meta property="og:description" content="Swift is easy to learn, but difficult to master. I will be writing interesting articles about Swift and iOS development here." />
-<link rel="canonical" href="https://ohmyswift.com/blog/posts/2/" />
-<meta property="og:url" content="https://ohmyswift.com/blog/posts/2/" />
+<link rel="canonical" href="http://localhost:4000/blog/posts/2/" />
+<meta property="og:url" content="http://localhost:4000/blog/posts/2/" />
 <meta property="og:site_name" content="Oh my Swift" />
-<link rel="prev" href="https://ohmyswift.com/blog/" />
+<link rel="prev" href="http://localhost:4000/blog/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Oh my Swift" />
 <script type="application/ld+json">
-{"@type":"WebPage","description":"Swift is easy to learn, but difficult to master. I will be writing interesting articles about Swift and iOS development here.","headline":"Oh my Swift","url":"https://ohmyswift.com/blog/posts/2/","@context":"https://schema.org"}</script>
+{"headline":"Oh my Swift","url":"http://localhost:4000/blog/posts/2/","@type":"WebPage","description":"Swift is easy to learn, but difficult to master. I will be writing interesting articles about Swift and iOS development here.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -133,12 +133,12 @@
         <header class="post-header">
           <h1 class="post-title">
             
-              <a class="post-link" href="/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/">Enabling &#39;Sign in with Apple&#39;in developer account</a>
+              <a class="post-link" href="/blog/2019/08/27/swifty-ways-of-typecasting-objects/">Swift bit #4 - Swifty ways of typecasting objects</a>
             
           </h1>
 
           <p class="post-meta">
-            Aug 12, 2019
+            Aug 27, 2019
             
                •
   
@@ -325,7 +325,21 @@
       
     
       
-        <a href="/blog/categories/sign-in-with-apple/">Sign in with Apple</a>
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/swift-fundamentals/">Swift fundamentals</a>
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -583,10 +597,22 @@
     
       
     
-  
-    
+      
     
       
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
     
       
     
@@ -802,6 +828,22 @@
     
       
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   
     
     
@@ -822,7 +864,992 @@
       
     
       
+        <a href="/blog/tags/type-casting/">type casting</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>Often we find ourselves in a situation where we need to check whether an object belongs to a particular class or not. For example, consider there is a UIView, and there are many subviews like UITextView, UILabel, and UIStepper. Now you have to find the UILabel from the parent view and change its text value. So how do we do that? 
+Well, there are multiple ways of doing it.</p>
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/blog/2019/08/27/swifty-ways-of-typecasting-objects/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/blog/2019/08/12/enabling-sign-in-with-apple-in-developer-account/">Enabling &#39;Sign in with Apple&#39;in developer account</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Aug 12, 2019
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/sign-in-with-apple/">Sign in with Apple</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+ •
+  
+    
+    
+      
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/ios/">iOS</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
         <a href="/blog/tags/sign-in-with-apple/">Sign in with Apple</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -1239,7 +2266,21 @@
       
     
       
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
         <a href="/blog/categories/sign-in-with-apple/">Sign in with Apple</a>
+      
+    
       
     
       
@@ -1282,6 +2323,18 @@
     
     
       
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
     
       
     
@@ -1294,7 +2347,9 @@
       
     
       
-        <a href="/blog/tags/swift/">Swift</a>,
+    
+      
+    
       
     
       
@@ -1499,8 +2554,6 @@
     
   
     
-    
-      
     
       
     
@@ -1716,6 +2769,22 @@
     
       
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   
     
     
@@ -1734,9 +2803,23 @@
       
     
       
+        <a href="/blog/tags/sign-in-with-apple/">Sign in with Apple</a>
+      
     
       
-        <a href="/blog/tags/sign-in-with-apple/">Sign in with Apple</a>
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -2147,7 +3230,21 @@
       
     
       
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
         <a href="/blog/categories/swift-fundamentals/">Swift fundamentals</a>
+      
+    
       
     
       
@@ -2197,6 +3294,20 @@
     
       
         <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -2630,6 +3741,20 @@
     
       
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   
     
     
@@ -2639,6 +3764,20 @@
     
       
         <a href="/blog/tags/for-in-loops/">for in loops</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -3068,6 +4207,20 @@
     
       
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   
     
     
@@ -3081,6 +4234,20 @@
     
       
         <a href="/blog/tags/optionals/">optionals</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -3501,7 +4668,21 @@
       
     
       
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
         <a href="/blog/categories/swift/">Swift</a>,
+      
+    
       
     
       
@@ -3542,6 +4723,18 @@
     
   
     
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
     
       
     
@@ -3759,6 +4952,8 @@
     
       
     
+      
+    
   
 
 
@@ -3768,6 +4963,20 @@
     
       
         <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -4201,6 +5410,20 @@
     
       
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   
 
 
@@ -4237,6 +5460,18 @@
                •
   
     
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
     
       
     
@@ -4454,6 +5689,8 @@
     
       
     
+      
+    
   
 
 
@@ -4463,6 +5700,20 @@
     
       
         <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -4896,6 +6147,20 @@
     
       
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   
     
     
@@ -4905,6 +6170,20 @@
     
       
         <a href="/blog/tags/for-in-loops/">for in loops</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -5334,6 +6613,20 @@
     
       
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   
     
     
@@ -5347,6 +6640,20 @@
     
       
         <a href="/blog/tags/optionals/">optionals</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -5764,7 +7071,21 @@ The usual way,</p>
       
     
       
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
         <a href="/blog/categories/personal/">Personal</a>
+      
+    
       
     
       
@@ -5853,7 +7174,7 @@ So much has evolved since then. With the introduction of new technologies and fr
       <p>
         
 
-&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://ohmyswift.com/blog/feed.xml">RSS</a>
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/blog/feed.xml">RSS</a>
 
         
       </p>

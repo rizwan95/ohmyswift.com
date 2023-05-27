@@ -7,6 +7,7 @@ tags: [swift, UIButton, iOS15, UIButtonConfiguration, ios15 button configuration
 comments: true
 author: Rizwan Ahmed A
 summary: Creating a button in iOS is a straightforward process, but it becomes problematic when it comes to customizations. Luckily, iOS 15.0 gives us a new methods to customize Buttons much easier using UIButton.Configuration. Let's get started!
+keywords: swift, UIButton, iOS15, UIButtonConfiguration, ios15 button configuration, swift ios 15, customizing uibutton in swift, swift uibutton, implementing button in swift
 
 image:
     path: assets/images/customize-uibutton-ios15/customizing-uibutton-fb.jpeg

@@ -8,6 +8,8 @@ tags: [swift, imageassets, phphotopickerviewcontroller, uiimagepikcercontroller,
 comments: true
 author: Rizwan Ahmed A
 summary: Different apps have different requirements. For example, a hi-res video editing app might be interested in showing cinematic videos and videos. From iOS 16.0, Apple has introduced new APIs, making filtering media very easy. Read the article to learn more. 
+keywords: swift, imageassets, phphotopickerviewcontroller, uiimagepikcercontroller, images, phpicker, photolibrary
+
 
 image:
     path: assets/images/phpicker-filters/Facebook-PHPicker-Filter.png

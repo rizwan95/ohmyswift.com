@@ -7,6 +7,7 @@ tags: [add loader to an uibutton, swift, UIButton, iOS15, UIButtonConfiguration,
 comments: true
 author: Rizwan Ahmed A
 summary: Before iOS 15, we had to write a custom button or do some hacks to show a simple loader or an UIActivityIndicator inside an UIButton. Now, it is not the case anymore. UIButtonConfiguration provides ```showsActivityIndicator```, a simple property using which we can hide/show a loader inside a button.
+keywords: add loader to an uibutton, swift, UIButton, iOS15, UIButtonConfiguration, ios15 button configuration, swift ios 15, customizing uibutton in swift, swift uibutton, implementing button in swift
 
 image:
     path: assets/images/loader_uibutton/fb.jpeg
