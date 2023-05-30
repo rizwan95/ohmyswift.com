@@ -56,6 +56,9 @@ Set the breakpoint in the line ```john.salary = 5000``` and run the program.
 
 ![Setting a Breakpoint](https://ik.imagekit.io/cfsimagecdn/ohmyswift/057631CA-A6FE-4C87-A9C3-384F8A805E70_0e0STPh2K.png)
 
+<br  />
+{% include google-ads.html %}
+
 
 ### Step 2: Add a Watchpoint
 
@@ -77,6 +80,8 @@ In our case, whenever the value of the property **salary** changes, the watchpoi
 ## Conclusion
 
 Watchpoints are a powerful, yet often overlooked feature in Xcode that can significantly improve your debugging process. The next time you're wrestling with a bug that involves variable value changes, don't forget about the power of watchpoints - they could be the tool you need to squash that bug swiftly.
+<br  />
+{% include google-ads.html %}
 
 
 ### References

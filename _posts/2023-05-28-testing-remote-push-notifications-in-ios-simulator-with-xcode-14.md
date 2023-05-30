@@ -27,6 +27,8 @@ However, Xcode 14 allows iOS simulators running on macOS 13 on Macs with Apple s
 ## Sending Remote Push Notifications to an iOS Simulator
 
 In truth, the process is quite straightforward. If your Mac is equipped with an Apple Silicon or T2 Processor, you're all set. Just send your remote push notifications in sandbox mode as you typically would, and, they'll pop up in the simulator.
+{% include google-ads.html %}
+
 <br  />
 {% include image.html src="https://ik.imagekit.io/cfsimagecdn/ohmyswift/3F451309-D8A6-48F1-B519-FD2B9A42698A_522Tqj6I8.png?updatedAt=1685341150104" alt="Sending Remote Push Notifications to an iOS Simulator" class="resize_image center_image" %}
 
@@ -35,6 +37,9 @@ Let me explain how it works behind the scenes. <br  />
 With Xcode 14, the simulator generates unique registration token for each combination of simulator and Mac hardware.<br  />
 This lets us test the entire process of sending a push notification, which was not previously possible.  <br  />
 It's worth noting that only debug builds targeting the Apple Push Notification Service (APNS) Sandbox environment are supported.<br  /> This means that we have to connect to ```api.sandbox.push.apple.com``` to send remote push notifications to the simulator, which you might have been doing already. 
+
+{% include google-ads.html %}
+
 
 ### Wrapping Up
 
