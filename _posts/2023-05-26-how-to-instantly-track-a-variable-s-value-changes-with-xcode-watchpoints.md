@@ -81,7 +81,6 @@ In our case, whenever the value of the property **salary** changes, the watchpoi
 
 Watchpoints are a powerful, yet often overlooked feature in Xcode that can significantly improve your debugging process. The next time you're wrestling with a bug that involves variable value changes, don't forget about the power of watchpoints - they could be the tool you need to squash that bug swiftly.
 <br  />
-{% include google-ads.html %}
 
 
 ### References
