@@ -1,18 +1,18 @@
 ---
 layout: post
 title: From viewWillAppear to viewIsAppearing - Perfecting Your iOS View Transitions
-date: 2023-09-17 23:25 +0530
+date: 2023-12-01 10:00 +0530
 category: WWDC23
-tags: [swift, xcode, remote push notifications, xcode14, ios simulator, apple silicon, t2 processor, wwdc23, push notification console, ios17, viewIsAppearing]
-keywords: viewIsAppearing, swift, xcode, remote push notifications, xcode14, ios simulator, apple silicon, t2 processor, wwdc23, push notification console, ios17
+tags: [swift, xcode, xcode14, ios simulator, apple silicon, t2 processor, wwdc23, ios17, viewIsAppearing, viewWillAppear]
+keywords: viewIsAppearing, swift, xcode, remote push notifications, xcode14, ios simulator, apple silicon, t2 processor, wwdc23, push notification console, ios17, viewWillAppear
 comments: true
 author: Rizwan Ahmed A
 summary: From viewWillAppear to viewIsAppearing - Perfecting Your iOS View Transitions.
 
 image:
-    path: assets/images/push-console/facebook.png
-    twitter: assets/images/push-console/twitter.png
-    facebook: assets/images/push-console/facebook.png
+    path: assets/images/viewIsAppearing/facebook.png
+    twitter: assets/images/viewIsAppearing/twitter.png
+    facebook: assets/images/viewIsAppearing/facebook.png
 ---
 
 In WWDC23, Apple introduced a nuanced addition to the UIViewController lifecycle: ```viewIsAppearing```. This instance method is a game-changer for developers looking to fine-tune the presentation and layout of their views. Let's explore how this method enhances the way we build responsive and dynamic interfaces.
@@ -24,7 +24,7 @@ In WWDC23, Apple introduced a nuanced addition to the UIViewController lifecycle
 
 ## Why viewIsAppearing Matters?
 
-**Accurate Geometry:** By the time ```viewIsAppearing`` is called, the view has accurate geometry, including size and safe area insets. <br><br>
+**Accurate Geometry:** By the time ```viewIsAppearing``` is called, the view has accurate geometry, including size and safe area insets. <br><br>
 **Updated Traits:** The trait collections of the view and view controller are updated, which is crucial for adapting UI based on environmental changes, like Dark Mode or accessibility settings.  <br><br>
 **Layout Established:** The superview has laid out the view, making it the right place to make final adjustments or scroll a table view to a specific position.  <br><br>
 
@@ -41,8 +41,8 @@ Trait and Geometry-Dependent Updates: When you need the updated traits and geome
 Post-Layout Adjustments: If you need to make changes after the view has been laid out by its superview, such as scrolling to a specific position in a UIScrollView.
 
 
-### Implementing viewIsAppearing
-When overriding this method, it's crucial to call super.viewIsAppearing(_:) to maintain the integrity of the lifecycle events. Below is an example illustrating the usage of viewIsAppearing:
+## Implementing viewIsAppearing
+When overriding this method, it's crucial to call ```super.viewIsAppearing(_:)``` to maintain the integrity of the lifecycle events. Below is an example illustrating the usage of viewIsAppearing:
 
 
 {% highlight swift %}
@@ -54,3 +54,29 @@ override func viewIsAppearing(_ animated: Bool) {
     }
 }
 {% endhighlight %}
+
+In this scenario, the viewIsAppearing method ensures that the collection view scrolls to the new item only after all layout information is accurately determined.
+
+## In Conclusion
+
+```viewIsAppearing``` offers a strategic point in the view lifecycle for making UI adjustments. By understanding the precise timing of its call, developers can ensure that their UI changes are made with the most up-to-date information about the view's traits and geometry. Use this method to polish the details of your user interface, making your app feel more responsive and intuitive.
+
+### References
+
+- [viewIsAppearing(_:) Documentation](https://developer.apple.com/documentation/uikit/uiviewcontroller/4195485-viewisappearing)
+
+### About the author
+
+- **Rizwan Ahmed** - Senior iOS Engineer. 
+<br> Twitter - <https://twitter.com/rizwanasifahmed>
+
+### More articles
+
+- [Exploring the New Push Notifications Console from Apple](/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple/)
+- [How to send Remote Push Notifications to an iOS Simulator with Xcode 14](/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/)
+- [How to Instantly Track a Variable's Value Changes with Xcode Watchpoints](/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/)
+- [How to add a loader to an UIButton](/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/)
+- [How to filter screenshots, cinematic videos, and depth-effect photos in PHPickerViewController](/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/)
+- [Implementing a custom native calendar using UICalendarView in iOS16 and Swift](/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/)
+- [Exploring Deque in Swift Collections](/blog/2021/04/14/exploring-deque-in-swift-collections/)
+- [Replacing UIImagePickerController with PHPickerViewController](/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/)
