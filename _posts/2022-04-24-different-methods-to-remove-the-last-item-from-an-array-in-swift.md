@@ -65,11 +65,6 @@ print(removedFruit) // Optional("Banana")
 
 
 
-  **_Let us give back to the community. Show your support to indie devs by downloading their apps from the banner displayed below. It will help them build great apps._**
-{% include appshowcase-mini.html %}
-
-
-
 ### About the author
 
 - **Rizwan Ahmed** - iOS Engineer.  Twitter - <https://twitter.com/rizwanasifahmed>

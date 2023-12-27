@@ -23,7 +23,6 @@ Consider that there is an array of optional values. Usually, we use if let or gu
     }
 {% endhighlight %}
 
-{% include appshowcase-mini.html %}
 
 The above code is okay, nothing wrong with it, but we should try to use the power of Swift whenever we can.
 
