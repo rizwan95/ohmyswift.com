@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/blog/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/blog/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/blog/assets/images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/blog/assets/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#9f00a7">
+    <meta name="theme-color" content="#ffffff">
+    <!-- <link href="https://newsletter.codeflakes.studio/public/static/style.css" rel="stylesheet" type="text/css">
+    <link href="https://newsletter.codeflakes.studio/public/custom.css" rel="stylesheet" type="text/css">
+    <link href="https://newsletter.codeflakes.studio/public/custom.js" rel="stylesheet" type="text/css"> -->
+    
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    </noscript>
+      
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    </noscript>
+
+  
+    <!-- AOS.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css"/>
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+  
+    
+    
+    
+    <title>Swift 5 replaces IntroSort with TimSort in the &#39;sort()&#39; method</title>
+    <meta name="description" content="When we hear the term ‘Sorting,’ the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method sort() to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was ‘Introsort,’ but after Swift 5, it is ‘Timsort.’ Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about ‘Timsort’ in this article.">
+    
+  
+    <link rel="stylesheet" href="/blog/assets/main.css">
+    <link rel="stylesheet" href="/blog/assets/css/fonts.css">
+    <link rel="stylesheet" href="/blog/assets/css/customstyles.css">
+    <link rel="stylesheet" href="/blog/assets/css/custom_image.css">
+
+ 
+    <link rel="canonical" href="https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/">
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="OhMySwift" href="https://ohmyswift.com/blog/feed.xml">
+  
+    
+  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6606434168907131"
+     crossorigin="anonymous"></script>
+    
+  
+  
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-144905716-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3SC6RS0VBR"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-3SC6RS0VBR');
+</script>
+
+   
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method | OhMySwift</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method" />
+<meta name="author" content="Rizwan Ahmed A" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="When we hear the term ‘Sorting,’ the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method sort() to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was ‘Introsort,’ but after Swift 5, it is ‘Timsort.’ Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about ‘Timsort’ in this article." />
+<meta property="og:description" content="When we hear the term ‘Sorting,’ the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method sort() to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was ‘Introsort,’ but after Swift 5, it is ‘Timsort.’ Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about ‘Timsort’ in this article." />
+<link rel="canonical" href="https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/" />
+<meta property="og:url" content="https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/" />
+<meta property="og:site_name" content="OhMySwift" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-29T11:04:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","description":"When we hear the term ‘Sorting,’ the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method sort() to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was ‘Introsort,’ but after Swift 5, it is ‘Timsort.’ Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about ‘Timsort’ in this article.","headline":"Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method","dateModified":"2019-09-29T11:04:00+05:30","datePublished":"2019-09-29T11:04:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/"},"url":"https://ohmyswift.com/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/","author":{"@type":"Person","name":"Rizwan Ahmed A"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+
+</head>
+  
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">OhMySwift</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="/blog/newsletter/">Newsletter</a>
+      
+        
+        <a class="page-link" href="/blog/social/">Social media</a>
+      
+        
+        <a class="page-link" href="/blog/showcase/">App Showcase</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Swift 5 replaces IntroSort with TimSort in the &#39;sort()&#39; method</h1>
+    
+    <p class="post-meta"><time datetime="2019-09-29T11:04:00+05:30" itemprop="datePublished">Sep 29, 2019</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan Ahmed A</span></span> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/algorithms/">Algorithms</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+ •
+  
+    
+    
+      
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/timsort/">timsort</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/algorithms/">algorithms</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/sort/">sort</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>When we hear the term ‘Sorting,’ the algorithms which come to our mind are quicksort, insertion sort, merge sort, bubble sort, heap sort, and other sorting algorithms. We would have used the method <code class="language-plaintext highlighter-rouge">sort()</code> to sort elements in an array, in our day to day programming tasks. However, have you ever wondered what algorithm does the method uses to sort the items in Swift? Before Swift 5, it was ‘Introsort,’ but after Swift 5, it is ‘Timsort.’ Timsort is a sorting algorithm, used in programming languages like Python, and Java. I am going to cover mostly about ‘Timsort’ in this article.</p>
+
+<div>
+    <a class="notification sponsor" href="https://apps.apple.com/app/apple-store/id1590127239?pt=423641&amp;ct=iosblog&amp;mt=8" target="_blank">
+    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/todo.svg" />
+    <div>
+    <p class="sponsor-title">
+        Zoho ToDo: Get work organised 
+    </p>
+    <p>
+        Zoho ToDo is the ultimate task management application for all your personal and work tasks. <br /> With clean views, personal and group tasks, categories, Kanban boards, social-media style collaboration, and mobile-exclusive features, you'll start enjoying every task you do!
+    </p>
+    </div>
+</a>
+</div>
+
+<h2 id="what-is-timsort">What is ‘Timsort?’</h2>
+<p>Timsort is a hybrid sorting algorithm similar to introsort. Hybrid sorting algorithms are the ones which combine two or more sorting techniques to achieve the required results. For example, introsort is a combination of insertion sort, quick sort, and heap sort whereas, Timsort is a beautiful combination of binary insertion sort and merge sort.</p>
+
+<p><img src="/blog/assets/images/timsortcomparisionchart.png" alt="Timsort in Swift" /></p>
+
+<h2 id="what-is-so-special-about-timsort">What is so special about Timsort?</h2>
+<p>Timsort is a stable sorting algorithm, whereas Introsort is an unstable sorting algorithm. Stable sorting algorithms are those in which the repeated elements are maintained in the same order as given during the input.</p>
+
+<p>Unstable sorting algorithms are those in which the order of the repeated elements are not maintained in the same order as given during the input.</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sorting_stability_playing_cards.svg/440px-Sorting_stability_playing_cards.svg.png" alt="Stable and unstable sorting algorithms" /></p>
+
+<p>Source - Wikipedia</p>
+
+<h2 id="how-does-timsort-work">How does Timsort work?</h2>
+<p>I had already mentioned that Timsort uses a combination of binary insertion sort and merge sort. Timsort divides the array of elements into smaller sections and sorts them using binary insertion sort and merges the sorted arrays using merge sort. Isn’t it cool? This technique is efficient when compared to introsort. Timsort has a worst case of O(n log n), and non-constant space complexity.</p>
+
+<h2 id="how-does-timsort-use-insertion-sort">How does Timsort use insertion sort?</h2>
+<p>Timsort scans the array at first and performs a progressive sorting and merging of sub-arrays(sub-partitions), instead of dividing the entire array at first and merging them at the end. These partitions are known as “runs.” Whenever a run is found, it is added to a stack containing all other previous runs.</p>
+
+<p>My friend, Bruno Rocha tells that, Timsort takes advantage of the fact that in every array of elements, there are contiguous subsequences of already sorted elements. In such cases, Timsort keeps on advancing its pointer until the current sequence stops being an ascending or descending pattern to find its next run.</p>
+
+<p><strong>Step 1</strong> - If the given sequence of elements is descending, we can quickly sort it in linear time by reversing the sequence.</p>
+
+<p><strong>Step 2</strong> - Timsort defines that every run should have a power of two, ranging from 16 to 256 or anything close to that. If the current run size is found to be smaller than the minimum field size, the elements are sorted immediately using insertion sort.</p>
+
+<h2 id="how-does-merge-work-in-timsort">How does merge work in Timsort?</h2>
+<p>In general, Timsort’s merging procedure is similar to mergesort. The algorithm tries to collapse the top three runs into a single one by merging them.<br />
+Timsort makes use of the fact that if a specific array keeps on winning the comparison, then it is likely that it will win every time. In such cases, instead of comparing, we can apply binary search to reduce the comparisons. This technique is called as galloping. Swift doesn’t use galloping, but it attempts to collapse runs based on the last four runs, instead of three.</p>
+
+<h2 id="timsort-algorithm-benchmarks">Timsort algorithm benchmarks.</h2>
+
+<p>During October 2018, Nate Cook submitted a PR for implementing Timsort in Swift. He stated,</p>
+
+<p>“This switches the standard library’s sort algorithm from an in-place introsort to use a modified Timsort, a stable, adaptive sort that merges runs using a temporary buffer. This implementation performs straight merges instead of adopting Timsort’s galloping strategy.
+In addition to maintaining the relative order of equal/non-comparable elements, this algorithm outperforms the introsort on data with any intrinsic structure, such as runs of ascending or descending elements or a significant number of equality collisions. Benchmarking script and results can be seen in this gist: <a href="https://gist.github.com/natecook1000/5161e10aeba09408c130284ea6ec4e11">https://gist.github.com/natecook1000/5161e10aeba09408c130284ea6ec4e11</a>”</p>
+
+<p>The pull request went through many iterations, and finally, the Timsort pull request was merged in November 2018.</p>
+
+<h2 id="my-thoughts-about-swift">My thoughts about Swift</h2>
+<p>It is fantastic to see how Swift is evolving every moment. A lot has changed since Swift’s initial release, and it is still changing. This kind of rapid evolution wouldn’t have been possible without the contribution of our Swift community. 
+ I realized that the more I learned, the more I understand that I know a very little. (Here is my <a href="https://twitter.com/rizwanasifahmed/status/1176908418256211969?s=20">tweet</a> about it.)</p>
+
+<p>Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
+ You can also follow me on twitter right here: <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></p>
+
+<h2 id="references">References:</h2>
+<p>If you want to learn more about Introsort , read this fantastic <a href="https://medium.com/swift2go/timsort-and-introsort-swifts-sorting-algorithms-f4b85b8fcbe2">blog</a> written by my friend Bruno Rocha</p>
+
+<p>Pull request Link: <a href="https://github.com/apple/swift/pull/19717">https://github.com/apple/swift/pull/19717</a></p>
+
+<p>SwiftCI Benchmark results: <a href="https://github.com/apple/swift/pull/19717#issuecomment-427511589">https://github.com/apple/swift/pull/19717#issuecomment-427511589</a></p>
+
+<p>Timsort: <a href="https://svn.python.org/projects/python/trunk/Objects/listsort.txt">https://svn.python.org/projects/python/trunk/Objects/listsort.txt</a></p>
+
+<h3 id="more-articles">More articles</h3>
+
+<ul>
+  <li><a href="/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">Using UICollectionViewCompositionalLayout in iOS 12 and earlier</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+  <li><a href="/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">Why should we avoid using closures in Swift structs?</a></li>
+</ul>
+
+  </div>
+  <!-- <script defer src="https://comments.codeflakesstudio.com/js/commento.js"></script>
+<div id="commento"></div>
+ -->
+  <!-- <div class="container wrap">
+<form method="post" action="https://newsletter.codeflakes.studio/subscription/form" class="listmonk-form">
+    <div>
+        <h2 class="centerstyle">OhMySwift Weekly</h2>
+        <p class="centerstyle">Interested in learning or upgrading your skills as an iOS/macOS developer? Then this newsletter is for you. Published on Fridays. </p>
+        <input type="hidden" name="nonce" />
+        <p><input type="email" name="email" required placeholder="E-mail" /></p>
+        <p><input type="text" name="name" placeholder="Name (optional)" /></p>
+        <p hidden>
+            <input id="d16d7" type="checkbox" name="l" checked value="d16d7a36-f48f-4edc-b743-7f2e6ca70478" />
+            <label for="d16d7">OhMySwift Readers</label>
+        </p>
+        <p class="centerstyle">
+            <button type="submit" class="button">Subscribe</button>
+        </p>
+        <p class="centerstyle">
+            No spam, ever. We’ll never share your email address and you can opt out at any time.
+        </p>
+
+    </div>
+</form>
+</div>
+
+ -->
+  <div>
+    <a class="notification sponsor" href="https://apps.apple.com/app/apple-store/id1590127239?pt=423641&ct=iosblog&mt=8" target="_blank">
+    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/todo.svg">
+    <div>
+    <p class= "sponsor-title">
+        Zoho ToDo: Get work organised 
+    </p>
+    <p>
+        Zoho ToDo is the ultimate task management application for all your personal and work tasks. <br /> With clean views, personal and group tasks, categories, Kanban boards, social-media style collaboration, and mobile-exclusive features, you'll start enjoying every task you do!
+    </p>
+    </div>
+</a>
+</div>
+  <div class = "centerstyle">
+    <p>Like our articles? Support us!</p>
+ 
+
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="ohmyswift" data-color="#FFDD00" data-emoji="🍕"  data-font="Lato" data-text="Buy me a pizza" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+
+
+</div>
+
+</article>
+
+
+
+  
+      </div>
+    </main>
+
+    <footer class="site-footer">
+    <div class="wrapper">
+
+
+      <p>
+        
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://ohmyswift.com/blog/feed.xml">RSS</a>
+
+      </p>
+
+    <div>
+<script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ohmyswift" data-description="Support me on Buy me a coffee!" data-message="Do you like our articles? Support us! Buy us a pizza" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18">
+</script>
+</div>
+    <div class = "centerstyle">
+    <p>Ohmyswift is hosted at <a href="https://host-palace.com/?affid=13">HostPalace</a> </p>
+</div>
+</footer>
+
+  </body>
+
+</html>

@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/blog/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/blog/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/blog/assets/images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/blog/assets/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#9f00a7">
+    <meta name="theme-color" content="#ffffff">
+    <!-- <link href="https://newsletter.codeflakes.studio/public/static/style.css" rel="stylesheet" type="text/css">
+    <link href="https://newsletter.codeflakes.studio/public/custom.css" rel="stylesheet" type="text/css">
+    <link href="https://newsletter.codeflakes.studio/public/custom.js" rel="stylesheet" type="text/css"> -->
+    
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    </noscript>
+      
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    </noscript>
+
+  
+    <!-- AOS.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css"/>
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+  
+    
+    
+    
+    <title>Simulating remote push notifications in a simulator</title>
+    <meta name="description" content="Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.">
+    
+  
+    <link rel="stylesheet" href="/blog/assets/main.css">
+    <link rel="stylesheet" href="/blog/assets/css/fonts.css">
+    <link rel="stylesheet" href="/blog/assets/css/customstyles.css">
+    <link rel="stylesheet" href="/blog/assets/css/custom_image.css">
+
+ 
+    <link rel="canonical" href="https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="OhMySwift" href="https://ohmyswift.com/blog/feed.xml">
+  
+    
+  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6606434168907131"
+     crossorigin="anonymous"></script>
+    
+  
+  
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-144905716-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3SC6RS0VBR"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-3SC6RS0VBR');
+</script>
+
+   
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Simulating remote push notifications in a simulator | OhMySwift</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Simulating remote push notifications in a simulator" />
+<meta name="author" content="Rizwan Ahmed A" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible." />
+<meta property="og:description" content="Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible." />
+<link rel="canonical" href="https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/" />
+<meta property="og:url" content="https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/" />
+<meta property="og:site_name" content="OhMySwift" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-13T22:22:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Simulating remote push notifications in a simulator" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","description":"Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.","headline":"Simulating remote push notifications in a simulator","dateModified":"2020-02-13T22:22:00+05:30","datePublished":"2020-02-13T22:22:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/"},"url":"https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/","author":{"@type":"Person","name":"Rizwan Ahmed A"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+
+</head>
+  
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">OhMySwift</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="/blog/newsletter/">Newsletter</a>
+      
+        
+        <a class="page-link" href="/blog/social/">Social media</a>
+      
+        
+        <a class="page-link" href="/blog/showcase/">App Showcase</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Simulating remote push notifications in a simulator</h1>
+    
+    <p class="post-meta"><time datetime="2020-02-13T22:22:00+05:30" itemprop="datePublished">Feb 13, 2020</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan Ahmed A</span></span> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/push-notifications/">Push Notifications</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+ •
+  
+    
+    
+      
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/ios-simulator/">ios simulator</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/simulator-notifications/">simulator notifications</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.</p>
+
+<div>
+    <a class="notification sponsor" href="https://apps.apple.com/app/apple-store/id1590127239?pt=423641&amp;ct=iosblog&amp;mt=8" target="_blank">
+    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/todo.svg" />
+    <div>
+    <p class="sponsor-title">
+        Zoho ToDo: Get work organised 
+    </p>
+    <p>
+        Zoho ToDo is the ultimate task management application for all your personal and work tasks. <br /> With clean views, personal and group tasks, categories, Kanban boards, social-media style collaboration, and mobile-exclusive features, you'll start enjoying every task you do!
+    </p>
+    </div>
+</a>
+</div>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>Well, the requirements are quite simple. We will be needing the following,</p>
+
+<ul>
+  <li>Xcode 11.4 beta or above.</li>
+  <li>Bundle identifier of your app.</li>
+  <li>The device identifier of your currently active simulator.</li>
+  <li>Push notification payload.</li>
+  <li>Terminal.</li>
+</ul>
+<div>
+    <a class="notification sponsor" href="https://apps.apple.com/app/apple-store/id1590127239?pt=423641&amp;ct=iosblog&amp;mt=8" target="_blank">
+    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/todo.svg" />
+    <div>
+    <p class="sponsor-title">
+        Zoho ToDo: Get work organised 
+    </p>
+    <p>
+        Zoho ToDo is the ultimate task management application for all your personal and work tasks. <br /> With clean views, personal and group tasks, categories, Kanban boards, social-media style collaboration, and mobile-exclusive features, you'll start enjoying every task you do!
+    </p>
+    </div>
+</a>
+</div>
+<h2 id="how-to-find-the-device-identifier-of-the-simulator">How to find the device identifier of the simulator</h2>
+
+<p>You can find the simulator’s device identifier from <strong>Window</strong> -&gt; <strong>Devices and Simulator</strong> -&gt; <strong>Select the active simulator</strong> -&gt; <strong>Copy the displayed identifier</strong></p>
+
+<h2 id="how-to-generate-push-notification-payload">How to generate push notification payload</h2>
+
+<p>The push notification payload is of the standard Apple format.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"aps":{"alert":"I am a remote push notification","badge":1,"sound":"default"}}
+</code></pre></div></div>
+
+<p>Save the following JSON in the .apns format.
+    (We will be saving the json in a file as notficationpayload.apns for the tutorial purpose. )</p>
+
+<h2 id="how-to-trigger-remote-push-notifications-in-the-simulator">How to trigger remote push notifications in the simulator</h2>
+
+<ul>
+  <li>Run the app in simulator using Xcode.</li>
+  <li>Open terminal.</li>
+  <li>Navigate to the folder where the payload file is present .</li>
+  <li>
+    <p>Execute the command with the format,
+ <code class="language-plaintext highlighter-rouge">xcrun simctl push &lt;device-identifier&gt; &lt;your-bundle-id&gt; notificationpayload.apns</code>
+ (Sample command -
+ <code class="language-plaintext highlighter-rouge">xcrun simctl push 3A3CE233-307D-463D-A1C6-F66B9C2C1445 com.sample.pushnotification notificationpayload.apns</code>)</p>
+  </li>
+  <li>Hit enter.</li>
+</ul>
+
+<p>That’s it! Notifications will start to appear on your simulator!</p>
+
+<p><img src="/blog/assets/images/simulatornotifications/simulatornotification.png" alt="Simulating remote push notifications in a simulator" /></p>
+
+<p>Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
+ You can also follow me on twitter right here: <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a></p>
+
+<h3 id="more-articles">More articles</h3>
+
+<ul>
+  <li><a href="/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/">Using UICollectionViewCompositionalLayout in iOS 12 and earlier</a></li>
+  <li><a href="/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/">Why should we avoid using closures in Swift structs?</a></li>
+  <li><a href="/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/">Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method</a></li>
+</ul>
+
+  </div>
+  <!-- <script defer src="https://comments.codeflakesstudio.com/js/commento.js"></script>
+<div id="commento"></div>
+ -->
+  <!-- <div class="container wrap">
+<form method="post" action="https://newsletter.codeflakes.studio/subscription/form" class="listmonk-form">
+    <div>
+        <h2 class="centerstyle">OhMySwift Weekly</h2>
+        <p class="centerstyle">Interested in learning or upgrading your skills as an iOS/macOS developer? Then this newsletter is for you. Published on Fridays. </p>
+        <input type="hidden" name="nonce" />
+        <p><input type="email" name="email" required placeholder="E-mail" /></p>
+        <p><input type="text" name="name" placeholder="Name (optional)" /></p>
+        <p hidden>
+            <input id="d16d7" type="checkbox" name="l" checked value="d16d7a36-f48f-4edc-b743-7f2e6ca70478" />
+            <label for="d16d7">OhMySwift Readers</label>
+        </p>
+        <p class="centerstyle">
+            <button type="submit" class="button">Subscribe</button>
+        </p>
+        <p class="centerstyle">
+            No spam, ever. We’ll never share your email address and you can opt out at any time.
+        </p>
+
+    </div>
+</form>
+</div>
+
+ -->
+  <div>
+    <a class="notification sponsor" href="https://apps.apple.com/app/apple-store/id1590127239?pt=423641&ct=iosblog&mt=8" target="_blank">
+    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/todo.svg">
+    <div>
+    <p class= "sponsor-title">
+        Zoho ToDo: Get work organised 
+    </p>
+    <p>
+        Zoho ToDo is the ultimate task management application for all your personal and work tasks. <br /> With clean views, personal and group tasks, categories, Kanban boards, social-media style collaboration, and mobile-exclusive features, you'll start enjoying every task you do!
+    </p>
+    </div>
+</a>
+</div>
+  <div class = "centerstyle">
+    <p>Like our articles? Support us!</p>
+ 
+
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="ohmyswift" data-color="#FFDD00" data-emoji="🍕"  data-font="Lato" data-text="Buy me a pizza" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+
+
+</div>
+
+</article>
+
+
+
+  
+      </div>
+    </main>
+
+    <footer class="site-footer">
+    <div class="wrapper">
+
+
+      <p>
+        
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://ohmyswift.com/blog/feed.xml">RSS</a>
+
+      </p>
+
+    <div>
+<script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ohmyswift" data-description="Support me on Buy me a coffee!" data-message="Do you like our articles? Support us! Buy us a pizza" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18">
+</script>
+</div>
+    <div class = "centerstyle">
+    <p>Ohmyswift is hosted at <a href="https://host-palace.com/?affid=13">HostPalace</a> </p>
+</div>
+</footer>
+
+  </body>
+
+</html>
