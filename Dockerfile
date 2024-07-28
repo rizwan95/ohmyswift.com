@@ -25,11 +25,12 @@ WORKDIR $APP_HOME
 # Copy the project files
 COPY . $APP_HOME/
 
-# Install Gems
-COPY Gemfile* $APP_HOME/
-RUN git clone https://github.com/rizwan95/jekyll-seo-tag.git
-RUN rm -f Gemfile.lock
-RUN gem install bundler && bundle install
+# Create a new Gemfile.lock file
+RUN bundle config --global frozen 1
+RUN bundle lock --update
+
+# Install dependencies
+RUN bundle install --full-index
 
 # Expose port 4000
 EXPOSE 4000
