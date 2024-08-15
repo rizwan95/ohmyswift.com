@@ -52,10 +52,10 @@
     <link rel="stylesheet" href="/blog/assets/css/custom_image.css">
 
  
-    <link rel="canonical" href="https://ohmyswift.com/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/">
+    <link rel="canonical" href="http://localhost:4000/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/">
     
     
-    <link rel="alternate" type="application/rss+xml" title="OhMySwift" href="https://ohmyswift.com/blog/feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="OhMySwift" href="http://localhost:4000/blog/feed.xml">
   
     
   
@@ -95,17 +95,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="In the past, testing push notifications on iOS simulators was quite challenging due to certain limitations. Prior to Xcode 14, receiving push notifications in a simulator was not possible and developers had to rely on local simulations using .apns payload files and the simctl push command. We have already seen how to simulate push notifications in a simulator in the article, Simulating remote push notifications in a simulator However, Xcode 14 allows iOS simulators running on macOS 13 on Macs with Apple silicon or T2 processors to receive remote push notifications just like a physical device." />
 <meta property="og:description" content="In the past, testing push notifications on iOS simulators was quite challenging due to certain limitations. Prior to Xcode 14, receiving push notifications in a simulator was not possible and developers had to rely on local simulations using .apns payload files and the simctl push command. We have already seen how to simulate push notifications in a simulator in the article, Simulating remote push notifications in a simulator However, Xcode 14 allows iOS simulators running on macOS 13 on Macs with Apple silicon or T2 processors to receive remote push notifications just like a physical device." />
-<link rel="canonical" href="https://ohmyswift.com/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/" />
-<meta property="og:url" content="https://ohmyswift.com/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/" />
+<link rel="canonical" href="http://localhost:4000/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/" />
+<meta property="og:url" content="http://localhost:4000/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/" />
 <meta property="og:site_name" content="OhMySwift" />
-<meta property="og:image" content="https://ohmyswift.com/blog/assets/images/remote-push-in-simulator/facebook-remote-push-simulator.png" />
+<meta property="og:image" content="http://localhost:4000/blog/assets/images/remote-push-in-simulator/facebook-remote-push-simulator.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2023-05-28T22:39:00+05:30" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="https://ohmyswift.com/blog/assets/images/remote-push-in-simulator/twitter-remote-push-simulator.png" />
+<meta property="twitter:image" content="http://localhost:4000/blog/assets/images/remote-push-in-simulator/twitter-remote-push-simulator.png" />
 <meta property="twitter:title" content="How to send Remote Push Notifications to an iOS Simulator with Xcode 14" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","image":{"twitter":"assets/images/remote-push-in-simulator/twitter-remote-push-simulator.png","facebook":"assets/images/remote-push-in-simulator/facebook-remote-push-simulator.png","url":"https://ohmyswift.com/blog/assets/images/remote-push-in-simulator/facebook-remote-push-simulator.png","@type":"imageObject"},"description":"In the past, testing push notifications on iOS simulators was quite challenging due to certain limitations. Prior to Xcode 14, receiving push notifications in a simulator was not possible and developers had to rely on local simulations using .apns payload files and the simctl push command. We have already seen how to simulate push notifications in a simulator in the article, Simulating remote push notifications in a simulator However, Xcode 14 allows iOS simulators running on macOS 13 on Macs with Apple silicon or T2 processors to receive remote push notifications just like a physical device.","headline":"How to send Remote Push Notifications to an iOS Simulator with Xcode 14","dateModified":"2023-05-28T22:39:00+05:30","datePublished":"2023-05-28T22:39:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/"},"url":"https://ohmyswift.com/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/","author":{"@type":"Person","name":"Rizwan Ahmed A"},"@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/"},"description":"In the past, testing push notifications on iOS simulators was quite challenging due to certain limitations. Prior to Xcode 14, receiving push notifications in a simulator was not possible and developers had to rely on local simulations using .apns payload files and the simctl push command. We have already seen how to simulate push notifications in a simulator in the article, Simulating remote push notifications in a simulator However, Xcode 14 allows iOS simulators running on macOS 13 on Macs with Apple silicon or T2 processors to receive remote push notifications just like a physical device.","url":"http://localhost:4000/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/","image":{"twitter":"assets/images/remote-push-in-simulator/twitter-remote-push-simulator.png","facebook":"assets/images/remote-push-in-simulator/facebook-remote-push-simulator.png","url":"http://localhost:4000/blog/assets/images/remote-push-in-simulator/facebook-remote-push-simulator.png","@type":"imageObject"},"headline":"How to send Remote Push Notifications to an iOS Simulator with Xcode 14","dateModified":"2023-05-28T22:39:00+05:30","datePublished":"2023-05-28T22:39:00+05:30","author":{"@type":"Person","name":"Rizwan Ahmed A"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -2218,9 +2218,8 @@ Were you aware of this already? Share your insights in the comments below.</p>
 </ul>
 
   </div>
-  <!-- <script defer src="https://comments.codeflakesstudio.com/js/commento.js"></script>
-<div id="commento"></div>
- -->
+  <script defer src="https://comments.ohmyswift.com/comentario.js"></script>
+<comentario-comments></comentario-comments>
   <!-- <div class="container wrap">
 <form method="post" action="https://newsletter.codeflakes.studio/subscription/form" class="listmonk-form">
     <div>
@@ -2282,7 +2281,7 @@ Were you aware of this already? Share your insights in the comments below.</p>
       <p>
         
 
-&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://ohmyswift.com/blog/feed.xml">RSS</a>
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/blog/feed.xml">RSS</a>
 
       </p>
 
