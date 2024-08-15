@@ -7,7 +7,7 @@ tags: [swift, xcode, xcode16, ios simulator, apple silicon, wwdc24, ios18, swift
 keywords: swift, xcode, xcode16, ios simulator, apple silicon, wwdc24, ios18, swiftui, tca, button
 comments: true
 author: Rizwan Ahmed A
-summary: SwiftUI in 2024: Bridging Perception and Reality
+summary: SwiftUI in 2024 - Bridging Perception and Reality
 
 image:
     path: https://ik.imagekit.io/ogr1ppev3u/OhMySwift/SwiftUI-Bridging-The-Gap/tr:w-1200,h-630/swiftui-button-behaviour_pxP875YCOu.svg?updatedAt=1723749347255
