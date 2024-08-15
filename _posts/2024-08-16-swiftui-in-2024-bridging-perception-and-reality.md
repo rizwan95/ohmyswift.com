@@ -83,6 +83,11 @@ As we continue to explore and adapt to this evolving framework, it's crucial to 
 
 Special thanks to the organizers of iOSKetchup2024, especially [Inder Deep Singh](https://www.linkedin.com/in/theidsingh/), for inviting me to be a part of the event.
 
+Also to my dear audience, thank you all for the amazing feedback! I truly appreciate it.
+{% include image.html src="https://ik.imagekit.io/ogr1ppev3u/OhMySwift/SwiftUI-Bridging-The-Gap/feedback_jDhfCY1dS.jpeg?updatedAt=1723750969624
+" alt="SwiftUI's Behavior Across Platforms" %}
+
+
 I look forward to hearing your thoughts and experiences with SwiftUI. Please feel free to share your insights in the comments below!
 
 ### About the author
