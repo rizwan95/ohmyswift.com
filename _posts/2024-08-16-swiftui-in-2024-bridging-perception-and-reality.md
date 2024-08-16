@@ -10,10 +10,12 @@ author: Rizwan Ahmed A
 summary: SwiftUI in 2024 - Bridging Perception and Reality
 
 image:
-    path: https://ik.imagekit.io/ogr1ppev3u/OhMySwift/SwiftUI-Bridging-The-Gap/tr:w-1200,h-630/swiftui-button-behaviour_pxP875YCOu.svg?updatedAt=1723749347255
-    twitter: https://ik.imagekit.io/ogr1ppev3u/OhMySwift/SwiftUI-Bridging-The-Gap/tr:w-600,h-330/swiftui-button-behaviour_pxP875YCOu.svg?updatedAt=1723749347255
-    facebook: https://ik.imagekit.io/ogr1ppev3u/OhMySwift/SwiftUI-Bridging-The-Gap/tr:w-300,h-300/swiftui-button-behaviour_pxP875YCOu.svg?updatedAt=1723749347255
+    path: assets/images/swiftui-state-2024/facebook.png
+    twitter: assets/images/swiftui-state-2024/twitter.png
+    facebook: assets/images/swiftui-state-2024/facebook.png
 ---
+
+
 
 I recently spoke at [iOSKetchup2024 hosted by Zomato x Blinkit](https://www.linkedin.com/posts/rizwan95_iosketchup2024-swiftui-swift-activity-7228315754343849984-9V2f) about the challenges and opportunities of using SwiftUI. The audience seemed to enjoy the session as much as I did! Here, I’m excited to share my experience and provide a detailed write-up of my talk.
 
