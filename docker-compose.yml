@@ -7,4 +7,7 @@ services:
       - ./vendor/bundle:/usr/local/bundle
     ports:
       - "4000:4000"
-    command: jekyll serve --force_polling --drafts
+    environment:
+      - JEKYLL_ENV=production
+    command: >
+      sh -c "jekyll build --destination /srv/jekyll/_site --baseurl '/blog' && jekyll serve --host 0.0.0.0 --port 4000"
