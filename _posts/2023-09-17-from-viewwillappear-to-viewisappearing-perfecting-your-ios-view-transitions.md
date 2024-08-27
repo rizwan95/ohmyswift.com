@@ -72,11 +72,10 @@ In this scenario, the viewIsAppearing method ensures that the collection view sc
 
 ### More articles
 
+- [SwiftUI in 2024: Bridging Perception and Reality](/blog/2024/08/15/swiftui-in-2024-bridging-perception-and-reality/)
 - [Exploring the New Push Notifications Console from Apple](/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple/)
 - [How to send Remote Push Notifications to an iOS Simulator with Xcode 14](/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/)
 - [How to Instantly Track a Variable's Value Changes with Xcode Watchpoints](/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/)
-- [How to add a loader to an UIButton](/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/)
 - [How to filter screenshots, cinematic videos, and depth-effect photos in PHPickerViewController](/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/)
 - [Implementing a custom native calendar using UICalendarView in iOS16 and Swift](/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/)
-- [Exploring Deque in Swift Collections](/blog/2021/04/14/exploring-deque-in-swift-collections/)
 - [Replacing UIImagePickerController with PHPickerViewController](/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/)
