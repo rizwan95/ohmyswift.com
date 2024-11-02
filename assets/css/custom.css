@@ -1,0 +1,64 @@
+.talks-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.talks-table th, .talks-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.talks-table th {
+  background-color: #f2f2f2;
+}
+
+.social-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.social-links li {
+  margin-bottom: 10px;
+}
+
+.social-links a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.social-links a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .talks-table, .talks-table thead, .talks-table tbody, .talks-table th, .talks-table td, .talks-table tr {
+    display: block;
+  }
+  
+  .talks-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  .talks-table tr {
+    border: 1px solid #ccc;
+  }
+  
+  .talks-table td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+  }
+  
+  .talks-table td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-label);
+    font-weight: bold;
+  }
+}
