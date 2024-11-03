@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Social Media
-permalink: /social/
+title: Talks & Workshops
+permalink: /talks/
 ---
 
 <!-- Include Font Awesome CDN -->
@@ -18,8 +18,87 @@ permalink: /social/
   /* Container Styling */
   .container {
     margin: 2em auto;
-    padding: 0 1em;
     max-width: 1200px;
+    padding: 0 20px;
+  }
+
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2em;
+    margin-top: 2em;
+  }
+
+  /* Card Styling */
+  .card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 1.5em;
+  }
+
+  .card-title {
+    margin: 0 0 1em;
+    font-size: 1.2em;
+    color: #333;
+  }
+
+  .card-location {
+    margin-bottom: 1em;
+    color: #666;
+  }
+
+  .card-description {
+    color: #666;
+    margin-bottom: 1.5em;
+    line-height: 1.5;
+  }
+
+  /* Icon Styling */
+  .fa-map-marker-alt,
+  .fa-info-circle {
+    margin-right: 0.5em;
+    color: #0056b3;
+  }
+
+  /* Learn More Link */
+  .learn-more {
+    display: inline-flex;
+    align-items: center;
+    color: #0056b3;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .learn-more:hover {
+    color: #003d82;
+  }
+
+  .learn-more i {
+    margin-left: 0.5em;
+    transition: transform 0.3s ease;
+  }
+
+  .learn-more:hover i {
+    transform: translateX(3px);
   }
 
   /* Section Titles */
@@ -40,76 +119,7 @@ permalink: /social/
     border-radius: 2px;
   }
 
-  /* Grid Layout */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  /* Card Styling */
-  .card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .card:hover {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  }
-
-  .card img {
-    width: 300px;  /* Fixed width */
-    height: 200px; /* Fixed height */
-    object-fit: cover;
-  }
-
-  .card-content {
-    padding: 1em;
-  }
-
-  .card-info {
-    flex: 1;
-    overflow: hidden; /* Prevents content from pushing button out */
-    margin-bottom: 1em; /* Add space between content and button */
-  }
-
-  .card-title, .card-location, .card-description {
-    font-size: 0.95rem;
-    color: #555;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5em;
-    margin-bottom: 0.75em;
-  }
-
-  .card-title {
-    font-size: 1.2rem;
-    color: #333;
-    font-weight: bold;
-  }
-
-  .card-title i, .card-location i, .card-description i {
-    font-size: 0.9em; /* Slightly smaller icon */
-    margin-top: 0.3em; /* Adjust this value to align with the first line of text */
-  }
-
-  .card-description {
-    /* Ensure long descriptions don't push the button out */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limit to 3 lines */
-    -webkit-box-orient: vertical;
-  }
-
+  /* Learn More Button */
   .learn-more {
     display: inline-block;
     text-decoration: none;
@@ -134,24 +144,6 @@ permalink: /social/
     background-color: #363666;
   }
 
-  /* Responsive Adjustments */
-  @media (max-width: 1200px) {
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .card {
-      width: 300px;
-      margin: 0 auto;
-    }
-  }
-
   /* Year Title Styling */
   .year-title {
     font-size: 2.5rem;
@@ -163,24 +155,41 @@ permalink: /social/
     border-left: 6px solid #0056b3;
   }
 
-  .featured-card {
-    position: relative;
-    border: none;
-    background: linear-gradient(135deg, #7B4BFF, #4B9EFF);
-    padding: 1px;
-    animation: borderGlow 3s ease-in-out infinite;
+  /* Card Info Styling */
+  .card-info {
+    flex: 1;
+    overflow: hidden;
+    margin-bottom: 1em;
   }
 
-  .featured-card > .card-content {
-    background: white;
-    border-radius: 8px;
+  .card-title, .card-location, .card-description {
+    font-size: 0.95rem;
+    color: #555;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+    margin-bottom: 0.75em;
   }
 
-  .featured-card img {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+  .card-title {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
   }
 
+  .card-title i, .card-location i, .card-description i {
+    font-size: 0.9em;
+    margin-top: 0.3em;
+  }
+
+  .card-description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Featured Card Animation */
   @keyframes borderGlow {
     0% {
       box-shadow: 0 0 5px rgba(123, 75, 255, 0.3),
@@ -200,107 +209,24 @@ permalink: /social/
     animation: borderGlow 1.5s ease-in-out infinite;
   }
 
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-  }
-
-  .social-icon {
-    color: #333;
-    font-size: 1.5rem;
-    transition: color 0.3s ease;
-  }
-
-  .social-icon:hover {
-    color: #007BFF;
-  }
-
-  /* Platform-specific colors on hover */
-  .fa-twitter:hover {
-    color: #1DA1F2;
-  }
-
-  .fa-linkedin:hover {
-    color: #0077B5;
-  }
-
-  .fa-instagram:hover {
-    color: #E4405F;
-  }
-
-  .fa-mastodon:hover {
-    color: #6364FF;
-  }
-
-  .fa-reddit:hover {
-    color: #FF4500;
-  }
-
-  .fa-envelope:hover {
-    color: #D44638;
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+      font-size: 2em;
+    }
+    
+    .year-title {
+      font-size: 1.5em;
+    }
   }
 </style>
 
 <div class="container">
-  <!-- Who Am I Section -->
-  <h1 class="section-title">Let's Connect!</h1>
-  <div class="content text-center">
-    <p>Hey there! 👋 I'm Rizwan Ahmed, an iOS developer who believes great software is born where code meets creativity. With over 9 years of bringing ideas to life through iOS development, I've discovered my true passion lies not just in coding, but in sharing that knowledge with developers like you.</p>
-    <p>You'll find me speaking at international tech conferences and meetups, breaking down complex iOS concepts into digestible insights. My expertise spans across:</p>
-
-    <div style="text-align: left; max-width: 600px; margin: 1.5em auto; padding: 1em; background: #f8f9fa; border-radius: 8px;">
-        <ul style="list-style-type: none; padding: 0;">
-            <li style="margin: 0.5em 0;">🚀 iOS Development Mastery</li>
-            <li style="margin: 0.5em 0;">⚡ SwiftUI & Modern App Architecture</li>
-            <li style="margin: 0.5em 0;">🎯 Test-Driven Development</li>
-            <li style="margin: 0.5em 0;">♿ Accessibility-First Design</li>
-            <li style="margin: 0.5em 0;">🤖 AI Integration in Mobile Apps</li>
-            <li style="margin: 0.5em 0;">💡 Design Thinking for Developers</li>
-        </ul>
-    </div>
-    <p>What drives me? Making technology more accessible and empowering developers to create apps that truly make a difference. Whether you're starting your iOS journey or looking to level up your skills, I'm here to help you navigate the path.</p>
-
-    <div style="max-width: 600px; margin: 1.5em auto; padding: 1em; background: #f8f9fa; border-radius: 8px;">
-        <!-- Option 1: Left-aligned (matches list items) -->
-        <h3 style="color: #0056b3; margin-bottom: 1em; text-align: left;">Let's build something extraordinary! ✨</h3>
-        
-        <!-- Option 2: Centered (uncomment this and remove Option 1 if preferred) -->
-        <!-- <h3 style="color: #0056b3; margin-bottom: 1em; text-align: center;">Let's build something extraordinary! ✨</h3> -->
-
-        <ul style="list-style-type: none; padding: 0; text-align: left;">
-            <li style="margin: 0.5em 0;">🎤 Need a speaker for your tech event?</li>
-            <li style="margin: 0.5em 0;">👨‍🏫 Looking to organize a workshop?</li>
-            <li style="margin: 0.5em 0;">💭 Have questions about iOS development?</li>
-            <li style="margin: 0.5em 0;">🤝 Want to collaborate on a project?</li>
-        </ul>
-        
-        <div class="social-links" style="margin-top: 1.5em;">
-            <a href="mailto:rizwan.ahmed95@gmail.com" title="Email" class="social-icon">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://twitter.com/rizwanasifahmed" title="Twitter" class="social-icon" target="_blank">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://linkedin.com/in/rizwan95" title="LinkedIn" class="social-icon" target="_blank">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="https://instagram.com/ohmyswiftblog" title="Instagram" class="social-icon" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://mastodon.social/deck/@rizwanahmed" title="Mastodon" class="social-icon" target="_blank">
-                <i class="fab fa-mastodon"></i>
-            </a>
-            <a href="https://reddit.com/user/rizwan95" title="Reddit" class="social-icon" target="_blank">
-                <i class="fab fa-reddit"></i>
-            </a>
-        </div>
-    </div>
-  </div>
-
   <!-- Talks & Workshops Section -->
-  
   <h1 class="section-title">Talks & Workshops</h1>
 
   <!-- Featured Subsection -->
@@ -393,6 +319,7 @@ permalink: /social/
         </a>
       </div>
     </div>
+
     <!-- Swift Testing Talk -->
     <div class="card">
       <img src="https://media.licdn.com/dms/image/v2/D5622AQHRLmNXvEWq_w/feedshare-shrink_800/feedshare-shrink_800/0/1729823434562?e=1732752000&v=beta&t=1SFheBGxlX1oHtRuYeal6pbR8TrhZnVGSG7luG3aiWU" alt="Swift Testing Talk">
@@ -413,6 +340,7 @@ permalink: /social/
         </a>
       </div>
     </div>
+
     <!-- SwiftUI Talk -->
     <div class="card">
       <img src="https://media.licdn.com/dms/image/v2/D5622AQGgCKz-ZYi0lw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1723364769725?e=1732752000&v=beta&t=Zrh8m0iETzZMww70bFGXkbohSDK4eRux7JwkSqzYDao" alt="Swift Testing Talk">
@@ -433,6 +361,7 @@ permalink: /social/
         </a>
       </div>
     </div>
+
     <!-- UI/UX Design Bootcamp -->
     <div class="card">
       <img src="https://media.licdn.com/dms/image/v2/D5622AQEWXxZZMoUDFA/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1727082837052?e=1733356800&v=beta&t=I2iFNwbIxwiziQSF5N6xwrmYXU1NYjQbx_ETCdam5pU" alt="UI/UX Design Bootcamp  - VIT">
@@ -541,6 +470,7 @@ permalink: /social/
         </a>
       </div>
     </div>
+
     <!-- iOSDevUK Conference Talk -->
     <div class="card">
       <img src="https://media.licdn.com/dms/image/v2/D4D22AQFY9rZ1zZT34A/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1695191821227?e=1733356800&v=beta&t=q73jRNlnCNWQ-7cKgMBx4IsADVE9fKRV8SeziThL1es" alt="iOSDevUK Conference Talk">
@@ -561,6 +491,7 @@ permalink: /social/
         </a>
       </div>
     </div>
+
     <!-- Swift Anytime Talk -->
     <div class="card">
       <img src="https://media.licdn.com/dms/image/v2/C4D22AQFC4LlTvxV9Bg/feedshare-shrink_800/feedshare-shrink_800/0/1677058511105?e=1733356800&v=beta&t=4GsnS96NfhsQaIRwHFxUq_JCED35dHOjw5XeS8sknNw" alt="Swift Anytime Accessibility Talk">
@@ -653,8 +584,6 @@ permalink: /social/
       </div>
     </div>
   </div>
-
-  <!-- Add more years as needed -->
 </div>
 
 <!-- Custom JS -->
