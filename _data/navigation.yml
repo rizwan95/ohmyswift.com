@@ -3,9 +3,8 @@
 main:
   - title: "Archives"
     url: /archives/
-  - title: "Newsletter"
-    url: /newsletter/
-  - title: "Social media"
+  - title: "Talks & Workshops"
+    url: /talks/
+  - title: "Let's Connect"
     url: /social/
-  - title: "App Showcase"
-    url: /showcase/
+
