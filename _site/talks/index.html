@@ -230,17 +230,18 @@
 
   /* Section Titles */
   .section-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: center;
     margin-bottom: 1rem;
     position: relative;
+    font-weight: 500;
   }
 
   .section-title::after {
     content: '';
     display: block;
     width: 50px;
-    height: 3px;
+    height: 2px;
     background-color: #007BFF;
     margin: 0.5rem auto 0;
     border-radius: 2px;
@@ -273,13 +274,13 @@
 
   /* Year Title Styling */
   .year-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #0056b3;
-    margin: 3rem 0 2rem;
+    margin: 2.5rem 0 2rem;
     padding-left: 1rem;
     position: relative;
-    font-weight: bold;
-    border-left: 6px solid #0056b3;
+    font-weight: 500;
+    border-left: 4px solid #0056b3;
   }
 
   /* Card Info Styling */
@@ -316,7 +317,20 @@
     -webkit-box-orient: vertical;
   }
 
-  /* Featured Card Animation */
+  /* Featured Card Styling */
+  .featured-card {
+    position: relative;
+    border: none;
+    background: linear-gradient(135deg, #7B4BFF, #4B9EFF);
+    padding: 1px;
+    animation: borderGlow 3s ease-in-out infinite; /* Always animate, not just on hover */
+  }
+
+  .featured-card > .card-content {
+    background: white;
+    border-radius: 8px;
+  }
+
   @keyframes borderGlow {
     0% {
       box-shadow: 0 0 5px rgba(123, 75, 255, 0.3),
@@ -332,8 +346,10 @@
     }
   }
 
+  /* Remove the hover-specific animation */
   .featured-card:hover {
-    animation: borderGlow 1.5s ease-in-out infinite;
+    /* removed animation property */
+    transform: translateY(-5px); /* Keep the lift effect on hover */
   }
 
   /* Responsive Design */
