@@ -1,13 +1,10 @@
-version: '3'
 services:
   jekyll:
-    image: jekyll/jekyll:latest
-    volumes:
-      - .:/srv/jekyll
-      - ./vendor/bundle:/usr/local/bundle
+    build: .
     ports:
       - "4000:4000"
+    volumes:
+      - .:/app
     environment:
       - JEKYLL_ENV=production
-    command: >
-      sh -c "jekyll build --destination /srv/jekyll/_site --baseurl '/blog' && jekyll serve --host 0.0.0.0 --port 4000"
+    command: jekyll serve --host 0.0.0.0 --trace5
