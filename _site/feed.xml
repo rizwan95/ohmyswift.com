@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
-  <updated>2024-08-15T21:17:45+05:30</updated>
+  <updated>2024-11-03T13:56:48+05:30</updated>
   <id>http://localhost:4000/blog//</id>
 
   
@@ -18,6 +18,457 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Send data Between iOS Apps and Extensions Using Darwin Notifications</title>
+      
+      
+      <link href="http://localhost:4000/blog/2024/08/28/send-data-between-ios-apps-and-extensions-using-darwin-notifications/" rel="alternate" type="text/html" title="Send data Between iOS Apps and Extensions Using Darwin Notifications" />
+      
+      <published>2024-08-28T00:13:00+05:30</published>
+      <updated>2024-08-28T00:13:00+05:30</updated>
+      <id>http://localhost:4000/blog/2024/08/28/send-data-between-ios-apps-and-extensions-using-darwin-notifications</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2024/08/28/send-data-between-ios-apps-and-extensions-using-darwin-notifications/">&lt;p&gt;In iOS development, app extensions run in separate processes from their containing apps. This separation poses a challenge when you need to communicate between the main app and its extensions. While &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NSNotificationCenter&lt;/code&gt; is a common choice for passing data between view controllers within the same app, it falls short when it comes to inter-process communication. Have you ever thought about how to pass data between the main app and its extension? Darwin notifications provide a powerful solution for this scenario. In this post, we’ll explore how to implement a Darwin Notifications manager and use it to facilitate real-time data transfer between a main app and its extension.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-are-darwin-notifications-aka-cfnotificationcentergetdarwinnotifycenter&quot;&gt;What are Darwin Notifications a.k.a CFNotificationCenterGetDarwinNotifyCenter?&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CFNotificationCenterGetDarwinNotifyCenter&lt;/code&gt; is a function in Apple’s Core Foundation framework that provides access to the Darwin Notification Center. This notification center is designed for system-wide notifications, allowing different processes (such as your app and its extensions) to communicate with each other.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-does-it-work&quot;&gt;How Does it Work?&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;System-Wide Communication:&lt;/strong&gt; Unlike NSNotificationCenter, which is limited to the app’s process, the Darwin Notification Center can send notifications that can be observed by other processes on the device. This makes it ideal for app-to-extension communication.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;No UserInfo Dictionary:&lt;/strong&gt; One limitation is that Darwin notifications do not support sending additional data (like a userInfo dictionary). This means you can only send a simple notification without any extra information. This is because the underlying mechanism, notify_post(), only accepts a string identifier for the notification&lt;/p&gt;
+
+&lt;h2 id=&quot;a-use-case-for-darwin-notifications&quot;&gt;A use case for Darwin Notifications&lt;/h2&gt;
+
+&lt;p&gt;For example, when a broadcast upload extension starts or stops, you can use a Darwin notification to inform the main app. I have seen most of the people use UserDefaults or the Keychain but I personally feel that Darwin notifications are the best fit for this use case.&lt;/p&gt;
+
+&lt;h2 id=&quot;implementing-the-darwin-notification-manager&quot;&gt;Implementing the Darwin Notification Manager&lt;/h2&gt;
+
+&lt;p&gt;To start, we’ll create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DarwinNotificationManager&lt;/code&gt; class that uses the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CFNotificationCenter&lt;/code&gt; API to post and observe notifications across processes.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foundation&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;shared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[:]&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// Method to post a Darwin notification&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;postNotification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;notificationCenter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFNotificationCenterGetDarwinNotifyCenter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;CFNotificationCenterPostNotification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notificationCenter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFNotificationName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;startObserving&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callback&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;notificationCenter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFNotificationCenterGetDarwinNotifyCenter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        
+        &lt;span class=&quot;kt&quot;&gt;CFNotificationCenterAddObserver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notificationCenter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                        &lt;span class=&quot;kt&quot;&gt;Unmanaged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;passUnretained&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toOpaque&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+                                        &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notificationCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                        &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                        &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deliverImmediately&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// 3&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stopObserving&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;notificationCenter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFNotificationCenterGetDarwinNotifyCenter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;CFNotificationCenterRemoveObserver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notificationCenter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unmanaged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;passUnretained&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toOpaque&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFNotificationName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removeValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;forKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// 4&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;notificationCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFNotificationCallback&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;observer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;observer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;observer&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;manager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unmanaged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fromOpaque&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;observer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;takeUnretainedValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rawValue&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callback&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;the-breakdown-of-darwin-notification-manager&quot;&gt;The breakdown of Darwin Notification Manager&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[:]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;callbacks&lt;/code&gt; stores callbacks for each notification name to execute when the notification is received.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;startObserving&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callback&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;notificationCenter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFNotificationCenterGetDarwinNotifyCenter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    
+    &lt;span class=&quot;kt&quot;&gt;CFNotificationCenterAddObserver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notificationCenter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                    &lt;span class=&quot;kt&quot;&gt;Unmanaged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;passUnretained&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toOpaque&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+                                    &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notificationCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                    &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deliverImmediately&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;startObserving&lt;/code&gt; method registers a callback for a notification and adds an observer to listen for it. Call this method when you want to start observing for notifications. It is usually called when the view is initialized.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stopObserving&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;notificationCenter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFNotificationCenterGetDarwinNotifyCenter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;CFNotificationCenterRemoveObserver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notificationCenter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unmanaged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;passUnretained&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toOpaque&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFNotificationName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removeValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;forKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stopObserving&lt;/code&gt; method removes the observer for a notification and deletes its callback to stop listening.It is usually called when the view gets deallocated.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;notificationCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CFNotificationCallback&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;observer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;observer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;observer&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;manager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unmanaged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fromOpaque&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;observer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;takeUnretainedValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rawValue&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callback&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;notificationCallback&lt;/code&gt; executes the stored callback when the corresponding notification is received.&lt;/p&gt;
+
+&lt;h2 id=&quot;using-the-manager-in-a-broadcast-extension&quot;&gt;Using the Manager in a Broadcast Extension&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ReplayKit&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SampleHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RPBroadcastSampleHandler&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;broadcastStarted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;withSetupInfo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;setupInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;NSObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]?)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;postNotification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.yourapp.BroadcastStarted&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;broadcastFinished&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;postNotification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.yourapp.BroadcastStopped&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;observing-the-darwin-notifications-in-a-uikit-view&quot;&gt;Observing the Darwin Notifications in a UIKit View&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DashboardViewController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIViewController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;viewWillAppear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;animated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;viewWillAppear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;animated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;configureCallbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+
+    &lt;span class=&quot;kd&quot;&gt;fileprivate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configureCallbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;startObserving&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.yourapp.BroadcastStarted&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*******Broadcast has started*******&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// Handle the event when broadcast starts&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        
+        &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;startObserving&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.yourapp.BroadcastStopped&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*******Broadcast has stopped*******&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// Handle the event when broadcast starts&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;observing-the-darwin-notifications-in-a-swiftui-view&quot;&gt;Observing the Darwin Notifications in a SwiftUI View&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SwiftUI&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foundation&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BroadcastView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;@State&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;broadcastStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Not Broadcasting&quot;&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;VStack&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;broadcastStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;font&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;largeTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;onAppear&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;configureCallbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;onDisappear&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;stopCallbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configureCallbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;startObserving&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.yourapp.BroadcastStarted&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;broadcastStatus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Broadcasting...&quot;&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*******Broadcast has started*******&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        
+        &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;startObserving&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.yourapp.BroadcastStopped&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;broadcastStatus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Not Broadcasting&quot;&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*******Broadcast has stopped*******&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stopCallbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;stopObserving&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.yourapp.BroadcastStarted&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;DarwinNotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;stopObserving&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.yourapp.BroadcastStopped&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Like I had mentioned earlier, the observation is started in onAppear and the observation is stopped in onDisappear. This will make sure that your code doesn’t cause a memory leak.&lt;/p&gt;
+
+&lt;h2 id=&quot;key-takeaways&quot;&gt;Key Takeaways&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Inter-Process Communication&lt;/strong&gt;: Darwin notifications provide a powerful mechanism for communication between different processes, such as between a main app and its extensions, overcoming the limitations of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NSNotificationCenter&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;System-Wide Reach&lt;/strong&gt;: Unlike &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NSNotificationCenter&lt;/code&gt;, which is confined to a single app, Darwin notifications can be observed by any process on the device, making them ideal for app-extension communication.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;No Payload Support&lt;/strong&gt;: Darwin notifications do not support sending additional data (like a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;userInfo&lt;/code&gt; dictionary). They are limited to notifying observers of the occurrence of an event without additional context.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Efficient Notification Handling&lt;/strong&gt;: By using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CFNotificationCenterGetDarwinNotifyCenter&lt;/code&gt;, developers can efficiently post and observe notifications without the overhead of managing additional data.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;SwiftUI Integration&lt;/strong&gt;: Darwin notifications can be easily integrated into SwiftUI applications, allowing for real-time updates and state management across different app components.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h2&gt;
+
+&lt;p&gt;My mind always compares these inter-process notifications to comets passing through our planet Earth. Just as comets are rare and awe-inspiring events that capture our attention, Darwin notifications serve as crucial signals that allow different parts of an app ecosystem to communicate seamlessly. Isn’t it a great analogy?&lt;/p&gt;
+
+&lt;p&gt;So, that is it. If you have read the blog till here, I really appreciate it. I hope this exploration of Darwin notifications has inspired you to think about inter-process communication in new ways. I can’t wait to see how you use Darwin notifications in your apps. Do let me know your thoughts and experiences in the comments below. Your feedback and ideas are always welcome! Also don’t forget to share this article with your network!&lt;/p&gt;
+
+&lt;h2 id=&quot;references-to-darwin-notifications&quot;&gt;References to Darwin Notifications&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/documentation/corefoundation/cfnotificationcenter&quot;&gt;CFNotificationCenter Reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - Senior iOS Engineer. 
+&lt;br /&gt; LinkedIn - &lt;a href=&quot;https://www.linkedin.com/in/rizwan95/&quot;&gt;https://www.linkedin.com/in/rizwan95/&lt;/a&gt;
+&lt;br /&gt; Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2024/08/15/swiftui-in-2024-bridging-perception-and-reality/&quot;&gt;SwiftUI in 2024: Bridging Perception and Reality&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2023/12/01/from-viewwillappear-to-viewisappearing-perfecting-your-ios-view-transitions/&quot;&gt;From viewWillAppear to viewIsAppearing - Perfecting Your iOS View Transitions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple/&quot;&gt;Exploring the New Push Notifications Console from Apple&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/&quot;&gt;How to send Remote Push Notifications to an iOS Simulator with Xcode 14&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/&quot;&gt;How to Instantly Track a Variable’s Value Changes with Xcode Watchpoints&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/&quot;&gt;Implementing a custom native calendar using UICalendarView in iOS16 and Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;Replacing UIImagePickerController with PHPickerViewController&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan Ahmed A</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="notifications" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="xcode" />
+      
+        <category term="xcode16" />
+      
+        <category term="darwin notifications" />
+      
+        <category term="CFNotificationCenter" />
+      
+
+      
+        <summary type="html">In iOS development, app extensions run in separate processes from their containing apps. This separation poses a challenge when you need to communicate between the main app and its extensions. While NSNotificationCenter is a common choice for passing data between view controllers within the same app, it falls short when it comes to inter-process communication. Have you ever thought about how to pass data between the main app and its extension? Darwin notifications provide a powerful solution for this scenario. In this post, we’ll explore how to implement a Darwin Notifications manager and use it to facilitate real-time data transfer between a main app and its extension.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">SwiftUI in 2024: Bridging Perception and Reality</title>
+      
+      
+      <link href="http://localhost:4000/blog/2024/08/16/swiftui-in-2024-bridging-perception-and-reality/" rel="alternate" type="text/html" title="SwiftUI in 2024: Bridging Perception and Reality" />
+      
+      <published>2024-08-16T00:12:00+05:30</published>
+      <updated>2024-08-16T00:12:00+05:30</updated>
+      <id>http://localhost:4000/blog/2024/08/16/swiftui-in-2024-bridging-perception-and-reality</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2024/08/16/swiftui-in-2024-bridging-perception-and-reality/">&lt;p&gt;I recently spoke at &lt;a href=&quot;https://www.linkedin.com/posts/rizwan95_iosketchup2024-swiftui-swift-activity-7228315754343849984-9V2f&quot;&gt;iOSKetchup2024 hosted by Zomato x Blinkit&lt;/a&gt; about the challenges and opportunities of using SwiftUI. The audience seemed to enjoy the session as much as I did! Here, I’m excited to share my experience and provide a detailed write-up of my talk.&lt;/p&gt;
+
+&lt;h2 id=&quot;challenges-with-swiftui&quot;&gt;Challenges with SwiftUI&lt;/h2&gt;
+
+&lt;p&gt;SwiftUI can be challenging, especially when dealing with:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Convincing Management&lt;/strong&gt;: It’s crucial to ensure that the modules we implement in SwiftUI are backward compatible. If the project’s codebase is old, this can be particularly challenging.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Uncertainty&lt;/strong&gt;: This is perhaps the biggest challenge. We usually follow a three-step approach:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Conduct necessary research before diving in.&lt;/li&gt;
+      &lt;li&gt;Start small and keep changes minimal.&lt;/li&gt;
+      &lt;li&gt;Be ready to revert changes if you feel stuck.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;understanding-swiftui&quot;&gt;Understanding SwiftUI&lt;/h2&gt;
+
+&lt;p&gt;What exactly is SwiftUI? Let me explain with a coffee machine analogy.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/SwiftUI-Bridging-The-Gap/coffee-analogy_VgbjnzEsj.svg?updatedAt=1723748277901&quot; alt=&quot;SwiftUI coffee machine analogy&quot; class=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Imagine a general coffee machine and an industrial coffee machine. Both brew coffee, but the industrial machine offers more customization. Similarly, SwiftUI is a powerful framework that helps you build quick prototypes and advanced applications.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-state-of-swiftui&quot;&gt;The State of SwiftUI&lt;/h2&gt;
+
+&lt;p&gt;Is SwiftUI declarative or imperative? Most people think it is declarative, but it’s actually both! Consider the below code snippet.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/SwiftUI-Bridging-The-Gap/declarative-imperative_q3uIyzpVl.png?updatedAt=1723749686484&quot; alt=&quot;SwiftUI is both declarative and imperative&quot; class=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The line &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Button(&quot;Add friend&quot;)&lt;/code&gt;  is declarative, and the next line &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;friend.append(&quot;Adithya&quot;)&lt;/code&gt; is imperative. With SwiftUI, getting started should be easy, and delving deeper should be possible. Check this &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2024/10150/&quot;&gt;video from Apple&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h2 id=&quot;swiftuis-behavior-across-platforms&quot;&gt;SwiftUI’s Behavior Across Platforms&lt;/h2&gt;
+
+&lt;p&gt;SwiftUI’s behavior can vary from platform to platform. The same code might behave differently. For example, a button’s code renders differently across platforms. In iOS, we say “Tap the button,” in macOS, “Click the button,” and in visionOS, “Hold the button.” Many mistakenly believe SwiftUI is “Write once, run everywhere.” It is actually “Learn once, apply anywhere.” Remember this principle. Check this &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2024/10150/&quot;&gt;video from Apple&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/SwiftUI-Bridging-The-Gap/swiftui-button-behaviour_pxP875YCOu.svg?updatedAt=1723749347255&quot; alt=&quot;SwiftUI&apos;s Behavior Across Platforms&quot; class=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;navigating-in-swiftui&quot;&gt;Navigating in SwiftUI&lt;/h2&gt;
+
+&lt;p&gt;When we started with SwiftUI, navigating between views was challenging. We understand that SwiftUI is evolving, but it can be frustrating when things don’t work properly. I decided to ask the Reddit community about their experiences with SwiftUI. Surprisingly, the thread received many responses, and it seemed everyone was in the same boat. Many people suggested various options, but only two were feasible:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Use SwiftUI views wrapped in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Use TCA (The Composable Architecture).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We were hesitant to use TCA, questioning whether a framework was necessary just for navigation. However, we decided to try it, and it solved all our issues. It’s brilliantly written, follows the Redux pattern, and provides a nice separation of concerns in the code. It also solved our problem of backward compatibility! There are some cons, though. You’ll need to unlearn and relearn concepts, and TCA need not be applied to every SwiftUI view. If you’re ready to begin, here are &lt;a href=&quot;https://pointfreeco.github.io/swift-composable-architecture/main/tutorials/meetcomposablearchitecture/&quot;&gt;some great tutorials&lt;/a&gt; to help you get started.&lt;/p&gt;
+
+&lt;h2 id=&quot;accessibility-in-swiftui&quot;&gt;Accessibility in SwiftUI&lt;/h2&gt;
+
+&lt;p&gt;SwiftUI offers many built-in features for accessibility. I believe SwiftUI will make it easier for developers. Have you ever considered teaching SwiftUI to your designer? How about using SwiftUI as a design tool? SwiftUI can indeed be used to craft design tools! The problem with existing design tools is that the designs are static, lacking the nuances of UX on the device. We started simple by creating a SwiftUI watchOS app. This experience revealed features we hadn’t considered, like the digital crown and scroll sensitivity. Designing in SwiftUI opened up new possibilities, making designs dynamic.&lt;/p&gt;
+
+&lt;h2 id=&quot;designing-with-swiftui&quot;&gt;Designing with SwiftUI&lt;/h2&gt;
+
+&lt;p&gt;The idea of designing with SwiftUI might seem unconventional. How can a designer learn SwiftUI? Surprisingly, it solves many problems. Traditional design tools are static and lack insights into hardware behavior. Designing in SwiftUI provides a deeper understanding of the platform. Apple even released a &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2023/10115/&quot;&gt;WWDC video&lt;/a&gt; on this topic.&lt;/p&gt;
+
+&lt;h2 id=&quot;key-takeaways&quot;&gt;Key Takeaways&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Start converting your UIKit views into SwiftUI, especially &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITableViewCells&lt;/code&gt;. You can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIHostingConfiguration&lt;/code&gt; to embed SwiftUI cells inside UIKit.&lt;/li&gt;
+  &lt;li&gt;Use TCA. It may be tough initially, but you’ll get used to it.&lt;/li&gt;
+  &lt;li&gt;While developing for one platform, consider how it will behave on other platforms.&lt;/li&gt;
+  &lt;li&gt;Try using SwiftUI to design and prototype your product.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;SwiftUI is a transformative framework that bridges the gap between perception and reality in app development. While it presents its own set of challenges, the potential it offers for creating dynamic, cross-platform applications is immense. By embracing strategies like TCA and leveraging SwiftUI’s design capabilities, developers can navigate these challenges effectively.&lt;/p&gt;
+
+&lt;p&gt;As we continue to explore and adapt to this evolving framework, it’s crucial to remain open to learning and innovation. SwiftUI not only enhances the development process but also invites collaboration between developers and designers, fostering a more integrated approach to app creation.&lt;/p&gt;
+
+&lt;p&gt;Special thanks to the organizers of iOSKetchup2024, especially &lt;a href=&quot;https://www.linkedin.com/in/theidsingh/&quot;&gt;Inder Deep Singh&lt;/a&gt;, for inviting me to be a part of the event.&lt;/p&gt;
+
+&lt;p&gt;Also to my dear audience, thank you all for the amazing feedback! I truly appreciate it.
+&lt;img src=&quot;https://ik.imagekit.io/ogr1ppev3u/OhMySwift/SwiftUI-Bridging-The-Gap/feedback_jDhfCY1dS.jpeg?updatedAt=1723750969624 &quot; alt=&quot;SwiftUI&apos;s Behavior Across Platforms&quot; class=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I look forward to hearing your thoughts and experiences with SwiftUI. Please feel free to share your insights in the comments below!&lt;/p&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - Senior iOS Engineer. 
+&lt;br /&gt; LinkedIn - &lt;a href=&quot;https://www.linkedin.com/in/rizwan95/&quot;&gt;https://www.linkedin.com/in/rizwan95/&lt;/a&gt;
+&lt;br /&gt; Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2023/12/01/from-viewwillappear-to-viewisappearing-perfecting-your-ios-view-transitions/&quot;&gt;From viewWillAppear to viewIsAppearing - Perfecting Your iOS View Transitions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple/&quot;&gt;Exploring the New Push Notifications Console from Apple&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/&quot;&gt;How to send Remote Push Notifications to an iOS Simulator with Xcode 14&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/&quot;&gt;How to Instantly Track a Variable’s Value Changes with Xcode Watchpoints&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/&quot;&gt;How to add a loader to an UIButton&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/&quot;&gt;Implementing a custom native calendar using UICalendarView in iOS16 and Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;Replacing UIImagePickerController with PHPickerViewController&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan Ahmed A</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="WWDC24" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="xcode" />
+      
+        <category term="xcode16" />
+      
+        <category term="ios simulator" />
+      
+        <category term="apple silicon" />
+      
+        <category term="wwdc24" />
+      
+        <category term="ios18" />
+      
+        <category term="swiftui" />
+      
+
+      
+        <summary type="html">I recently spoke at iOSKetchup2024 hosted by Zomato x Blinkit about the challenges and opportunities of using SwiftUI. The audience seemed to enjoy the session as much as I did! Here, I’m excited to share my experience and provide a detailed write-up of my talk.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
@@ -86,13 +537,12 @@ Post-Layout Adjustments: If you need to make changes after the view has been lai
 &lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
 
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2024/08/15/swiftui-in-2024-bridging-perception-and-reality/&quot;&gt;SwiftUI in 2024: Bridging Perception and Reality&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple/&quot;&gt;Exploring the New Push Notifications Console from Apple&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/&quot;&gt;How to send Remote Push Notifications to an iOS Simulator with Xcode 14&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/&quot;&gt;How to Instantly Track a Variable’s Value Changes with Xcode Watchpoints&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/&quot;&gt;How to add a loader to an UIButton&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/&quot;&gt;How to filter screenshots, cinematic videos, and depth-effect photos in PHPickerViewController&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/&quot;&gt;Implementing a custom native calendar using UICalendarView in iOS16 and Swift&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2021/04/14/exploring-deque-in-swift-collections/&quot;&gt;Exploring Deque in Swift Collections&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;Replacing UIImagePickerController with PHPickerViewController&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
 
@@ -2599,330 +3049,6 @@ I installed it using Cocoapods, followed the instructions given, and boom! Compo
 
       
         <summary type="html">At WWDC 2019, Apple added a brand new API “UICollectionViewCompositionalLayout” to the UIKit. Using this powerful API, we can create complex compositional layouts without writing complicated code. At times, It feels tough to create complex collection view UIs using the UICollectionViewFlowLayout. The UICollectionViewCompositionalLayout API eases the process and guess what you can even support orthogonal scrolling UIs with much ease. Well, it sounds great, but practically we cannot use the UICollectionViewCompositionalLayout API until we drop the support for iOS 12.0 and earlier in our apps. (It is not going to happen for the next few years is what I predict.) So how do we use this API in iOS 12.0 and earlier?</summary>
-      
-
-      
-      
-    </entry>
-  
-  
-  
-    <entry>
-      
-      <title type="html">Simulating remote push notifications in a simulator</title>
-      
-      
-      <link href="http://localhost:4000/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/" rel="alternate" type="text/html" title="Simulating remote push notifications in a simulator" />
-      
-      <published>2020-02-13T22:22:00+05:30</published>
-      <updated>2020-02-13T22:22:00+05:30</updated>
-      <id>http://localhost:4000/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator</id>
-      <content type="html" xml:base="http://localhost:4000/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">&lt;p&gt;Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.&lt;/p&gt;
-
-&lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://apps.apple.com/app/apple-store/id1590127239?pt=423641&amp;amp;ct=iosblog&amp;amp;mt=8&quot; target=&quot;_blank&quot;&gt;
-    &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/todo.svg&quot; /&gt;
-    &lt;div&gt;
-    &lt;p class=&quot;sponsor-title&quot;&gt;
-        Zoho ToDo: Get work organised 
-    &lt;/p&gt;
-    &lt;p&gt;
-        Zoho ToDo is the ultimate task management application for all your personal and work tasks. &lt;br /&gt; With clean views, personal and group tasks, categories, Kanban boards, social-media style collaboration, and mobile-exclusive features, you&apos;ll start enjoying every task you do!
-    &lt;/p&gt;
-    &lt;/div&gt;
-&lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
-
-&lt;p&gt;Well, the requirements are quite simple. We will be needing the following,&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Xcode 11.4 beta or above.&lt;/li&gt;
-  &lt;li&gt;Bundle identifier of your app.&lt;/li&gt;
-  &lt;li&gt;The device identifier of your currently active simulator.&lt;/li&gt;
-  &lt;li&gt;Push notification payload.&lt;/li&gt;
-  &lt;li&gt;Terminal.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://apps.apple.com/app/apple-store/id1590127239?pt=423641&amp;amp;ct=iosblog&amp;amp;mt=8&quot; target=&quot;_blank&quot;&gt;
-    &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/todo.svg&quot; /&gt;
-    &lt;div&gt;
-    &lt;p class=&quot;sponsor-title&quot;&gt;
-        Zoho ToDo: Get work organised 
-    &lt;/p&gt;
-    &lt;p&gt;
-        Zoho ToDo is the ultimate task management application for all your personal and work tasks. &lt;br /&gt; With clean views, personal and group tasks, categories, Kanban boards, social-media style collaboration, and mobile-exclusive features, you&apos;ll start enjoying every task you do!
-    &lt;/p&gt;
-    &lt;/div&gt;
-&lt;/a&gt;
-&lt;/div&gt;
-&lt;h2 id=&quot;how-to-find-the-device-identifier-of-the-simulator&quot;&gt;How to find the device identifier of the simulator&lt;/h2&gt;
-
-&lt;p&gt;You can find the simulator’s device identifier from &lt;strong&gt;Window&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Devices and Simulator&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Select the active simulator&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Copy the displayed identifier&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;how-to-generate-push-notification-payload&quot;&gt;How to generate push notification payload&lt;/h2&gt;
-
-&lt;p&gt;The push notification payload is of the standard Apple format.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{&quot;aps&quot;:{&quot;alert&quot;:&quot;I am a remote push notification&quot;,&quot;badge&quot;:1,&quot;sound&quot;:&quot;default&quot;}}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Save the following JSON in the .apns format.
-    (We will be saving the json in a file as notficationpayload.apns for the tutorial purpose. )&lt;/p&gt;
-
-&lt;h2 id=&quot;how-to-trigger-remote-push-notifications-in-the-simulator&quot;&gt;How to trigger remote push notifications in the simulator&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Run the app in simulator using Xcode.&lt;/li&gt;
-  &lt;li&gt;Open terminal.&lt;/li&gt;
-  &lt;li&gt;Navigate to the folder where the payload file is present .&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Execute the command with the format,
- &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xcrun simctl push &amp;lt;device-identifier&amp;gt; &amp;lt;your-bundle-id&amp;gt; notificationpayload.apns&lt;/code&gt;
- (Sample command -
- &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xcrun simctl push 3A3CE233-307D-463D-A1C6-F66B9C2C1445 com.sample.pushnotification notificationpayload.apns&lt;/code&gt;)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Hit enter.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;That’s it! Notifications will start to appear on your simulator!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/images/simulatornotifications/simulatornotification.png&quot; alt=&quot;Simulating remote push notifications in a simulator&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
- You can also follow me on twitter right here: &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/&quot;&gt;Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
-
-      
-      
-      
-      
-      
-
-      
-        <author>
-            <name>Rizwan Ahmed A</name>
-          
-          
-        </author>
-      
-
-      
-        <category term="Push Notifications" />
-      
-
-      
-        <category term="swift" />
-      
-        <category term="ios simulator" />
-      
-        <category term="simulator notifications" />
-      
-
-      
-        <summary type="html">Apple just released Xcode 11.4 beta with tons of features. One of the notable features is simulating remote push notifications in simulators, which means that triggering remote notifications in simulators is now possible.</summary>
-      
-
-      
-      
-        
-        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/blog/blog/assets/images/simulatornotifications/simulatornotification.png" />
-      
-    </entry>
-  
-  
-  
-    <entry>
-      
-      <title type="html">Why should we avoid using closures in Swift structs?</title>
-      
-      
-      <link href="http://localhost:4000/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs/" rel="alternate" type="text/html" title="Why should we avoid using closures in Swift structs?" />
-      
-      <published>2020-01-10T10:06:00+05:30</published>
-      <updated>2020-01-10T10:06:00+05:30</updated>
-      <id>http://localhost:4000/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs</id>
-      <content type="html" xml:base="http://localhost:4000/blog/2020/01/10/why-should-we-avoid-using-closures-in-swift-structs/">&lt;p&gt;We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.”
-Wait. What? Memory leak in structs? How could that be possible?&lt;/p&gt;
-
-&lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://apps.apple.com/app/apple-store/id1590127239?pt=423641&amp;amp;ct=iosblog&amp;amp;mt=8&quot; target=&quot;_blank&quot;&gt;
-    &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/todo.svg&quot; /&gt;
-    &lt;div&gt;
-    &lt;p class=&quot;sponsor-title&quot;&gt;
-        Zoho ToDo: Get work organised 
-    &lt;/p&gt;
-    &lt;p&gt;
-        Zoho ToDo is the ultimate task management application for all your personal and work tasks. &lt;br /&gt; With clean views, personal and group tasks, categories, Kanban boards, social-media style collaboration, and mobile-exclusive features, you&apos;ll start enjoying every task you do!
-    &lt;/p&gt;
-    &lt;/div&gt;
-&lt;/a&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/images/closuresinstructs.png&quot; alt=&quot;Why should we avoid using closures in Swift structs?&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Structs are value types, and there is no way a memory leak can occur.
-Is that statement even true? We have so many questions already. So let’s get back to the basics of memory management in Swift.&lt;/p&gt;
-
-&lt;h2 id=&quot;back-to-basics&quot;&gt;&lt;strong&gt;Back to basics&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;The reason I am taking you back to the basics is that before diving into the main problem, we need to have a stronghold of the basics.&lt;/p&gt;
-
-&lt;p&gt;The basic types in Swift fall into two categories. One is the “Reference type,” and the other is the “Value type.” Generally, Classes are reference types. On the other hand, structs and enums are value types.&lt;/p&gt;
-
-&lt;h2 id=&quot;value-types&quot;&gt;&lt;strong&gt;Value types&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;The value types store the data directly in memory. Every instance has a unique copy of the data. When a variable is assigned to an existing variable, the data is copied. The allocation of the value types is done in the stack. When the value type variable goes out of scope, the deallocation of the memory occurs.&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;oldPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Rizwan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;newPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Oh my Swift&quot;&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;-------&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;Output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;Rizwan&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;Oh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;-------&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We can see that changing the value of the newPerson doesn’t change the value of oldPerson. This is how value types work.&lt;/p&gt;
-
-&lt;h2 id=&quot;reference-types&quot;&gt;&lt;strong&gt;Reference types&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;The reference types keep a reference (aka a pointer) to the data when initialized. Whenever a variable is assigned to an existing reference type, the reference is shared among the variables. The allocation of reference types is done in the heap. The ARC (Automatic Reference Counting) handles the deallocation of the reference type variables.&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
-    &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;withName&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;oldPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;withName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Rizwan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;newPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Oh my Swift&quot;&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newPerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-
-&lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;Output&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;Oh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;Oh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We can see that changing the oldPerson variable reflects the changes in the newPerson variable. This is how reference types work.&lt;/p&gt;
-
-&lt;p&gt;Usually, memory leaks occur in reference types. It occurs in the form of retain cycles in most of the cases. To know more about retain cycles, read this &lt;a href=&quot;https://medium.com/flawless-app-stories/memory-leaks-in-swift-bfd5f95f3a74&quot;&gt;blog&lt;/a&gt; from Flawless app stories.&lt;/p&gt;
-
-&lt;p&gt;So, if reference types are the reason for memory leaks, we can use value types for all purposes. That should solve the problem.&lt;/p&gt;
-
-&lt;p&gt;Unfortunately, this is not the case. Sometimes structs and enums can be treated as reference types, and this means that retain cycles can occur in structs and enums too.&lt;/p&gt;
-
-&lt;h2 id=&quot;closures---the-villain-in-structs&quot;&gt;&lt;strong&gt;Closures - The Villain in structs&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;When you use closures in structs, the closure behaves as a reference type, and the problem starts there. The closures need to have a reference to the environment outside so that the environment can be modified when the closure body is executed.&lt;/p&gt;
-
-&lt;p&gt;In the case of classes, we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;weak self&lt;/code&gt; to break the retain cycle. When we try to do it for a struct, we get the following compiler error, ‘weak’ may only be applied to class and class-bound protocol types, not ‘{struct name}’&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;speed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Float&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;())?&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;myCar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;increaseSpeed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// The retain cycle occurs here. We cannot use [weak myCar] as myCar is a value type.&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My car&apos;s speed :&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prints 30&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;myNewCar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myCar&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;increaseSpeed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My new car&apos;s speed :&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myNewCar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;speed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prints 30 still!&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;You would have expected the result of myNewCar to be 90.0, but it prints My new car’s speed: 30.0&lt;/p&gt;
-
-&lt;h2 id=&quot;but-why&quot;&gt;&lt;strong&gt;But why?&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;Well, the reason is, “myNewCar” is a partial copy of “newCar.” Since closures and their environments cannot be copied completely. The value of “speed” is copied, but the property “increaseSpeed” of “myNewCar” (myNewCar.increaseSpeed?()) holds a reference to the “increaseSpeed” of “myCar” with the “speed” of “myCar” in the captured environment. So, the “increaseSpeed” of “myCar” is invoked.&lt;/p&gt;
-
-&lt;p&gt;These are the various reasons why closures in Swift structs are dangerous.&lt;/p&gt;
-
-&lt;h2 id=&quot;so-what-do-we-do-now&quot;&gt;&lt;strong&gt;So what do we do now?&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;The straight forward solution is, avoid using closures in value types. If you want to use them, you should be very careful with it, or else it might lead to unexpected results.
-Regarding the retain cycle, the only way to break them is to set the variables “myCar” and “myNewCar” to nil manually. It doesn’t sound ideal, but there is no other way.&lt;/p&gt;
-
-&lt;p&gt;It was really thought provoking for me when I learnt about the behaviour of closures in value types. I hope you also felt the same.&lt;/p&gt;
-
-&lt;p&gt;Enjoyed reading it? Feel free to share your comments below. Like this article? Share it with your friends!
- You can also follow me on twitter right here: &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;[1] &lt;a href=&quot;https://forums.swift.org/t/avoiding-unbreakable-reference-cycle-with-value-types-and-closures/18757/6&quot;&gt;https://forums.swift.org/t/avoiding-unbreakable-reference-cycle-with-value-types-and-closures/18757/6&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;[2] &lt;a href=&quot;https://github.com/Wolox/ios-style-guide/blob/master/rules/avoid-struct-closure-self.md&quot;&gt;https://github.com/Wolox/ios-style-guide/blob/master/rules/avoid-struct-closure-self.md&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;[3] &lt;a href=&quot;https://www.objc.io/issues/16-swift/swift-classes-vs-structs/&quot;&gt;https://www.objc.io/issues/16-swift/swift-classes-vs-structs/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;[4] &lt;a href=&quot;https://marcosantadev.com/capturing-values-swift-closures/&quot;&gt;https://marcosantadev.com/capturing-values-swift-closures/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2019/09/29/swift-5-replaces-introsort-with-timsort-in-the-sort-method/&quot;&gt;Swift 5 replaces IntroSort with TimSort in the ‘sort()’ method&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
-
-      
-      
-      
-      
-      
-
-      
-        <author>
-            <name>Rizwan Ahmed A</name>
-          
-          
-        </author>
-      
-
-      
-        <category term="Closures" />
-      
-
-      
-        <category term="swift" />
-      
-        <category term="struct" />
-      
-        <category term="closures" />
-      
-        <category term="struct vs classes" />
-      
-
-      
-        <summary type="html">We all love closures, don’t we? Closures make an iOS developer’s life easy. Well, if it makes it easy, then why am I saying to avoid using closures in Swift structs? The reason is, “Memory leaks and unexpected behaviors.” Wait. What? Memory leak in structs? How could that be possible?</summary>
       
 
       
