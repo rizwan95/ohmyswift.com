@@ -22,7 +22,7 @@ body {
 }
 
 .sponsor:after {
-content: "SUPPORT CREATORS";
+content: "SHOWCASE";
 display: block;
 float: right;
 font-size: 0.8rem;

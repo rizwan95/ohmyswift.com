@@ -22,7 +22,7 @@ body {
 }
 
 .sponsor:after {
-content: "SUPPORT CREATORS";
+content: "SHOWCASE";
 display: block;
 float: right;
 font-size: 0.8rem;
@@ -52,4 +52,9 @@ color:  rgb(207, 125, 48);
 img[src$="centerme"] {
     display:block;
     margin: 0 auto;
+}
+
+.post-content h3#developer-showcase::before {
+content: "DEVELOPER SHOWCASE";
+// ...existing code...
 }

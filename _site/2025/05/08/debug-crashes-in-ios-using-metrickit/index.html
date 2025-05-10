@@ -1,0 +1,3660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/blog/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/blog/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/blog/assets/images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/blog/assets/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#9f00a7">
+    <meta name="theme-color" content="#ffffff">
+    <!-- <link href="https://newsletter.codeflakes.studio/public/static/style.css" rel="stylesheet" type="text/css">
+    <link href="https://newsletter.codeflakes.studio/public/custom.css" rel="stylesheet" type="text/css">
+    <link href="https://newsletter.codeflakes.studio/public/custom.js" rel="stylesheet" type="text/css"> -->
+    
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    </noscript>
+      
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    </noscript>
+
+  
+    <!-- AOS.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css"/>
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+  
+    
+    
+    
+    <title>Debug crashes in iOS using MetricKit</title>
+    <meta name="description" content="“Production only” crashes in iOS apps are notoriously difficult to debug. Traditional in-process crash reporting tools install handlers within your app to capture failure data, but if the app crashes hard enough, these reporters themselves may fail.">
+    
+      
+      <meta name="keywords" content="swift, debugging, iOS, MetricKit, crash reporting, crash diagnostics, MXCrashDiagnostic, callStackTree, crash analysis, iOS crash handling, Zoho Apptics">
+    
+  
+    <link rel="stylesheet" href="/blog/assets/main.css">
+    <link rel="stylesheet" href="/blog/assets/css/fonts.css">
+    <link rel="stylesheet" href="/blog/assets/css/customstyles.css">
+    <link rel="stylesheet" href="/blog/assets/css/custom_image.css">
+
+ 
+    <link rel="canonical" href="https://ohmyswift.com/blog/2025/05/08/debug-crashes-in-ios-using-metrickit/">
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="OhMySwift" href="https://ohmyswift.com/blog/feed.xml">
+  
+    
+  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6606434168907131"
+     crossorigin="anonymous"></script>
+    
+  
+  
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-144905716-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3SC6RS0VBR"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-3SC6RS0VBR');
+</script>
+    <script type="text/javascript" id="zohoapptics">var d=document,s=d.createElement("script");s.type="text/javascript";s.id="zohoappticsscript";s.defer=!0;s.src="https://apptics.zoho.in/sdk/web/v1/60040795023/645000000002061/init?aaID=645000000002073";var t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);window.appticsReady=function(s){var e=window.apptics__asyncalls=window.apptics__asyncalls||[];window.appticsReadyStatus?(s&&e.push(s),e.forEach(s=>s&&s()),window.apptics__asyncalls=null):s&&e.push(s)};</script>
+
+   
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Debug crashes in iOS using MetricKit | OhMySwift</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Debug crashes in iOS using MetricKit" />
+<meta name="author" content="Rizwan Ahmed A" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="“Production only” crashes in iOS apps are notoriously difficult to debug. Traditional in-process crash reporting tools install handlers within your app to capture failure data, but if the app crashes hard enough, these reporters themselves may fail." />
+<meta property="og:description" content="“Production only” crashes in iOS apps are notoriously difficult to debug. Traditional in-process crash reporting tools install handlers within your app to capture failure data, but if the app crashes hard enough, these reporters themselves may fail." />
+<link rel="canonical" href="https://ohmyswift.com/blog/2025/05/08/debug-crashes-in-ios-using-metrickit/" />
+<meta property="og:url" content="https://ohmyswift.com/blog/2025/05/08/debug-crashes-in-ios-using-metrickit/" />
+<meta property="og:site_name" content="OhMySwift" />
+<meta property="og:image" content="https://ohmyswift.com/blog/assets/images/metrickit-crash/fb.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-08T23:30:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://ohmyswift.com/blog/assets/images/metrickit-crash/twitter.png" />
+<meta property="twitter:title" content="Debug crashes in iOS using MetricKit" />
+<script type="application/ld+json">
+{"url":"https://ohmyswift.com/blog/2025/05/08/debug-crashes-in-ios-using-metrickit/","author":{"@type":"Person","name":"Rizwan Ahmed A"},"image":{"twitter":"assets/images/metrickit-crash/twitter.png","facebook":"assets/images/metrickit-crash/fb.png","url":"https://ohmyswift.com/blog/assets/images/metrickit-crash/fb.png","@type":"imageObject"},"headline":"Debug crashes in iOS using MetricKit","dateModified":"2025-05-08T23:30:00-05:00","datePublished":"2025-05-08T23:30:00-05:00","description":"“Production only” crashes in iOS apps are notoriously difficult to debug. Traditional in-process crash reporting tools install handlers within your app to capture failure data, but if the app crashes hard enough, these reporters themselves may fail.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2025/05/08/debug-crashes-in-ios-using-metrickit/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+
+</head>
+  
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">OhMySwift</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="/blog/talks/">Talks & Workshops</a>
+      
+        
+        <a class="page-link" href="/blog/social/">Let's Connect</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Debug crashes in iOS using MetricKit</h1>
+    
+    <p class="post-meta"><time datetime="2025-05-08T23:30:00-05:00" itemprop="datePublished">May 8, 2025</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan Ahmed A</span></span> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/debugging/">Debugging</a>
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+ •
+  
+    
+    
+      
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/debugging/">debugging</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/ios/">iOS</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/metrickit/">MetricKit</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/crash-reporting/">crash reporting</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/crash-diagnostics/">crash diagnostics</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/crash-analysis/">crash analysis</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/ios-development/">iOS development</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/swift-debugging/">Swift debugging</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/wwdc25/">wwdc25</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>“Production only” crashes in iOS apps are notoriously difficult to debug. Traditional in-process crash reporting tools install handlers within your app to capture failure data, but if the app crashes hard enough, these reporters themselves may fail.</p>
+
+<p>Apple introduced MetricKit in iOS 13 to address these limitations. Unlike conventional tools, it operates outside your app’s process, collecting diagnostics at the system level. This approach captures crashes that traditional reporters miss, including those from memory pressure, background terminations, and OS signals.</p>
+
+<p>In this article, we’ll explore how MetricKit helps debug stubborn crashes and complements traditional crash reporting approaches with its system-level capabilities.</p>
+
+<h2 id="what-is-metrickit-for-crash-debugging">What is MetricKit for Crash Debugging?</h2>
+
+<p>MetricKit’s crash reporting capabilities provide a system-level framework to collect, analyze, and deliver crash reports to your app. Beyond crashes, MetricKit offers comprehensive diagnostics including performance metrics (CPU/memory usage, launch time, hangs), battery consumption patterns, animation hitches detection, and disk I/O monitoring—all using the same implementation pattern. For crash reporting, it captures detailed diagnostic information including call stacks, exception types, and timestamps of crashes that occur on user devices. This data is collected by iOS and delivered to your app differently depending on which iOS version your users are running:</p>
+
+<ul>
+  <li><strong>iOS 13-14</strong>: Crash reports are aggregated by iOS and delivered once per day when the user launches your app after the collection period.</li>
+  <li><strong>iOS 15 and later</strong>: Crash reports are delivered immediately on the next launch of your app after a crash occurs.</li>
+</ul>
+
+<p>This improvement in iOS 15 significantly reduces the feedback loop for crash diagnostics, allowing you to identify and fix issues much faster.</p>
+
+<h2 id="setting-up-metrickit-for-crash-reporting">Setting up MetricKit for Crash Reporting</h2>
+
+<p>To begin receiving crash reports through MetricKit, follow these steps:</p>
+
+<p>First, import MetricKit in your AppDelegate:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="kt">MetricKit</span></code></pre></figure>
+
+<p>Next, make your AppDelegate conform to the <code class="language-plaintext highlighter-rouge">MXMetricManagerSubscriber</code> protocol, focusing on crash diagnostics:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIApplicationDelegate</span><span class="p">,</span> <span class="kt">MXMetricManagerSubscriber</span> <span class="p">{</span>
+    
+    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplication</span><span class="o">.</span><span class="kt">LaunchOptionsKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="c1">// Register as a subscriber to receive metrics and diagnostics</span>
+        <span class="kt">MXMetricManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="k">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Implement the required delegate method for diagnostics</span>
+    <span class="kd">func</span> <span class="nf">didReceive</span><span class="p">(</span><span class="n">_</span> <span class="nv">payloads</span><span class="p">:</span> <span class="p">[</span><span class="kt">MXDiagnosticPayload</span><span class="p">])</span> <span class="p">{</span>
+        <span class="c1">// Process crash reports</span>
+        <span class="k">for</span> <span class="n">payload</span> <span class="k">in</span> <span class="n">payloads</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="k">let</span> <span class="nv">crashDiagnostics</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">crashDiagnostics</span> <span class="p">{</span>
+                <span class="nf">processCrashReports</span><span class="p">(</span><span class="n">crashDiagnostics</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">applicationWillTerminate</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Unsubscribe when the app terminates</span>
+        <span class="kt">MXMetricManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="k">self</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="processing-crash-reports">Processing Crash Reports</h2>
+
+<p>Now, let’s implement a method to effectively process the crash reports:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="kd">func</span> <span class="nf">processCrashReports</span><span class="p">(</span><span class="n">_</span> <span class="nv">crashDiagnostics</span><span class="p">:</span> <span class="p">[</span><span class="kt">MXCrashDiagnostic</span><span class="p">])</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">diagnostic</span> <span class="k">in</span> <span class="n">crashDiagnostics</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🚨 CRASH DETECTED 🚨"</span><span class="p">)</span>
+        
+        <span class="c1">// Basic crash information</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Timestamp: </span><span class="se">\(</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">timeStamp</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"App version: </span><span class="se">\(</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">applicationVersion</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"iOS version: </span><span class="se">\(</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">metaData</span><span class="o">.</span><span class="n">osVersion</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Device type: </span><span class="se">\(</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">metaData</span><span class="o">.</span><span class="n">deviceType</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        
+        <span class="c1">// Crash type information</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">exceptionType</span> <span class="o">=</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">exceptionType</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Exception type: </span><span class="se">\(</span><span class="n">exceptionType</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">exceptionCode</span> <span class="o">=</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">exceptionCode</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Exception code: </span><span class="se">\(</span><span class="n">exceptionCode</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">signal</span> <span class="o">=</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">signal</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Signal: </span><span class="se">\(</span><span class="n">signal</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Analyze the call stack</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">callStackTree</span> <span class="o">=</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">callStackTree</span> <span class="p">{</span>
+            <span class="nf">analyzeCrashCallStack</span><span class="p">(</span><span class="n">callStackTree</span><span class="p">)</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Log or send to your backend</span>
+        <span class="nf">archiveCrashReport</span><span class="p">(</span><span class="n">diagnostic</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="understanding-crash-call-stacks">Understanding Crash Call Stacks</h2>
+
+<p>The call stack tree is crucial for understanding what led to a crash. Let’s implement a focused analysis method:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="kd">func</span> <span class="nf">analyzeCrashCallStack</span><span class="p">(</span><span class="n">_</span> <span class="nv">callStackTree</span><span class="p">:</span> <span class="kt">MXCallStackTree</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Convert the call stack tree to JSON for easier analysis</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">callStackData</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">JSONSerialization</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">withJSONObject</span><span class="p">:</span> <span class="n">callStackTree</span><span class="o">.</span><span class="nf">jsonRepresentation</span><span class="p">(),</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">prettyPrinted</span><span class="p">]),</span>
+       <span class="k">let</span> <span class="nv">jsonString</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">callStackData</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span> <span class="p">{</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🔍 Call Stack Analysis:"</span><span class="p">)</span>
+        
+        <span class="c1">// Look for common crash patterns</span>
+        <span class="k">if</span> <span class="n">jsonString</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="s">"EXC_BAD_ACCESS"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Memory access issue detected - likely accessing deallocated memory"</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">jsonString</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="s">"EXC_BREAKPOINT"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Exception breakpoint - possibly an unhandled Swift error or assertion"</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">jsonString</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="s">"EXC_CRASH"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Kernel terminated process - often due to memory pressure or watchdog timeout"</span><span class="p">)</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Find problematic frames in your code</span>
+        <span class="nf">findProblematicFrames</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="n">jsonString</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kd">func</span> <span class="nf">findProblematicFrames</span><span class="p">(</span><span class="k">in</span> <span class="nv">callStackJSON</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Look for your app's frames in the call stack</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">appNameRange</span> <span class="o">=</span> <span class="n">callStackJSON</span><span class="o">.</span><span class="nf">range</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="s">"YourAppName"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Extract the surrounding context (simplified example)</span>
+        <span class="k">let</span> <span class="nv">startIndex</span> <span class="o">=</span> <span class="n">callStackJSON</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">appNameRange</span><span class="o">.</span><span class="n">lowerBound</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="nv">limitedBy</span><span class="p">:</span> <span class="n">callStackJSON</span><span class="o">.</span><span class="n">startIndex</span><span class="p">)</span> <span class="p">??</span> <span class="n">callStackJSON</span><span class="o">.</span><span class="n">startIndex</span>
+        <span class="k">let</span> <span class="nv">endIndex</span> <span class="o">=</span> <span class="n">callStackJSON</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">appNameRange</span><span class="o">.</span><span class="n">upperBound</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nv">limitedBy</span><span class="p">:</span> <span class="n">callStackJSON</span><span class="o">.</span><span class="n">endIndex</span><span class="p">)</span> <span class="p">??</span> <span class="n">callStackJSON</span><span class="o">.</span><span class="n">endIndex</span>
+        <span class="k">let</span> <span class="nv">frameContext</span> <span class="o">=</span> <span class="n">callStackJSON</span><span class="p">[</span><span class="n">startIndex</span><span class="o">..&lt;</span><span class="n">endIndex</span><span class="p">]</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Potential problem in your code: </span><span class="se">\(</span><span class="n">frameContext</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="common-ios-crash-types-and-their-interpretation">Common iOS Crash Types and Their Interpretation</h2>
+
+<p>Understanding the crash type is crucial for debugging. Here’s how to interpret common crash signals in iOS:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="kd">func</span> <span class="nf">interpretCrashSignal</span><span class="p">(</span><span class="n">_</span> <span class="nv">signal</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">code</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="n">signal</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="s">"SIGSEGV"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Segmentation fault: Invalid memory access (likely accessing a nil pointer)"</span>
+    <span class="k">case</span> <span class="s">"SIGABRT"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Abort: Process terminated by system (common in unhandled exceptions, assertions)"</span>
+    <span class="k">case</span> <span class="s">"SIGBUS"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Bus error: Misaligned memory access or non-existent memory address"</span>
+    <span class="k">case</span> <span class="s">"SIGILL"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Illegal instruction: Invalid instruction attempted (rare, possibly corrupted memory)"</span>
+    <span class="k">case</span> <span class="s">"SIGTRAP"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Trap: Often from debug breakpoints or exceptions"</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Unknown signal: </span><span class="se">\(</span><span class="n">signal</span><span class="se">)</span><span class="s">"</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="archiving-crash-reports-for-analysis">Archiving Crash Reports for Analysis</h2>
+
+<p>To properly track and analyze crashes over time, implement an archiving system:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="kd">func</span> <span class="nf">archiveCrashReport</span><span class="p">(</span><span class="n">_</span> <span class="nv">diagnostic</span><span class="p">:</span> <span class="kt">MXCrashDiagnostic</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Generate a unique ID for the crash</span>
+    <span class="k">let</span> <span class="nv">crashID</span> <span class="o">=</span> <span class="kt">UUID</span><span class="p">()</span><span class="o">.</span><span class="n">uuidString</span>
+    
+    <span class="c1">// Create a dictionary with the important crash information</span>
+    <span class="k">var</span> <span class="nv">crashInfo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s">"id"</span><span class="p">:</span> <span class="n">crashID</span><span class="p">,</span>
+        <span class="s">"timestamp"</span><span class="p">:</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">timeStamp</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+        <span class="s">"appVersion"</span><span class="p">:</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">applicationVersion</span><span class="p">,</span>
+        <span class="s">"osVersion"</span><span class="p">:</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">metaData</span><span class="o">.</span><span class="n">osVersion</span><span class="p">,</span>
+        <span class="s">"deviceType"</span><span class="p">:</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">metaData</span><span class="o">.</span><span class="n">deviceType</span>
+    <span class="p">]</span>
+    
+    <span class="c1">// Add optional crash details if available</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">exceptionType</span> <span class="o">=</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">exceptionType</span> <span class="p">{</span>
+        <span class="n">crashInfo</span><span class="p">[</span><span class="s">"exceptionType"</span><span class="p">]</span> <span class="o">=</span> <span class="n">exceptionType</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">exceptionCode</span> <span class="o">=</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">exceptionCode</span> <span class="p">{</span>
+        <span class="n">crashInfo</span><span class="p">[</span><span class="s">"exceptionCode"</span><span class="p">]</span> <span class="o">=</span> <span class="n">exceptionCode</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">signal</span> <span class="o">=</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">signal</span> <span class="p">{</span>
+        <span class="n">crashInfo</span><span class="p">[</span><span class="s">"signal"</span><span class="p">]</span> <span class="o">=</span> <span class="n">signal</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Add call stack if available</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">callStackTree</span> <span class="o">=</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">callStackTree</span><span class="p">,</span>
+       <span class="k">let</span> <span class="nv">callStackData</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">JSONSerialization</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">withJSONObject</span><span class="p">:</span> <span class="n">callStackTree</span><span class="o">.</span><span class="nf">jsonRepresentation</span><span class="p">(),</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[]),</span>
+       <span class="k">let</span> <span class="nv">callStackString</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">callStackData</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">crashInfo</span><span class="p">[</span><span class="s">"callStack"</span><span class="p">]</span> <span class="o">=</span> <span class="n">callStackString</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Save or send the crash info</span>
+    <span class="nf">sendCrashToAnalyticsService</span><span class="p">(</span><span class="n">crashInfo</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kd">func</span> <span class="nf">sendCrashToAnalyticsService</span><span class="p">(</span><span class="n">_</span> <span class="nv">crashInfo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="p">{</span>
+    <span class="c1">// Here you would implement your specific analytics service integration</span>
+    <span class="c1">// Example:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Sending crash to analytics service: </span><span class="se">\(</span><span class="n">crashInfo</span><span class="p">[</span><span class="s">"id"</span><span class="p">]</span> <span class="p">??</span> <span class="s">"unknown"</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    
+    <span class="c1">// YourAnalyticsService.send(event: "app_crash", properties: crashInfo)</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="simulating-crashes-for-testing-metrickit">Simulating Crashes for Testing MetricKit</h2>
+
+<p>While implementing MetricKit’s crash reporting, you’ll need to test whether your implementation works correctly. Let’s explore a few simple ways to simulate crashes in your development builds.</p>
+
+<h3 id="different-types-of-crashes-you-can-simulate">Different Types of Crashes You Can Simulate</h3>
+
+<p>Here are some quick and easy ways to simulate various crash types:</p>
+
+<h4 id="1-array-index-out-of-bounds">1. Array Index Out of Bounds</h4>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">item</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="c1">// This crashes immediately</span></code></pre></figure>
+
+<h4 id="2-force-unwrapping-nil">2. Force Unwrapping nil</h4>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="k">let</span> <span class="nv">unwrapped</span> <span class="o">=</span> <span class="n">text</span><span class="o">!</span> <span class="c1">// Crash!</span></code></pre></figure>
+
+<h2 id="testing-the-full-metrickit-pipeline">Testing the Full MetricKit Pipeline</h2>
+
+<p>After simulating a crash, follow these steps:</p>
+
+<ol>
+  <li>Launch your app and trigger a crash</li>
+  <li>Fully close the app (swipe up in app switcher)</li>
+  <li>Launch your app again</li>
+</ol>
+
+<p>That’s it! If you’re testing on iOS 15 or later, MetricKit will deliver the crash report immediately when your app launches again. The <code class="language-plaintext highlighter-rouge">didReceive(_ payloads: [MXDiagnosticPayload])</code> method will be called with the crash data right away.</p>
+
+<p>If you’re testing on iOS 13-14, you’ll need to be more patient as MetricKit only delivers reports once per day on those older iOS versions.</p>
+
+<p>Remember that crashes in the debug environment might behave differently than in production. Some crashes might be caught by the debugger, making them harder to test. For the most accurate results, test crashes on a device with a release configuration but still including the debug crash button.</p>
+
+<h2 id="integrating-with-analytics-services-like-zoho-apptics">Integrating with Analytics Services like Zoho Apptics</h2>
+
+<p>While MetricKit provides powerful native crash reporting, you might want to integrate it with an analytics service for a more comprehensive solution. <a href="https://www.zoho.com/apptics/">Zoho Apptics</a> SDK is a good example as it already leverages MetricKit to collect crash data when available:</p>
+
+<div>
+    <a class="notification sponsor" href="https://zoho.to/OMS" target="_blank">
+    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg" />
+    <div>
+    <p class="sponsor-title">
+        Zoho Apptics: Comprehensive, comparative, and concise product analytics
+    </p>
+    </div>
+</a>
+</div>
+
+<h3 id="installing-apptics-sdk">Installing Apptics SDK</h3>
+
+<p>You can integrate Apptics SDK in your project using either CocoaPods or Swift Package Manager.</p>
+
+<h4 id="using-cocoapods">Using CocoaPods</h4>
+
+<p>Add the following to your Podfile:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">pod</span> <span class="s1">'Apptics-Swift'</span><span class="p">,</span> <span class="s1">'3.1.0'</span></code></pre></figure>
+
+<p>Then run:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pod <span class="nb">install</span></code></pre></figure>
+
+<h4 id="using-swift-package-manager">Using Swift Package Manager</h4>
+
+<p>You can also add Apptics as a dependency in your <code class="language-plaintext highlighter-rouge">Package.swift</code> file:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/zoho/Apptics.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"3.1.0"</span><span class="p">)</span>
+<span class="p">]</span></code></pre></figure>
+
+<p>Or directly in Xcode:</p>
+<ol>
+  <li>Go to File &gt; Swift Packages &gt; Add Package Dependency</li>
+  <li>Enter the repository URL: https://github.com/zoho/Apptics.git</li>
+  <li>Select the version you want to use</li>
+</ol>
+
+<h3 id="configuring-zoho-apptics">Configuring Zoho Apptics</h3>
+
+<p>Once installed, you can configure Apptics for crash reporting:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// First, include Apptics SDK in your app. Usually it is done in the AppDelegate</span>
+
+
+<span class="kd">func</span> <span class="nf">configureAppticsForCrashReporting</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Initialize Apptics SDK with your app's configuration</span>
+    <span class="kt">Apptics</span><span class="o">.</span><span class="nf">initialize</span><span class="p">(</span><span class="nv">withVerbose</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+
+    <span class="c1">// Enable crash reporting</span>
+    <span class="kt">Apptics</span><span class="o">.</span><span class="nf">enableAutomaticCrashTracking</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+    
+    <span class="c1">// The SDK will automatically collect MetricKit crash diagnostics</span>
+    <span class="c1">// when available on iOS 14 and above</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>That’s it! It just takes two lines of code. You don’t have to manually handle the MetricKit delegates or process the unstructured data. The Zoho Apptics SDK does it for you!</p>
+
+<p>Benefits of integrating with Apptics:</p>
+<ol>
+  <li>Dashboard for crashes reported by MetricKit</li>
+  <li>User session information alongside crash data</li>
+  <li>Automatic symbolication of crash reports</li>
+</ol>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I hope you’ve learned about the internal workings of MetricKit through this article. I really enjoyed writing about it and sharing this knowledge at <a href="https://www.linkedin.com/feed/update/urn:li:activity:7316121256502702081/">IndeHub x Zoho Apptics Chapter 9</a> and the <a href="https://www.linkedin.com/feed/update/urn:li:activity:7324718095132983296/">Swift Summer event at Microsoft Noida</a>. If you’ve read this far, I truly appreciate your dedication to mastering these concepts! Do try implementing these techniques in your projects and let me know your thoughts in the comments below.</p>
+
+<h3 id="references">References</h3>
+
+<p>[1] <a href="https://developer.apple.com/documentation/metrickit">https://developer.apple.com/documentation/metrickit</a></p>
+
+<p>[2] <a href="https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic">https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic</a></p>
+
+<p>[3] <a href="https://developer.apple.com/videos/play/wwdc2020/10089/">https://developer.apple.com/videos/play/wwdc2020/10089/</a></p>
+
+<h3 id="about-the-author">About the author</h3>
+
+<ul>
+  <li><strong>Rizwan Ahmed</strong> -
+Developer Relations at Zoho Apptics | Tech Evangelist at Zoho | AI Researcher | iOS Engineer | Blogger at ohmyswift.com | Speaker | Mentor <br /> <br />LinkedIn - <a href="https://www.linkedin.com/in/rizwan95/">https://www.linkedin.com/in/rizwan95/</a> <br />Twitter - <a href="https://twitter.com/rizwanasifahmed">https://twitter.com/rizwanasifahmed</a>  <br /> Social media  - <a href="https://bento.me/rizwan95">https://bento.me/rizwan95</a>  <br /></li>
+</ul>
+
+<h4 id="more-articles">More articles</h4>
+
+<ul>
+  <li><a href="/blog/2024/08/15/swiftui-in-2024-bridging-perception-and-reality/">SwiftUI in 2024: Bridging Perception and Reality</a></li>
+  <li><a href="/blog/2023/12/01/from-viewwillappear-to-viewisappearing-perfecting-your-ios-view-transitions/">From viewWillAppear to viewIsAppearing - Perfecting Your iOS View Transitions</a></li>
+  <li><a href="/blog/2021/08/23/customizing-uibutton-in-ios-15/">Customizing UIButton in iOS 15</a></li>
+  <li><a href="/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/">Different methods to remove the last item from an array in Swift</a></li>
+  <li><a href="/blog/2021/04/14/exploring-deque-in-swift-collections/">Exploring Deque in Swift Collections</a></li>
+  <li><a href="/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">Replacing UIImagePickerController with PHPickerViewController</a></li>
+  <li><a href="/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/">Simulating remote push notifications in a simulator</a></li>
+</ul>
+
+
+  </div>
+  <script defer src="https://comments.ohmyswift.com/comentario.js"></script>
+<comentario-comments theme="light"></comentario-comments>
+  <!-- <div class="container wrap">
+<form method="post" action="https://newsletter.codeflakes.studio/subscription/form" class="listmonk-form">
+    <div>
+        <h2 class="centerstyle">OhMySwift Weekly</h2>
+        <p class="centerstyle">Interested in learning or upgrading your skills as an iOS/macOS developer? Then this newsletter is for you. Published on Fridays. </p>
+        <input type="hidden" name="nonce" />
+        <p><input type="email" name="email" required placeholder="E-mail" /></p>
+        <p><input type="text" name="name" placeholder="Name (optional)" /></p>
+        <p hidden>
+            <input id="d16d7" type="checkbox" name="l" checked value="d16d7a36-f48f-4edc-b743-7f2e6ca70478" />
+            <label for="d16d7">OhMySwift Readers</label>
+        </p>
+        <p class="centerstyle">
+            <button type="submit" class="button">Subscribe</button>
+        </p>
+        <p class="centerstyle">
+            No spam, ever. We’ll never share your email address and you can opt out at any time.
+        </p>
+
+    </div>
+</form>
+</div>
+
+ -->
+  <div>
+    <a class="notification sponsor" href="https://zoho.to/OMS" target="_blank">
+    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg">
+    <div>
+    <p class= "sponsor-title">
+        Zoho Apptics: Comprehensive, comparative, and concise product analytics
+    </p>
+    <p>
+        Zoho Apptics gives you everything you need in one SDK and dashboard—crash reporting, in‑app feedback, push notifications, user segments, feature‑usage tracking, and user flows—so you can track metrics, visualize engagement, and optimize for growth without stitching data across tools.    </p>
+    </div>
+</a>
+</div>
+  <div class = "centerstyle">
+    <p>Like our articles? Support us!</p>
+ 
+
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="ohmyswift" data-color="#FFDD00" data-emoji="🍕"  data-font="Lato" data-text="Buy me a pizza" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+
+
+</div>
+
+</article>
+
+
+  
+      </div>
+    </main>
+
+    <footer class="site-footer">
+    <div class="wrapper">
+
+
+      <p>
+        
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://ohmyswift.com/blog/feed.xml">RSS</a>
+
+      </p>
+
+    <div>
+<script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ohmyswift" data-description="Support me on Buy me a coffee!" data-message="Do you like our articles? Support us! Buy us a pizza" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18">
+</script>
+</div>
+</footer>
+
+  </body>
+
+</html>

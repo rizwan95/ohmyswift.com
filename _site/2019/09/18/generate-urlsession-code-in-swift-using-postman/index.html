@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/blog/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/blog/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/blog/assets/images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/blog/assets/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#9f00a7">
+    <meta name="theme-color" content="#ffffff">
+    <!-- <link href="https://newsletter.codeflakes.studio/public/static/style.css" rel="stylesheet" type="text/css">
+    <link href="https://newsletter.codeflakes.studio/public/custom.css" rel="stylesheet" type="text/css">
+    <link href="https://newsletter.codeflakes.studio/public/custom.js" rel="stylesheet" type="text/css"> -->
+    
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    </noscript>
+      
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    </noscript>
+
+  
+    <!-- AOS.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css"/>
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+  
+    
+    
+    
+    <title>Generate URLSession code in Swift using Postman</title>
+    <meta name="description" content="Almost every iOS developer would have had to make a network call from their app. Swift uses URLSession to make network calls. URLSessionTask includes DataTask, UploadTask, DownloadTask, and WebsocketTask (WebsocketTask is lately introduced in iOS13.0 check this article to know more about it.) I was testing a multipart data request API using the [Postman app.]https://www.getpostman.com/ The API worked, the file got uploaded, and the results came in. However, I needed to write the Swift code to make a multipart request from the iOS app. Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could!">
+    
+  
+    <link rel="stylesheet" href="/blog/assets/main.css">
+    <link rel="stylesheet" href="/blog/assets/css/fonts.css">
+    <link rel="stylesheet" href="/blog/assets/css/customstyles.css">
+    <link rel="stylesheet" href="/blog/assets/css/custom_image.css">
+
+ 
+    <link rel="canonical" href="https://ohmyswift.com/blog/2019/09/18/generate-urlsession-code-in-swift-using-postman/">
+    
+    
+    <link rel="alternate" type="application/rss+xml" title="OhMySwift" href="https://ohmyswift.com/blog/feed.xml">
+  
+    
+  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6606434168907131"
+     crossorigin="anonymous"></script>
+    
+  
+  
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-144905716-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3SC6RS0VBR"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-3SC6RS0VBR');
+</script>
+    <script type="text/javascript" id="zohoapptics">var d=document,s=d.createElement("script");s.type="text/javascript";s.id="zohoappticsscript";s.defer=!0;s.src="https://apptics.zoho.in/sdk/web/v1/60040795023/645000000002061/init?aaID=645000000002073";var t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);window.appticsReady=function(s){var e=window.apptics__asyncalls=window.apptics__asyncalls||[];window.appticsReadyStatus?(s&&e.push(s),e.forEach(s=>s&&s()),window.apptics__asyncalls=null):s&&e.push(s)};</script>
+
+   
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Generate URLSession code in Swift using Postman | OhMySwift</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Generate URLSession code in Swift using Postman" />
+<meta name="author" content="Rizwan Ahmed A" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Almost every iOS developer would have had to make a network call from their app. Swift uses URLSession to make network calls. URLSessionTask includes DataTask, UploadTask, DownloadTask, and WebsocketTask (WebsocketTask is lately introduced in iOS13.0 check this article to know more about it.) I was testing a multipart data request API using the [Postman app.]https://www.getpostman.com/ The API worked, the file got uploaded, and the results came in. However, I needed to write the Swift code to make a multipart request from the iOS app. Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could!" />
+<meta property="og:description" content="Almost every iOS developer would have had to make a network call from their app. Swift uses URLSession to make network calls. URLSessionTask includes DataTask, UploadTask, DownloadTask, and WebsocketTask (WebsocketTask is lately introduced in iOS13.0 check this article to know more about it.) I was testing a multipart data request API using the [Postman app.]https://www.getpostman.com/ The API worked, the file got uploaded, and the results came in. However, I needed to write the Swift code to make a multipart request from the iOS app. Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could!" />
+<link rel="canonical" href="https://ohmyswift.com/blog/2019/09/18/generate-urlsession-code-in-swift-using-postman/" />
+<meta property="og:url" content="https://ohmyswift.com/blog/2019/09/18/generate-urlsession-code-in-swift-using-postman/" />
+<meta property="og:site_name" content="OhMySwift" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-18T14:01:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Generate URLSession code in Swift using Postman" />
+<script type="application/ld+json">
+{"url":"https://ohmyswift.com/blog/2019/09/18/generate-urlsession-code-in-swift-using-postman/","author":{"@type":"Person","name":"Rizwan Ahmed A"},"headline":"Generate URLSession code in Swift using Postman","dateModified":"2019-09-18T14:01:00-05:00","datePublished":"2019-09-18T14:01:00-05:00","description":"Almost every iOS developer would have had to make a network call from their app. Swift uses URLSession to make network calls. URLSessionTask includes DataTask, UploadTask, DownloadTask, and WebsocketTask (WebsocketTask is lately introduced in iOS13.0 check this article to know more about it.) I was testing a multipart data request API using the [Postman app.]https://www.getpostman.com/ The API worked, the file got uploaded, and the results came in. However, I needed to write the Swift code to make a multipart request from the iOS app. Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could!","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2019/09/18/generate-urlsession-code-in-swift-using-postman/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+
+</head>
+  
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">OhMySwift</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="/blog/talks/">Talks & Workshops</a>
+      
+        
+        <a class="page-link" href="/blog/social/">Let's Connect</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Generate URLSession code in Swift using Postman</h1>
+    
+    <p class="post-meta"><time datetime="2019-09-18T14:01:00-05:00" itemprop="datePublished">Sep 18, 2019</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan Ahmed A</span></span> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/categories/postman/">Postman</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+ •
+  
+    
+    
+      
+        <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/blog/tags/postman/">postman</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Almost every iOS developer would have had to make a network call from their app. Swift uses URLSession to make network calls. URLSessionTask includes DataTask, UploadTask, DownloadTask, and WebsocketTask (WebsocketTask is lately introduced in iOS13.0 check <a href="/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/">this article</a> to know more about it.)
+I was testing a multipart data request API using the [Postman app.]<a href="https://www.getpostman.com/">https://www.getpostman.com/</a> The API worked, the file got uploaded, and the results came in.
+However, I needed to write the Swift code to make a multipart request from the iOS app.
+Writing code for data task can be simple, but the complexity increases when we write code for multipart requests. I was wondering whether Postman can generate the multipart data request code for me, turns out that it could!</p>
+
+<div>
+    <a class="notification sponsor" href="https://zoho.to/OMS" target="_blank">
+    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg" />
+    <div>
+    <p class="sponsor-title">
+        Zoho Apptics: Comprehensive, comparative, and concise product analytics
+    </p>
+    <p>
+        Zoho Apptics gives you everything you need in one SDK and dashboard—crash reporting, in‑app feedback, push notifications, user segments, feature‑usage tracking, and user flows—so you can track metrics, visualize engagement, and optimize for growth without stitching data across tools.    </p>
+    </div>
+</a>
+</div>
+
+<p><img src="/blog/assets/images/postman-swift.png" alt="Generate Swift code using Postman" /></p>
+
+<p>After you had entered the API endpoint details like URL, query params, request body, and request headers hit the “code” button.</p>
+
+<p><img src="/blog/assets/images/postman-main-screen.png" alt="Postman main screeen" /></p>
+
+<p>Select Swift as the programming language, and you will be able to see the Swift code for the request.
+Neat, isn’t it? The generated code comes in very handy for developers and saves much time. Of course, we have to modify the code here and there to suit our needs, but it saves much time!</p>
+
+<p><img src="/blog/assets/images/postman-swift-snippet-1.png" alt="Postman Swift snippet 1" /></p>
+
+<p><img src="/blog/assets/images/postman-swift-snippet-2.png" alt="Postman Swift snippet 2" /></p>
+
+<p>Got any remarks? Feel free to comment them below. You can also reach out to me at <a href="https://twitter.com/rizwanasifahmed">Twitter</a></p>
+
+  </div>
+  <script defer src="https://comments.ohmyswift.com/comentario.js"></script>
+<comentario-comments theme="light"></comentario-comments>
+  <!-- <div class="container wrap">
+<form method="post" action="https://newsletter.codeflakes.studio/subscription/form" class="listmonk-form">
+    <div>
+        <h2 class="centerstyle">OhMySwift Weekly</h2>
+        <p class="centerstyle">Interested in learning or upgrading your skills as an iOS/macOS developer? Then this newsletter is for you. Published on Fridays. </p>
+        <input type="hidden" name="nonce" />
+        <p><input type="email" name="email" required placeholder="E-mail" /></p>
+        <p><input type="text" name="name" placeholder="Name (optional)" /></p>
+        <p hidden>
+            <input id="d16d7" type="checkbox" name="l" checked value="d16d7a36-f48f-4edc-b743-7f2e6ca70478" />
+            <label for="d16d7">OhMySwift Readers</label>
+        </p>
+        <p class="centerstyle">
+            <button type="submit" class="button">Subscribe</button>
+        </p>
+        <p class="centerstyle">
+            No spam, ever. We’ll never share your email address and you can opt out at any time.
+        </p>
+
+    </div>
+</form>
+</div>
+
+ -->
+  <div>
+    <a class="notification sponsor" href="https://zoho.to/OMS" target="_blank">
+    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg">
+    <div>
+    <p class= "sponsor-title">
+        Zoho Apptics: Comprehensive, comparative, and concise product analytics
+    </p>
+    <p>
+        Zoho Apptics gives you everything you need in one SDK and dashboard—crash reporting, in‑app feedback, push notifications, user segments, feature‑usage tracking, and user flows—so you can track metrics, visualize engagement, and optimize for growth without stitching data across tools.    </p>
+    </div>
+</a>
+</div>
+  <div class = "centerstyle">
+    <p>Like our articles? Support us!</p>
+ 
+
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="ohmyswift" data-color="#FFDD00" data-emoji="🍕"  data-font="Lato" data-text="Buy me a pizza" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+
+
+</div>
+
+</article>
+
+
+  
+      </div>
+    </main>
+
+    <footer class="site-footer">
+    <div class="wrapper">
+
+
+      <p>
+        
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://ohmyswift.com/blog/feed.xml">RSS</a>
+
+      </p>
+
+    <div>
+<script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ohmyswift" data-description="Support me on Buy me a coffee!" data-message="Do you like our articles? Support us! Buy us a pizza" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18">
+</script>
+</div>
+</footer>
+
+  </body>
+
+</html>
