@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MXMetricManagerSubscriber
         // Process crash reports
         for payload in payloads {
             if let crashDiagnostics = payload.crashDiagnostics {
-                processCrashReports(crashDiagnostics)
+                // Write your method to process crashes.
             }
         }
     }
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MXMetricManagerSubscriber
 }
 {% endhighlight %}
 
-## Processing Crash Reports
+<!-- ## Processing Crash Reports
 
 Now, let's implement a method to effectively process the crash reports:
 
@@ -217,7 +217,7 @@ private func sendCrashToAnalyticsService(_ crashInfo: [String: Any]) {
     
     // YourAnalyticsService.send(event: "app_crash", properties: crashInfo)
 }
-{% endhighlight %}
+{% endhighlight %} -->
 
 ## Simulating Crashes for Testing MetricKit
 
