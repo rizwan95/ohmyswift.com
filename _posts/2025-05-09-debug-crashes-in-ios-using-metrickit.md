@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MXMetricManagerSubscriber
         // Process crash reports
         for payload in payloads {
             if let crashDiagnostics = payload.crashDiagnostics {
-                // Write your method to process crashes.
+                handleCrashDiagnostics(crashDiagnostics)
             }
         }
     }
@@ -67,106 +67,140 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MXMetricManagerSubscriber
 }
 {% endhighlight %}
 
-<!-- ## Processing Crash Reports
+## Processing Crash Reports
 
 Now, let's implement a method to effectively process the crash reports:
 
 {% highlight swift %}
-private func processCrashReports(_ crashDiagnostics: [MXCrashDiagnostic]) {
-    for diagnostic in crashDiagnostics {
-        print("🚨 CRASH DETECTED 🚨")
-        
-        // Basic crash information
-        print("Timestamp: \(diagnostic.timeStamp)")
-        print("App version: \(diagnostic.applicationVersion)")
-        print("iOS version: \(diagnostic.metaData.osVersion)")
-        print("Device type: \(diagnostic.metaData.deviceType)")
-        
-        // Crash type information
-        if let exceptionType = diagnostic.exceptionType {
-            print("Exception type: \(exceptionType)")
-        }
-        
-        if let exceptionCode = diagnostic.exceptionCode {
-            print("Exception code: \(exceptionCode)")
-        }
-        
-        if let signal = diagnostic.signal {
-            print("Signal: \(signal)")
-        }
-        
-        // Analyze the call stack
-        if let callStackTree = diagnostic.callStackTree {
-            analyzeCrashCallStack(callStackTree)
-        }
-        
-        // Log or send to your backend
+private func handleCrashDiagnostics(_ diagnostics: [MXCrashDiagnostic]) {
+    for diagnostic in diagnostics {
+        logCrashSummary(diagnostic)
+        analyzeCrashCallStack(diagnostic.callStackTree)
         archiveCrashReport(diagnostic)
     }
 }
 {% endhighlight %}
 
-## Understanding Crash Call Stacks
+## Log Crash Summary 
 
-The call stack tree is crucial for understanding what led to a crash. Let's implement a focused analysis method:
-
+Logs a concise summary of the crash for quick inspection.
 {% highlight swift %}
-private func analyzeCrashCallStack(_ callStackTree: MXCallStackTree) {
-    // Convert the call stack tree to JSON for easier analysis
-    if let callStackData = try? JSONSerialization.data(withJSONObject: callStackTree.jsonRepresentation(), options: [.prettyPrinted]),
-       let jsonString = String(data: callStackData, encoding: .utf8) {
-        
-        print("🔍 Call Stack Analysis:")
-        
-        // Look for common crash patterns
-        if jsonString.contains("EXC_BAD_ACCESS") {
-            print("Memory access issue detected - likely accessing deallocated memory")
-        } else if jsonString.contains("EXC_BREAKPOINT") {
-            print("Exception breakpoint - possibly an unhandled Swift error or assertion")
-        } else if jsonString.contains("EXC_CRASH") {
-            print("Kernel terminated process - often due to memory pressure or watchdog timeout")
-        }
-        
-        // Find problematic frames in your code
-        findProblematicFrames(in: jsonString)
+private func logCrashSummary(_ diagnostic: MXCrashDiagnostic) {
+    print("🚨 CRASH DETECTED 🚨")
+    let crashDictionary = diagnostic.dictionaryRepresentation()
+    let crashTimestamp = crashDictionary["timestamp"] ?? Date().description
+    print("Timestamp: \(crashTimestamp)")
+    print("App version: \(diagnostic.applicationVersion)")
+    print("iOS version: \(diagnostic.metaData.osVersion)")
+    print("Device type: \(diagnostic.metaData.deviceType)")
+    if let exceptionType = diagnostic.exceptionType {
+        print("Exception type: \(exceptionType)")
     }
-}
-
-private func findProblematicFrames(in callStackJSON: String) {
-    // Look for your app's frames in the call stack
-    if let appNameRange = callStackJSON.range(of: "YourAppName") {
-        // Extract the surrounding context (simplified example)
-        let startIndex = callStackJSON.index(appNameRange.lowerBound, offsetBy: -100, limitedBy: callStackJSON.startIndex) ?? callStackJSON.startIndex
-        let endIndex = callStackJSON.index(appNameRange.upperBound, offsetBy: 100, limitedBy: callStackJSON.endIndex) ?? callStackJSON.endIndex
-        let frameContext = callStackJSON[startIndex..<endIndex]
-        
-        print("Potential problem in your code: \(frameContext)")
+    if let exceptionCode = diagnostic.exceptionCode {
+        print("Exception code: \(exceptionCode)")
+    }
+    if let signal = diagnostic.signal {
+        let codeString = diagnostic.exceptionCode?.stringValue
+        print(describeCrashSignal(signal, code: codeString))
     }
 }
 {% endhighlight %}
 
-## Common iOS Crash Types and Their Interpretation
+## Analyze Crash Call Stack 
 
-Understanding the crash type is crucial for debugging. Here's how to interpret common crash signals in iOS:
+Analyzes the call stack for common crash patterns and user binaries.
 
 {% highlight swift %}
-private func interpretCrashSignal(_ signal: String, code: String?) -> String {
-    switch signal {
+
+/// Returns a human-readable description for a crash signal.
+private func describeCrashSignal(_ signal: Any?, code: String?) -> String {
+    let signalMap: [String: String] = [
+        "1": "SIGHUP", "2": "SIGINT", "3": "SIGQUIT", "4": "SIGILL", "5": "SIGTRAP",
+        "6": "SIGABRT", "7": "SIGBUS", "8": "SIGFPE", "9": "SIGKILL", "10": "SIGUSR1",
+        "11": "SIGSEGV", "12": "SIGUSR2", "13": "SIGPIPE", "14": "SIGALRM", "15": "SIGTERM"
+    ]
+    var signalName: String?
+    if let signalStr = signal as? String, let mapped = signalMap[signalStr] {
+        signalName = mapped
+    } else if let signalNum = signal as? NSNumber, let mapped = signalMap["\(signalNum.intValue)"] {
+        signalName = mapped
+    } else if let signalStr = signal as? String {
+        signalName = signalStr
+    }
+    switch signalName {
     case "SIGSEGV":
-        return "Segmentation fault: Invalid memory access (likely accessing a nil pointer)"
+        return "Segmentation fault (SIGSEGV): Invalid memory access (likely accessing a nil pointer)"
     case "SIGABRT":
-        return "Abort: Process terminated by system (common in unhandled exceptions, assertions)"
+        return "Abort (SIGABRT): Process terminated by system (common in unhandled exceptions, assertions)"
     case "SIGBUS":
-        return "Bus error: Misaligned memory access or non-existent memory address"
+        return "Bus error (SIGBUS): Misaligned memory access or non-existent memory address"
     case "SIGILL":
-        return "Illegal instruction: Invalid instruction attempted (rare, possibly corrupted memory)"
+        return "Illegal instruction (SIGILL): Invalid instruction attempted (rare, possibly corrupted memory)"
     case "SIGTRAP":
-        return "Trap: Often from debug breakpoints or exceptions"
+        return "Trap (SIGTRAP): Often from debug breakpoints or exceptions"
+    case .some(let name):
+        return "Signal: \(name)"
     default:
-        return "Unknown signal: \(signal)"
+        return "Unknown signal: \(String(describing: signal))"
     }
 }
+
+private func analyzeCrashCallStack(_ callStackTree: MXCallStackTree) {
+    let callStackData = callStackTree.jsonRepresentation()
+    guard let jsonString = String(data: callStackData, encoding: .utf8) else {
+        print("Unable to decode call stack JSON.")
+        return
+    }
+    print("🔍 Call Stack Analysis:")
+    printCrashPatternHints(in: jsonString)
+    printUserBinaries(in: jsonString)
+}
+
+/// Prints hints if common crash patterns are detected in the call stack.
+private func printCrashPatternHints(in callStackJSON: String) {
+    if callStackJSON.contains("EXC_BAD_ACCESS") {
+        print("Memory access issue detected - likely accessing deallocated memory")
+    } else if callStackJSON.contains("EXC_BREAKPOINT") {
+        print("Exception breakpoint - possibly an unhandled Swift error or assertion")
+    } else if callStackJSON.contains("EXC_CRASH") {
+        print("Kernel terminated process - often due to memory pressure or watchdog timeout")
+    }
+}
+
+/// Prints user or third-party binaries found in the call stack.
+private func printUserBinaries(in callStackJSON: String) {
+    guard let data = callStackJSON.data(using: .utf8),
+            let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+            let callStacks = json["callStacks"] as? [[String: Any]] else {
+        print("Could not parse call stack JSON")
+        return
+    }
+    var userBinaries: Set<String> = []
+    for stack in callStacks {
+        if let frames = stack["callStackRootFrames"] as? [[String: Any]] {
+            for frame in frames {
+                if let binaryName = frame["binaryName"] as? String, !isSystemBinary(binaryName) {
+                    userBinaries.insert(binaryName)
+                }
+            }
+        }
+    }
+    if userBinaries.isEmpty {
+        print("No obvious user or third-party binaries found in call stack.")
+    } else {
+        print("Potential problematic binaries in call stack: \(userBinaries.joined(separator: ", "))")
+    }
+}
+
+/// Determines if a binary is a system binary.
+private func isSystemBinary(_ binaryName: String) -> Bool {
+    let systemPrefixes = ["lib", "UIKit", "Foundation", "Core", "CFNetwork", "dyld", "libsystem"]
+    return systemPrefixes.contains { binaryName.hasPrefix($0) }
+}
 {% endhighlight %}
+
+
+
 
 ## Archiving Crash Reports for Analysis
 
@@ -217,7 +251,7 @@ private func sendCrashToAnalyticsService(_ crashInfo: [String: Any]) {
     
     // YourAnalyticsService.send(event: "app_crash", properties: crashInfo)
 }
-{% endhighlight %} -->
+{% endhighlight %}
 
 ## Simulating Crashes for Testing MetricKit
 
