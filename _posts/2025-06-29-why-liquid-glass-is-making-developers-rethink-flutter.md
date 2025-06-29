@@ -100,12 +100,12 @@ It's not a weekend project, but it's worth it for apps that need to shine on iOS
 
 ## Let's Keep the Conversation Going
 
-Liquid Glass isn't "killing" Flutter, but it's a wake-up call that native iOS shines for Apple's latest designs. If you're iOS-first, SwiftUI's glassEffect makes Liquid Glass effortless, as WWDC 2025 shows. If cross-platform's your thing, Flutter's still viable with some work. I'm curious. What's your take? Try the SwiftUI code above and share your glassy UI at our next SWIFT Chennai meetup. Or hit me up on X (@rizwan) with #WWDC2025. Oh, and our ohmyswift.com newsletter is launching soon. Let's build some stunning apps together!
+Liquid Glass isn't "killing" Flutter, but it's a wake-up call that native iOS shines for Apple's latest designs. If you're iOS-first, SwiftUI's glassEffect makes Liquid Glass effortless, as WWDC 2025 shows. If cross-platform's your thing, Flutter's still viable with some work. I'm curious. What's your take? Try the SwiftUI code above and hit me up on [LinkedIn](https://www.linkedin.com/in/rizwan95/) or [X.com](https://x.com/rizwanasifahmed) with #WWDC25. Oh, and our ohmyswift.com newsletter is launching soon. Let's build some stunning apps together!
 
 ### About the author
 
 - **Rizwan Ahmed** -
-Developer Relations at Zoho Apptics | Tech Evangelist at Zoho | AI Researcher | iOS Engineer | Blogger at ohmyswift.com | Speaker | Mentor <br /> <br />LinkedIn - <https://www.linkedin.com/in/rizwan95/> <br />Twitter - <https://twitter.com/rizwanasifahmed>  <br /> Social media  - <https://bento.me/rizwan95>  <br />
+Developer Relations at [Zoho Apptics](https://www.zoho.com/apptics/) | Tech Evangelist at Zoho | AI Researcher | iOS Engineer | Blogger at ohmyswift.com | Speaker | Mentor <br /> <br />LinkedIn - <https://www.linkedin.com/in/rizwan95/> <br />Twitter - <https://twitter.com/rizwanasifahmed>  <br /> Social media  - <https://bento.me/rizwan95>  <br />
 
 #### More articles
 
