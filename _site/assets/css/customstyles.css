@@ -53,3 +53,8 @@ img[src$="centerme"] {
     display:block;
     margin: 0 auto;
 }
+
+.post-content h3#developer-showcase::before {
+content: "DEVELOPER SHOWCASE";
+// ...existing code...
+}

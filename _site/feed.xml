@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <generator uri="http://jekyllrb.com" version="4.3.2">Jekyll</generator>
+  <generator uri="http://jekyllrb.com" version="4.4.1">Jekyll</generator>
   
   
-  <link href="https://ohmyswift.com/blog/feed.xml" rel="self" type="application/atom+xml" />
-  <link href="https://ohmyswift.com/blog/" rel="alternate" type="text/html" />
-  <updated>2025-05-10T12:54:47-05:00</updated>
-  <id>https://ohmyswift.com/blog//</id>
+  <link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/blog/" rel="alternate" type="text/html" />
+  <updated>2025-06-29T16:00:45+05:30</updated>
+  <id>http://localhost:4000/blog/</id>
 
   
     <title type="html">OhMySwift</title>
@@ -22,15 +22,214 @@
   
     <entry>
       
+      <title type="html">Why Liquid Glass Is Making Developers Rethink Flutter</title>
+      
+      
+      <link href="http://localhost:4000/blog/2025/06/29/why-liquid-glass-is-making-developers-rethink-flutter/" rel="alternate" type="text/html" title="Why Liquid Glass Is Making Developers Rethink Flutter" />
+      
+      <published>2025-06-29T09:28:00+05:30</published>
+      <updated>2025-06-29T09:28:00+05:30</updated>
+      <id>http://localhost:4000/blog/2025/06/29/why-liquid-glass-is-making-developers-rethink-flutter</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2025/06/29/why-liquid-glass-is-making-developers-rethink-flutter/">&lt;p&gt;Hey Swift folks! If you’ve been scrolling X or LinkedIn, you have probably caught wind of the buzz: Apple’s Liquid Glass design is supposedly “killing” Flutter. I have been diving into &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2025/219/&quot;&gt;Meet Liquid Glass&lt;/a&gt; video and Apple’s official &lt;a href=&quot;https://developer.apple.com/documentation/technologyoverviews/adopting-liquid-glass&quot;&gt;Adopting Liquid Glass&lt;/a&gt; documentation to figure out what is driving this talk and what it means for us. Is it time to ditch Flutter for native iOS with SwiftUI? Let’s unpack why Liquid Glass is a challenge for Flutter, what really matters, and how to migrate if you’re ready to go all-in on native.&lt;/p&gt;
+
+&lt;h2 id=&quot;whys-liquid-glass-stirring-up-trouble-for-flutter&quot;&gt;Why’s Liquid Glass Stirring Up Trouble for Flutter?&lt;/h2&gt;
+
+&lt;p&gt;At WWDC 2025, Apple dropped Liquid Glass, a stunning design language for iOS 26, iPadOS 26, macOS Tahoe 26, watchOS 26, and tvOS 26. It’s all about translucent, fluid interfaces with dynamic blur, refraction, and adaptive animations, as shown in the session Build a SwiftUI app with the new design. SwiftUI makes it seamless with the new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glassEffect(_:in:isEnabled:)&lt;/code&gt; modifier. But for Flutter devs, it’s a different story.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Flutter’s Rendering Hurdle&lt;/strong&gt;: Flutter uses its Impeller engine (built on Skia) to draw UI on a canvas, skipping native iOS components. Even Flutter’s Cupertino widgets which mimic pre-iOS 26 designs, can’t natively use Liquid Glass’s effects, which rely on Apple’s Metal and Core Animation.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;DIY Workarounds&lt;/strong&gt;: To get a Liquid Glass look in Flutter, you need custom solutions like BackdropFilter, shaders, or community packages (e.g., liquid_glass on pub.dev). These are time-consuming and often don’t match native polish.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Performance Edge for Native&lt;/strong&gt;:
+Liquid Glass is GPU-heavy, and SwiftUI optimizes it with Metal. Flutter’s extra layer can lag, especially on older iPhones or Vision Pro. A 2025 Medium article found SwiftUI uses 20-30% less CPU for dynamic animations compared to Flutter’s Impeller.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Support Lag&lt;/strong&gt;: The Flutter team said on June 11, 2025, they’re “&lt;a href=&quot;https://github.com/flutter/flutter/issues/170310&quot;&gt;not developing Liquid Glass features in the Cupertino library right now,&lt;/a&gt;” leaving devs to lean on community fixes, which may not be production-ready. It is the same case with Material 3 design.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;what-really-matters&quot;&gt;What Really Matters?&lt;/h2&gt;
+
+&lt;p&gt;Before you decide to stick with Flutter or go native, here’s what to consider:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Native Polish vs. Cross-Platform Speed&lt;/strong&gt;:
+If your app is iOS-first and needs that Liquid Glass sparkle, SwiftUI’s glassEffect makes it a breeze, as shown at WWDC. But if you’re targeting Android, web, or more, Flutter’s single codebase saves time, even if it means extra UI effort.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;User Expectations&lt;/strong&gt;
+iOS users notice when apps don’t match the platform’s glassy aesthetic. A Flutter app without Liquid Glass might feel dated, but for utility apps, users may care less.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Team Resources&lt;/strong&gt;
+Mimicking Liquid Glass in Flutter requires shader skills or third-party packages. SwiftUI cuts that effort with native APIs. Can your team handle a rewrite?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Future-Proofing&lt;/strong&gt;
+Apple’s ecosystem is racing ahead with the latest APIs announced at WWDC25. Native apps get these instantly, while Flutter waits for plugins.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Accessibility &amp;amp; Compliance Edge&lt;/strong&gt;
+SwiftUI’s accessibility features work out-of-the-box. VoiceOver, Dynamic Type, and Reduce Motion are automatically supported. Flutter developers need to manually implement accessibility for each widget, and even if they nail the Liquid Glass look, they still have to handle accessibility separately. With the EU’s European Accessibility Act and similar regulations worldwide pushing hard for digital accessibility compliance, it’s better to have these features built-in from day one rather than scrambling to add them after the fact.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Testing Made Simple&lt;/strong&gt;
+Xcode’s latest UI testing capabilities make testing Liquid Glass interfaces a breeze. SwiftUI’s declarative nature pairs perfectly with Xcode’s testing tools. You can easily test dynamic blur effects, glass transitions, and responsive layouts. Flutter’s testing story for custom visual effects is more complex, requiring additional setup and often custom testing solutions.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Regulatory Future-Proofing&lt;/strong&gt;
+As governments worldwide tighten accessibility requirements, native iOS development provides a compliance safety net. SwiftUI’s built-in accessibility means you’re already meeting most standards, while Flutter teams need to audit and retrofit accessibility features. This is a costly process that’s better avoided upfront.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;how-to-migrate-to-native-ios&quot;&gt;How to Migrate to Native iOS&lt;/h2&gt;
+
+&lt;p&gt;If Liquid Glass has you leaning toward native iOS, migrating from Flutter to SwiftUI is a big step but doable. The WWDC session focuses on building new SwiftUI apps, not migration, but here’s a practical roadmap:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Break Down Your App&lt;/strong&gt;:
+Split your Flutter code into UI (widgets) and logic (networking, state). You can often reuse logic like API calls with minor tweaks.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Set Up SwiftUI&lt;/strong&gt;
+Create an Xcode 26 project targeting iOS 26. SwiftUI’s declarative style feels a bit like Flutter’s widget tree but with native power.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Rebuild the UI&lt;/strong&gt;
+Use SwiftUI’s glassEffect for Liquid Glass. Here’s a simple example, inspired by the WWDC session:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SwiftUI&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GlassCard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;VStack&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Welcome to iOS 26&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;font&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;foregroundStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;Spacer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;maxWidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infinity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ultraThinMaterial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;glassEffect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;regular&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RoundedRectangle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cornerRadius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Liquid Glass magic&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GlassCard_Previews&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;PreviewProvider&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;previews&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;GlassCard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;preferredColorScheme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In Flutter, you’d wrestle with shaders or packages to get close. This is way simpler.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Port Logic&lt;/strong&gt;:
+Translate Dart logic to Swift, using async/await for networking. If you want you can use libraries like Alamofire that can replace Flutter’s HTTP package or else just go ahead with Apple’s URLSession.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Test and Optimize&lt;/strong&gt;
+Use Xcode’s Instruments for performance and check accessibility. Liquid Glass’s transparency needs tweaks, and SwiftUI’s accessibilityReduceTransparency helps.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It’s not a weekend project, but it’s worth it for apps that need to shine on iOS 26.&lt;/p&gt;
+
+&lt;h2 id=&quot;lets-keep-the-conversation-going&quot;&gt;Let’s Keep the Conversation Going&lt;/h2&gt;
+
+&lt;p&gt;Liquid Glass isn’t “killing” Flutter, but it’s a wake-up call that native iOS shines for Apple’s latest designs. If you’re iOS-first, SwiftUI’s glassEffect makes Liquid Glass effortless, as WWDC 2025 shows. If cross-platform’s your thing, Flutter’s still viable with some work. I’m curious. What’s your take? Try the SwiftUI code above and hit me up on &lt;a href=&quot;https://www.linkedin.com/in/rizwan95/&quot;&gt;LinkedIn&lt;/a&gt; or &lt;a href=&quot;https://x.com/rizwanasifahmed&quot;&gt;X.com&lt;/a&gt; with #WWDC25. Oh, and our ohmyswift.com newsletter is launching soon. Let’s build some stunning apps together!&lt;/p&gt;
+
+&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; -
+Developer Relations at &lt;a href=&quot;https://www.zoho.com/apptics/&quot;&gt;Zoho Apptics&lt;/a&gt; | Tech Evangelist at Zoho | AI Researcher | iOS Engineer | Blogger at ohmyswift.com | Speaker | Mentor &lt;br /&gt; &lt;br /&gt;LinkedIn - &lt;a href=&quot;https://www.linkedin.com/in/rizwan95/&quot;&gt;https://www.linkedin.com/in/rizwan95/&lt;/a&gt; &lt;br /&gt;Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;  &lt;br /&gt; Social media  - &lt;a href=&quot;https://bento.me/rizwan95&quot;&gt;https://bento.me/rizwan95&lt;/a&gt;  &lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;more-articles&quot;&gt;More articles&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2025/05/09/debug-crashes-in-ios-using-metrickit/&quot;&gt;Debug crashes in iOS using MetricKit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2024/08/15/swiftui-in-2024-bridging-perception-and-reality/&quot;&gt;SwiftUI in 2024: Bridging Perception and Reality&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2023/12/01/from-viewwillappear-to-viewisappearing-perfecting-your-ios-view-transitions/&quot;&gt;From viewWillAppear to viewIsAppearing - Perfecting Your iOS View Transitions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2021/08/23/customizing-uibutton-in-ios-15/&quot;&gt;Customizing UIButton in iOS 15&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/&quot;&gt;Different methods to remove the last item from an array in Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2021/04/14/exploring-deque-in-swift-collections/&quot;&gt;Exploring Deque in Swift Collections&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;Replacing UIImagePickerController with PHPickerViewController&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Rizwan Ahmed A</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Flutter" />
+      
+
+      
+        <category term="swift" />
+      
+        <category term="flutter" />
+      
+        <category term="iOS" />
+      
+        <category term="liquid glass" />
+      
+        <category term="SwiftUI" />
+      
+        <category term="cross-platform" />
+      
+        <category term="native development" />
+      
+        <category term="WWDC2025" />
+      
+        <category term="iOS 26" />
+      
+        <category term="design language" />
+      
+
+      
+        <summary type="html">Hey Swift folks! If you’ve been scrolling X or LinkedIn, you have probably caught wind of the buzz: Apple’s Liquid Glass design is supposedly “killing” Flutter. I have been diving into Meet Liquid Glass video and Apple’s official Adopting Liquid Glass documentation to figure out what is driving this talk and what it means for us. Is it time to ditch Flutter for native iOS with SwiftUI? Let’s unpack why Liquid Glass is a challenge for Flutter, what really matters, and how to migrate if you’re ready to go all-in on native.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
       <title type="html">Debug crashes in iOS using MetricKit</title>
       
       
-      <link href="https://ohmyswift.com/blog/2025/05/08/debug-crashes-in-ios-using-metrickit/" rel="alternate" type="text/html" title="Debug crashes in iOS using MetricKit" />
+      <link href="http://localhost:4000/blog/2025/05/09/debug-crashes-in-ios-using-metrickit/" rel="alternate" type="text/html" title="Debug crashes in iOS using MetricKit" />
       
-      <published>2025-05-08T23:30:00-05:00</published>
-      <updated>2025-05-08T23:30:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2025/05/08/debug-crashes-in-ios-using-metrickit</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2025/05/08/debug-crashes-in-ios-using-metrickit/">&lt;p&gt;“Production only” crashes in iOS apps are notoriously difficult to debug. Traditional in-process crash reporting tools install handlers within your app to capture failure data, but if the app crashes hard enough, these reporters themselves may fail.&lt;/p&gt;
+      <published>2025-05-09T10:00:00+05:30</published>
+      <updated>2025-05-09T10:00:00+05:30</updated>
+      <id>http://localhost:4000/blog/2025/05/09/debug-crashes-in-ios-using-metrickit</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2025/05/09/debug-crashes-in-ios-using-metrickit/">&lt;p&gt;“Production only” crashes in iOS apps are notoriously difficult to debug. Traditional in-process crash reporting tools install handlers within your app to capture failure data, but if the app crashes hard enough, these reporters themselves may fail.&lt;/p&gt;
 
 &lt;p&gt;Apple introduced MetricKit in iOS 13 to address these limitations. Unlike conventional tools, it operates outside your app’s process, collecting diagnostics at the system level. This approach captures crashes that traditional reporters miss, including those from memory pressure, background terminations, and OS signals.&lt;/p&gt;
 
@@ -70,7 +269,7 @@
         &lt;span class=&quot;c1&quot;&gt;// Process crash reports&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;payloads&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
             &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;crashDiagnostics&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crashDiagnostics&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;nf&quot;&gt;processCrashReports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crashDiagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;handleCrashDiagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crashDiagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -85,95 +284,126 @@
 
 &lt;p&gt;Now, let’s implement a method to effectively process the crash reports:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;processCrashReports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;crashDiagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;MXCrashDiagnostic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crashDiagnostics&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;🚨 CRASH DETECTED 🚨&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;// Basic crash information&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Timestamp: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timeStamp&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;App version: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;applicationVersion&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;iOS version: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metaData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;osVersion&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Device type: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metaData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deviceType&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;// Crash type information&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;exceptionType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exceptionType&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Exception type: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exceptionType&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;exceptionCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exceptionCode&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Exception code: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exceptionCode&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Signal: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;// Analyze the call stack&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callStackTree&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;callStackTree&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nf&quot;&gt;analyzeCrashCallStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;callStackTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;// Log or send to your backend&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handleCrashDiagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;diagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;MXCrashDiagnostic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostics&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;logCrashSummary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;analyzeCrashCallStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;callStackTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;nf&quot;&gt;archiveCrashReport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h2 id=&quot;understanding-crash-call-stacks&quot;&gt;Understanding Crash Call Stacks&lt;/h2&gt;
+&lt;h2 id=&quot;log-crash-summary&quot;&gt;Log Crash Summary&lt;/h2&gt;
 
-&lt;p&gt;The call stack tree is crucial for understanding what led to a crash. Let’s implement a focused analysis method:&lt;/p&gt;
+&lt;p&gt;Logs a concise summary of the crash for quick inspection.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;analyzeCrashCallStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callStackTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MXCallStackTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Convert the call stack tree to JSON for easier analysis&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callStackData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;JSONSerialization&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;withJSONObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackTree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;jsonRepresentation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prettyPrinted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;
-       &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;jsonString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utf8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        
-        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;🔍 Call Stack Analysis:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;// Look for common crash patterns&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;EXC_BAD_ACCESS&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Memory access issue detected - likely accessing deallocated memory&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;EXC_BREAKPOINT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Exception breakpoint - possibly an unhandled Swift error or assertion&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;EXC_CRASH&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Kernel terminated process - often due to memory pressure or watchdog timeout&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;// Find problematic frames in your code&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;findProblematicFrames&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;logCrashSummary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MXCrashDiagnostic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;🚨 CRASH DETECTED 🚨&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;crashDictionary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;dictionaryRepresentation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;crashTimestamp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crashDictionary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;timestamp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Timestamp: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crashTimestamp&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;App version: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;applicationVersion&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;iOS version: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metaData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;osVersion&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Device type: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metaData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deviceType&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;exceptionType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exceptionType&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Exception type: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exceptionType&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findProblematicFrames&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Look for your app&apos;s frames in the call stack&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;appNameRange&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;YourAppName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Extract the surrounding context (simplified example)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;startIndex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;appNameRange&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lowerBound&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;offsetBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;limitedBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;startIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;startIndex&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;endIndex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;appNameRange&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;upperBound&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;offsetBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;limitedBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endIndex&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;frameContext&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;startIndex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        
-        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Potential problem in your code: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frameContext&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;exceptionCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exceptionCode&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Exception code: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exceptionCode&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;codeString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diagnostic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exceptionCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stringValue&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;describeCrashSignal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codeString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h2 id=&quot;common-ios-crash-types-and-their-interpretation&quot;&gt;Common iOS Crash Types and Their Interpretation&lt;/h2&gt;
+&lt;h2 id=&quot;analyze-crash-call-stack&quot;&gt;Analyze Crash Call Stack&lt;/h2&gt;
 
-&lt;p&gt;Understanding the crash type is crucial for debugging. Here’s how to interpret common crash signals in iOS:&lt;/p&gt;
+&lt;p&gt;Analyzes the call stack for common crash patterns and user binaries.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;interpretCrashSignal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGSEGV&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Segmentation fault: Invalid memory access (likely accessing a nil pointer)&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGABRT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Abort: Process terminated by system (common in unhandled exceptions, assertions)&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGBUS&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Bus error: Misaligned memory access or non-existent memory address&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGILL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Illegal instruction: Invalid instruction attempted (rare, possibly corrupted memory)&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGTRAP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Trap: Often from debug breakpoints or exceptions&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Unknown signal: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;/// Returns a human-readable description for a crash signal.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;describeCrashSignal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signalMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGHUP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGINT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGQUIT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGILL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;5&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGTRAP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;6&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGABRT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;7&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGBUS&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGFPE&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;9&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGKILL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;10&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGUSR1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;11&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGSEGV&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;12&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGUSR2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;13&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGPIPE&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;14&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGALRM&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;15&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGTERM&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signalName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signalStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mapped&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signalMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;signalStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;signalName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mapped&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signalNum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;NSNumber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mapped&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signalMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;signalNum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intValue&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;signalName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mapped&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;signalStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;signalName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signalStr&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signalName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGSEGV&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Segmentation fault (SIGSEGV): Invalid memory access (likely accessing a nil pointer)&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGABRT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Abort (SIGABRT): Process terminated by system (common in unhandled exceptions, assertions)&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGBUS&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Bus error (SIGBUS): Misaligned memory access or non-existent memory address&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGILL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Illegal instruction (SIGILL): Invalid instruction attempted (rare, possibly corrupted memory)&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SIGTRAP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Trap (SIGTRAP): Often from debug breakpoints or exceptions&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;some&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Signal: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Unknown signal: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;describing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;analyzeCrashCallStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callStackTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MXCallStackTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callStackData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackTree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;jsonRepresentation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;jsonString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utf8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Unable to decode call stack JSON.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;🔍 Call Stack Analysis:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;printCrashPatternHints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;printUserBinaries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;/// Prints hints if common crash patterns are detected in the call stack.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printCrashPatternHints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;EXC_BAD_ACCESS&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Memory access issue detected - likely accessing deallocated memory&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;EXC_BREAKPOINT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Exception breakpoint - possibly an unhandled Swift error or assertion&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;EXC_CRASH&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Kernel terminated process - often due to memory pressure or watchdog timeout&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;/// Prints user or third-party binaries found in the call stack.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printUserBinaries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStackJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;using&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utf8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;JSONSerialization&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;jsonObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callStacks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;callStacks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Could not parse call stack JSON&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;userBinaries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callStacks&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;frames&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;callStackRootFrames&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frames&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;binaryName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;binaryName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;isSystemBinary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binaryName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;userBinaries&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;insert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binaryName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userBinaries&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEmpty&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;No obvious user or third-party binaries found in call stack.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Potential problematic binaries in call stack: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userBinaries&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;joined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;separator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;/// Determines if a binary is a system binary.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isSystemBinary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;binaryName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;systemPrefixes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lib&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;UIKit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Foundation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Core&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;CFNetwork&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;dyld&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;libsystem&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;systemPrefixes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contains&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binaryName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;hasPrefix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;archiving-crash-reports-for-analysis&quot;&gt;Archiving Crash Reports for Analysis&lt;/h2&gt;
@@ -264,7 +494,7 @@
 &lt;p&gt;While MetricKit provides powerful native crash reporting, you might want to integrate it with an analytics service for a more comprehensive solution. &lt;a href=&quot;https://www.zoho.com/apptics/&quot;&gt;Zoho Apptics&lt;/a&gt; SDK is a good example as it already leverages MetricKit to collect crash data when available:&lt;/p&gt;
 
 &lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/3h5&quot; target=&quot;_blank&quot;&gt;
     &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
     &lt;div&gt;
     &lt;p class=&quot;sponsor-title&quot;&gt;
@@ -416,12 +646,12 @@ Developer Relations at Zoho Apptics | Tech Evangelist at Zoho | AI Researcher | 
       <title type="html">Send data Between iOS Apps and Extensions Using Darwin Notifications</title>
       
       
-      <link href="https://ohmyswift.com/blog/2024/08/27/send-data-between-ios-apps-and-extensions-using-darwin-notifications/" rel="alternate" type="text/html" title="Send data Between iOS Apps and Extensions Using Darwin Notifications" />
+      <link href="http://localhost:4000/blog/2024/08/28/send-data-between-ios-apps-and-extensions-using-darwin-notifications/" rel="alternate" type="text/html" title="Send data Between iOS Apps and Extensions Using Darwin Notifications" />
       
-      <published>2024-08-27T13:43:00-05:00</published>
-      <updated>2024-08-27T13:43:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2024/08/27/send-data-between-ios-apps-and-extensions-using-darwin-notifications</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2024/08/27/send-data-between-ios-apps-and-extensions-using-darwin-notifications/">&lt;p&gt;In iOS development, app extensions run in separate processes from their containing apps. This separation poses a challenge when you need to communicate between the main app and its extensions. While &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NSNotificationCenter&lt;/code&gt; is a common choice for passing data between view controllers within the same app, it falls short when it comes to inter-process communication. Have you ever thought about how to pass data between the main app and its extension? Darwin notifications provide a powerful solution for this scenario. In this post, we’ll explore how to implement a Darwin Notifications manager and use it to facilitate real-time data transfer between a main app and its extension.&lt;/p&gt;
+      <published>2024-08-28T00:13:00+05:30</published>
+      <updated>2024-08-28T00:13:00+05:30</updated>
+      <id>http://localhost:4000/blog/2024/08/28/send-data-between-ios-apps-and-extensions-using-darwin-notifications</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2024/08/28/send-data-between-ios-apps-and-extensions-using-darwin-notifications/">&lt;p&gt;In iOS development, app extensions run in separate processes from their containing apps. This separation poses a challenge when you need to communicate between the main app and its extensions. While &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NSNotificationCenter&lt;/code&gt; is a common choice for passing data between view controllers within the same app, it falls short when it comes to inter-process communication. Have you ever thought about how to pass data between the main app and its extension? Darwin notifications provide a powerful solution for this scenario. In this post, we’ll explore how to implement a Darwin Notifications manager and use it to facilitate real-time data transfer between a main app and its extension.&lt;/p&gt;
 
 &lt;h2 id=&quot;what-are-darwin-notifications-aka-cfnotificationcentergetdarwinnotifycenter&quot;&gt;What are Darwin Notifications a.k.a CFNotificationCenterGetDarwinNotifyCenter?&lt;/h2&gt;
 
@@ -708,12 +938,12 @@ Developer Relations at Zoho Apptics | Tech Evangelist at Zoho | AI Researcher | 
       <title type="html">SwiftUI in 2024: Bridging Perception and Reality</title>
       
       
-      <link href="https://ohmyswift.com/blog/2024/08/15/swiftui-in-2024-bridging-perception-and-reality/" rel="alternate" type="text/html" title="SwiftUI in 2024: Bridging Perception and Reality" />
+      <link href="http://localhost:4000/blog/2024/08/16/swiftui-in-2024-bridging-perception-and-reality/" rel="alternate" type="text/html" title="SwiftUI in 2024: Bridging Perception and Reality" />
       
-      <published>2024-08-15T13:42:00-05:00</published>
-      <updated>2024-08-15T13:42:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2024/08/15/swiftui-in-2024-bridging-perception-and-reality</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2024/08/15/swiftui-in-2024-bridging-perception-and-reality/">&lt;p&gt;I recently spoke at &lt;a href=&quot;https://www.linkedin.com/posts/rizwan95_iosketchup2024-swiftui-swift-activity-7228315754343849984-9V2f&quot;&gt;iOSKetchup2024 hosted by Zomato x Blinkit&lt;/a&gt; about the challenges and opportunities of using SwiftUI. The audience seemed to enjoy the session as much as I did! Here, I’m excited to share my experience and provide a detailed write-up of my talk.&lt;/p&gt;
+      <published>2024-08-16T00:12:00+05:30</published>
+      <updated>2024-08-16T00:12:00+05:30</updated>
+      <id>http://localhost:4000/blog/2024/08/16/swiftui-in-2024-bridging-perception-and-reality</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2024/08/16/swiftui-in-2024-bridging-perception-and-reality/">&lt;p&gt;I recently spoke at &lt;a href=&quot;https://www.linkedin.com/posts/rizwan95_iosketchup2024-swiftui-swift-activity-7228315754343849984-9V2f&quot;&gt;iOSKetchup2024 hosted by Zomato x Blinkit&lt;/a&gt; about the challenges and opportunities of using SwiftUI. The audience seemed to enjoy the session as much as I did! Here, I’m excited to share my experience and provide a detailed write-up of my talk.&lt;/p&gt;
 
 &lt;h2 id=&quot;challenges-with-swiftui&quot;&gt;Challenges with SwiftUI&lt;/h2&gt;
 
@@ -867,12 +1097,12 @@ Developer Relations at Zoho Apptics | Tech Evangelist at Zoho | AI Researcher | 
       <title type="html">From viewWillAppear to viewIsAppearing - Perfecting Your iOS View Transitions</title>
       
       
-      <link href="https://ohmyswift.com/blog/2023/11/30/from-viewwillappear-to-viewisappearing-perfecting-your-ios-view-transitions/" rel="alternate" type="text/html" title="From viewWillAppear to viewIsAppearing - Perfecting Your iOS View Transitions" />
+      <link href="http://localhost:4000/blog/2023/12/01/from-viewwillappear-to-viewisappearing-perfecting-your-ios-view-transitions/" rel="alternate" type="text/html" title="From viewWillAppear to viewIsAppearing - Perfecting Your iOS View Transitions" />
       
-      <published>2023-11-30T22:30:00-06:00</published>
-      <updated>2023-11-30T22:30:00-06:00</updated>
-      <id>https://ohmyswift.com/blog/2023/11/30/from-viewwillappear-to-viewisappearing-perfecting-your-ios-view-transitions</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2023/11/30/from-viewwillappear-to-viewisappearing-perfecting-your-ios-view-transitions/">&lt;p&gt;In WWDC23, Apple introduced a nuanced addition to the UIViewController lifecycle: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;viewIsAppearing&lt;/code&gt;. This instance method is a game-changer for developers looking to fine-tune the presentation and layout of their views. Let’s explore how this method enhances the way we build responsive and dynamic interfaces.&lt;/p&gt;
+      <published>2023-12-01T10:00:00+05:30</published>
+      <updated>2023-12-01T10:00:00+05:30</updated>
+      <id>http://localhost:4000/blog/2023/12/01/from-viewwillappear-to-viewisappearing-perfecting-your-ios-view-transitions</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2023/12/01/from-viewwillappear-to-viewisappearing-perfecting-your-ios-view-transitions/">&lt;p&gt;In WWDC23, Apple introduced a nuanced addition to the UIViewController lifecycle: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;viewIsAppearing&lt;/code&gt;. This instance method is a game-changer for developers looking to fine-tune the presentation and layout of their views. Let’s explore how this method enhances the way we build responsive and dynamic interfaces.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-role-of-viewisappearing&quot;&gt;The Role of viewIsAppearing&lt;/h2&gt;
 
@@ -992,12 +1222,12 @@ Post-Layout Adjustments: If you need to make changes after the view has been lai
       <title type="html">Exploring the New Push Notifications Console from Apple</title>
       
       
-      <link href="https://ohmyswift.com/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple/" rel="alternate" type="text/html" title="Exploring the New Push Notifications Console from Apple" />
+      <link href="http://localhost:4000/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple/" rel="alternate" type="text/html" title="Exploring the New Push Notifications Console from Apple" />
       
-      <published>2023-06-19T00:29:00-05:00</published>
-      <updated>2023-06-19T00:29:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple/">&lt;p&gt;Apple has recently unveiled a powerful new tool for developers: the Apple Push Notifications Console. This innovative console simplifies the task of sending test notifications to Apple devices using the Apple Push Notification service (APNs).&lt;/p&gt;
+      <published>2023-06-19T10:59:00+05:30</published>
+      <updated>2023-06-19T10:59:00+05:30</updated>
+      <id>http://localhost:4000/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2023/06/19/exploring-the-new-push-notifications-console-from-apple/">&lt;p&gt;Apple has recently unveiled a powerful new tool for developers: the Apple Push Notifications Console. This innovative console simplifies the task of sending test notifications to Apple devices using the Apple Push Notification service (APNs).&lt;/p&gt;
 
 &lt;h3 id=&quot;understanding-the-apple-push-notifications-console&quot;&gt;Understanding the Apple Push Notifications Console&lt;/h3&gt;
 
@@ -1129,12 +1359,12 @@ Post-Layout Adjustments: If you need to make changes after the view has been lai
       <title type="html">How to send Remote Push Notifications to an iOS Simulator with Xcode 14</title>
       
       
-      <link href="https://ohmyswift.com/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/" rel="alternate" type="text/html" title="How to send Remote Push Notifications to an iOS Simulator with Xcode 14" />
+      <link href="http://localhost:4000/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/" rel="alternate" type="text/html" title="How to send Remote Push Notifications to an iOS Simulator with Xcode 14" />
       
-      <published>2023-05-28T12:09:00-05:00</published>
-      <updated>2023-05-28T12:09:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/">&lt;p&gt;In the past, testing push notifications on iOS simulators was quite challenging due to certain limitations. Prior to Xcode 14, receiving push notifications in a simulator was not possible and developers had to rely on local simulations using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.apns&lt;/code&gt; payload files and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;simctl push&lt;/code&gt; command.
+      <published>2023-05-28T22:39:00+05:30</published>
+      <updated>2023-05-28T22:39:00+05:30</updated>
+      <id>http://localhost:4000/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2023/05/28/testing-remote-push-notifications-in-ios-simulator-with-xcode-14/">&lt;p&gt;In the past, testing push notifications on iOS simulators was quite challenging due to certain limitations. Prior to Xcode 14, receiving push notifications in a simulator was not possible and developers had to rely on local simulations using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.apns&lt;/code&gt; payload files and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;simctl push&lt;/code&gt; command.
 We have already seen how to simulate push notifications in a simulator in the article, &lt;a href=&quot;https://ohmyswift.com/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;
 &lt;br /&gt;
 &lt;br /&gt;
@@ -1230,12 +1460,12 @@ Were you aware of this already? Share your insights in the comments below.&lt;/p
       <title type="html">How to Instantly Track a Variable’s Value Changes with Xcode Watchpoints</title>
       
       
-      <link href="https://ohmyswift.com/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/" rel="alternate" type="text/html" title="How to Instantly Track a Variable&apos;s Value Changes with Xcode Watchpoints" />
+      <link href="http://localhost:4000/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/" rel="alternate" type="text/html" title="How to Instantly Track a Variable&apos;s Value Changes with Xcode Watchpoints" />
       
-      <published>2023-05-26T10:04:00-05:00</published>
-      <updated>2023-05-26T10:04:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/">&lt;p&gt;In the world of programming, tracking variable changes can often turn into a debugging nightmare.
+      <published>2023-05-26T20:34:00+05:30</published>
+      <updated>2023-05-26T20:34:00+05:30</updated>
+      <id>http://localhost:4000/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2023/05/26/how-to-instantly-track-a-variable-s-value-changes-with-xcode-watchpoints/">&lt;p&gt;In the world of programming, tracking variable changes can often turn into a debugging nightmare.
 In Xcode, you might find yourself frequently relying on breakpoints and manually tracing the changes in your variables’ values. At times, you might also utilize property observers such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;didSet&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;willSet&lt;/code&gt; for this purpose.
 &lt;br /&gt;
 &lt;br /&gt;
@@ -1370,12 +1600,12 @@ In our case, whenever the value of the property &lt;strong&gt;salary&lt;/strong&
       <title type="html">How to add a loader to an UIButton</title>
       
       
-      <link href="https://ohmyswift.com/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/" rel="alternate" type="text/html" title="How to add a loader to an UIButton" />
+      <link href="http://localhost:4000/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/" rel="alternate" type="text/html" title="How to add a loader to an UIButton" />
       
-      <published>2022-08-28T10:58:00-05:00</published>
-      <updated>2022-08-28T10:58:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/">&lt;p&gt;Sometimes, we would require a button to show a loader with appropriate text when a long-duration task is done, such as downloading an image. Before iOS 15, we had to write a custom button or do some hacks to show a simple loader or an UIActivityIndicator inside an UIButton. Now, it is not the case anymore. UIButtonConfiguration provides &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;showsActivityIndicator&lt;/code&gt;, a simple property using which we can hide/show a loader inside a button.&lt;/p&gt;
+      <published>2022-08-28T21:28:00+05:30</published>
+      <updated>2022-08-28T21:28:00+05:30</updated>
+      <id>http://localhost:4000/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2022/08/28/how-to-add-a-loader-to-an-uibutton/">&lt;p&gt;Sometimes, we would require a button to show a loader with appropriate text when a long-duration task is done, such as downloading an image. Before iOS 15, we had to write a custom button or do some hacks to show a simple loader or an UIActivityIndicator inside an UIButton. Now, it is not the case anymore. UIButtonConfiguration provides &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;showsActivityIndicator&lt;/code&gt;, a simple property using which we can hide/show a loader inside a button.&lt;/p&gt;
 
 &lt;p&gt;We recommend that you visit &lt;a href=&quot;/blog/2021/08/23/customizing-uibutton-in-ios-15/&quot;&gt;this article&lt;/a&gt; if you are unfamiliar with UIButtonConfiguration.&lt;/p&gt;
 
@@ -1453,7 +1683,7 @@ In our case, whenever the value of the property &lt;strong&gt;salary&lt;/strong&
 
 &lt;h3 id=&quot;support-creators&quot;&gt;Support creators&lt;/h3&gt;
 &lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/3h5&quot; target=&quot;_blank&quot;&gt;
     &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
     &lt;div&gt;
     &lt;p class=&quot;sponsor-title&quot;&gt;
@@ -1531,12 +1761,12 @@ In our case, whenever the value of the property &lt;strong&gt;salary&lt;/strong&
       <title type="html">How to filter screenshots, cinematic videos, and depth-effect photos in PHPickerViewController</title>
       
       
-      <link href="https://ohmyswift.com/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/" rel="alternate" type="text/html" title="How to filter screenshots, cinematic videos, and depth-effect photos in PHPickerViewController" />
+      <link href="http://localhost:4000/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/" rel="alternate" type="text/html" title="How to filter screenshots, cinematic videos, and depth-effect photos in PHPickerViewController" />
       
-      <published>2022-06-26T11:00:00-05:00</published>
-      <updated>2022-06-26T11:00:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/">&lt;p&gt;In iOS 14.0, Apple introduced a new way to pick images from the device’s photo library using PHPickerViewController. 
+      <published>2022-06-26T21:30:00+05:30</published>
+      <updated>2022-06-26T21:30:00+05:30</updated>
+      <id>http://localhost:4000/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2022/06/26/how-to-filter-screenshots-cinematic-videos-and-depth-effect-photos-in-phpickerviewcontroller/">&lt;p&gt;In iOS 14.0, Apple introduced a new way to pick images from the device’s photo library using PHPickerViewController. 
 (If you are not aware of PHPickerViewController, I strongly recommend you to read about &lt;a href=&quot;https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/&quot;&gt;PHPickerViewController first.&lt;/a&gt;)&lt;/p&gt;
 
 &lt;p&gt;Different apps have different requirements. For example, a hi-res video editing app might be interested in showing cinematic videos and videos. 
@@ -1583,7 +1813,7 @@ You can also add compound filters and refine your media results using &lt;code c
 &lt;h3 id=&quot;support-creators&quot;&gt;Support creators&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Show your support to indie devs by downloading their apps from the banner displayed below. It will help them build great apps in these tough times.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/3h5&quot; target=&quot;_blank&quot;&gt;
     &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
     &lt;div&gt;
     &lt;p class=&quot;sponsor-title&quot;&gt;
@@ -1654,12 +1884,12 @@ You can also add compound filters and refine your media results using &lt;code c
       <title type="html">Implementing a custom native calendar using UICalendarView in iOS16 and Swift</title>
       
       
-      <link href="https://ohmyswift.com/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/" rel="alternate" type="text/html" title="Implementing a custom native calendar using UICalendarView in iOS16 and Swift" />
+      <link href="http://localhost:4000/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/" rel="alternate" type="text/html" title="Implementing a custom native calendar using UICalendarView in iOS16 and Swift" />
       
-      <published>2022-06-12T07:38:00-05:00</published>
-      <updated>2022-06-12T07:38:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/">&lt;p&gt;It was WWDC22 week, and I was browsing through my Twitter feed to get some updates about the latest Apple APIs. A person tweeted, “No matter how experienced you are as an iOS developer, you’ll always look it up how to set up a date formatter.” So I humorously replied to the tweet by saying, “Dates are hard 😜 .”&lt;/p&gt;
+      <published>2022-06-12T18:08:00+05:30</published>
+      <updated>2022-06-12T18:08:00+05:30</updated>
+      <id>http://localhost:4000/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2022/06/12/implementing-a-custom-native-calendar-using-uicalendarview-in-ios16-and-swift/">&lt;p&gt;It was WWDC22 week, and I was browsing through my Twitter feed to get some updates about the latest Apple APIs. A person tweeted, “No matter how experienced you are as an iOS developer, you’ll always look it up how to set up a date formatter.” So I humorously replied to the tweet by saying, “Dates are hard 😜 .”&lt;/p&gt;
 
 &lt;p&gt;After a while, something struck my mind, and I was curious to know if Apple had made improvements to the existing date picker. To my surprise, Apple introduced &lt;strong&gt;UICalendarView&lt;/strong&gt; to create custom calendar views from iOS 16.&lt;/p&gt;
 
@@ -1805,7 +2035,7 @@ The delegate provides us with two methods.&lt;/p&gt;
 &lt;h3 id=&quot;support-creators&quot;&gt;Support creators&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Show your support to indie devs by downloading their apps from the banner displayed below. It will help them build great apps in these tough times.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/3h5&quot; target=&quot;_blank&quot;&gt;
     &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
     &lt;div&gt;
     &lt;p class=&quot;sponsor-title&quot;&gt;
@@ -1880,12 +2110,12 @@ The delegate provides us with two methods.&lt;/p&gt;
       <title type="html">Different methods to remove the last item from an array in Swift</title>
       
       
-      <link href="https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/" rel="alternate" type="text/html" title="Different methods to remove the last item from an array in Swift" />
+      <link href="http://localhost:4000/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/" rel="alternate" type="text/html" title="Different methods to remove the last item from an array in Swift" />
       
-      <published>2022-04-24T13:27:00-05:00</published>
-      <updated>2022-04-24T13:27:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/">&lt;p&gt;Arrays are one of the most widely used data structures in Swift, and we deal with a lot of array manipulations. One such manipulation is the removal of the last element from an array. The three useful methods to remove an element from an array are dropLast(), popLast(), and removeLast()&lt;/p&gt;
+      <published>2022-04-24T23:57:00+05:30</published>
+      <updated>2022-04-24T23:57:00+05:30</updated>
+      <id>http://localhost:4000/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2022/04/24/different-methods-to-remove-the-last-item-from-an-array-in-swift/">&lt;p&gt;Arrays are one of the most widely used data structures in Swift, and we deal with a lot of array manipulations. One such manipulation is the removal of the last element from an array. The three useful methods to remove an element from an array are dropLast(), popLast(), and removeLast()&lt;/p&gt;
 
 &lt;h2 id=&quot;droplast&quot;&gt;dropLast()&lt;/h2&gt;
 
@@ -1993,12 +2223,12 @@ If there are no elements in the array and if removeLast() method is invoked, the
       <title type="html">Customizing UIButton in iOS 15</title>
       
       
-      <link href="https://ohmyswift.com/blog/2021/08/23/customizing-uibutton-in-ios-15/" rel="alternate" type="text/html" title="Customizing UIButton in iOS 15" />
+      <link href="http://localhost:4000/blog/2021/08/23/customizing-uibutton-in-ios-15/" rel="alternate" type="text/html" title="Customizing UIButton in iOS 15" />
       
-      <published>2021-08-23T10:33:00-05:00</published>
-      <updated>2021-08-23T10:33:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2021/08/23/customizing-uibutton-in-ios-15</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2021/08/23/customizing-uibutton-in-ios-15/">&lt;p&gt;Buttons are an essential element in iOS apps. If you are developing an app using UIKit, you will probably use UIButton class to create buttons. 
+      <published>2021-08-23T21:03:00+05:30</published>
+      <updated>2021-08-23T21:03:00+05:30</updated>
+      <id>http://localhost:4000/blog/2021/08/23/customizing-uibutton-in-ios-15</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2021/08/23/customizing-uibutton-in-ios-15/">&lt;p&gt;Buttons are an essential element in iOS apps. If you are developing an app using UIKit, you will probably use UIButton class to create buttons. 
 Creating a button is a straightforward process, but it becomes problematic when it comes to customizations. Soon you will find yourself writing hacks for achieving your desired result. We all have been there, and we have done it. You are not alone. Luckily, iOS 15.0 gives us a new method to customize Buttons much easier using UIButton.Configuration.
 Let’s get started!&lt;/p&gt;
 
@@ -2037,7 +2267,7 @@ In this article, we will be focusing only on filled configuration. I will leave 
 
 &lt;p&gt;Yes, you read it right. You can set attributed titles as well using the attributedTitle property on the configuration.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedTitle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Start download&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AttributeContainer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;NSAttributedString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;foregroundColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;252&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;255.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;132.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;255.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;255.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedTitle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Start download&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AttributeContainer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;NSAttributedString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;foregroundColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;252&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/255.0, green: 132.0/255.0, blue: 0/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;255.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Some of you might have noticed that I am using AttribtedString instead of NSAttributedString. Yes, from iOS 15.0, NSAttributedString has been replaced by AttributedString API. I will be writing more about it in the upcoming articles.&lt;/p&gt;
 
@@ -2147,7 +2377,7 @@ The imagePlacement property supports the following options - leading, trailing, 
   &lt;/li&gt;
 &lt;/ul&gt;
 &lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/3h5&quot; target=&quot;_blank&quot;&gt;
     &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
     &lt;div&gt;
     &lt;p class=&quot;sponsor-title&quot;&gt;
@@ -2212,12 +2442,12 @@ The imagePlacement property supports the following options - leading, trailing, 
       <title type="html">Exploring Deque in Swift Collections</title>
       
       
-      <link href="https://ohmyswift.com/blog/2021/04/14/exploring-deque-in-swift-collections/" rel="alternate" type="text/html" title="Exploring Deque in Swift Collections" />
+      <link href="http://localhost:4000/blog/2021/04/14/exploring-deque-in-swift-collections/" rel="alternate" type="text/html" title="Exploring Deque in Swift Collections" />
       
-      <published>2021-04-14T12:30:00-05:00</published>
-      <updated>2021-04-14T12:30:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2021/04/14/exploring-deque-in-swift-collections</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2021/04/14/exploring-deque-in-swift-collections/">&lt;p&gt;Deque (should be pronounced as “deck”) is a collection implementing double-ended queues. Deques are similar to arrays, but they have efficient insertions and removal of elements at the beginning and at the end.&lt;/p&gt;
+      <published>2021-04-14T23:00:00+05:30</published>
+      <updated>2021-04-14T23:00:00+05:30</updated>
+      <id>http://localhost:4000/blog/2021/04/14/exploring-deque-in-swift-collections</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2021/04/14/exploring-deque-in-swift-collections/">&lt;p&gt;Deque (should be pronounced as “deck”) is a collection implementing double-ended queues. Deques are similar to arrays, but they have efficient insertions and removal of elements at the beginning and at the end.&lt;/p&gt;
 
 &lt;p&gt;The indexing semantics are integer indices that are the same as arrays. 
 Now let’s see a sample implementation of deque.&lt;/p&gt;
@@ -2279,7 +2509,7 @@ Now let’s see a sample implementation of deque.&lt;/p&gt;
 I hope you like this article. Do let me know your thoughts about the deque data structure in the comments below.&lt;/p&gt;
 
 &lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/3h5&quot; target=&quot;_blank&quot;&gt;
     &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
     &lt;div&gt;
     &lt;p class=&quot;sponsor-title&quot;&gt;
@@ -2366,12 +2596,12 @@ I hope you like this article. Do let me know your thoughts about the deque data 
       <title type="html">Swap keys and values of a Dictionary</title>
       
       
-      <link href="https://ohmyswift.com/blog/2021/03/24/swap-keys-and-values-of-a-dictionary/" rel="alternate" type="text/html" title="Swap keys and values of a Dictionary" />
+      <link href="http://localhost:4000/blog/2021/03/24/swap-keys-and-values-of-a-dictionary/" rel="alternate" type="text/html" title="Swap keys and values of a Dictionary" />
       
-      <published>2021-03-24T04:06:00-05:00</published>
-      <updated>2021-03-24T04:06:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2021/03/24/swap-keys-and-values-of-a-dictionary</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2021/03/24/swap-keys-and-values-of-a-dictionary/">&lt;p&gt;Dictionaries are one of the most commonly used data structures. Dictionaries come with keys and values where the keys are unique. Sometimes, there might be a situation where we would want to swap the keys and values of a dictionary. Let’s see how to swap keys and values of a dictionary in swift.&lt;/p&gt;
+      <published>2021-03-24T14:36:00+05:30</published>
+      <updated>2021-03-24T14:36:00+05:30</updated>
+      <id>http://localhost:4000/blog/2021/03/24/swap-keys-and-values-of-a-dictionary</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2021/03/24/swap-keys-and-values-of-a-dictionary/">&lt;p&gt;Dictionaries are one of the most commonly used data structures. Dictionaries come with keys and values where the keys are unique. Sometimes, there might be a situation where we would want to swap the keys and values of a dictionary. Let’s see how to swap keys and values of a dictionary in swift.&lt;/p&gt;
 
 &lt;p&gt;While doing so, we need to make sure that the values which are converted to keys are hashable and unique, else the conversion will fail.&lt;/p&gt;
 
@@ -2424,7 +2654,7 @@ I hope you like this article. Do let me know your thoughts about the deque data 
 &lt;/ul&gt;
 
 &lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/3h5&quot; target=&quot;_blank&quot;&gt;
     &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
     &lt;div&gt;
     &lt;p class=&quot;sponsor-title&quot;&gt;
@@ -2477,12 +2707,12 @@ I hope you like this article. Do let me know your thoughts about the deque data 
       <title type="html">Experimenting with Swift async and await pattern using Xcode</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode/" rel="alternate" type="text/html" title="Experimenting with Swift async and await pattern using Xcode" />
+      <link href="http://localhost:4000/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode/" rel="alternate" type="text/html" title="Experimenting with Swift async and await pattern using Xcode" />
       
-      <published>2020-12-25T09:32:00-06:00</published>
-      <updated>2020-12-25T09:32:00-06:00</updated>
-      <id>https://ohmyswift.com/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode/">&lt;p&gt;You all might know that async/await is accepted and is available in the main snapshots! Let’s get our hands dirty by trying out some basic example of async/await in Swift.&lt;/p&gt;
+      <published>2020-12-25T21:02:00+05:30</published>
+      <updated>2020-12-25T21:02:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/12/25/experimenting-with-swift-async-and-await-pattern-using-xcode/">&lt;p&gt;You all might know that async/await is accepted and is available in the main snapshots! Let’s get our hands dirty by trying out some basic example of async/await in Swift.&lt;/p&gt;
 
 &lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
 &lt;ol&gt;
@@ -2628,17 +2858,17 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
       <title type="html">Common problems and workarounds while building apps using Apple Silicon</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/12/18/common-problems-and-workarounds-while-building-apps-using-apple-silicon/" rel="alternate" type="text/html" title="Common problems and workarounds while building apps using Apple Silicon" />
+      <link href="http://localhost:4000/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon/" rel="alternate" type="text/html" title="Common problems and workarounds while building apps using Apple Silicon" />
       
-      <published>2020-12-18T22:27:00-06:00</published>
-      <updated>2020-12-18T22:27:00-06:00</updated>
-      <id>https://ohmyswift.com/blog/2020/12/18/common-problems-and-workarounds-while-building-apps-using-apple-silicon</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/12/18/common-problems-and-workarounds-while-building-apps-using-apple-silicon/">&lt;p&gt;Apple’s new Apple Silicon (M1 processor) is a beast. The apps open pretty quickly, and the slow Xcode build times are a thing of the past. But what does it have in store for the iOS/macOS developers?&lt;/p&gt;
+      <published>2020-12-19T09:57:00+05:30</published>
+      <updated>2020-12-19T09:57:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/12/19/common-problems-and-workarounds-while-building-apps-using-apple-silicon/">&lt;p&gt;Apple’s new Apple Silicon (M1 processor) is a beast. The apps open pretty quickly, and the slow Xcode build times are a thing of the past. But what does it have in store for the iOS/macOS developers?&lt;/p&gt;
 
 &lt;p&gt;When you try to run your existing projects on Apple Silicon devices, there are a few problems you have to resolve before your projects could build. I will list three significant issues and their solution, which most developers are likely to face when running the projects in Apple Silicon devices.&lt;/p&gt;
 
 &lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/3h5&quot; target=&quot;_blank&quot;&gt;
     &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
     &lt;div&gt;
     &lt;p class=&quot;sponsor-title&quot;&gt;
@@ -2843,12 +3073,12 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
       <title type="html">Closure based actions in UIButton</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/11/01/closure-based-actions-in-uibutton/" rel="alternate" type="text/html" title="Closure based actions in UIButton" />
+      <link href="http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton/" rel="alternate" type="text/html" title="Closure based actions in UIButton" />
       
-      <published>2020-11-01T13:24:00-06:00</published>
-      <updated>2020-11-01T13:24:00-06:00</updated>
-      <id>https://ohmyswift.com/blog/2020/11/01/closure-based-actions-in-uibutton</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/11/01/closure-based-actions-in-uibutton/">&lt;p&gt;iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; method in UIControls. Yes, you heard me right—no more usage of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; methods, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#selector()&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@objc&lt;/code&gt; annotation in front of methods.
+      <published>2020-11-02T00:54:00+05:30</published>
+      <updated>2020-11-02T00:54:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/11/02/closure-based-actions-in-uibutton/">&lt;p&gt;iOS 14.0 brings us many improvements and new APIs using which the developers can write efficient code. One such API is the closure based action API instead of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; method in UIControls. Yes, you heard me right—no more usage of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addTarget&lt;/code&gt; methods, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#selector()&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@objc&lt;/code&gt; annotation in front of methods.
 More importantly, we can write a closure based code using the action handler. Okay, enough talk, let’s dive into the code.&lt;/p&gt;
 
 &lt;h3 id=&quot;target-based-uibutton-ios-130-and-earlier&quot;&gt;Target-based UIButton. (iOS 13.0 and earlier)&lt;/h3&gt;
@@ -2856,7 +3086,7 @@ More importantly, we can write a closure based code using the action handler. Ok
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;fileprivate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configureButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;fileprivate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configureButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addTarget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#selector(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;openFile(_:)&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchUpInside&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addTarget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;#selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;openFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:)),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchUpInside&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setTitleColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemBlue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Tap me&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addSubview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -2980,15 +3210,15 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
       <title type="html">Replacing UIImagePickerController with PHPickerViewController</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/" rel="alternate" type="text/html" title="Replacing UIImagePickerController with PHPickerViewController" />
+      <link href="http://localhost:4000/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/" rel="alternate" type="text/html" title="Replacing UIImagePickerController with PHPickerViewController" />
       
-      <published>2020-08-29T00:39:00-05:00</published>
-      <updated>2020-08-29T00:39:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">&lt;p&gt;Almost every app requires photos and video access these days. Before iOS 14.0, the iOS developers used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIImagePickerController&lt;/code&gt; to access the items from the user’s media library. From iOS 14.0, Apple is providing its developers a brand new way to select images or videos from their apps using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPickerViewController&lt;/code&gt;&lt;/p&gt;
+      <published>2020-08-29T11:09:00+05:30</published>
+      <updated>2020-08-29T11:09:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/">&lt;p&gt;Almost every app requires photos and video access these days. Before iOS 14.0, the iOS developers used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIImagePickerController&lt;/code&gt; to access the items from the user’s media library. From iOS 14.0, Apple is providing its developers a brand new way to select images or videos from their apps using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPickerViewController&lt;/code&gt;&lt;/p&gt;
 
 &lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/3h5&quot; target=&quot;_blank&quot;&gt;
     &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
     &lt;div&gt;
     &lt;p class=&quot;sponsor-title&quot;&gt;
@@ -3150,15 +3380,15 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
       <title type="html">Embracing Localization in Image Assets</title>
       
       
-      <link href="https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/" rel="alternate" type="text/html" title="Embracing Localization in Image Assets" />
+      <link href="http://localhost:4000/blog/2020/06/14/embracing-localization-in-image-assets/" rel="alternate" type="text/html" title="Embracing Localization in Image Assets" />
       
-      <published>2020-06-14T08:11:00-05:00</published>
-      <updated>2020-06-14T08:11:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/06/14/embracing-localization-in-image-assets/">&lt;p&gt;One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.&lt;/p&gt;
+      <published>2020-06-14T18:41:00+05:30</published>
+      <updated>2020-06-14T18:41:00+05:30</updated>
+      <id>http://localhost:4000/blog/2020/06/14/embracing-localization-in-image-assets</id>
+      <content type="html" xml:base="http://localhost:4000/blog/2020/06/14/embracing-localization-in-image-assets/">&lt;p&gt;One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.&lt;/p&gt;
 
 &lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
+    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/3h5&quot; target=&quot;_blank&quot;&gt;
     &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
     &lt;div&gt;
     &lt;p class=&quot;sponsor-title&quot;&gt;
@@ -3236,105 +3466,6 @@ Ohmyswifters, &lt;strong&gt;&lt;em&gt;&lt;a href=&quot;https://winya.link/getwin
 
       
         <summary type="html">One of the most significant features which make an app stand out is localization. When we hear the term localization, the first thing that comes to mind is localizing the text displayed in UILabels, UITextViews, UIButtons, and other UIElements. It is quite straight forward to localize the text in the UIElements, and most of us think that we have localized the app, and it is ready to go! But wait, there is one more area I would like to highlight, and that is the images used in the app. You heard me right. If the images used in the app contain text, then they should be localized as well. Localizing the image assets is slightly different but not so hard.</summary>
-      
-
-      
-      
-    </entry>
-  
-  
-  
-    <entry>
-      
-      <title type="html">An effective way to clear entire Userdefaults in Swift</title>
-      
-      
-      <link href="https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/" rel="alternate" type="text/html" title="An effective way to clear entire Userdefaults in Swift" />
-      
-      <published>2020-05-19T09:19:00-05:00</published>
-      <updated>2020-05-19T09:19:00-05:00</updated>
-      <id>https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift</id>
-      <content type="html" xml:base="https://ohmyswift.com/blog/2020/05/19/an-effective-way-to-clear-entire-userdefaults-in-swift/">&lt;p&gt;As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;removeObject&lt;/code&gt; method to remove the value for a particular key.&lt;/p&gt;
-
-&lt;div&gt;
-    &lt;a class=&quot;notification sponsor&quot; href=&quot;https://zoho.to/OMS&quot; target=&quot;_blank&quot;&gt;
-    &lt;img src=&quot;https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg&quot; /&gt;
-    &lt;div&gt;
-    &lt;p class=&quot;sponsor-title&quot;&gt;
-        Zoho Apptics: Comprehensive, comparative, and concise product analytics
-    &lt;/p&gt;
-    &lt;p&gt;
-        Zoho Apptics gives you everything you need in one SDK and dashboard—crash reporting, in‑app feedback, push notifications, user segments, feature‑usage tracking, and user flows—so you can track metrics, visualize engagement, and optimize for growth without stitching data across tools.    &lt;/p&gt;
-    &lt;/div&gt;
-&lt;/a&gt;
-&lt;/div&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;standard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removeObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;forKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;is_app_launched&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;What if we have a vast number of keys, and we want to clear them all? Like 10 or 20 keys?  If we try to clear all the keys using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;removeObject&lt;/code&gt; method, we might miss clearing some values, and the code becomes complex. We don’t want to do that. So is there a better way? Yes, there is.&lt;/p&gt;
-
-&lt;p&gt;Apple provides us with a nice and clean API to deal with this. We can make use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;removePersistantDomainForName&lt;/code&gt; method to reset the UserDefaults.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bundleID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bundleIdentifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;standard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removePersistentDomain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;forName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bundleID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;We can wrap the API in the UserDefaults extension to use it conveniently.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/images/clear-userdefaults.png&quot; alt=&quot;Clear UserDefaults&quot; /&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;resetDefaults&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bundleID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bundleIdentifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;standard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removePersistentDomain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;forName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bundleID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Using the API clears our UserDefaults completely, and leaves it in a fresh state.
-So yes, it might look insignificant, but it is a helpful API. Do you have other ways to clear the UserDefaults? Let me know in the comments below.&lt;/p&gt;
-
-&lt;h3 id=&quot;about-the-author&quot;&gt;About the author&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Rizwan Ahmed&lt;/strong&gt; - iOS Engineer. Twitter - &lt;a href=&quot;https://twitter.com/rizwanasifahmed&quot;&gt;https://twitter.com/rizwanasifahmed&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;more-articles&quot;&gt;More articles&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2020/06/14/embracing-localization-in-image-assets/&quot;&gt;Embracing Localization in Image Assets&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2020/02/13/simulating-remote-push-notifications-in-a-simulator/&quot;&gt;Simulating remote push notifications in a simulator&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/11/why-should-we-avoid-using-closures-in-swift-structs/&quot;&gt;Why should we avoid using closures in Swift structs?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2020/03/18/using-uicollectionviewcompositionallayout-in-ios-12-and-earlier/&quot;&gt;Using UICollectionViewCompositionalLayout in iOS 12 and earlier&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
-
-      
-      
-      
-      
-      
-
-      
-        <author>
-            <name>Rizwan Ahmed A</name>
-          
-          
-        </author>
-      
-
-      
-        <category term="Userdefaults" />
-      
-
-      
-        <category term="swift" />
-      
-        <category term="userdefaults" />
-      
-
-      
-        <summary type="html">As a developer, we might use Userdefaults in our apps at some point in time for storing some basic configuration or settings in the app. But as the project gets complex, things can get pretty tough. Especially, when you want to clear all the UserDefaults values from the app. Well, we can use the removeObject method to remove the value for a particular key.</summary>
       
 
       

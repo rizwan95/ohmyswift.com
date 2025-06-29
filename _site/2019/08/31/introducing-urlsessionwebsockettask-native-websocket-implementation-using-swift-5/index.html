@@ -49,10 +49,10 @@
     <link rel="stylesheet" href="/blog/assets/css/custom_image.css">
 
  
-    <link rel="canonical" href="https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/">
+    <link rel="canonical" href="http://localhost:4000/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/">
     
     
-    <link rel="alternate" type="application/rss+xml" title="OhMySwift" href="https://ohmyswift.com/blog/feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="OhMySwift" href="http://localhost:4000/blog/feed.xml">
   
     
   
@@ -87,21 +87,21 @@
    
     <!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5 | OhMySwift</title>
-<meta name="generator" content="Jekyll v4.3.2" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5" />
 <meta name="author" content="Rizwan Ahmed A" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore." />
 <meta property="og:description" content="We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore." />
-<link rel="canonical" href="https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/" />
-<meta property="og:url" content="https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/" />
+<link rel="canonical" href="http://localhost:4000/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/" />
+<meta property="og:url" content="http://localhost:4000/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/" />
 <meta property="og:site_name" content="OhMySwift" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-08-31T08:40:00-05:00" />
+<meta property="article:published_time" content="2019-08-31T19:10:00+05:30" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5" />
 <script type="application/ld+json">
-{"url":"https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/","author":{"@type":"Person","name":"Rizwan Ahmed A"},"headline":"Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5","dateModified":"2019-08-31T08:40:00-05:00","datePublished":"2019-08-31T08:40:00-05:00","description":"We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://ohmyswift.com/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/"},"@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/","description":"We all love WebSockets, don’t we? They have a vast range of applications such as chat applications, push notifications, and much more. I got excited when I stumbled upon “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore.","author":{"@type":"Person","name":"Rizwan Ahmed A"},"headline":"Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5","dateModified":"2019-08-31T19:10:00+05:30","datePublished":"2019-08-31T19:10:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2019/08/31/introducing-urlsessionwebsockettask-native-websocket-implementation-using-swift-5/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -144,9 +144,25 @@
     
       <h1 class="post-title" itemprop="name headline">Introducing URLSessionWebSocketTask - Native WebSocket implementation using Swift 5</h1>
     
-    <p class="post-meta"><time datetime="2019-08-31T08:40:00-05:00" itemprop="datePublished">Aug 31, 2019</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan Ahmed A</span></span> •
+    <p class="post-meta"><time datetime="2019-08-31T19:10:00+05:30" itemprop="datePublished">Aug 31, 2019</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Rizwan Ahmed A</span></span> •
   
     
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
     
       
     
@@ -426,6 +442,8 @@
     
       
     
+      
+    
   
 
 
@@ -435,6 +453,24 @@
     
       
         <a href="/blog/tags/swift/">swift</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -992,6 +1028,24 @@
     
       
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   
     
     
@@ -1015,6 +1069,24 @@
     
       
         <a href="/blog/tags/websockets/">websockets</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
@@ -1554,6 +1626,24 @@
     
       
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   
 
 </p>
@@ -1564,7 +1654,7 @@
 “URLSessionWebSocketTask”. That’s right, in addition to data task, download task, and upload task, we have websocketTask! in URLSession. Websockets are now first-class citizens in the foundation framework. Before websocket tasks, we had to use third-party libraries like Star Scream or Socket Rocket, but it is not the case anymore.</p>
 
 <div>
-    <a class="notification sponsor" href="https://zoho.to/OMS" target="_blank">
+    <a class="notification sponsor" href="https://zoho.to/3h5" target="_blank">
     <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg" />
     <div>
     <p class="sponsor-title">
@@ -1667,7 +1757,7 @@ I am excited to see you people implement URLSessionWebSocketTask in your project
 
  -->
   <div>
-    <a class="notification sponsor" href="https://zoho.to/OMS" target="_blank">
+    <a class="notification sponsor" href="https://zoho.to/3h5" target="_blank">
     <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/apptics.svg">
     <div>
     <p class= "sponsor-title">
@@ -1701,7 +1791,7 @@ I am excited to see you people implement URLSessionWebSocketTask in your project
       <p>
         
 
-&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://ohmyswift.com/blog/feed.xml">RSS</a>
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/blog/feed.xml">RSS</a>
 
       </p>
 
