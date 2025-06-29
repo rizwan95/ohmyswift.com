@@ -15,7 +15,7 @@ image:
     facebook: assets/images/liquid-glass-flutter/fb.png
 ---
 
-Hey Swift folks! If you've been scrolling X or LinkedIn, you have probably caught wind of the buzz: Apple's Liquid Glass design is supposedly "killing" Flutter. I have been diving into [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/219/) video to figure out what is driving this talk and what it means for us. Is it time to ditch Flutter for native iOS with SwiftUI? Let's unpack why Liquid Glass is a challenge for Flutter, what really matters, and how to migrate if you're ready to go all-in on native. 
+Hey Swift folks! If you've been scrolling X or LinkedIn, you have probably caught wind of the buzz: Apple's Liquid Glass design is supposedly "killing" Flutter. I have been diving into [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/219/) video and Apple's official [Adopting Liquid Glass](https://developer.apple.com/documentation/technologyoverviews/adopting-liquid-glass) documentation to figure out what is driving this talk and what it means for us. Is it time to ditch Flutter for native iOS with SwiftUI? Let's unpack why Liquid Glass is a challenge for Flutter, what really matters, and how to migrate if you're ready to go all-in on native.
 
 ## Why's Liquid Glass Stirring Up Trouble for Flutter?
 
@@ -46,9 +46,16 @@ Mimicking Liquid Glass in Flutter requires shader skills or third-party packages
 - **Future-Proofing**
 Apple's ecosystem is racing ahead with the latest APIs announced at WWDC25. Native apps get these instantly, while Flutter waits for plugins. 
 
-The big question: does your app need iOS 26's native look, or is cross-platform efficiency worth the tradeoff?
+- **Accessibility & Compliance Edge**
+SwiftUI's accessibility features work out-of-the-box. VoiceOver, Dynamic Type, and Reduce Motion are automatically supported. Flutter developers need to manually implement accessibility for each widget, and even if they nail the Liquid Glass look, they still have to handle accessibility separately. With the EU's European Accessibility Act and similar regulations worldwide pushing hard for digital accessibility compliance, it's better to have these features built-in from day one rather than scrambling to add them after the fact.
 
-## How to Migrate to Native iOS (If You Choose To)
+- **Testing Made Simple**
+Xcode's latest UI testing capabilities make testing Liquid Glass interfaces a breeze. SwiftUI's declarative nature pairs perfectly with Xcode's testing tools. You can easily test dynamic blur effects, glass transitions, and responsive layouts. Flutter's testing story for custom visual effects is more complex, requiring additional setup and often custom testing solutions.
+
+- **Regulatory Future-Proofing**
+As governments worldwide tighten accessibility requirements, native iOS development provides a compliance safety net. SwiftUI's built-in accessibility means you're already meeting most standards, while Flutter teams need to audit and retrofit accessibility features. This is a costly process that's better avoided upfront.
+
+## How to Migrate to Native iOS
 
 If Liquid Glass has you leaning toward native iOS, migrating from Flutter to SwiftUI is a big step but doable. The WWDC session focuses on building new SwiftUI apps, not migration, but here's a practical roadmap:
 
@@ -56,7 +63,7 @@ If Liquid Glass has you leaning toward native iOS, migrating from Flutter to Swi
 Split your Flutter code into UI (widgets) and logic (networking, state). You can often reuse logic like API calls with minor tweaks.
 
 - **Set Up SwiftUI**
-Create an Xcode 17 project targeting iOS 26. SwiftUI's declarative style feels a bit like Flutter's widget tree but with native power.
+Create an Xcode 26 project targeting iOS 26. SwiftUI's declarative style feels a bit like Flutter's widget tree but with native power.
 
 - **Rebuild the UI**
 Use SwiftUI's glassEffect for Liquid Glass. Here's a simple example, inspired by the WWDC session:
