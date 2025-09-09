@@ -1,13 +1,13 @@
-version: '3'
+version: "3.8"
 services:
   jekyll:
-    image: jekyll/jekyll:latest
+    build: .
+    # Mount the current directory to the container, but exclude certain folders
     volumes:
       - .:/srv/jekyll
-      - ./vendor/bundle:/usr/local/bundle
+      # Use anonymous volumes to persist gems and the generated site
+      # This prevents local versions from overwriting the container's
+      - /srv/jekyll/vendor/bundle
+      - /srv/jekyll/_site
     ports:
       - "4000:4000"
-    environment:
-      - JEKYLL_ENV=production
-    command: >
-      sh -c "jekyll build --destination /srv/jekyll/_site --baseurl '/blog' && jekyll serve --host 0.0.0.0 --port 4000"
