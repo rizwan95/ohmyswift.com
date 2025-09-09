@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Why Liquid Glass Is Making Developers Rethink Flutter
-date: 2025-06-29 09:28 +0530
+date: 2025-06-28 09:28 +0530
 category: Flutter
 tags: [swift, flutter, iOS, liquid glass, SwiftUI, cross-platform, native development, WWDC2025, iOS 26, design language]
 comments: true
