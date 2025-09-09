@@ -2,11 +2,8 @@ version: "3.8"
 services:
   jekyll:
     build: .
-    # Mount the current directory to the container, but exclude certain folders
     volumes:
       - .:/srv/jekyll
-      # Use anonymous volumes to persist gems and the generated site
-      # This prevents local versions from overwriting the container's
       - /srv/jekyll/vendor/bundle
       - /srv/jekyll/_site
     ports:

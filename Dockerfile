@@ -22,5 +22,11 @@ COPY . .
 # Expose port 4000
 EXPOSE 4000
 
-# The main command to run Jekyll
-CMD ["bundle", "exec", "jekyll", "serve", "--host", "0.0.0.0"]
+# Copy the entrypoint script
+COPY entrypoint.sh /usr/local/bin/
+
+# Make the entrypoint script executable
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["entrypoint.sh"]
