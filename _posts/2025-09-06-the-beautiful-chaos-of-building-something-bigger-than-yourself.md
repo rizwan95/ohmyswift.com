@@ -29,7 +29,7 @@ The most chaotic moment was when we had to categorize apps, send invites, and cr
 
 #### The Semifinals: Traveling Across India
 
-For the semifinals, our Apptics and IndeHub teams divided across cities. I traveled to Delhi and served as a judge along with Sameer, Maninder, Sejal, Raghav, and Bhupesh. Judging was tough, but we finally selected two teams from Delhi. Other cities also picked their finalists.
+For the semifinals, our Apptics and IndeHub teams divided across cities. I traveled to Delhi and served as a judge along with [Sameer](https://www.linkedin.com/in/sameer-rajadnya/), [Maninder](https://www.linkedin.com/in/manindersinghh/), [Sejal](https://www.linkedin.com/in/sejallkhanna/), [Raghav](https://www.linkedin.com/in/sforsethi/), and [Bhupesh](https://www.linkedin.com/in/bhupesh-pruthi-365b5319a/). Judging was tough, but we finally selected two teams from Delhi. Other cities also picked their finalists.
 
 #### The Grand Finale: Apple Developer Center, Bangalore
 
