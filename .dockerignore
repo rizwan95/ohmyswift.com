@@ -1,0 +1,10 @@
+.git
+.gitignore
+.dockerignore
+_site/
+vendor/bundle/
+.jekyll-cache/
+.jekyll-metadata
+assets/main.css
+*.swp
+.DS_Store
