@@ -10,9 +10,9 @@ author: Rizwan Ahmed A
 summary: What started as just an idea quickly turned into something much bigger. The story of organizing India's nationwide hackathon for Apple platform developers - from crazy suggestion to inspiring reality.
 
 image:
-    path: https://ik.imagekit.io/ogr1ppev3u/OhMySwift/wwdc25-hackathon/facebook.png
-    twitter: https://ik.imagekit.io/ogr1ppev3u/OhMySwift/wwdc25-hackathon/twitter.png
-    facebook: https://ik.imagekit.io/ogr1ppev3u/OhMySwift/wwdc25-hackathon/facebook.png
+    path: assets/images/building-bigger-than-yourself/facebook.png
+    twitter: assets/images/building-bigger-than-yourself/twitter.png
+    facebook: assets/images/building-bigger-than-yourself/facebook.png
 ---
 
 It all started as an idea. When I asked my friends Adithya and Raghav, “Why don’t we organize a nationwide hackathon for Apple platform developers in India after the announcement of WWDC25?” I thought I was being crazy and that it might not gain traction. Come on, it’s a nationwide hackathon—how would we even pull it off? It seemed impossible, but we didn’t give up. 
