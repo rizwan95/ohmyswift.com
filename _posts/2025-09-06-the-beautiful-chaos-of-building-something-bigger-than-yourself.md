@@ -60,7 +60,7 @@ Finally, I want to thank my wife Abeer, who was there with me, reassuring me tha
 
 ### About the author
 
-- **Rizwan Ahmed** - Senior iOS Engineer. 
+- **Rizwan Ahmed** - Developer Relations @ [Zoho Apptics](https://www.zoho.com/apptics/) | Tech Evangelist | AI Researcher | iOS Engineer | Blogger at ohmyswift.com | Speaker | Proud husband. 
 <br> LinkedIn - <https://www.linkedin.com/in/rizwan95/>
 <br> Twitter - <https://twitter.com/rizwanasifahmed>
 
