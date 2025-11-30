@@ -16,12 +16,12 @@ image:
 ---
 Every day brings a new learning opportunity in Apple platform development, especially with Xcode. In the latest Xcode 26, Apple quietly removed the "Show Library" button, which used to be accessible by clicking the "+" icon on the right side of the navigation bar. I found myself wondering: How do I access the Library now? Has it been removed entirely? No, Apple wouldn't make such a blunder. Luckily, the Library is still there, tucked away in the "View" menu under **View > Show Library**, or via the handy shortcut **Command + Shift + L (⌘⇧L)**.
 
-![Accessing SF Symbols from View menu](/blog/assets/images/access-sfsymbols-in-xcode/menu.png?style=centerme)
+![Accessing SF Symbols from View menu](https://ohmyswift.com/blog/assets/images/access-sfsymbols-in-xcode/menu.png?style=centerme)
 ## My "Aha" Moment with SF Symbols
 
 With the Library open and while exploring its features, I noticed that SF Symbols are directly accessible inside Xcode. All these years I’ve been using the standalone SF Symbols app to look up icons, and only today did I realize they’ve been right here the whole time. That's the beauty of programming. Even after building apps for 10 years, there's always something new to learn. It keeps me humble and eager to explore and share more.
 
-![SF Symbols](/blog/assets/images/access-sfsymbols-in-xcode/sfsymbols.png?style=centerme)
+![SF Symbols](https://ohmyswift.com/blog/assets/images/access-sfsymbols-in-xcode/sfsymbols.png?style=centerme)
 
 ## What is SF Symbols?
 
