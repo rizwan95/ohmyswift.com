@@ -26,12 +26,23 @@ jobs:
           JEKYLL_ENV: production
 
       - name: Deploy to VPS
-        uses: burnett01/rsync-deployments@7.0.1
-        with:
-          switches: -avzr --delete --filter=Pvendor/ --filter=Pvendor/*** --filter=P.jekyll-cache/ --filter=P.jekyll-cache/*** --filter=P_site/ --filter=P_site/**/*
-          path: _site/
-          remote_path: ${{ secrets.DEPLOY_PATH }}
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_user: ${{ secrets.SSH_USER }}
-          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          remote_port: ${{ secrets.SSH_PORT }}
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          install -m 600 /dev/null ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          rsync -avzr --delete \
+            --filter='P vendor/' \
+            --filter='P vendor/***' \
+            --filter='P .jekyll-cache/' \
+            --filter='P .jekyll-cache/***' \
+            --filter='P _site/' \
+            --filter='P _site/***' \
+            -e "ssh -i ~/.ssh/deploy_key -p ${SSH_PORT} -o StrictHostKeyChecking=accept-new" \
+            _site/ \
+            "${SSH_USER}@${SSH_HOST}:${DEPLOY_PATH}"
