@@ -28,7 +28,7 @@ jobs:
       - name: Deploy to VPS
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avzr --delete --filter P vendor/ --filter P vendor/*** --filter P .jekyll-cache/ --filter P .jekyll-cache/*** --filter P _site/ --filter P _site/**/*
+          switches: -avzr --delete --filter=Pvendor/ --filter=Pvendor/*** --filter=P.jekyll-cache/ --filter=P.jekyll-cache/*** --filter=P_site/ --filter=P_site/**/*
           path: _site/
           remote_path: ${{ secrets.DEPLOY_PATH }}
           remote_host: ${{ secrets.SSH_HOST }}
