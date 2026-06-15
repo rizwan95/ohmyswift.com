@@ -229,7 +229,8 @@ sudo chown -R deploy:www-data <DEPLOY_PATH>
 | **Empty post title on homepage** | Unquoted `:` in YAML `title` | Quote the title string |
 | **Post 404, wrong URL** | Slug/title YAML parse issue | Fix front matter; rebuild via push |
 | **Actions build OK, deploy fails** | SSH, permissions, or stale root-owned files | Check secrets, port, `authorized_keys`; cleanup `_site` / `.jekyll-cache` |
-| **rsync permission denied** | `--delete` cannot remove root-owned old files | Fix ownership or remove stale dirs as root |
+| **rsync permission denied** | `--delete` cannot remove root-owned old files | Fix ownership or remove stale dirs as root (see below) |
+| **rsync `vendor/` delete failed** | Old `bundle install` on VPS left root-owned `vendor/` | As root: `rm -rf <DEPLOY_PATH>/vendor` — never run Bundler in deploy path |
 | **Live site stale after push** | Workflow failed or wrong branch | Push to `master`; check Actions log |
 | **Container running, NPM OK, still broken** | Test each layer: disk → Docker nginx → NPM | `curl` host port, then public URL |
 
