@@ -15,6 +15,7 @@ gem "rouge"
 gem "jekyll-whiteglass"
 gem "kramdown"
 gem "webrick", "~> 1.7"
+gem "addressable", ">= 2.9.0"
 
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and

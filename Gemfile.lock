@@ -8,7 +8,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.7)
+    addressable (2.9.0)
       public_suffix (>= 2.0.2, < 7.0)
     base64 (0.3.0)
     bigdecimal (3.2.2)
@@ -176,6 +176,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  addressable (>= 2.9.0)
   jekyll
   jekyll-archives
   jekyll-compose
