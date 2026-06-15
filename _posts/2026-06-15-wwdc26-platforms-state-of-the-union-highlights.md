@@ -1,6 +1,6 @@
 ---
 layout: post
-title: WWDC26 Platforms State of the Union — What Developers Need to Know
+title: WWDC26 Platforms State of the Union: A Developer Recap
 date: 2026-06-15 10:00 +0530
 category: WWDC26
 tags: [swift, xcode, wwdc26, apple intelligence, swiftui, liquid glass, foundation models, app intents, xcode 27, agentic coding]
@@ -15,15 +15,13 @@ image:
     facebook: assets/images/wwdc26-platforms-sotu/fb.png
 ---
 
-Hey Swift folks! WWDC26 is here, and the Platforms State of the Union session packed a lot into one hour. If you missed it or want a quick recap before diving into the individual sessions, this one's for you.
-
 The 2026 Platforms State of the Union outlines major advancements for developers across Apple's ecosystem, focusing on three core pillars: Apple Intelligence, platform refinements, and developer productivity. Here's what stood out.
 
 ![WWDC26 Platforms State of the Union infographic](/blog/assets/images/wwdc26-platforms-sotu/fb.png?style=centerme)
 
 ## Apple Intelligence
 
-Apple Intelligence took center stage, and this year the message is clear: you get more choice, less boilerplate, and tighter integration with the system.
+Apple Intelligence took center stage, and this year the message is clear: you get more choice, less boilerplate, and tighter integration with the system. I really hope developers take full advantage of the new AI APIs provided by Apple.
 
 ### Foundation Models Framework
 
@@ -47,7 +45,7 @@ The platform updates this year are less about dramatic rewrites and more about p
 
 ### Liquid Glass Design
 
-Liquid Glass continues to evolve. Refinements include better diffusion, darkened edges for depth, and more personalization options for users. The best part for developers: apps that already adopt these system features benefit automatically without recompiling. Ship once, look better on the next OS — hard to argue with that.
+Liquid Glass continues to evolve. Refinements include better diffusion, darkened edges for depth, and more personalization options for users. The best part for developers: apps that already adopt these system features benefit automatically without recompiling. Ship once, look better on the next OS. Hard to argue with that.
 
 ### SwiftUI
 
@@ -61,6 +59,7 @@ If you've built file-heavy workflows in SwiftUI before, you know how much fricti
 
 ### Swift 6.4
 
+I know most of us are vibe-coding these days. But it is good to know what's new in Swift 6.4
 Swift 6.4 focuses on the day-to-day developer experience:
 
 - Better compiler diagnostics (fewer cryptic errors, more actionable fixes)
@@ -71,7 +70,7 @@ Small changes individually, but they add up when you're shipping across iOS, mac
 
 ### Hardware Transition
 
-macOS is now fully transitioned to Apple Silicon. For developers, that means you can ship optimized, smaller binaries without carrying Intel compatibility baggage. The ecosystem has crossed the finish line.
+macOS is now fully transitioned to Apple Silicon. For developers, that means you can ship optimized, smaller binaries without carrying Intel compatibility baggage. The ecosystem has crossed the finish line. 
 
 ## Developer Productivity
 
@@ -79,7 +78,7 @@ The tooling story this year might be the most practical headline of the entire s
 
 ### Xcode 27
 
-Xcode 27 arrives with a **30% smaller footprint**, iCloud-synced settings, and a redesigned experience overall. The headline feature is **Device Hub** — a unified environment that merges simulator and physical device management. One place to run, inspect, and test instead of jumping between disconnected tools.
+Xcode 27 beta arrives with a **30% smaller footprint**, iCloud-synced settings, and a redesigned experience overall. The headline feature is **Device Hub** — a unified environment that merges simulator and physical device management. One place to run, inspect, and test instead of jumping between disconnected tools.
 
 ### Agentic Coding
 
