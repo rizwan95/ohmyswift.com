@@ -1,6 +1,6 @@
 ---
 layout: post
-title: WWDC26 Platforms State of the Union: A Developer Recap
+title: "WWDC26 Platforms State of the Union: A Developer Recap"
 date: 2026-06-15 10:00 +0530
 category: WWDC26
 tags: [swift, xcode, wwdc26, apple intelligence, swiftui, liquid glass, foundation models, app intents, xcode 27, agentic coding]
