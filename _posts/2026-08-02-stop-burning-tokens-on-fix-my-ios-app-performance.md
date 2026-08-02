@@ -8,6 +8,11 @@ keywords: vibe coding, llm performance, swiftui performance, instruments traces,
 comments: true
 author: Rizwan Ahmed A
 summary: A simple onboarding-to-home delay took almost two seconds. I refused to open the code and made the coding agent fix it instead. Skills and better prompts failed. Instruments traces did not.
+
+image:
+    path: assets/images/stop-burning-tokens/fb.png
+    twitter: assets/images/stop-burning-tokens/twitter.png
+    facebook: assets/images/stop-burning-tokens/fb.png
 ---
 
 I have been vibe coding a lot lately. And if I am honest, writing performant code with these tools is still a struggle. We are in 2026 and somehow most of them are still pretty bad at this part.
