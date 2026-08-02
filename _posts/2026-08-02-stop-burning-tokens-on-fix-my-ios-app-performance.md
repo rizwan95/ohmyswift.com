@@ -51,12 +51,8 @@ So get the context right, my dear coders. Measure it. Feed the traces. Stop burn
 
 ### About the author
 
-- **Rizwan Ahmed** - Developer Relations @ [Zoho Apptics](https://www.zoho.com/apptics/) | Tech Evangelist | AI Researcher | iOS Engineer | Blogger at ohmyswift.com | Speaker | Proud husband.
-
-  
- LinkedIn - [https://www.linkedin.com/in/rizwan95/](https://www.linkedin.com/in/rizwan95/)
-  
- Twitter - [https://twitter.com/rizwanasifahmed](https://twitter.com/rizwanasifahmed)
+- **Rizwan Ahmed** -
+Developer Relations at [Zoho Apptics](https://www.zoho.com/apptics/) | Tech Evangelist at Zoho | AI Researcher | iOS Engineer | Blogger at ohmyswift.com | Speaker | Mentor <br /> <br />LinkedIn - <https://www.linkedin.com/in/rizwan95/> <br />Twitter - <https://twitter.com/rizwanasifahmed>  <br /> Social media  - <https://bento.me/rizwan95>  <br />
 
 ### More articles
 
