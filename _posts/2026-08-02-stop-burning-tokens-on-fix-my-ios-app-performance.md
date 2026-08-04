@@ -45,7 +45,7 @@ That little moment taught me more than a dozen blog posts about prompting. Conte
 
 And this is not only a local debugging lesson. In production, you do not get to sit with every user through that awkward pause after onboarding. You need real signals. Screen load times. Hangs. Crashes. The kind of numbers that tell you something is wrong before a review says the app feels slow. At work, that tool for me is [Zoho Apptics](https://www.zoho.com/apptics/). Same idea: less guessing, more meaningful data.
 
-{% include appshowcase-mini.html %}
+{% include appshowcase-action.html %}
 
 Coding agents cannot feel how an app performs. Humans feel that. Agents are excellent at crunching numbers and structured data. Give them meaningful data and the output gets better. That is not some deep secret in 2026. That is just how this works.
 
