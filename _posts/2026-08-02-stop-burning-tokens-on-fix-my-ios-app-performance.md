@@ -13,6 +13,9 @@ image:
     path: assets/images/stop-burning-tokens/fb.png
     twitter: assets/images/stop-burning-tokens/twitter.png
     facebook: assets/images/stop-burning-tokens/fb.png
+    width: 1200
+    height: 630
+    alt: "Stop Burning Tokens on Fix my iOS app performance"
 ---
 
 I have been vibe coding a lot lately. And if I am honest, writing performant code with these tools is still a struggle. We are in 2026 and somehow most of them are still pretty bad at this part.
