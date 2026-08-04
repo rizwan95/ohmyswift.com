@@ -43,6 +43,10 @@ Guess what? Tada. It solved the whole thing in a jiffy.
 
 That little moment taught me more than a dozen blog posts about prompting. Context matters. A lot. No matter how good the model is.
 
+And this is not only a local debugging lesson. In production, you do not get to sit with every user through that awkward pause after onboarding. You need real signals. Screen load times. Hangs. Crashes. The kind of numbers that tell you something is wrong before a review says the app feels slow. At work, that tool for me is [Zoho Apptics](https://www.zoho.com/apptics/). Same idea: less guessing, more meaningful data.
+
+{% include appshowcase-mini.html %}
+
 Coding agents cannot feel how an app performs. Humans feel that. Agents are excellent at crunching numbers and structured data. Give them meaningful data and the output gets better. That is not some deep secret in 2026. That is just how this works.
 
 The gap is perception. When we say "this is not performing well" or "the animation is laggy," we are describing a feeling. The agent hears a vague complaint. Sometimes that is enough. Sometimes you get a totally different result. Sometimes you accept a half fix and move on. Sometimes you get properly frustrated.
@@ -61,3 +65,4 @@ Developer Relations at [Zoho Apptics](https://www.zoho.com/apptics/) | Tech Evan
 - [Why Liquid Glass Is Making Developers Rethink Flutter](/blog/2025/06/28/why-liquid-glass-is-making-developers-rethink-flutter/)
 - [SwiftUI in 2024: Bridging Perception and Reality](/blog/2024/08/16/swiftui-in-2024-bridging-perception-and-reality/)
 - [Debug Crashes in iOS Using MetricKit](/blog/2025/05/09/debug-crashes-in-ios-using-metrickit/)
+
